@@ -1,0 +1,10 @@
+﻿@*@model Web.ModelViews.MonthSummary*@
+<script type="text/javascript">
+    $.get('@Url.Action("GetMonthSummary", "Home", null)',
+        function (data) {
+            $('#monthSummary-box').html(data);
+        });
+</script>
+<div id="monthSummary-box">
+    @*@Html.Partial("Issues/_Issues", Model.Issues)*@
+</div>

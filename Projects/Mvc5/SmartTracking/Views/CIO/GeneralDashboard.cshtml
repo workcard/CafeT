@@ -1,0 +1,110 @@
+﻿@model SmartTracking.ViewModels.GeneralCIOViewModel
+@using SmartTracking.Helpers;
+
+@{
+    ViewBag.Title = "General Dashboard";
+}
+
+<div class="row top_tiles">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon">
+                <i class="fa fa-check-square-o"></i>
+            </div>
+            <div class="count">@Model.PerfomanceAverageLastWorkingDay.y.ToString("0")%</div>
+            <h3>Average Last Working</h3>
+            <h2> (@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetLastWorkingDate(DateHelpers.GetToDay())))</h2>
+            <p class="red">@Model.PerfomanceAverageLastWorkingDay.Note</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon">
+                <i class="fa fa-check-square-o"></i>
+            </div>
+            <div class="count">@Model.PerfomanceAverageToday.y.ToString("0")%</div>
+            <h3>Average Today</h3>
+            <h2>(@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetToDay()))</h2>
+            <p class="red">@Model.PerfomanceAverageToday.Note</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon">
+                <i class="fa fa-check-square-o"></i>
+            </div>
+            <div class="count">@Model.PerfomanceAverageNextWorkingDay.y.ToString("0")%</div>
+            <h3>Average Next Working</h3>
+            <h2>(@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetNextWorkingDate(DateHelpers.GetToDay())))</h2>
+            <p class="red">@Model.PerfomanceAverageNextWorkingDay.Note</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon">
+                <i class="fa fa-check-square-o"></i>
+            </div>
+            <div class="count">@Model.PerfomanceAverageThisWeek.y.ToString("0")%</div>
+            <h3>Average This Week</h3>
+            <h2>(@String.Format("{0:dd/MM/yyyy}", DateHelpers.FirstDayOfWeek(DateHelpers.GetToDay())) - @String.Format("{0:dd/MM/yyyy}", DateHelpers.LastDayOfWeek(DateHelpers.GetToDay())))</h2>
+            <p class="red">@Model.PerfomanceAverageThisWeek.Note</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title green">
+                <h2><b class="green">Last Working Day </b></h2>
+                <h2 class="red">(@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetLastWorkingDate(DateHelpers.GetToDay())))</h2>
+                <div class="clearfix"></div>
+            </div>
+            @Html.Partial("_ColGraphOnDayOfUser", Model.PerformancesLastWorkingDate)
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title green">
+                <h2><b class="green">Today </b></h2>
+                <h2 class="red">(@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetToDay()))</h2>
+                <div class="clearfix"></div>
+            </div>
+            @Html.Partial("_ColGraphOnDayOfUser", Model.PerformancesToday)
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title green">
+                <h2><b class="green">Next Working Day </b></h2>
+                <h2 class="red">(@String.Format("{0:dd/MM/yyyy}", DateHelpers.GetNextWorkingDate(DateHelpers.GetToDay())))</h2>
+                <div class="clearfix"></div>
+            </div>
+            @Html.Partial("_ColGraphOnDayOfUser", Model.PerformancesNextWorkingDate)
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title green">
+                    <h2><b>List issues not finished</b></h2>
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_Issues", Model.IssuesNotFinished)
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title green">
+                    <h2><b>List issues future</b></h2>
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_Issues", Model.IssuesFuture)
+            </div>
+        </div>
+    </div>
+</div>

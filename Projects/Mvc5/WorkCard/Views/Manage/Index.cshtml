@@ -1,0 +1,22 @@
+﻿@model Web.Models.IndexViewModel
+@using Web.Models;
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+}
+<script type="text/javascript">
+    $.get('@Url.Action("GetContacts", "Contacts", null)',
+        function (data) {
+            $('#contacts-box').html(data);
+        });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">Quản lý tài khoản</div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="contacts-box"></div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+﻿@model IEnumerable<SmartTracking.Models.NewIssue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueCategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueStatusId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuePriorityId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueMilestoneId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueAffectedMilestoneId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueResolutionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueAssignedUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueCreatorUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueOwnerUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueDueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueVisibility)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueEstimation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueProgress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueCategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueStatusId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssuePriorityId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueMilestoneId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueAffectedMilestoneId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueResolutionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueAssignedUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueCreatorUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueOwnerUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueDueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueVisibility)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueEstimation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueProgress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

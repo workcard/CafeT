@@ -1,0 +1,10 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.CommentView
+<li class="list-group-item">
+    @Model.CreatedBy.GetFromBeginTo("@") on @Model.CreatedDate.TimeAgo()<br />
+    <h5>
+        <a href="/Comments/Details/@Model.Id"> @Model.Title </a>
+    </h5>
+</li>
+
+
+

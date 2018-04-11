@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Web.Models.Contact>
+
+<div class="card">
+    @if (Model != null)
+    {
+        <div class="card-header">
+            Contacts <span class="badge badge-danger">@Model.Count()</span>
+        </div>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    @Html.Partial("Contacts/_ContactItem", item)
+                </li>
+            }
+        </ul>
+        
+    }
+</div>

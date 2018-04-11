@@ -1,0 +1,4 @@
+﻿public string GetHello()
+{
+	return "Hello";
+}

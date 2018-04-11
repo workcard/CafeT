@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Web.ModelViews.IssueView>
+
+@{
+    ViewBag.Title = "WorkCard.vn - Quản trị công việc 4.0";
+}
+
+<script type="text/javascript">
+    $.get('@Url.Action("GetLastQuestions", "Questions", new { n = 5 })',
+        function (data) {
+            $('#questions-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetCompletedIssues", "WorkIssues", new { page = 1 })',
+        function (data) {
+            $('#completed-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetTodayIssues", "WorkIssues", new { page = 1 })',
+        function (data) {
+            $('#today-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetExpiredIssues", "WorkIssues", new { page = 1 })',
+        function (data) {
+            $('#expired-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetTodaySummary", "Home", null)',
+        function (data) {
+            $('#summary-box').html(data);
+        });
+</script>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        @Html.Partial("Partials/_About")
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div id="QuickIssue" class="container">
+                <p>
+                    @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
+                      null,
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "QuickIssue",
+                          HttpMethod = "Get",
+                          InsertionMode = InsertionMode.Replace
+                      }, new { @class = "btn btn-outline-danger" })
+                </p>
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div id="today-box"></div>
+            </div>
+            <div class="col-md-4">
+                <div id="expired-box"></div>
+                <div id="completed-box"></div>
+            </div>
+            <div class="col-md-4">
+                <div id="summary-box"></div>
+                @Html.Partial("Issues/_IssuesToVerify", Model.Where(t => !t.IsCompleted())
+                  .Where(t => !t.IsVerified)
+                  .OrderBy(t => t.End.Value)
+                  .AsEnumerable())
+                @Html.Partial("Issues/_IssuesUpcoming", Model
+                  .Where(t => t.IsUpcoming(null))
+                  .OrderBy(t => t.UpdatedDate)
+                  .AsEnumerable())
+            </div>
+        </div>
+        
+    </div>
+    
+}

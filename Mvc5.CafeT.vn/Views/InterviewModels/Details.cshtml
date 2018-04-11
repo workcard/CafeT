@@ -1,0 +1,61 @@
+﻿@model Mvc5.CafeT.vn.Models.InterviewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script type="text/javascript">
+        $.get('@Url.Action("GetQuestions", "InterviewModels", new { interviewId = Model.Id} )', function (data) {
+            $('#interviews-box').html(data);
+        });
+</script>
+
+<div>
+    <h4>InterviewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterviewDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterviewDate)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")|
+    @Ajax.ActionLink(" | Add Question", "AddQuestion", "InterviewModels", new { interviewId = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+    @Ajax.ActionLink(" | Mark as article", "MarkAsArticle", "InterviewModels", new { interviewId = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+</p>
+<div id= "Update-@Model.Id.ToString()"></div>
+<div id="interviews-box"></div>

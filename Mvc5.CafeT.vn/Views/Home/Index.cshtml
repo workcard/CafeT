@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "CafeT.vn - Công nghệ và Ứng dụng";
+}
+
+<script type="text/javascript">
+        $.get('@Url.Action("TopJobs", "JobModels", null)', function (data) {
+            $('#jobs-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetUserProfile", "Home", null)', function (data) {
+            $('#Profile').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetNewVideos", "Home", new { n = 5 })', function (data) {
+            $('#videos-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetNews", "Questions", new { n = 3} )', function (data) {
+            $('#Questions').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetNewFilesAsync", "Home", new { n = 10 })', function (data) {
+            $('#Files').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("ReadDoc", "Home", new { n = 10 })', function (data) {
+            $('#Doc').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetNewArticles", "Home", new { n = 10 })', function (data) {
+            $('#Articles').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("TopWords", "WordModels", new { n = 10 })', function (data) {
+            $('#NewWords').html(data);
+        });
+</script>
+
+<script type="text/javascript">
+        $.get('@Url.Action("TopComments", "Comments", null)', function (data) {
+            $('#comments-box').html(data);
+        });
+</script>
+
+<div class="row single-wrapper">
+    <div class="col-md-9">
+        <div id="Articles" class="col-md-12"></div>
+        <div class="col-md-6">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4>
+                        Sách và Tài liệu
+                        <span><a href="/tai-lieu">Xem tất cả (@ViewBag.CountFiles)</a></span>
+                    </h4>
+                    <hr>
+                </div>
+                <div id="Files" class="review-posts row m30"></div>
+            </div>
+        </div>
+        <div id="videos-box" class="col-md-6">
+        </div>
+    </div>
+    <div id="Doc"></div>
+    <div class="col-md-3">
+        <div id="Profile"></div>
+        @Html.Partial("Templates/_Left")
+        <div id="Questions"></div>
+        <div class="widget">
+            <div class="widget-title">
+                <h4> <span><a href="/tuyen-dung">Xem tất cả (@ViewBag.NewWords)</a></span></h4>
+                <hr>
+            </div>
+            <div class="mini-widget carrier-widget m30">
+                <div id="jobs-box"></div>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-title">
+                <h4>
+                    Bình luận mới
+                    <span>
+                        <a href="/Comments">Xem tất cả (@ViewBag.CountComments)</a>
+                    </span>
+                </h4>
+                <hr>
+            </div>
+            <div id="comments-box"></div>
+        </div>
+        <div id="NewWords"></div>
+    </div>
+</div>
+    

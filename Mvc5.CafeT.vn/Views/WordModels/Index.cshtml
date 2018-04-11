@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.WordModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRemembered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Viewers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Value)
+            |
+            @Html.DisplayFor(modelItem => item.Translation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRemembered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Viewers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.Raw(item.CreatedDate.TimeAgo())
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
+            @Ajax.ActionLink("Remembered", "Remembered", "WordModels", new { id = item.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + item.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+            <div id="Update-@item.Id.ToString()"></div>
+        </td>
+    </tr>
+}
+
+</table>

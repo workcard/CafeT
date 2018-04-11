@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.WordModel>
+<h5 class="text-primary">
+    New words
+</h5>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @Html.Raw(item.Model.Value.PadRight(10)) @Html.Raw(" : ") @Html.Raw(item.Translation)
+                <div id="Update-@item.Id.ToString()" class="pull-right">
+                    @Ajax.ActionLink("Remembered", "Remembered", "WordModels", new { id = item.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + item.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+                </div>
+            </li>
+        }
+    </ul>
+}

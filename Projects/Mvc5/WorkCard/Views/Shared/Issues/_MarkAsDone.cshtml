@@ -1,0 +1,19 @@
+﻿@using CafeT.Objects.Enums
+@model Web.ModelViews.IssueView
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.Status != IssueStatus.Done)
+    {
+        <div class="right">
+            @Html.Raw("Mark as: ")
+            @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
+                     new { Id = Model.Id, status = "Done" },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "Status-" + Model.Id.ToString(),
+                         HttpMethod = "Post",
+                     }, null)
+        </div>
+    }
+}

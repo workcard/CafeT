@@ -1,0 +1,17 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.ModelViews.ArticleView>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.Partial("Articles/_ArticleForHome",item)
+        </li>
+    }
+</ul>
+@*Trang 
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+@Html.Raw(" / ")*@ 
+@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", "Articles", new { page }, null))

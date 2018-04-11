@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    var images = (IEnumerable<string>)ViewBag.Images;
+    if (images != null)
+    {
+<ul>
+    @foreach (var image in images)
+    {
+        <li>
+            <img src="@image" width="1418" height="980"/>
+        </li>
+        @*if (image.Contains("?imgmax"))
+        {
+            <li>
+                <img src="@image.DeleteEndTo("?imgmax").Replace("https://www.google.com/url?q=","")" />
+            </li>
+        }*@
+    }
+</ul>
+    }
+}
+

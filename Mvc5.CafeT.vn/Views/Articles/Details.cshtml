@@ -1,0 +1,97 @@
+﻿@using Mvc5.CafeT.vn.ModelViews
+@using Mvc5.CafeT.vn.Models
+@model ArticleView
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js"></script>
+
+<script type="text/javascript">
+    $.get('@Url.Action("GetCommentsByArticle", "Comments", new { articleId = Model.Id })', function (data) {
+        $('#comments-box').html(data);
+    });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetEnglishWords", "Articles", new { articleId = Model.Id })', function (data) {
+        $('#NewWords').html(data);
+    });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GoogleSearch", "Google", new { keywords = Model.Tags})', function (data) {
+        $('#Results').html(data);
+    });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GoogleImages", "Google", new { keywords = Model.Tags})', function (data) {
+            $('#Images').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetByAuthors", "Articles", new { articleId = Model.Id })', function (data) {
+        $('#by-authors-box').html(data);
+    });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetAuthors", "Articles", new { articleId = Model.Id })', function (data) {
+        $('#authors-box').html(data);
+    });
+</script>
+
+    @{
+        ViewBag.Title = Model.Title;
+    }
+    <div class="row single-wrapper">
+        <div class="col-md-8">
+            <div class="widget">
+                <h4>@Model.Title</h4>
+                @Html.Partial("Articles/_ArticleInfo", Model)
+                <hr />
+                <p class="text-justify">
+                    @Html.Markdown(Model.Content)
+                    <hr />
+                    @Html.Raw(Model.Content)
+                </p>
+                @Html.Partial("Articles/_ArticleFooter", Model)
+                
+                <div id="Files" class="col-md-4">
+                    @if (Model.HasFiles())
+                    {
+                        <h5>Tài liệu đính kèm</h5>
+                        @Html.Partial("Files/_Files", Model.Files)
+                    }
+                </div>
+            </div>
+            <div id="TextProcessor">
+                @{
+                    TextProcessor processor = new TextProcessor(Model.Content);
+                    @*if (processor.Phrases != null & processor.Phrases.Count > 0)
+                        {
+                            @Html.Partial("Messages/_Menus", processor.Phrases);
+                        }*@
+
+                if (processor.Commands != null & processor.Commands.Count > 0)
+                {
+                    @*@Html.Partial("Messages/_Menus", processor.Commands);*@
+                foreach (string command in processor.Commands)
+                {
+                    TextCommand _command = new TextCommand(command);
+                    _command.Excute();
+                    @Html.Raw(_command.ToString());
+                    <br />
+                    }
+                }
+                }
+            </div>
+            @Html.Partial("Articles/_AddAvatar", new ImageLink()  { ArticleId = Model.Id })
+            @Html.Partial("Comments/_AddComment", new CommentView() { ArticleId = Model.Id })
+        </div>
+        <div class="col-md-4">
+            @Html.Partial("Articles/_ArticleMenu", Model)
+        </div>
+        <div id="authors-box" class="col-md-4 pull-right"></div>
+        <div id="NewWords" class="col-md-4"></div>
+        @*<div id="meta2-box" class="col-md-4 pull-right"></div>
+        <div id="meta3-box" class="col-md-4 pull-right"></div>*@
+        <div id="by-authors-box" class="col-md-4 pull-right"></div>
+        <div id="comments-box" class="col-md-4 pull-right"></div>
+        <div id="Results" class="col-md-4 pull-right"></div>
+        <div id="Images" class="col-md-4 pull-right"></div>
+    </div>

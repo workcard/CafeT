@@ -1,0 +1,57 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+@using CafeT.BusinessObjects
+
+@if (User.Identity.IsAuthenticated && Model.IsOf(User.Identity.Name) 
+    ||(User.IsInRole("Admin")))
+{
+    @Html.ActionLink("Sửa", "Edit", "Articles", new { id = Model.Id }, null)
+    @Html.Raw(" | ")
+    @Html.ActionLink("Xóa", "Delete", "Articles", new { id = Model.Id }, null)
+
+    if (Model.Status != PublishStatus.IsPublished)
+    {
+        @Html.Raw("| Bài nháp")
+        @Ajax.ActionLink(" | Xuất bản", "ToPublish", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+    else
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Lưu (nháp)", "ToDraft", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+    
+    if (Model.Scope != ScopeStatus.IsPublic)
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Công khai", "ToPublic", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+    else
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Công khai", "ToPrivate", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+    <div id="Update-@Model.Id.ToString()"> </div>
+}

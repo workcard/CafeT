@@ -1,0 +1,42 @@
+﻿@model Web.Models.WorkIssue
+
+@*@foreach (TimeTodoType p in Enum.GetValues(typeof(TimeTodoType)))
+{
+    @Ajax.ActionLink(p.ToString(), "SetTimeTodo", "WorkIssues", new { Id = Model.Id, timeTodo = p },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default btn-xs" })
+}*@
+@using (Ajax.BeginForm("AddPrice", "WorkIssues", null, 
+    new AjaxOptions { HttpMethod = "POST", UpdateTargetId = Model.Id.ToString() }, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => Model.Id)
+    @Html.HiddenFor(model => Model.CreatedDate)
+    <div class="card-box">
+        @Html.TextBoxFor(model => model.Price)
+        <div class="p-t-10 pull-right">
+            <p>
+                <input type="submit" value="Post" class="btn btn-default" />
+            </p>
+        </div>
+        <ul class="nav nav-pills profile-pills m-t-10">
+            <li>
+                <a href="#"><i class="fa fa-user"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-location-arrow"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class=" fa fa-camera"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-smile-o"></i></a>
+            </li>
+        </ul>
+    </div>
+}
+
+<div id="@Model.Id.ToString()" class="card-box panel panel-border panel-success"></div>

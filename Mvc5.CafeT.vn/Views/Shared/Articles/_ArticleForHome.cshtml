@@ -1,0 +1,31 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+<script type="text/javascript">
+        $.get('@Url.Action("GetLastComment", "Comments", new { articleId = Model.Id })', function (data) {
+            $('#LastComment-@Model.Id.ToString()').html(data);
+        });
+</script>
+
+@Html.Partial("Articles/_ArticleHeader", Model)
+
+@Html.Partial("Articles/_ArticleInfo", Model)
+
+@if(Model.Avatar != null)
+{
+    @Html.Raw(Model.Avatar)
+}
+else if (!Model.AvatarPath.IsNullOrEmptyOrWhiteSpace())
+{
+    <img src="@Model.AvatarPath" width="180" height="150" />
+}
+@if (!Model.Summary.IsNullOrEmptyOrWhiteSpace())
+{
+    <p class="text-justify">
+        @Html.Raw(Model.Summary)
+    </p>
+}
+<p>
+    @*@Html.Partial("Articles/_ArticleFooter", Model)*@
+</p>
+<div id="LastComment-@Model.Id.ToString()"></div>
+

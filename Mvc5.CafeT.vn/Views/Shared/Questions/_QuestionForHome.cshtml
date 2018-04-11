@@ -1,0 +1,14 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+@if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+{
+    @Html.ActionLink(Model.Title, "Details", "Questions", new { id = Model.Id }, null)<br />
+    @Html.Raw(Model.Content.TakeMaxWords(30))
+}
+else
+{
+    @Html.Raw(Model.Content.TakeMaxWords(30)) <br />
+    @Html.ActionLink("...", "Details", "Questions", new { id = Model.Id }, null)
+}
+@Html.Partial("Questions/_QuestionInfo", Model)
+@Html.Partial("Questions/_QuestionMenu", Model)

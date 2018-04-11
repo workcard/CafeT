@@ -1,0 +1,21 @@
+﻿@model string
+@using System.Text
+@using CafeT.Text
+
+<script type="text/javascript">
+    $.get('@Url.Action("ExcuteCommand", "Commands", new { command = Model })',
+        function (data) {
+            $('#result-box').html(data);
+        });
+</script>
+
+@Html.Raw(Model) -->
+@Ajax.ActionLink("Excute", "ExcuteCommand", "Commands", new { command = Model },
+                                                           new AjaxOptions
+                                                           {
+                                                               UpdateTargetId = "box-" + Model,
+                                                               HttpMethod = "Get",
+                                                               InsertionMode = InsertionMode.Replace
+                                                           }, null)
+<div id="result-box"> </div>
+<div id="box-@Model"> </div>

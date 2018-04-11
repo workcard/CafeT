@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Web.Models.Answer>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <p>
+        Trả lời: <span class="badge badge-danger"> @Model.Count() </span> 
+    </p>
+    <ul class="list-group">
+        @foreach (var model in Model)
+        {
+            <li class="list-group-item">
+                @Html.Partial("Answers/_AnswerItem", model)
+            </li>
+        }
+    </ul>
+}
+

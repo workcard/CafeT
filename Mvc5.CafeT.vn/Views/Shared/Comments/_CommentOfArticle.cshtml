@@ -1,0 +1,34 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.CommentView
+
+@*@Html.Partial("Comments/_ItemHeader", Model)
+
+@if(Model.Article != null)
+{
+    <span class="glyphicon glyphicon-arrow-right"></span>
+    <span>@Html.ActionLink(Model.Article.Title, "Details", "Articles", new { id = Model.ArticleId }, null)</span>
+}
+@Html.Partial("Comments/_ItemInfo", Model)
+<p>
+    @Html.Raw(Model.Content.TakeMaxWords(20))
+    <hr />
+    by: @Model.CreatedBy.GetFromBeginTo("@") on @Model.CreatedDate.TimeAgo()
+</p>
+<div class="post-bottom">
+   @Html.Partial("Comments/_CommentMenu", Model)
+</div>*@
+
+<h5>
+        @Html.Raw(Model.Title)
+    </h5>
+    <span>
+        @Html.Raw(Model.CreatedDate.TimeAgo()) @Html.Raw(" By: " + Model.CreatedBy.GetFromBeginTo("@"))
+        @if (Model.LastUpdatedDate.HasValue)
+        {
+            @Html.Raw(" | Cập nhật: " + Model.LastUpdatedBy.GetFromBeginTo("@"))
+            @Html.Raw(" lúc: " + Model.LastUpdatedDate.Value.TimeAgo())
+        }
+    </span>
+    @Html.Raw(Model.Content)
+
+
+

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Web.ModelViews.IssueView>
+
+@{
+    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
+    if (items != null && items.Count() > 0)
+    {
+        <div class="card border-success">
+            <div class="card-header">
+                To verify
+                <span class="badge badge-danger">
+                    @Model.Count() (issues)
+                </span>
+                <span class="badge badge-danger">
+                    @{
+                        var time = Model.Sum(t => t.IssueEstimation) / 60;
+                        @Html.Raw(time.ToReadable() + " (h)");
+                    }
+                </span>
+            </div>
+        </div>
+        <ul class="list-group">
+            @foreach (var item in items)
+            {
+                <li id="@item.Id.ToString()" class="list-group-item">
+                    @if (item.IsToday())
+                    {
+                        <span class="badge badge-danger">Hôm nay</span>
+                    }
+                    @Html.ActionLink(item.Title, "Details", "WorkIssues", new { id = item.Id }, null)
+                    <span class="badge badge-danger pull-right">@item.Status</span>
+                    <br />
+                    @if (item.IsVerified)
+                    {
+                        <span class="material-icons">verified_user</span>
+                    }
+                    <span class="small border-dark">@item.Price.ToReadable() (VND)</span>
+                    <span class="small">@item.IssueEstimation (phút)</span>
+                    @if (item.End.HasValue)
+                    {
+                        <span class="text-danger">[@item.End.Value.ToShortDateString()]</span>
+                    }
+                    <hr />
+                    @Html.Partial("Issues/_IssueMenu", item)
+                </li>
+            }
+        </ul>
+    }
+
+}
+
+
+
+

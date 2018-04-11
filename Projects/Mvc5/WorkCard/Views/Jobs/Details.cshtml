@@ -1,0 +1,120 @@
+﻿@model Web.Models.Job
+@using CafeT.Text
+@using Web.Models
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script>
+            var dt = '@ViewBag.EndDate';
+            var dateAr = dt.split('-');
+            var newDate = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+
+            var end = new Date(dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2]);
+
+            var _second = 1000;
+            var _minute = _second * 60;
+            var _hour = _minute * 60;
+            var _day = _hour * 24;
+            var timer;
+
+            function showRemaining() {
+                var now = new Date();
+                var distance = end - now;
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdown').innerHTML = 'Expried!';
+                    //window.location.href = '/Account/Login';
+
+                    return;
+                }
+                var days = Math.floor(distance / _day);
+                var hours = Math.floor((distance % _day) / _hour);
+                var minutes = Math.floor((distance % _hour) / _minute);
+                var seconds = Math.floor((distance % _minute) / _second);
+
+                //document.getElementById('countdown').innerHTML = days + 'days ';
+                document.getElementById('countdown').innerHTML = hours + 'hrs ';
+                document.getElementById('countdown').innerHTML += minutes + 'mins ';
+                document.getElementById('countdown').innerHTML += seconds + 'secs';
+            }
+
+            timer = setInterval(showRemaining, 1000);
+</script>
+<div class="row">
+    <div class="col-md-8">
+        <h4>
+            @Html.Raw(Model.Title)
+        </h4>
+        <span id="countdown"></span>
+        <hr />
+        <div class="row">
+            @if (Model.Tags != null && Model.Tags.Length > 0)
+            {
+                foreach (string tag in Model.Tags)
+                {
+                    if (tag.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(tag, "GetByTags", "Jobs", new { tag = tag }, null)
+                    }
+                }
+            }
+        </div>
+        <p class="row">
+            @Html.Raw(Model.Description)
+        </p>
+        <p class="row">
+            @Html.Raw(Model.Content)
+        </p>
+    </div>
+    <div class="col-md-4">
+       @Html.DisplayFor(model => model.Status)
+       @if (Model.Appliers != null && Model.Appliers.Count() > 0)
+       {
+            foreach (string applier in Model.Appliers)
+            {
+                @Html.Raw(applier)
+            }
+        }
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Jobs", new { id = Model.Id }, null) |
+            @Html.ActionLink("Add comment", "CreateForJob", "Comments", new { jobId = Model.Id }, null) |
+        </p>
+        <span class="pull-right">
+            @Ajax.ActionLink("Apply", "Apply", "Jobs", new { id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Get",
+                            }, null)
+        </span>
+        <p>
+            <div id="Update-@Model.Id.ToString()"></div>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            @Html.Raw("Lương: " + Model.Salary.Amout.ToReadable() + Model.Salary.Currency.ToString())
+        </div>
+        <div class="col-md-5">
+            @Html.DisplayFor(model => model.Start)
+            @Html.Raw(" | ")
+            @Html.DisplayFor(model => model.End)
+        </div>
+    </div>
+    <div class="row">
+        <h4>Appliers</h4>
+        @if (Model.Appliers != null && Model.Appliers.Count() > 0)
+        {
+            foreach (string applier in Model.Appliers)
+            {
+                @Html.Raw(applier)
+            }
+        }
+    </div>
+    <div class="row">
+        @Html.Partial("Comments/_Comments", (IEnumerable<Comment>)ViewBag.Comments)
+    </div>
+</div>
+

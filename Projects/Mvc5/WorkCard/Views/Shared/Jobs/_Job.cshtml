@@ -1,0 +1,45 @@
+﻿@using CafeT.Text
+@using CafeT.Time
+@using System.Globalization
+
+@model Web.Models.Job
+
+<div class="card-box kanban-box">
+    
+    @if (Model.Title != null && Model.Title.Length > 0)
+    {
+        <div class="row">
+            <h5>
+                <a href="#">@Html.ActionLink(Model.Title, "Details", "Jobs", new { id = Model.Id }, null)</a>
+                <span class="label label-danger">@Model.Status</span>
+                <span class="label label-success pull-right">@Model.Salary.Amout.ToReadable() (@Model.Salary.Currency)/tháng</span>
+            </h5>
+        </div>
+        <div class="row">
+            @if (Model.End.HasValue)
+            {
+                <span class="label label-success pull-left">@Model.End.Value.TimeAgo()</span>
+                @Html.Raw(" ")
+            }
+            
+        </div>
+    }
+    <div class="row">
+        <p>
+            @Html.Raw(Model.Description)
+        </p>
+    </div>
+    <div class="row">
+        <span class="pull-right">
+            @Ajax.ActionLink("Apply", "Apply", "Jobs", new { id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Get",
+                            }, null)
+        </span>
+        <p>
+            <div id="Update-@Model.Id.ToString()"></div>
+        </p>
+    </div>
+</div>

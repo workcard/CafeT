@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Google.Apis.Customsearch.v1.Data.Result>
+<div class="list-group">
+    <a href="javascript:void(0);" class="list-group-item active">
+        Google search ...
+    </a>
+    Secrect File: @ViewBag.SecrectFile
+    @if (Model != null && Model.Count() > 0)
+    {
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                if (item.Image != null)
+                {
+                    <li class="list-group-item">
+                        <img src="@item.Image.ThumbnailLink" width="150" height="100" />
+                        @Html.Raw(item.HtmlSnippet)
+                        <a href="@item.Link" title="@item.Title"></a>
+                        @Html.ActionLink("Details", "View", "FileModels", new { id = item.Link }, null)
+                    </li>
+                }
+            }
+        </ul>
+    }
+    
+</div>

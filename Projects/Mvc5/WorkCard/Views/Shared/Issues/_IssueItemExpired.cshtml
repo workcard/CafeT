@@ -1,0 +1,27 @@
+﻿@using CafeT.Text
+@using CafeT.Time
+@using System.Globalization
+
+@model Web.ModelViews.IssueView
+
+@if (Model.IsExpired())
+{
+    if (Model.IsToday())
+    {
+        <span class="badge badge-danger">Hôm nay</span>
+    }
+    @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+    <span class="badge badge-danger pull-right">@Model.Status</span>
+    <span class="badge badge-success">@Model.End.Value.TimeAgo()</span>
+    <br />
+    if (Model.IsVerified)
+    {
+        <span class="material-icons">verified_user</span>
+    }
+    <span class="small">@Model.Price.ToReadable() (VND)</span>
+    <span class="small">@Model.IssueEstimation (phút)</span>
+
+
+    <div id="Status-@Model.Id.ToString()" class="container"></div>
+    @Html.Partial("Issues/_IssueMenu", Model)
+}

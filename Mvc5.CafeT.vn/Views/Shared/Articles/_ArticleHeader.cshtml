@@ -1,0 +1,12 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+@if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+{
+    <h5>
+        @Html.ActionLink(Model.Title, "Details", "Articles", new { id = Model.Id }, null)
+        @if (Model.IsNews())
+        {
+            <span class="label label-danger">Mới</span>
+        }
+    </h5>
+}

@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.Models.QuestionModel>
+<span>
+    @Ajax.ActionLink("Cơ bản (" + Model.Where(t => t.Level == 0).Count() + ")", "GetAllByLevel", "Questions", new { level = 0 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Dễ (" + Model.Where(t => t.Level == 1).Count() + ")", "GetAllByLevel", "Questions", new { level = 1 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Trung bình (" + Model.Where(t => t.Level == 2).Count() + ")", "GetAllByLevel", "Questions", new { level = 2 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Khá (" + Model.Where(t => t.Level == 3).Count() + ")", "GetAllByLevel", "Questions", new { level = 3 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Giỏi (" + Model.Where(t => t.Level == 4).Count() + ")", "GetAllByLevel", "Questions", new { level = 4 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Khó (" + Model.Where(t => t.Level == 5).Count() + ")", "GetAllByLevel", "Questions", new { level = 5 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+
+</span>

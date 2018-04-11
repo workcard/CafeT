@@ -1,0 +1,92 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+<div class="nav-tabs">
+    @Ajax.ActionLink("Đúng", "GetAnswers", "Questions", new { questionId = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "Answers",
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get"
+                 }, null)
+    @Ajax.ActionLink("Sai", "GetAnswers", "Questions", new { questionId = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "Answers",
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get"
+                 }, null)
+    @Ajax.ActionLink("Chưa review", "GetAnswers", "Questions", new { questionId = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "Answers",
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get"
+                 }, null)
+</div>
+<ul class="list-group">
+    @foreach (var item in Model.Answers)
+    {
+        <li class="list-group-item">
+            @if (!item.Name.IsNullOrEmptyOrWhiteSpace())
+            {
+                @Html.ActionLink(item.Name, "Details", "Answers", new { id = item.Id }, null)
+                <br />
+                <span>
+                    @Html.Raw("Giải bởi: " + item.CreatedBy)
+                    @Html.Raw(" | ")
+                    @Html.Raw(" lúc " + item.CreatedDate.TimeAgo())
+                    @if (item.LastUpdatedDate.HasValue)
+                    {
+                        @Html.Raw(" | Cập nhật bởi: " + item.LastUpdatedBy)
+                        @Html.Raw(" lúc: " + item.LastUpdatedDate.Value.TimeAgo())
+                    }
+                </span>
+            }
+            <p>
+                @Html.Raw(item.Content.TakeMaxWords(50) + " ...")
+            </p>
+            
+            @if (item.Reviews == null || (item.Reviews != null && item.Reviews.Count()<=0))
+            {
+                @Html.Raw("Chưa review.")
+                if (User.Identity.IsAuthenticated)
+                {
+                    @Html.Raw(" Hãy ")
+                    @Ajax.ActionLink("Review", "GetToReview", "Answers", new { id = item.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Review",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+                    if (item.IsOf(User.Identity.Name))
+                    {
+                        @Ajax.ActionLink("Delete", "Delete", "Answers", new { id = item.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Review",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+                    }
+                }
+            }
+            else
+            {
+                if (item.IsCorrect)
+                {
+                    <p class="glyphicon">
+                        [Đúng]
+                    </p>
+                }
+                else
+                {
+                    <p class="text-danger">
+                        [Sai]
+                    </p>
+                }
+            }
+        </li>
+    }
+</ul>
+<div id="Review"></div>

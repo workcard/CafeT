@@ -1,0 +1,26 @@
+﻿@model Web.ModelViews.DaySummary
+
+<div class="card-header bg-success">
+    Tổng kết
+</div>
+<div class="card">
+    <div class="row">
+        <div class="col-md-6 pull-left ">
+            <div class="container">
+                Thời gian: @Model.TotalTimes (phút)<br />
+                Đánh giá: @Model.GetWorkingStatus()<br />
+                @Html.Raw("Chi phí "):
+                @Html.Raw(Model.Issues.Sum(t => t.Price).ToReadable() + " (VND)")
+            </div>
+            
+        </div>
+        <div class="col-md-6 pull-right">
+            <div class="container">
+                @Html.Raw("Hoàn thành "): @Model.CompletedIssues.Count() việc. <br />
+                @Html.Raw("Trong: " + Model.CompletedIssues.Sum(t => t.IssueEstimation) + " (phút)")<br />
+                @Html.Raw("Có: " + Model.CompletedIssues.Sum(t => t.Price).ToReadable() + " (VND)")
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,45 @@
+﻿@model Web.Models.Question
+
+
+<div class="container">
+    <div class="col-md-10">
+        @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+    {
+        <span>
+            <i class="material-icons">question_answer</i>
+        </span>
+        <div class="card-link float-lg-right">
+            @Html.ActionLink("Chi tiết", "Details", "Questions", new { id = Model.Id },
+                 null)
+            @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
+                               new AjaxOptions
+                               {
+                                   UpdateTargetId = "Insert-" + Model.Id.ToString(),
+                                   HttpMethod = "Get",
+                                   InsertionMode = InsertionMode.Replace
+                               },
+                               null)
+            @Ajax.ActionLink("Translate", "Translate", "Questions", new { questionId = Model.Id },
+                               new AjaxOptions
+                               {
+                                   UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                   HttpMethod = "Get",
+                               }, null)
+        </div>
+        <h6 class="text-danger">
+            @Model.Title
+        </h6>
+
+
+}
+        <p class="text-justify">
+            <hr />
+            @Html.Raw(Model.Content)
+        </p>
+    </div>
+    
+    <div id="Insert-@Model.Id.ToString()"></div>
+    <div id="answers-box-@Model.Id.ToString()"></div>
+    
+</div>
+

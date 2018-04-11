@@ -1,0 +1,33 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+@*<script type="text/javascript">
+        $.get('@Url.Action("GetLastComment", "Comments", new { articleId = Model.Id })', function (data) {
+            $('#LastComment-@Model.Id.ToString()').html(data);
+        });
+</script>*@
+@{
+    string avatarUrl = string.Empty;
+    <div class="post row clearfix">
+        <div class="col-md-12">
+            @if (Model.Images.Count > 0)
+            {
+                Model.ResizeImages("40%", "100%");
+                <h4><a href="/Articles/Details/@Model.Id">@Model.Title</a></h4>
+                avatarUrl = Model.Images.FirstOrDefault();
+                <div class="news-img">
+                    <a href="/Articles/Details/@Model.Id">
+                        @Html.Raw(@avatarUrl);
+                    </a>
+                </div>
+                <p>
+                    @Html.Raw(Model.GetDescription(50))
+                </p>
+            }
+            else
+            {
+                <h4><a href="/Articles/Details/@Model.Id">@Model.Title</a></h4>
+            }
+            @Html.Partial("Articles/_ArticleInfo", Model)
+        </div>
+    </div>
+}

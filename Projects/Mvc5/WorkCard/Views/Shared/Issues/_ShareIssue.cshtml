@@ -1,0 +1,61 @@
+﻿@using Web.Models
+@model Web.Models.WorkIssue
+
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#Content").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/WorkIssues/AutoCompleted",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            var _content = $("#Content").val();
+                            var _index = _content.lastIndexOf(" ");
+                            _content = _content.substring(0, _index + 1);
+                            return {
+                                label: item,
+                                value: _content +  item
+                            };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+<div class="card-box">
+    @using (Html.BeginForm("ShareTo", "WorkIssues", FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+
+        <textarea id="Content" name="Content" rows="3" class="form-control" placeholder="Post a new message"></textarea>
+        <div class="p-t-10 pull-right">
+            <p>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </p>
+        </div>
+    }
+    <p>
+        Gợi ý: <br />
+        <ul>
+            <li>Mặc định khi tạo issue, ngày đến hạn và bắt đầu (end/start) sẽ là ngày hôm nay</li>
+            <li>Nếu bạn ai sẽ tham gia vào issue, chỉ cần nhập email của họ vào, chương trình sẽ tự động thông báo đến người đó</li>
+            <li>Chúng tôi có tạo sẵn một số từ khóa hữu ích mà bạn có thể tham khảo @Html.ActionLink("Tại đây", "Index", "Keywords")</li>
+        </ul>
+    </p>
+</div>
+

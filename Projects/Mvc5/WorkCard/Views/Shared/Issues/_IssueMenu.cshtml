@@ -1,0 +1,62 @@
+﻿@model Web.ModelViews.IssueView
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="notify-@Model.Id.ToString()" class="badge badge-success"></div>
+    if (!Model.IsCompleted())
+    {
+        @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues", new { id = Model.Id, status = "Done" },
+                                     new AjaxOptions
+                                     {
+                                         UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                         HttpMethod = "Post",
+                                     }, null)
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("+ 5 (min)", "AddTimeToDo", "WorkIssues", new { id = Model.Id, minutes = 5 },
+                              new AjaxOptions
+                              {
+                                  UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                  HttpMethod = "Post",
+                              }, null)
+    }
+    if (!Model.IsVerified)
+    {
+        @Ajax.ActionLink(" | Verify", "Verify", "WorkIssues", new { id = Model.Id },
+                                 new AjaxOptions
+                                 {
+                                     UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                     HttpMethod = "Post",
+                                 }, null)
+        @Html.Raw(" | ")
+    }
+    if (Model.IsCompleted())
+    {
+        @Ajax.ActionLink("Re-Open", "MarkStatus", "WorkIssues", new { id = Model.Id, status = "New" },
+                                     new AjaxOptions
+                                     {
+                                         UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                         HttpMethod = "Post",
+                                     }, null)
+    }
+
+    @Ajax.ActionLink(" | Today", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.ToString() },
+                                   new AjaxOptions
+                                   {
+                                       UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                       HttpMethod = "Post",
+                                   }, null)
+    @Ajax.ActionLink(" | Tomorrow", "SetWorkOnTime", "WorkIssues",
+                                    new { Id = Model.Id, date = DateTime.Now.AddDays(1).ToString() },
+                                    new AjaxOptions
+                                    {
+                                        UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                        HttpMethod = "Post",
+                                    }, null)
+    @Ajax.ActionLink(" | Next week", "SetWorkOnTime", "WorkIssues",
+                           new { Id = Model.Id, date = DateTime.Now.AddDays(5).ToString() },
+                           new AjaxOptions
+                           {
+                               UpdateTargetId = "notify-" + Model.Id.ToString(),
+                               HttpMethod = "Post",
+                           }, null)
+}

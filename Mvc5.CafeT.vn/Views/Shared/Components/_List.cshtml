@@ -1,0 +1,27 @@
+﻿@model IEnumerable<string>
+<div class="list-group">
+    <a href="javascript:void(0);" class="list-group-item active">
+        List
+    </a>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <ul class="list-group">
+            @foreach (string item in Model)
+            {
+                if (!item.IsNullOrEmptyOrWhiteSpace())
+                {
+                    <li class="list-group-item">
+                        @Ajax.ActionLink(item, "UploadAvatar", "Account", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+                    </li>
+                }
+            }
+        </ul>
+    }
+    
+</div>

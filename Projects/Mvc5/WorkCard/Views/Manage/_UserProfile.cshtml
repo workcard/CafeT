@@ -1,0 +1,131 @@
+﻿@model Web.Models.ApplicationUser
+
+
+@{
+    string avartarUrl = "/Assets/Customizes/images/avatar_default.png";
+    if(!string.IsNullOrWhiteSpace(@ViewBag.Avatar))
+    {
+        avartarUrl = @ViewBag.Avatar;
+    }
+}
+
+@*<link href="~/Content/avatar/imgareaselect-default.css" rel="stylesheet" />
+<link href="~/Content/avatar/jquery.awesome-cropper.css" rel="stylesheet" />*@
+
+<div class="media-left">
+    <div class="media-left">
+        <a href="javascript:void(0);">
+            <img class="media-object" id="url-avatar" alt="..." src="@avartarUrl" />
+        </a>
+    </div>
+    <div class="media-body">
+        <div class="media-heading">
+            Chào bạn: @Html.Raw(Model.GetFullName())
+        </div>
+        @Html.Raw(Model.About)
+    </div>
+
+</div>
+@*<div>
+    <form role="form" method="post" action="/Manage/UploadAvatar">
+        <input id="image" type="image" name="imageBase">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu</button>
+    </form>
+</div>
+<p><a href="#" id="hl-crop-image">Lưu</a></p>
+<img id="my-cropped-image" src="#" style="display:none;" />*@
+@*<p>
+    <img id="my-origin-image" src="~/Images/funny_cat_v1.jpg" />
+</p>*@
+@using (Html.BeginForm("CropImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<label for="file">Upload Image:</label>
+<input type="file" name="file" id="file" style="width: 100%;" />
+<input type="submit" value="Upload" class="submit" />
+}
+@*
+<script src="~/Scripts/avatar/jquery.imgareaselect.js"></script>
+<script src="~/Scripts/avatar/jquery.awesome-cropper.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#imageBase').awesomeCropper(
+        { width: 110, height: 110, debug: true }
+        );
+    });
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>*@
+@section scripts{
+
+<script type="text/javascript">
+
+        var imageCropWidth = 0;
+        var imageCropHeight = 0;
+        var cropPointX = 0;
+        var cropPointY = 0;
+
+        $(document).ready(function () {
+            initCrop();
+        });
+
+        $("#hl-crop-image").on("click", function (e) {
+            e.preventDefault();
+            cropImage();
+        });
+
+        function initCrop() {
+            $('#my-origin-image').Jcrop({
+                onChange: setCoordsAndImgSize,
+                aspectRatio: 1
+            });
+        }
+
+        function setCoordsAndImgSize(e) {
+
+            imageCropWidth = e.w;
+            imageCropHeight = e.h;
+
+            cropPointX = e.x;
+            cropPointY = e.y;
+        }
+
+        function cropImage() {
+
+            if (imageCropWidth == 0 && imageCropHeight == 0) {
+                alert("Please select crop area.");
+                return;
+            }
+
+            $.ajax({
+                url: '/Images/CropImage',
+                type: 'POST',
+                data: {
+                    imagePath: $("#my-origin-image").attr("src"),
+                    cropPointX: cropPointX,
+                    cropPointY: cropPointY,
+                    imageCropWidth: imageCropWidth,
+                    imageCropHeight: imageCropHeight
+                },
+                success: function (data) {
+                    $("#my-cropped-image")
+                        .attr("src", data.photoPath + "?t=" + new Date().getTime())
+                        .show();
+                },
+                error: function (data) { }
+            });
+        }
+
+</script>
+}

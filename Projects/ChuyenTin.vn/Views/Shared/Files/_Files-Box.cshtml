@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.FileModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="post-title">
+            <h5><a title="@item.Title" href="/chi-tiet-tai-lieu/@item.Id.ToString()">@item.Title</a></h5>
+        </div><!-- end post-title -->
+        <div class="large-post-meta">
+            <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy")</a></span>
+            <small>&#124;</small>
+            <span><a href="javascript:void(0);"><i class="fa fa-download"></i> @item.CountDownloads</a></span>
+            <small>&#124;</small>
+            <span><a href="javascript:void(0);"><i class="fa fa-eye"></i> @item.CountViews</a></span>
+        </div><!-- end meta -->
+    }
+}

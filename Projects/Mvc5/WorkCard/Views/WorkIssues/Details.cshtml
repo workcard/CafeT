@@ -1,0 +1,212 @@
+﻿@using CafeT.Objects.Enums
+@model Web.ModelViews.IssueView
+@{
+    ViewBag.Title = Model.Title;
+}
+<script type="text/javascript">
+    $.get('@Url.Action("GetQuestionsMustAnswer", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#questions-box').html(data);
+        });
+</script>
+@*<script type="text/javascript">
+    $.get('@Url.Action("GetQuestionsHasAnswers", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#questionsHasAnswers-box').html(data);
+        });*@
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("SearchBy", "WorkIssues", new { keyWord = Model.GetCommands().Where(t=>t.StartsWith("[")).FirstOrDefault()})',
+        function (data) {
+            $('#sameTag-box').html(data);
+        });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        @Model.Title
+                        <span class="badge badge-danger pull-right">@Model.Status</span>
+                        @if (Model.Repeat != ScheduleType.None)
+    {
+                    <span class="badge badge-info pull-right">@Model.Repeat</span>
+}
+                        <span class="badge badge-danger pull-right">@Model.IssueEstimation (phút)</span>
+                        <span class="badge badge-danger pull-right">@Model.End.Value.ToShortTimeString()</span>
+                        <hr />
+
+                        @if (Model.Start.HasValue)
+    {
+                    @Model.Start.Value.ToShortDateString()
+                    @Html.Raw("-")
+}
+                        @if (Model.End.HasValue)
+    {
+                    @Model.End.Value.ToShortDateString()
+}
+
+                        <div id="Update"></div>
+
+                        By: @Model.CreatedBy
+                        @if (!Model.Content.IsNullOrEmptyOrWhiteSpace())
+    {
+                    <span class=" badge badge-info">@Model.Content.ToWords().Count() từ</span>
+                    <span class=" badge badge-info">@Model.Content.GetEmails().Count() emails</span>
+}
+
+
+                    </div>
+                    <div class="card-text">
+                        @Html.Raw(Model.Content)
+                    </div>
+                    <div class="card-link">
+                        @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.IsOf(User.Identity.Name))
+
+        {
+                    @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
+new { issueId = Model.Id },
+new AjaxOptions
+{
+UpdateTargetId = "AddQuestion",
+HttpMethod = "Get",
+}, new { @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("To article", "ToArticle", new { id = Model.Id })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Delete All Questions", "DeleteAllQuestions", "WorkIssues",
+new { Id = Model.Id },
+new AjaxOptions
+{
+UpdateTargetId = "Status-" + Model.Id.ToString(),
+HttpMethod = "Post",
+}, null)
+                    @Html.Raw(" | ")
+}
+
+
+                    @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
+new { id = Model.Id, status = "Done" },
+new AjaxOptions
+{
+UpdateTargetId = "Status-" + Model.Id.ToString(),
+HttpMethod = "Post",
+}, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Notify", "Notify", "WorkIssues",
+new { id = Model.Id },
+new AjaxOptions
+{
+UpdateTargetId = "Status-" + Model.Id.ToString(),
+HttpMethod = "Post",
+}, null)
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Back to List", "Index")
+
+
+}
+                    </div>
+                </div>
+                <div id="AddQuestion"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            @if (Model.GetEmails() != null && Model.GetEmails().Count() > 0)
+            {
+                <div class="card">
+                    <div class="card-header">Contacts</div>
+                    <ul class="list-group">
+                        @foreach (string email in Model.GetEmails().Distinct())
+                        {
+                            <li class="list-group-item">
+                                @Html.ActionLink(email, "GetContact", "Contacts", new { email = email }, null)
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Send email", "SendEmail", "WorkIssues", new { toEmail = email, issueId = Model.Id }, null)
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+                <div class="card">
+                    <div class="card-header">Tags</div>
+                    <ul class="list-group">
+                        @foreach (var command in Model.GetCommands().Distinct())
+                        {
+                            if (command.StartsWith("["))
+                            {
+                                <li class="list-group-item">
+                                    @Html.ActionLink(command, "SearchBy", "WorkIssues", new { keyWord = command }, null)
+                                </li>
+                            }
+
+                        }
+                    </ul>
+                    <div id="sameTag-box"></div>
+                </div>
+            }
+            @{
+                var commands = Model.GetCommands().Distinct();
+                if (commands != null && commands.Count() > 0)
+                {
+                    <div class="card-header">
+                        Commands
+                    </div>
+                    <ul class="list-group">
+                        @foreach (string command in commands)
+    {
+        if (command.Contains("@"))
+        {
+                    <li class="list-group-item">
+                        @Html.Partial("_Command", command)
+                    </li>
+}
+
+else
+{
+                    <li class="list-group-item">
+                        @Html.Partial("_Command", command)
+                    </li>
+}
+}
+                    </ul>
+                }
+
+            }
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <div id="questionsHasAnswers-box"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Đã xem bởi: </div>
+                <ul class="list-group">
+                    @foreach (string userName in Model.Viewers.Distinct())
+                    {
+                        <li class="list-group-item">
+                            @Html.Raw(userName)
+                        </li>
+                    }
+                </ul>
+
+            </div>
+            <div class="card">
+                <div id="questions-box"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+

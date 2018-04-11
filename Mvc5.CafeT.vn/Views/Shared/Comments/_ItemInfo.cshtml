@@ -1,0 +1,18 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.CommentView
+
+<div>
+    @if (Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(Model.LastUpdatedDate.Value.TimeAgo())
+        @Html.Raw(" by: " + Model.CreatedBy.GetFromBeginTo("@"))
+    }
+    else
+    {
+        @Html.Raw(Model.CreatedDate.TimeAgo())
+        @Html.Raw(" by: " + Model.CreatedBy.GetFromBeginTo("@"))
+    }
+</div>
+
+
+
+

@@ -1,0 +1,16 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.YouTubeView
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsOf(User.Identity.Name) || (User.IsInRole("Admin")))
+    {
+        @Html.ActionLink("Edit", "Edit", "Comments", new { id = Model.Id }, null)
+        @Html.Raw(" | ")
+        @Html.ActionLink("Details", "Details", "Comments", new { id = Model.Id }, null)
+        @Html.Raw(" | ")
+        @Html.ActionLink("Delete", "Delete", "Comments", new { id = Model.Id }, null)
+    }
+    @Html.Raw(" | ")
+    @Html.ActionLink("Reply", "Reply", "Comments", new { id = Model.Id }, null)
+}
+

@@ -1,0 +1,1192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BD84FE5E-E551-4721-9F53-EDD1D3EF9E34}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartTracking</RootNamespace>
+    <AssemblyName>SmartTracking</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Quartz.2.6.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CIOController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IssueController.cs" />
+    <Compile Include="Controllers\LeaderController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewIssuesController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CIOHelpers.cs" />
+    <Compile Include="Helpers\DataChartHelpers.cs" />
+    <Compile Include="Helpers\DateHelpers.cs" />
+    <Compile Include="Helpers\EmailHelpers.cs" />
+    <Compile Include="Helpers\ExcelHelpers.cs" />
+    <Compile Include="Helpers\IPerformance.cs" />
+    <Compile Include="Helpers\IssueHelpers.cs" />
+    <Compile Include="Helpers\PerformanceHelpers.cs" />
+    <Compile Include="Helpers\StaffHelpers.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
+    <Compile Include="Managers\ApplicationGroupManager.cs" />
+    <Compile Include="Managers\ApplicationRoleManager.cs" />
+    <Compile Include="Managers\ApplicationSignInManager.cs" />
+    <Compile Include="Managers\ApplicationUserManager.cs" />
+    <Compile Include="Mappers\IssueMappers.cs" />
+    <Compile Include="Mappers\ProjectMappers.cs" />
+    <Compile Include="Mappers\UserMappers.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\BaseObject.cs" />
+    <Compile Include="Models\Jobs\EmailJob.cs" />
+    <Compile Include="Models\Objects\Email.cs" />
+    <Compile Include="Models\Objects\Issue.cs" />
+    <Compile Include="Models\Jobs\JobScheduler.cs" />
+    <Compile Include="Models\Objects\IssueType.cs" />
+    <Compile Include="Models\NewIssue.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectUser.cs" />
+    <Compile Include="Models\Objects\SmartIssue.cs" />
+    <Compile Include="Repositories\IssueRepositories.cs" />
+    <Compile Include="Repositories\ProjectRepositories.cs" />
+    <Compile Include="Repositories\UserProfileRepositories.cs" />
+    <Compile Include="Repositories\UserRepositories.cs" />
+    <Compile Include="Stores\ApplicationGroupStore.cs" />
+    <Compile Include="Stores\ApplicationRoleStore.cs" />
+    <Compile Include="Stores\ApplicationUserStore.cs" />
+    <Compile Include="Stores\GroupStoreBase.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\CIOViewModels.cs" />
+    <Compile Include="ViewModels\ColumnGraphViewModel.cs" />
+    <Compile Include="ViewModels\GeneralStaffViewModel.cs" />
+    <Compile Include="ViewModels\IssueViewModels.cs" />
+    <Compile Include="ViewModels\ListIssuesForDateViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PerformanceListUserViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModels.cs" />
+    <Compile Include="ViewModels\RoleViewModels.cs" />
+    <Compile Include="ViewModels\StaffTimesViewModel.cs" />
+    <Compile Include="ViewModels\StaffViewModels.cs" />
+    <Compile Include="ViewModels\UserViewModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap\bootstrap.css" />
+    <Content Include="Content\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap\Site.css" />
+    <Content Include="Content\Extend\Date\bootstrap-datepicker.js" />
+    <Content Include="Content\Extend\Date\bootstrap.css" />
+    <Content Include="Content\Extend\Date\datepicker.css" />
+    <Content Include="Content\Extend\Date\jquery.js" />
+    <Content Include="Content\Images\female-profile.gif" />
+    <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\male_profile.gif" />
+    <Content Include="Content\Images\Profile.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\animate.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\bootstrap.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\calendar\fullcalendar.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\calendar\fullcalendar.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\calendar\fullcalendar.print.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\custom.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\css\demo_page.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\css\demo_table.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\css\demo_table_jui.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\back_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\back_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\back_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\favicon.ico" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\forward_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\forward_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\forward_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\sort_asc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\sort_both.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\sort_desc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\tools\css\dataTables.tableTools.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\editor\external\google-code-prettify\prettify.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\editor\index.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\floatexamples.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\aero%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\aero.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\aero.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\blue%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\blue.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\blue.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\flat%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\flat.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\flat.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\green%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\green.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\green.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\grey%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\grey.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\grey.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\orange%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\orange.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\orange.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\pink%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\pink.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\pink.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\purple%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\purple.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\purple.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\red%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\red.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\red.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\yellow%402x.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\yellow.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\yellow.png" />
+    <Content Include="Content\Templates\Gentelella Alela\css\icheck\flat\_all.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\ion.rangeSlider.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\normalize.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\nprogress.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\progressbar\bootstrap-progressbar-3.3.0.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\select\select2.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\css\switchery\switchery.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\css\font-awesome.css" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\css\font-awesome.min.css" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\1.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\4.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\american-express.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\back_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\back_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\back_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\data.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\favicon.ico" />
+    <Content Include="Content\Templates\Gentelella Alela\images\forward_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\forward_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\forward_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\icons.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\img.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\loading.gif" />
+    <Content Include="Content\Templates\Gentelella Alela\images\mastercard.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\paypal2.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\picture-2.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\picture.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\picture2.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\prod1.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\prod2.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\prod3.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\prod4.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\prod5.jpg" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sort_asc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sort_asc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sort_both.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sort_desc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sort_desc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sprite-skin-flat.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sprite-skin-modern.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sprite-skin-nice.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\sprite-skin-simple.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\user.png" />
+    <Content Include="Content\Templates\Gentelella Alela\images\visa.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\autocomplete\countries.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\autocomplete\jquery.autocomplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\bootstrap.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\calendar\fullcalendar.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\chartjs\chart.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\colorpicker\docs.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\cropping\cropper.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\cropping\main.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\cropping\main2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\custom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\back_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\back_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\back_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\favicon.ico" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\forward_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\forward_enabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\forward_enabled_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\sort_asc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\sort_both.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\sort_desc.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\js\jquery.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\api\api.internal.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\api\api.methods.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\api\api.static.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.ajax.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.columns.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.compat.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.constructor.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.data.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.draw.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.filter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.info.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.init.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.length.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.page.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.processing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.scrolling.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.sizing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.sort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.state.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\core\core.support.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\DataTables.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\ext\ext.classes.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\ext\ext.paging.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\ext\ext.sorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\ext\ext.types.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.column.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.defaults.columns.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.defaults.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.ext.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.row.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.search.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\src\model\model.settings.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\alter_buttons.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\bootstrap.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\button_text.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\collection.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\defaults.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\index.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\multiple_tables.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\multi_instance.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\new_init.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\pdf_message.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\plug-in.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\select_column.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\select_multi.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\select_os.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\select_single.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\simple.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\examples\swf_path.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\background.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\collection.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\collection_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\copy.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\copy_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\csv.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\csv_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\pdf.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\pdf_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\print.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\print_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\xls.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\xls_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\js\dataTables.tableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\Readme.txt" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\src\dataTables.tableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\src\TableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\src\ZeroClipboard.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\swf\copy_csv_xls.swf" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\css\dataTables.tableTools.css" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\alter_buttons.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\bootstrap.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\button_text.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\collection.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\defaults.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\index.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\multiple_tables.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\multi_instance.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\new_init.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\pdf_message.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\plug-in.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\select_column.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\select_multi.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\select_os.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\select_single.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\simple.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\examples\swf_path.xml" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\background.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\collection.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\collection_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\copy.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\copy_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\csv.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\csv_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\pdf.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\pdf_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\print.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\print_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\xls.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\xls_hover.png" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\js\dataTables.tableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\Readme.txt" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\src\dataTables.tableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\src\TableTools.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\src\ZeroClipboard.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\swf\copy_csv_xls.swf" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\controller.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\index.html" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\performance\draw.html" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\performance\page.html" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\performance\sort.html" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\-complex_header.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\-iDraw.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2512.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2530-2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2530.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2569.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2600.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2608.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2635.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2746-stable-sort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2799.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2840-restore-table-width.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\2914-state-save-sort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\5396-fnUpdate-arrays-mData.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\5396-fnUpdate-arrays.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\5508-xscroll-zero-content.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\6776-scrolling-table-grows.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.bVisible2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.iDataSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bInfiniteScroll.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bJQueryUI.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bSortCellsTop.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnCookieCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnCreatedCell.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnCreatedRow.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnDeleteRow.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnFooterCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnInfoCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnSetColumnVis.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\fnSetColumnVis2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\gh125 - stripe stripping.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\html-autodetect-sort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\sScrollXY.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\th_in_body.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\_getDataFunctions.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\_setDataFunctions.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\1_dom\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\39-nested-null.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\6872-default-content-missing-props.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\8549--string-sorting-nonstrings.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.iDataSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnCreatedCell.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnCreatedRow.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnFooterCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\js_data_mixed_types.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\2_js\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.iDataSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnCreatedCell.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnCreatedRow.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\fnServerData.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sLoadingRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxDataProp.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxDataProp2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\3_ajax\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\-iDraw.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\2440.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\2569.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\2600.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bInfiniteScroll.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnCreatedCell.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnCreatedRow.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\iDeferLoading.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\sAjaxDataProp.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\4_server-side\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.iDataSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\fnServerData.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_arrays_subobjects.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_deep.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_mDataProp.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_null_source.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects_subarrays.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aaSorting.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aaSortingFixed.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSearchable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSortable.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bUseRendered.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bVisible.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.fnRender.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.iDataSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sClass.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sName.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sTitle.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\aoSearchCols.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\asStripClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bAutoWidth.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bFilter.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bLengthChange.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bServerSide.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bSort.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\bSortClasses.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnDrawCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnHeaderCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnInitComplete.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnRowCallback.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\fnServerData.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\iDisplayLength.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.oPaginate.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoEmpty.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoPostFix.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sLengthMenu.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sProcessing.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sUrl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sZeroRecords.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\oSearch.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp2.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sAjaxSource.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sDom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\sPaginationType.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\tests_onhold\6_delayed_rendering\_zero_config.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\unit_test.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datepicker\daterangepicker.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\dropzone\dropzone.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\easypie\jquery.easypiechart.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\echart\echarts-all.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\echart\green.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\bootstrap-wysiwyg.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-apollo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-basic.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-clj.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-css.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-dart.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-erlang.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-go.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-hs.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-lisp.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-llvm.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-lua.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-matlab.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-ml.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-mumps.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-n.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-pascal.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-proto.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-r.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-rd.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-scala.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-sql.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-tcl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-tex.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-vb.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-vhdl.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-wiki.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-xq.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\lang-yaml.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\prettify.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\google-code-prettify\run_prettify.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\editor\external\jquery.hotkeys.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\curvedLines.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\date.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.orderBars.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.pie.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.resize.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.spline.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.stack.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.time.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\gauge\gauge.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\gauge\gauge_demo.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\icheck\icheck.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\input_mask\jquery.inputmask.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\ion_range\ion.rangeSlider.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\jquery.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\knob\jquery.knob.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\maps\gdp-data.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\maps\jquery-jvectormap-2.0.3.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\maps\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\maps\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\moment\moment.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\moris\example.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\moris\morris.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\moris\raphael-min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\notify\pnotify.buttons.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\notify\pnotify.core.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\notify\pnotify.nonblock.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\nprogress.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\pace\pace.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\parsley\parsley.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\progressbar\bootstrap-progressbar.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\select\select2.full.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\sidebar\classie.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\sidebar\component.css" />
+    <Content Include="Content\Templates\Gentelella Alela\js\sidebar\modernizr.custom.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\sidebar\sidebarEffects.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\skycons\skycons.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\switchery\switchery.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\tags\jquery.tagsinput.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\textarea\autosize.min.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\validator\validator.js" />
+    <Content Include="Content\Templates\Gentelella Alela\js\wizard\jquery.smartWizard.js" />
+    <Content Include="Content\Templates\Gentelella Alela\less\custom.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Templates\Gentelella Alela\css\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\fonts\FontAwesome.otf" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\animated.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\bordered-pulled.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\core.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\fixed-width.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\font-awesome.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\icons.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\larger.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\list.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\mixins.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\path.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\rotated-flipped.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\spinning.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\stacked.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\less\variables.less" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\font-awesome.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_animated.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_bordered-pulled.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_core.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_fixed-width.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_icons.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_larger.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_list.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_mixins.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_path.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_rotated-flipped.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_spinning.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_stacked.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\fonts\scss\_variables.scss" />
+    <Content Include="Content\Templates\Gentelella Alela\images\Sorting icons.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\.gitignore" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\as3\lib\AlivePDF.swc" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\as3\ZeroClipboard.as" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\as3\ZeroClipboardPdf.as" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\bower.json" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\psd\collection.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\psd\copy document.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\psd\file_types.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\images\psd\printer.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\make.sh" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\.gitignore" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\as3\lib\AlivePDF.swc" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\as3\ZeroClipboard.as" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\as3\ZeroClipboardPdf.as" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\bower.json" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\psd\collection.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\psd\copy document.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\psd\file_types.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\images\psd\printer.psd" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\tools\TableTools-master\make.sh" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\controller.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\performance\large.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\-complex_header.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\2512.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\6776.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\complex_header_2.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\deferred_table.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\dom_data.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\dom_data_th.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\dom_data_two_headers.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\dymanic_table.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\empty_table.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\html_table.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\js_data.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\js_data_mixed_types.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\datatables\unit_testing\templates\two_tables.php" />
+    <Content Include="Content\Templates\Gentelella Alela\js\maps\us-unemployment.json" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\SmartTracking.pubxml" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_Footer.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_Menu.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_MenuFooter.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_Notifications.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_Profile.cshtml" />
+    <Content Include="Views\Shared\Partial Pages\_TopNavigation.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Account\_CheckUserName.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\CIO\GeneralDashboard.cshtml" />
+    <Content Include="Views\CIO\_PerformanceAverage.cshtml" />
+    <Content Include="Views\CIO\_PerformanceListUsers.cshtml" />
+    <Content Include="Views\CIO\_ListIssuesFuture.cshtml" />
+    <Content Include="Views\CIO\_ListIssuesNotFinish.cshtml" />
+    <Content Include="Views\Leader\Index.cshtml" />
+    <Content Include="Views\Staff\Issue.cshtml" />
+    <Content Include="Views\Staff\_Performance.cshtml" />
+    <Content Include="Views\Staff\_ListIssuesFuture.cshtml" />
+    <Content Include="Views\Staff\_ListIssuesNotFinish.cshtml" />
+    <Content Include="Views\Issue\IssuesManager.cshtml" />
+    <Content Include="Views\Issue\_ImportIssues.cshtml" />
+    <Content Include="Views\Issue\_ExportIssues.cshtml" />
+    <Content Include="Views\Issue\_UpdateIssues.cshtml" />
+    <Content Include="Views\Issue\IsueDetails.cshtml" />
+    <Content Include="Views\CIO\TimesDashboard.cshtml" />
+    <Content Include="Views\Leader\GeneralDashboard.cshtml" />
+    <Content Include="Views\Leader\TimesDashboard.cshtml" />
+    <Content Include="Views\Staff\GeneralDashboard.cshtml" />
+    <Content Include="Views\Staff\TimesDashboard.cshtml" />
+    <Content Include="Views\CIO\IssuesOnTimes.cshtml" />
+    <Content Include="Views\CIO\_ListIssuesForDate.cshtml" />
+    <Content Include="Views\Staff\_LineGraph.cshtml" />
+    <Content Include="Views\CIO\StaffDashboard.cshtml" />
+    <Content Include="Views\CIO\OrderTimes.cshtml" />
+    <Content Include="Views\CIO\_ColGraphOnDayOfUser.cshtml" />
+    <Content Include="Views\Staff\_IssuesNotFinished.cshtml" />
+    <Content Include="Views\Staff\_IssuesInFuture.cshtml" />
+    <Content Include="Views\Shared\_Issues.cshtml" />
+    <Content Include="Views\Issue\Edit.cshtml" />
+    <Content Include="Views\NewIssues\Create.cshtml" />
+    <Content Include="Views\NewIssues\Delete.cshtml" />
+    <Content Include="Views\NewIssues\Details.cshtml" />
+    <Content Include="Views\NewIssues\Edit.cshtml" />
+    <Content Include="Views\NewIssues\Index.cshtml" />
+    <Content Include="Views\Issue\Create.cshtml" />
+    <Content Include="Views\Issue\Index.cshtml" />
+    <Content Include="Views\Issue\Details.cshtml" />
+    <Content Include="Views\Action\Index.cshtml" />
+    <Content Include="Views\Action\Daily.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\Uploads\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CafeT.EF6.Objects\CafeT.EF6.Objects.csproj">
+      <Project>{8b0d379f-96dd-425f-9793-8de51fdc8706}</Project>
+      <Name>CafeT.EF6.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CafeT.Html\CafeT.Html.csproj">
+      <Project>{6F875B12-CE9C-46E4-A8B8-D8A1B0E2DFE2}</Project>
+      <Name>CafeT.Html</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CafeT.Text\CafeT.Text.csproj">
+      <Project>{5AB7261D-F74C-4853-BD70-4EB2239B89F9}</Project>
+      <Name>CafeT.Text</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\CafeT.Frameworks.Identity\CafeT.Frameworks.Identity.csproj">
+      <Project>{bfde1694-7184-46cd-bd6a-9cbdc0d5bb04}</Project>
+      <Name>CafeT.Frameworks.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Frameworks\CafeT.Frameworks.Services\CafeT.Frameworks.Services.csproj">
+      <Project>{d6aeb44a-4e98-483f-87a1-2ba91599d8c6}</Project>
+      <Name>CafeT.Frameworks.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
+      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
+      <Name>Repository.Pattern.Ef6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Repository.Pattern\Repository.Pattern.csproj">
+      <Project>{6e682a14-c872-4813-b620-76e108dea683}</Project>
+      <Name>Repository.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Service.Pattern\Service.Pattern.csproj">
+      <Project>{96608cdd-c8bd-407b-8c18-6a242350337d}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5656</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2087/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,118 @@
+﻿
+@using Web.Models
+@using CafeT.Enumerable
+@model IEnumerable<Web.ModelViews.IssueView>
+
+@{
+    ViewBag.Title = "WorkCard.vn - AI for Work";
+}
+
+
+@{
+    var issues = Model.Where(t => t.IsToday())
+        .Where(t => !t.IsCompleted())
+        .OrderByDescending(t => t.End)
+        .AsEnumerable()
+        .TakeMax(20);
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("Issues/_QuickCreateIssue", new WorkIssue() { })
+            </div>
+            <div class="col-md-6">
+                @if (issues != null && issues.Count() > 0)
+                {
+                    <ul class="list-group">
+                        @foreach (var item in issues)
+                        {
+                            <li class="list-group-item">
+
+                                @if (item.IsToday())
+                                {
+                                    <span class="badge badge-danger">Hôm nay</span>
+                                }
+                                @Ajax.ActionLink(item.Title, "Details", "WorkIssues", new { id = item.Id },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "details",
+                                                HttpMethod = "Get",
+                                                InsertionMode = InsertionMode.Replace
+                                            }, null)
+                                <span id="status-@item.Id.ToString()" class="badge badge-danger pull-right">@item.Status</span>
+                                <span class="badge badge-info pull-right">@item.Price.ToReadable() (VND)</span>
+                                <span class="badge badge-primary">@item.IssueEstimation (phút)</span>
+
+                                @if (item.End.HasValue)
+                                {
+                                    <span class="badge badge-danger">@item.End.Value.ToShortDateString()</span>
+                                }
+                                <hr />
+                                <div id="Alert-@item.Id.ToString()" class="container"></div>
+
+                                <p class="pull-right">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", "WorkIssues", new { id = item.Id }, null)
+                                        @Html.Raw(" | ")
+                                        @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = item.Id }, null)
+                                        @Html.Raw(" | ")
+                                        if (!item.IsCompleted())
+                                        {
+                                            @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues", new { Id = item.Id, status = "Done" },
+                                              new AjaxOptions
+                                              {
+                                                  UpdateTargetId = "Status-" + item.Id.ToString(),
+                                                  HttpMethod = "Post",
+                                              }, null)
+                                            @Html.Raw(" | ")
+                                        }
+                                        if (item.IsCompleted())
+                                        {
+                                            @Ajax.ActionLink("Re-Open", "MarkStatus", "WorkIssues", new { Id = item.Id, status = "New" },
+                                              new AjaxOptions
+                                              {
+                                                  UpdateTargetId = "Status-" + item.Id.ToString(),
+                                                  HttpMethod = "Post",
+                                              }, null)
+                                            @Html.Raw(" | ")
+                                        }
+                                        @Ajax.ActionLink("+ 5 (min)", "AddTimeToDo", "WorkIssues", new { Id = item.Id, minutes = 5 },
+                                          new AjaxOptions
+                                          {
+                                              UpdateTargetId = "Alert-" + item.Id.ToString(),
+                                              HttpMethod = "Post",
+                                          }, null)
+                                        @Html.Raw(" | ")
+                                        if (!item.IsToday())
+                                        {
+                                            @Ajax.ActionLink("Today", "SetWorkOnTime", "WorkIssues", new { Id = item.Id, date = DateTime.Now.ToString() },
+                                              new AjaxOptions
+                                              {
+                                                  UpdateTargetId = "Alert-" + item.Id.ToString(),
+                                                  HttpMethod = "Post",
+                                              }, null)
+                                        }
+                                        else
+                                        {
+                                            @Ajax.ActionLink("Tomorrow", "SetWorkOnTime", "WorkIssues",
+                                                new { Id = item.Id, date = DateTime.Now.AddDays(1).ToString() },
+                                                new AjaxOptions
+                                                {
+                                                    UpdateTargetId = "Status-" + item.Id.ToString(),
+                                                    HttpMethod = "Post",
+                                                }, null)
+                                        }
+
+                                    }
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+            <div class="col-md-6">
+                <div id="details"></div>
+            </div>
+        </div>
+    </div>
+}

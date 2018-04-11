@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Web.Models.Story>
+
+<ul class="list-unstyled task-list" id="drag-upcoming">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.Partial("_StoryItemLink", item)
+        </li>
+    }
+</ul>

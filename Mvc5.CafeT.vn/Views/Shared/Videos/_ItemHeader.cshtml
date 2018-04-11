@@ -1,0 +1,21 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.YouTubeView
+
+<div class="post-title">
+    @if (!Model.Name.IsNullOrEmptyOrWhiteSpace())
+    {
+        <a href="/Comments/Details/@Model.Id"> @Model.Name </a>
+    }
+    else
+    {
+        <a href="/Comments/Details/@Model.Id"> _title </a>
+    }
+    @if (Model.IsNews())
+    {
+        @Html.Partial("Messages/_New")
+    }
+</div>
+
+
+
+
+

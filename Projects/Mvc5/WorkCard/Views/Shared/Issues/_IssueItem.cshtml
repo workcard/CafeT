@@ -1,0 +1,54 @@
+﻿@using CafeT.Text
+
+@model Web.ModelViews.IssueView
+
+<script type="text/javascript">
+    $.get('@Url.Action("GetQuestionsMustAnswer", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#questions-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetQuestionsHasAnswers", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#questionsHasAnswers-box').html(data);
+        });
+</script>
+
+<div class="card">
+    @if (Model.Title != null && Model.Title.Length > 0)
+    {
+        <div class="card-body">
+            @if (!Model.Content.IsNullOrEmptyOrWhiteSpace() && Model.HasImage())
+            {
+                <div class="featured-image">
+                    <a href="#">
+                        <img src="assets/images/blog/featured1.jpg" alt="">
+                    </a>
+                </div>
+            }
+            <div class="card-title">
+                @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+                <span class="badge badge-primary badge-pill pull-right">@Model.End.Value.ToShortTimeString()</span>
+            </div>
+            <div class="card-text">
+                @Html.Raw(Model.Content)
+            </div>
+            <div class="card-link">
+                @Html.Partial("Issues/_MarkAsDone", Model)
+            </div>
+        </div>
+
+    }
+    <div id="AddQuestion" class="container">
+        @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
+                            new { issueId = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "AddQuestion",
+                                HttpMethod = "Get",
+                            }, null)
+    </div>
+    <div id="questionsHasAnswers-box" class="container"></div>
+    <div id="questions-box" class="container"></div>
+</div>

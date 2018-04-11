@@ -1,0 +1,20 @@
+﻿@model Mvc5.CafeT.vn.Models.WordModel
+
+
+@if (Model != null)
+                {
+    <li class="list-group-item">
+        @Html.Raw(Model.Model.Value)|
+        @Html.Encode(Model.Model.Value)|
+        @Ajax.ActionLink(Model.Model.Value, "UploadAvatar", "Account", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+        |
+        @Model.Length
+        |@Model.Model.Freq
+</li>
+ }

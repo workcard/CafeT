@@ -1,0 +1,18 @@
+﻿@model Web.Models.Comment
+
+<h5>@Html.Raw(Model.Title)</h5>
+Trong : @Model.IssueId
+<hr />
+<p>
+    @Html.Raw(Model.Content)
+</p>
+@if (User.Identity.IsAuthenticated && Model.IsOf(User.Identity.Name))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Comments", new { id = Model.Id }, null) |
+    </p>
+    <p>
+        @Html.ActionLink("Delete", "Delete", "Comments", new { id = Model.Id }, null) |
+    </p>
+}
+

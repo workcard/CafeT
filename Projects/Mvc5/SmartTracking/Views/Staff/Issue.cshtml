@@ -1,0 +1,29 @@
+﻿@model SmartTracking.ViewModels.GeneralStaffViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-body">
+            <div class="x_title">
+                <h4>Username: @User.Identity.Name</h4>
+            </div>
+            <p>Performance.</p>
+            @Html.Partial("_Performance", @Model.PerfomanceLastWorkingDay)
+            @Html.Partial("_Performance", @Model.PerfomanceToday)
+            @Html.Partial("_Performance", @Model.PerfomanceNextWorkingDay)
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+<div class="">
+    <div class="row">
+        @Html.Partial("_ListIssuesNotFinish", Model.IssuesNotFinished)
+        @Html.Partial("_ListIssuesFuture", Model.IssuesFuture)
+    </div>
+</div>

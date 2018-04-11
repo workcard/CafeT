@@ -1,0 +1,33 @@
+﻿@model Web.Models.Answer
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Edit</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.QuestionId)
+    <div class="form-group">
+        @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
+        <script>
+                CKEDITOR.replace('Content');
+        </script>
+        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

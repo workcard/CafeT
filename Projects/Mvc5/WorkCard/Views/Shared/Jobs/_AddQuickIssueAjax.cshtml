@@ -1,0 +1,78 @@
+﻿@model Web.Models.WorkIssue
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#Content").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/WorkIssues/AutoCompleted",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            var _content = $("#Content").val();
+                            var _index = _content.lastIndexOf(" ");
+                            _content = _content.substring(0, _index + 1);
+                            return {
+                                label: item,
+                                value: _content +  item
+                            };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+<div class="card-box">
+    @using (Ajax.BeginForm("Create", "WorkIssues", null,
+    new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "News", InsertionMode = InsertionMode.InsertBefore }, null))
+    {
+        @Html.AntiForgeryToken()
+        Model.Id = Guid.NewGuid();
+        @Html.HiddenFor(model => Model.Id)
+    <div class="card-box">
+        <span class="input-icon icon-right">
+            Hỏi: <br />
+        </span>
+        <div class="row">
+            <textarea id="Content" name="Content" rows="1" class="form-control" placeholder="Post a new message"></textarea>
+            <p  class="p-t-10 pull-right">
+                <input type="submit" value="Post" class="btn btn-default" />
+            </p>
+        </div>
+        <ul class="nav nav-pills profile-pills m-t-10">
+            <li>
+                <a href="#"><i class="fa fa-user"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-location-arrow"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class=" fa fa-camera"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-smile-o"></i></a>
+            </li>
+        </ul>
+    </div>
+        Response.Headers.Remove("X-Frame-Options");
+    }
+    <div class="row">
+        <div id="News" class="card-box panel panel-border panel-success">
+
+        </div>
+    </div>
+</div>
+
+
+

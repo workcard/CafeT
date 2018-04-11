@@ -1,0 +1,22 @@
+﻿@*@{
+        ViewBag.Title = "Dashboards";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+
+@*@model Web.ModelViews.MonthSummary*@
+<script type="text/javascript">
+    $.get('@Url.Action("GetMonthSummary", "Home", null)',
+        function (data) {
+            $('#monthSummary-box').html(data);
+        });
+</script>
+
+<h2>Dashboards</h2>
+<div id="monthSummary-box">
+    @*@Html.Partial("Issues/_Issues", Model.Issues)*@
+</div>
+
+
+
+
+@*@Html.Partial("Dashboards/_MonthDashboard")*@

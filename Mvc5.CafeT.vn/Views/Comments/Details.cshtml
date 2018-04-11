@@ -1,0 +1,33 @@
+﻿@model Mvc5.CafeT.vn.Models.CommentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+    string title = Model.Title;
+    if (title.Length > 100)
+    {
+        title = title.Substring(0, 100) + " ...";
+    }
+
+    <div class="post clearfix">
+        <div class="mini-widget-thumb">
+            <a href="/Comments/Details/@Model.Id">
+                <img alt="" src="@imageUrl" class="img-responsive">
+            </a>
+        </div>
+        <div class="mini-widget-title">
+            <a href="/Comments/Details/@Model.Id"> @title</a>
+        </div>
+        <div class="post-desc">
+            @Html.Raw(Model.Content)
+        </div><!-- end post-desc -->
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+}
+

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.ArticleView>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Cùng tác giả
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    @Html.Partial("Articles/_ArticleHeader", item)
+                </li>
+            }
+        </ul>
+    </div>
+</div>

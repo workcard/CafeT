@@ -1,0 +1,36 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+<div class="large-post-meta">
+    <hr />
+    @if (Model.Category != null)
+    {
+        <span>
+            <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @Model.Category.Name</a>
+        </span>
+    }
+    <small class="">&#124;</small>
+    <span class="">Số từ: @Model.Content.GetCountWords()</span>
+    <small class="">&#124;</small>
+    <span class="">Links: @Model.Content.GetUrls().Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Emails: @Model.Content.GetEmails().Count()</span>
+    <small class="">&#124;</small>
+    <span class="">YouTube: @Model.Content.GetYouTubeUrls().Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Điểm: @Model.Points</span>
+    <small class="">&#124;</small>
+    @*<span class="">$Latex$: @Model.Content.ToSmartText().Latexs.Count()</span>*@
+    <span>
+        @if (!Model.GetKeyWords().IsNullTypeOrEmpty())
+        {
+            @Html.Raw("Từ khóa: ")
+            foreach (string _tag in Model.GetKeyWords())
+            {
+                if (!_tag.IsNullOrEmptyOrWhiteSpace() && _tag.HasLetter())
+                {
+                    @Html.ActionLink(_tag, "Search", "Articles", new { searchString = _tag }, null) @Html.Raw("; ")
+                }
+            }
+        }
+    </span>
+</div>

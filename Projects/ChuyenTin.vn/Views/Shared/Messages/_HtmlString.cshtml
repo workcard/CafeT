@@ -1,0 +1,16 @@
+﻿@model string
+<p>
+    @{
+        try
+        {
+            string content = Model.GetFromBeginTo("About the Author")
+                                .GetFromEndTo("Please Sign up or sign in to vote.");
+            //content = Html.De(content);
+            @Html.Raw(content.ToHtml())
+        }
+        catch
+        {
+            @Html.Raw(Model)
+        }
+    }
+</p>

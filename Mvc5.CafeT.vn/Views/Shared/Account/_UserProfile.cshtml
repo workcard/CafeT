@@ -1,0 +1,10 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.UserProfileView
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Raw(@User.Identity.Name)
+    <hr />
+    @Html.Raw("Đã thuộc: " + Model.CountOfRemembered) <br />
+    @Html.Raw("Chưa thuộc: " + Model.CountOfNewWords)
+    <div id="Dashboard"></div>
+}

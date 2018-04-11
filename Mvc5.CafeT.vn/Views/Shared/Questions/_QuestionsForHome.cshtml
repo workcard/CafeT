@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.QuestionModel>
+
+<ul class="list-group">
+    @foreach (var item in Model) {
+        <li class="list-group-item">
+            @Html.Partial("Questions/_QuestionForHome", item)
+        </li>
+    }
+</ul>

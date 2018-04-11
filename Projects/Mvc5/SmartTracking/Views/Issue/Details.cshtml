@@ -1,0 +1,163 @@
+﻿@model SmartTracking.Models.NewIssue
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NewIssue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueCategoryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueCategoryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueStatusId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueStatusId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuePriorityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuePriorityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueMilestoneId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueMilestoneId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueAffectedMilestoneId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueAffectedMilestoneId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueTypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueResolutionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueResolutionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueAssignedUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueAssignedUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueCreatorUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueCreatorUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueOwnerUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueOwnerUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueDueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueVisibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueVisibility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueEstimation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueEstimation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueProgress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueProgress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

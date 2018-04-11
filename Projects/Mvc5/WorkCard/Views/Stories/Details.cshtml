@@ -1,0 +1,375 @@
+﻿@using CafeT.Objects
+@model Web.Models.Story
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="bg-picture card-box">
+            <div class="profile-info-detail">
+                <h3 class="m-t-0 m-b-0">
+                    @*@if (Model.Repeat != Web.Models.RepeatType.None)
+                {
+                    <span class="label label-info">@Model.Repeat</span>
+                }*@
+                    @Model.Title
+                    @*<span class="label label-danger">@Model.Status</span>*@
+                </h3>
+                <p>
+                    @*Work on: @Model.Start.Value.ToShortDateString() - @Model.End.Value.ToShortDateString()*@
+                </p>
+                <p class="text-muted m-b-20"><i>@Model.CreatedBy</i></p>
+                <p>
+                    @Html.Raw(Model.Description)
+                </p>
+                <div class="button-list m-t-20">
+                    <button type="button" class="btn btn-facebook btn-sm waves-effect waves-light">
+                        <i class="fa fa-facebook"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-twitter waves-effect waves-light">
+                        <i class="fa fa-twitter"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-linkedin waves-effect waves-light">
+                        <i class="fa fa-linkedin"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-dribbble waves-effect waves-light">
+                        <i class="fa fa-dribbble"></i>
+                    </button>
+                </div>
+                <p>
+                    @Html.Partial("_StoryMenuForDetail", Model)
+                </p>
+                <p>
+                    Có <span class=" badge badge-info">@Model.Description.ToWords().Count()</span>  từ
+                    @Html.Raw(" | ")
+                    Có <span class=" badge badge-info">@Model.Description.GetEmails().Count()</span>  emails
+                    @Html.Raw(" | ")
+                    Có <span class=" badge badge-info">@Model.Description.GetTimes().Count()</span>  mốc thời gian
+                </p>
+            </div>
+            @*<div class="profile-info-name">
+                <img src="assets/images/profile.jpg"
+                     class="img-thumbnail" alt="profile-image">
+                
+                <div class="clearfix"></div>
+            </div>*@
+        </div>
+        <!--/ meta -->
+    </div>
+    <div class="col-sm-4">
+        <div class="card-box">
+            <div class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <h4 class="header-title m-t-0 m-b-30">Issue members</h4>
+            <ul class="list-group m-b-0 user-list">
+                @if (Model.Description.GetEmails() != null && Model.Description.GetEmails().Count() > 0)
+                {
+                    foreach (string _member in Model.Description.GetEmails())
+                    {
+                        <li class="list-group-item">
+                            <a href="#" class="user-list-item">
+                                <div class="avatar">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="">
+                                </div>
+                                <div class="user-desc">
+                                    <span class="name">@Html.Raw(_member)</span>
+                                    <span class="desc">Member</span>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="card-box">
+            <div class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-box">
+            <div class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <h4 class="header-title m-t-0 m-b-30"><i class="zmdi zmdi-notifications-none m-r-5"></i> My Reminders</h4>
+            <ul class="list-group m-b-0 user-list">
+                <li class="list-group-item">
+                    <a href="#" class="user-list-item">
+                        <div class="avatar text-center">
+                            <i class="zmdi zmdi-circle text-primary"></i>
+                        </div>
+                        <div class="user-desc">
+                            <span class="name">Meet Manager</span>
+                            <span class="desc">February 29, 2016 - 10:30am to 12:45pm</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="user-list-item">
+                        <div class="avatar text-center">
+                            <i class="zmdi zmdi-circle text-success"></i>
+                        </div>
+                        <div class="user-desc">
+                            <span class="name">Project Discussion</span>
+                            <span class="desc">February 29, 2016 - 10:30am to 12:45pm</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="user-list-item">
+                        <div class="avatar text-center">
+                            <i class="zmdi zmdi-circle text-pink"></i>
+                        </div>
+                        <div class="user-desc">
+                            <span class="name">Meet Manager</span>
+                            <span class="desc">February 29, 2016 - 10:30am to 12:45pm</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="user-list-item">
+                        <div class="avatar text-center">
+                            <i class="zmdi zmdi-circle text-muted"></i>
+                        </div>
+                        <div class="user-desc">
+                            <span class="name">Project Discussion</span>
+                            <span class="desc">February 29, 2016 - 10:30am to 12:45pm</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" class="user-list-item">
+                        <div class="avatar text-center">
+                            <i class="zmdi zmdi-circle text-danger"></i>
+                        </div>
+                        <div class="user-desc">
+                            <span class="name">Meet Manager</span>
+                            <span class="desc">February 29, 2016 - 10:30am to 12:45pm</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Right Sidebar -->
+<div class="side-bar right-bar">
+    <a href="javascript:void(0);" class="right-bar-toggle">
+        <i class="zmdi zmdi-close-circle-o"></i>
+    </a>
+    <h4 class="">Notifications</h4>
+    <div class="notification-list nicescroll">
+        <ul class="list-group list-no-border user-list">
+            <li class="list-group-item">
+                <a href="#" class="user-list-item">
+                    <div class="avatar">
+                        <img src="assets/images/users/avatar-2.jpg" alt="">
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">Michael Zenaty</span>
+                        <span class="desc">There are new settings available</span>
+                        <span class="time">2 hours ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="user-list-item">
+                    <div class="icon bg-info">
+                        <i class="zmdi zmdi-account"></i>
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">New Signup</span>
+                        <span class="desc">There are new settings available</span>
+                        <span class="time">5 hours ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="user-list-item">
+                    <div class="icon bg-pink">
+                        <i class="zmdi zmdi-comment"></i>
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">New Message received</span>
+                        <span class="desc">There are new settings available</span>
+                        <span class="time">1 day ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item active">
+                <a href="#" class="user-list-item">
+                    <div class="avatar">
+                        <img src="assets/images/users/avatar-3.jpg" alt="">
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">James Anderson</span>
+                        <span class="desc">There are new settings available</span>
+                        <span class="time">2 days ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item active">
+                <a href="#" class="user-list-item">
+                    <div class="icon bg-warning">
+                        <i class="zmdi zmdi-settings"></i>
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">Settings</span>
+                        <span class="desc">There are new settings available</span>
+                        <span class="time">1 day ago</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /Right-bar -->
+
+<div class="row">
+    <div class="col-md-8">
+
+        @if (Model.Description.HasCloudEmbedFiles())
+        {
+            <h4>
+                Files:
+            </h4>
+                <p>
+                    @foreach (string youtubeLink in Model.Description.GetEmbedCloudFiles())
+                    {
+                        @Html.Raw(youtubeLink)
+                        <hr />
+                    }
+                </p>
+        }
+        <p>
+
+        </p>
+        <div id="Update"></div>
+
+    </div>
+    <div class="col-md-4">
+        Words: @Model.Description.GetCountWords()
+        <br />
+        Sentences: @Model.Description.GetSentences().Count()
+        <br />
+        Emails: @Model.Description.GetEmails().Count()
+        <br />
+
+        Links: @Model.Description.GetUrls().Count(); <br />
+        <ul>
+            @if (Model.Description.GetUrlsWithoutHref() != null && Model.Description.GetUrlsWithoutHref().Count() > 0)
+            {
+                foreach (string _link in Model.Description.GetUrlsWithoutHref())
+                {
+                    <li>
+                        @Html.Raw(_link.ToHtmlLink())
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+
+@*@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Story</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+    </dl>
+</div>
+<div id="divAddQuestion"></div>
+
+
+<p>
+    @Ajax.ActionLink("Add Question", "AddQuestion","Stories", new { storyId = Model.Id}, 
+        new AjaxOptions { UpdateTargetId = "divAddQuestion", InsertionMode = InsertionMode.InsertAfter, HttpMethod = "GET"}, null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

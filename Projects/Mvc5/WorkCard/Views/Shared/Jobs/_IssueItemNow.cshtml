@@ -1,0 +1,21 @@
+﻿@using Web.Models
+@using System.Globalization
+
+@model Web.Models.IssueView
+<div class="card-box kanban-box">
+    <span class="label label-danger pull-right">
+        @Model.End.Value.ToShortTimeString()
+    </span>
+    @if (Model.Title != null && Model.Title.Length > 0)
+    {
+        <h4>
+            <a href="#">@Html.ActionLink(Model.Title, "Details", new { id = Model.Id }, null)</a>
+            <span class="label label-info">@Model.Status</span>
+        </h4>
+    }
+    <span class="label label-success pull-right">@Model.IssueEstimation phút</span>
+    
+    @Html.Partial("Issues/_IssueMenu", Model)
+    <div id="Update-@Model.Id"></div>
+   
+</div>

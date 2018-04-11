@@ -1,0 +1,93 @@
+﻿<div class="list-group">
+    <a href="javascript:void(0);" class="list-group-item active">
+        Quản trị
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Upload Logo", "UploadLogo", "Settings", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        
+        <li class="list-group-item">
+            @Ajax.ActionLink("Update WebInfo", "UpdateInfo", "Settings", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Users", "Index", "UsersAdmin", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Crawlers", "Index", "CrawlerModels", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Urls", "Index", "Urls", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Tuyển dụng", "Index", "JobModels", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Bài viết", "GetAllUnPublished", "Articles", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Menus", "Index", "MenuModels")
+        </li>
+        <li class="list-group-item">
+                @Html.ActionLink("MenuItems", "Index", "MenuItemModels")
+            </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Article Category", "Index", "ArticleCategories")
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Curiculums", "Index", "Curiculums")
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Jobs", "Index", "JobModels")
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Exams", "Index", "Questions")
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Comments", "Index", "Comments")
+        </li>
+    </ul>
+</div>
+

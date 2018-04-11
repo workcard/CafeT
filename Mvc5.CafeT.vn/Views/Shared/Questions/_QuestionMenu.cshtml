@@ -1,0 +1,22 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsOf(User.Identity.Name) || User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", "Questions", new { id = Model.Id }, null)
+        @Html.ActionLink(" | Delete", "Delete", "Questions", new { id = Model.Id }, null)
+        if (!Model.IsVerified)
+        {
+            @Ajax.ActionLink(" | Mark Verified", "Verified", "Questions", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update-" + Model.Id.ToString(),
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        }
+    }
+    @Html.ActionLink(" | Trả lời", "AddAnswer", "Questions", new { id = Model.Id }, null)
+}
+<div id="" Update-" + @Model.Id.ToString()></div>

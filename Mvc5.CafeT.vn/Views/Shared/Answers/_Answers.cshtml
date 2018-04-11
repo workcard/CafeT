@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.AnswerModel>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.Raw(item.Name)
+            @Html.DisplayFor(modelItem => item.QuestionId)
+            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+            @Html.Raw(item.CreatedDate.TimeAgo())
+            @Html.DisplayFor(modelItem => item.IsCorrect)
+
+            @if (!item.Name.IsNullOrEmptyOrWhiteSpace())
+            {
+                @Html.ActionLink(item.Name, "Details", "Answers", new { id = item.Id }, null)
+            }
+            <p>
+                @Html.Raw(item.Content.TakeMaxWords(50))
+            </p>
+            <p>
+                @if (User.Identity.IsAuthenticated && item.IsOf(User.Identity.Name))
+                {
+                    @Html.ActionLink("Edit", "Edit", "Answers",new { id = item.Id }, null)
+                    @Html.ActionLink(" | Delete", "Delete", "Answers", new { id = item.Id }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Details", "Details", "Answers", new { id = item.Id }, null)
+                }
+            </p>
+        </li>
+    }
+</ul>

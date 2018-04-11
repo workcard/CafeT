@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Web.ModelViews.IssueView>
+
+@{
+    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
+
+    <div class="card border-success">
+        <div class="card-header">
+            Upcomming
+            <span class="badge badge-danger">
+                @Model.Count() (issues)
+            </span>
+            <span class="badge badge-danger">
+                @{
+                    var time = Model.Sum(t => t.IssueEstimation) / 60;
+                    @Html.Raw(time.ToReadable() + " (h)");
+                }
+
+            </span>
+            <span class="badge badge-primary">
+                @Model.Sum(t => t.Price).ToReadable() (VND)
+            </span>
+        </div>
+    </div>
+    <ul class="list-group">
+        @foreach (var item in items)
+    {
+        if (item.Status != CafeT.Objects.Enums.IssueStatus.Done)
+        {
+            <li class="list-group-item">
+                @Html.Partial("Issues/_ItemUpcoming", item)
+            </li>
+    }
+
+
+}
+    </ul>
+}
+
+
+
+

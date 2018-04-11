@@ -1,0 +1,14 @@
+﻿@using Web.Models
+@model IEnumerable<Web.Models.Question>
+
+@{
+    ViewBag.Title = "Câu hỏi";
+}
+<div class="container">
+    <h4>
+        Có: @Model.Count() câu hỏi
+    </h4>
+    @Html.Partial("Questions/_Questions", Model)
+
+</div>
+

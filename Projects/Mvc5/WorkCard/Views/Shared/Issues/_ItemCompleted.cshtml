@@ -1,0 +1,16 @@
+﻿@model Web.ModelViews.IssueView
+
+@Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+<span class="badge badge-danger pull-right">@Model.Status</span>
+<span class="badge badge-success pull-right">@Model.End.Value.ToShortTimeString()</span>
+<br />
+    @if (Model.IsVerified)
+    {
+<span class="material-icons">verified_user</span>
+    }
+<span class="small">@Model.Price.ToReadable() (VND)</span>
+<span class="small">@Model.IssueEstimation (phút)</span>
+<hr />
+<div id="Status-@Model.Id.ToString()" class="container"></div>
+
+@Html.Partial("Issues/_IssueMenu", Model)

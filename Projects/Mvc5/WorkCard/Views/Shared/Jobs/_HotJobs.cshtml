@@ -1,0 +1,25 @@
+﻿@using CafeT.Time
+@model IEnumerable<Web.Models.Job>
+
+<div class="dropdown pull-right">
+    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+        <i class="zmdi zmdi-more-vert"></i>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</div>
+<div class="row">
+    <ul class="list-unstyled task-list" id="drag-upcoming">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @Html.Partial("Jobs/_HotJob", item)
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,344 @@
+﻿@model SmartTracking.ViewModels.StaffTimesViewModel
+@using SmartTracking.Helpers;
+
+@{
+    ViewBag.Title = "Times Dashboard";
+}
+
+<script src="@Url.Content("~/Content/Extend/Date/bootstrap-datepicker.js")"></script>
+<link href="@Url.Content("~/Content/Extend/Date/datepicker.css")" rel="stylesheet" />
+
+<script>
+    $(function () {
+
+        // disabling dates
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#fromdate').datepicker({
+            onRender: function (date) {
+                //return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate());
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#todate')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#todate').datepicker({
+            onRender: function (date) {
+                return date.valueOf() < checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    });
+</script>
+
+<div class="x_content">
+    <form method="post" class="form-horizontal form-label-left" novalidate>
+        <span class="section">Check performance on times</span>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="item form-group">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "text", @readonly = true, placeholder = "MM/dd/yyyy", id = "fromdate" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="item form-group">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", type = "text", @readonly = true, placeholder = "MM/dd/yyyy", id = "todate" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-2">
+                    <button type="reset" class="btn btn-primary">Cancel</button>
+                    <button id="send" type="submit" class="btn btn-success">Check</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="row">
+    <!-- bar chart -->
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Bar Charts <small>Sessions</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div id="graph_bar" style="width:100%; height:280px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /bar charts -->
+
+    <!-- line graph -->
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Line Graph <small>Sessions</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content2">
+                <div id="graph_line" style="width:100%; height:300px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /line graph -->
+</div>
+
+<!-- moris js -->
+<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/moris/raphael-min.js")"></script>
+<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/moris/morris.min.js")"></script>
+@*<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/moris/example.js")"></script>*@
+
+<script>
+    // set data
+    var dataBarChart = @Html.Raw(ViewBag.BarChart);
+    var resultBarChart = $.parseJSON('[' + dataBarChart + ']');
+
+    $(function () {
+
+        Morris.Bar({
+            element: 'graph_bar',
+            data: resultBarChart,
+            xkey: 'date',
+            ykeys: ['performance'],
+            labels: ['Performance'],
+            barRatio: 0.4,
+            barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+            xLabelAngle: 35,
+            hideHover: 'auto'
+        });
+
+
+        new Morris.Line({
+            element: 'graph_line',
+            xkey: 'year',
+            ykeys: ['value'],
+            labels: ['Value'],
+            hideHover: 'auto',
+            lineColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+            data: [
+                {year: '2012', value: 20},
+                {year: '2013', value: 10},
+                {year: '2014', value: 5},
+                {year: '2015', value: 5},
+                {year: '2016', value: 20}
+            ]
+        });
+
+    });
+
+</script>
+
+
+<link href="@Url.Content("~/Content/Templates/Gentelella Alela/css/datatables/tools/css/dataTables.tableTools.css")" rel="stylesheet">
+
+<div class="">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title green">
+                    <h2><b>List issues not finished</b></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a href="#"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_IssuesNotFinished", Model)                
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title green">
+                    <h2><b>List issues future</b></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a href="#"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_IssuesInFuture", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Datatables -->
+<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/datatables/js/jquery.dataTables.js")"></script>
+<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/datatables/tools/js/dataTables.tableTools.js")"></script>
+
+<script>
+    $(document).ready(function () {
+        $('input.tableflat').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    });
+
+    var asInitVals = new Array();
+    $(document).ready(function () {
+        var oTable = $('#ListIssuesFuture').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            "aoColumnDefs": [
+                {
+                    'bSortable': false,
+                    'aTargets': [0]
+                } //disables sorting for column one
+            ],
+            'iDisplayLength': 10,
+            "sPaginationType": "full_numbers",
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
+            }
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        var oTable = $('#ListIssuesNotFinished').dataTable({
+            "oLanguage": {
+                "sSearch": "Search all columns:"
+            },
+            "aoColumnDefs": [
+                {
+                    'bSortable': false,
+                    'aTargets': [0]
+                } //disables sorting for column one
+            ],
+            'iDisplayLength': 10,
+            "sPaginationType": "full_numbers",
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
+            }
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
+    });
+</script>

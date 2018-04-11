@@ -1,0 +1,125 @@
+﻿@model SmartTracking.ViewModels.ProjectViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="x_content">
+    <form method="post" class="form-horizontal form-label-left" novalidate>
+        <span class="section">Check UserName from BugNet</span>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", id = "number", name = "number" } })
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-md-offset-2">
+                <button type="reset" class="btn btn-primary">Cancel</button>
+                <button id="send" type="submit" formaction="CheckProjectId" class="btn btn-success">Check</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="x_content">
+    <form method="post" class="form-horizontal form-label-left" novalidate>
+        <span class="section">Create a new account</span>
+
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", id = "number", name = "number", @readonly = true } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", @readonly = true } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", @readonly = true } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.ManagerUserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.ManagerUserName, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", @readonly = true } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.BugNetDateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.BugNetDateCreated, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12", @readonly = true } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12" } })
+            </div>
+        </div>
+        <div class="item form-group">
+            @Html.LabelFor(model => model.Disabled, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @Html.CheckBoxFor(model => model.Disabled, new { htmlAttributes = new { @class = "optional form-control col-md-7 col-xs-12" } })
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-md-offset-2">
+                <button type="reset" class="btn btn-primary">Cancel</button>
+                <button id="send" type="submit" formaction="Create" class="btn btn-success">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- form validation -->
+<script src="@Url.Content("~/Content/Templates/Gentelella Alela/js/validator/validator.js")"></script>
+@*<script>
+    // initialize the validator function
+    validator.message['date'] = 'not a real date';
+
+    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+    $('form')
+        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+        .on('change', 'select.required', validator.checkField)
+        .on('keypress', 'input[required][pattern]', validator.keypress);
+
+    $('.multi.required')
+        .on('keyup blur', 'input', function () {
+            validator.checkField.apply($(this).siblings().last()[0]);
+        });
+
+    // bind the validation to the form submit event
+    //$('#send').click('submit');//.prop('disabled', true);
+
+    $('form').submit(function (e) {
+        e.preventDefault();
+        var submit = true;
+        // evaluate the form using generic validaing
+        if (!validator.checkAll($(this))) {
+            submit = false;
+        }
+
+        if (submit)
+            this.submit();
+        return false;
+    });
+
+    /* FOR DEMO ONLY */
+    $('#vfields').change(function () {
+        $('form').toggleClass('mode2');
+    }).prop('checked', false);
+
+    $('#alerts').change(function () {
+        validator.defaults.alerts = (this.checked) ? false : true;
+        if (this.checked)
+            $('form .alert').remove();
+    }).prop('checked', false);
+</script>*@

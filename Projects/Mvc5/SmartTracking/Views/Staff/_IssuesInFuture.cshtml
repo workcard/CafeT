@@ -1,0 +1,34 @@
+﻿@model SmartTracking.ViewModels.StaffTimesViewModel
+@using SmartTracking.Helpers;
+<div class="x_content">
+    <table id="ListIssuesFuture" class="table table-striped responsive-utilities jambo_table">
+        <thead>
+            <tr class="headings">
+                <th>
+                    <input type="checkbox" class="tableflat">
+                </th>
+                <th class=" no-link last">Issue Title </th>
+                <th>Estimation </th>
+                <th>Assigned </th>
+                <th>Status </th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.IssuesFuture)
+            {
+                <tr class="even pointer">
+                    <td class="a-center ">
+                        <input type="checkbox" class="tableflat">
+                    </td>
+                    <td class=" last"><a target="_blank" href="@Url.Content("~/Issue/IsueDetails/")@item.IssueId">@item.IssueTitle</a></td>
+                    <td class=" ">@item.IssueEstimation</td>
+                    <td class=" ">@item.AssignedUserName</td>
+                    <td class=" ">@item.StatusName</td>
+                    <td class="center">@String.Format("{0:dd/MM/yyyy}", item.IssueDueDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

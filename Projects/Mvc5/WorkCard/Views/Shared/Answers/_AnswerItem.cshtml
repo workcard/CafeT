@@ -1,0 +1,39 @@
+﻿@model Web.Models.Answer
+
+<div class="container">
+    <div class="text-justify">
+        @Html.Raw(Model.Content)
+    </div>
+    <hr />
+    <span class="pull-right">
+        @Model.CreatedBy: @Model.CreatedDate.Value.TimeAgo() |
+        @if (User.Identity.IsAuthenticated)
+    {
+        @Ajax.ActionLink("Reply ", "Create", "Answers", new { questionId = Model.Id },
+                              new AjaxOptions
+                              {
+                                  UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                  HttpMethod = "Get",
+                                  InsertionMode = InsertionMode.InsertAfter
+                              }, null)
+        @Ajax.ActionLink("Edit ", "Edit", "Answers", new { id = Model.Id },
+                              new AjaxOptions
+                              {
+                                  UpdateTargetId = "Edit",
+                                  HttpMethod = "Get",
+                                  InsertionMode = InsertionMode.InsertAfter
+                              }, null)
+    if (Model.IsOf(User.Identity.Name))
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Delete ", "Delete", "Answers", new { Id = Model.Id },
+                          new AjaxOptions
+                          {
+                              UpdateTargetId = "Status-" + Model.Id.ToString(),
+                              HttpMethod = "Get",
+                          }, null)
+}
+}
+    </span>
+    <div id="Edit"></div>
+</div>

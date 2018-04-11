@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Counters>
+  <Counter>
+    <Name>Total Calls</Name>
+    <Description>The total number of times this action has been called since the ASP.NET worker process has been started</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Total Elapsed Time</Name>
+    <Description>The total elapsed time (in milliseconds) spent in this controller action since the ASP.NET worker process started</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Delta Calls</Name>
+    <Description>The number of times this action has been called in the last sample period.  That is, if the sampling period in a tool such as perfmon is 30 seconds, this value represents that number of calls in the last 30 seconds</Description>
+    <Type>CounterDelta64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Delta Elapsed Time</Name>
+    <Description>The elapsed time (in milliseconds) spent in this action for the last sample period.  That is, if the sampling period in a tool such as perfmon is 30 seconds, this value represents that number of calls in the last 30 seconds</Description>
+    <Type>CounterDelta64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Average Time per Call</Name>
+    <Description>The average amount of elapsed time taken for calls to this action in the last sample period.</Description>
+    <Type>AverageTimer32</Type>
+  </Counter>
+
+    <Counter>
+    <Name>Average Time per Call Base</Name>
+    <Description>The base counter for the Average Time per Call Counter (must immediately follow Average Time Per Call in definition of counters)</Description>
+    <Type>AverageBase</Type>
+  </Counter>
+  
+  <Counter>
+    <Name>Calls Per Second</Name>
+    <Description>The number of times this controller action was called per second for the last reporting period</Description>
+    <Type>RateOfCountsPerSecond32</Type>
+  </Counter>
+  
+  <Counter>
+    <Name>Calls in Progress</Name>
+    <Description>The number of requests currently executing this action.  This is a point in time measurement, not an average.</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Last Call Elapsed Time</Name>
+    <Description>The amount of elapsed time the last completed call to this action took.  This is a point in time measurement that represents whatever call was last completed when the counter is checked</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+
+  <Counter>
+    <Name>Total Exceptions Thrown</Name>
+    <Description>The total number of uncaught exceptions thrown by this action</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+  
+  <Counter>
+    <Name>Delta Exceptions Thrown</Name>
+    <Description>The number of uncaught exceptions thrown by this action in the last period</Description>
+    <Type>NumberOfItems64</Type>
+  </Counter>
+  
+</Counters>

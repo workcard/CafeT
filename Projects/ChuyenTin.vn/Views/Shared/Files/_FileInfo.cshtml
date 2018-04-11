@@ -1,0 +1,19 @@
+﻿
+@model Models.FileModel
+
+<span>
+    @if (Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+    }
+    else
+    {
+        @Html.Raw(Model.CreatedDate.ToShortDateString())
+    }
+    
+    @Html.Raw(" | Tải: ")
+    @Html.Raw(Model.CountDownloads)
+    @Html.Raw(" | Đã xem: ")
+    @Html.Raw(Model.CountViews)
+    @Html.Raw(" | " + Model.SizeToString)
+</span>

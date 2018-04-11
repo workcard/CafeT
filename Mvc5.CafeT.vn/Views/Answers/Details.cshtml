@@ -1,0 +1,60 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.AnswerModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="col-md-12">
+    @if (ViewBag.Question != null)
+    {
+        @Html.Partial("Questions/_QuestionOfAnswer", (QuestionModel)ViewBag.Question)
+    }
+    <div class="col-md-8">
+        <h4>
+            @Html.Raw(Model.Name)
+        </h4>
+        @*<span>
+            @Html.Partial("Questions/_QuestionIfo", Model)
+        </span>*@
+        <p>
+            @Html.Raw(Model.Content)
+        </p>
+        @if (!Model.IsCorrect)
+        {
+            <p>
+                Rất tiếc, bạn đã trả lời sai. Vui lòng trả lời lại
+                <br />
+                @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+                {
+                    if (Model.QuestionId.HasValue)
+                    {
+                        @Html.ActionLink("Re-Answer", "AddAnswer", "Questions", new { id = Model.QuestionId.Value }, null)
+                    }
+                }
+            </p>
+        }
+        <p>
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "Answers", new { id = Model.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Back to List", "Index")
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Review answer", "AddReview", "Answers", new { answerId = Model.Id }, null)
+            }
+        </p>
+    </div>
+    <div class="col-md-4">
+    @if (Model.Reviews != null && Model.Reviews.Count() > 0)
+    {
+        <h4>
+            Đánh giá - Nhận xét
+        </h4>
+        @Html.Partial("Answers/_AnswerReviews", Model.Reviews)
+    }
+    </div>
+</div>
+

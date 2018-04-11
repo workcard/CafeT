@@ -1,0 +1,18 @@
+﻿@model Web.ModelViews.DaySummary
+
+<div class="container">
+    <div class="row bg-white">
+        <h4>TỔNG KẾT</h4>
+        <div class="col-md-4">
+            Thời gian: @Model.TotalTimes (phút)<br />
+            Đánh giá: @Model.GetWorkingStatus()<br />
+            @Html.Raw("Chi phí "):
+            @Html.Raw(Model.Issues.Sum(t => t.Price).ToReadable() + " (VND)")
+        </div>
+        <div class="col-md-5">
+            @Html.Raw("Bạn đã hoàn thành "): @Model.CompletedIssues.Count() việc. <br />
+            @Html.Raw("Thời gian: " + Model.CompletedIssues.Sum(t => t.IssueEstimation) + " (phút)")<br />
+            @Html.Raw("Bạn đã có: " + Model.CompletedIssues.Sum(t => t.Price).ToReadable() + " (VND)")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+﻿<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a href="@Url.Content("~/Home/Index")"><i class="fa fa-home"></i> Home </a>
+                @*<ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Home/Dashboard")">Dashboard</a>
+                    </li>
+                </ul>*@
+            </li>
+            <li>
+                <a><i class="fa fa-dashboard"></i> CIO <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/CIO/GeneralDashboard")">General Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/CIO/TimesDashboard")">Times Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/CIO/IssuesOnTimes")">Issues On Times</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/CIO/StaffDashboard")">Staff Dashboard</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-male"></i> Leader <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Leader/GeneralDashboard")">General Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Leader/TimesDashboard")">Times Dashboard</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-user"></i> Staff <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Staff/GeneralDashboard")">General Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Staff/TimesDashboard")">Times Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Staff/Issue")">Staff Dashboard</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-recycle"></i> Issues Manager <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Issue/IssuesManager")">Issues Manager</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Issue/Create")">Create new issue</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Issue/Index")">Issues All</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-pie-chart"></i> Project Manager <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Project/Create")">Create new project</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Project/Index")">Project Manager</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-users"></i> User Manager <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Role/Create")">Create new a role</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Role/Index")">Role Manager</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Account/Register")">Register new a user</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/User/Index")">User Manager</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Account/Login")">Login</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-bookmark-o"></i> Actions <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Content("~/Action/Index")">All actions</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- /menu footer buttons -->
+@RenderPage("~/Views/Shared/Partial Pages/_MenuFooter.cshtml")
+<!-- /menu footer buttons -->

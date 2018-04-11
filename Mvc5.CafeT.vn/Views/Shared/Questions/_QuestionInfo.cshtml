@@ -1,0 +1,43 @@
+﻿@using CafeT.Time
+@model Mvc5.CafeT.vn.Models.QuestionModel
+
+@if(Model.Title.IsNullOrEmptyOrWhiteSpace())
+{
+    @Html.Raw(Model.Content.GetSentences().ToArray()[1])
+}
+else
+{
+    @Html.Raw(Model.Title)
+}
+
+@if(Model.IsNew())
+{
+    <span class="text-danger">(New)</span>
+}
+<p>
+    <h5>
+        @Html.Raw(Model.CreatedDate.TimeAgo())
+        @Html.Raw(" by " + Model.CreatedBy.GetFromBeginTo("@"))
+        @if (Model.LastUpdatedDate.HasValue)
+        {
+            @Html.Raw(" | Updated: ")
+            @Html.Raw(Model.LastUpdatedDate.Value.TimeAgo())
+        }
+
+        @if (Model.HasAnswer())
+        {
+            <span class="text-info">
+                @Html.Raw(" | Có: " + Model.Answers.Count() + " trả lời")
+            </span>
+        }
+        else
+        {
+            <span class="panel-danger">
+                @if (User.Identity.IsAuthenticated && !Model.IsOf(User.Identity.Name))
+                {
+                    @Html.Raw("Bạn hãy là người đầu tiên trả lời")
+                }
+            </span>
+        }
+    </h5>
+</p>

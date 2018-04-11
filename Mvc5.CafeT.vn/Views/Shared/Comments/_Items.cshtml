@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.CommentView>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        <div class="list-group-item">
+            @Html.Partial("Comments/_Item", item)
+        </div>
+        @*<div class="col-md-2">
+                @Html.Raw(item.CreatedDate.TimeAgo())
+                @Html.Raw(" By: " + item.CreatedBy.GetFromBeginTo("@"))
+                @if (item.LastUpdatedDate.HasValue)
+                {
+                    @Html.Raw(" | Cập nhật: " + item.LastUpdatedBy.GetFromBeginTo("@"))
+                    @Html.Raw(" lúc: " + item.LastUpdatedDate)
+                }
+                <br />
+                @Html.Raw("Vews: " + item.CountViews)
+            </div>
+            <div class="col-md-10">
+                <h4>
+                    @Html.Raw(item.Title)
+                </h4>
+                <span>
+                    @if (item.ArticleId.HasValue)
+                    {
+                        @Html.Raw(item.Article.Title)
+                    }
+                </span>
+                <p>
+                    @Html.Raw(item.Content)
+                </p>
+                @Html.Partial("Comments/_CommentMenu", item)
+            </div>*@
+    }
+</div>
+

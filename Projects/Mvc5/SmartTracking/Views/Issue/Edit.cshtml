@@ -1,0 +1,203 @@
+﻿@model SmartTracking.Models.Objects.Issue
+
+@{
+    ViewBag.Title = "IsueDetails";
+}
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Standard Details</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form class="form-horizontal form-label-left input_mask">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">ProjectId </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.ProjectId">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueId </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueId">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueTitle </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueTitle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueDescription </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueDescription">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">PriorityName </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.PriorityName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">AssignedDisplayName </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.AssignedDisplayName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">CreatorDisplayName </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.CreatorDisplayName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">OwnerDisplayName </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.OwnerDisplayName">
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueDueDate </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueDueDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">StatusName </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.StatusName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">ProjectName </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.ProjectName">
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Parameter details</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form class="form-horizontal form-label-left input_mask">
+                    <div class="form-group">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-sm-12 col-xs-12" style="padding: initial; text-align: right;">Issue Progress </label>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="col-xs-11">
+                                <div class="progress progress_sm">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="@Model.IssueProgress"></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1 more_info">
+                                <span>@Model.IssueProgress%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Issue Estimation </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueEstimation">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">AffectedMilestoneName </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.AffectedMilestoneName">
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">DateCreated </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.DateCreated">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">LastUpdate </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" disabled="disabled" placeholder="@Model.LastUpdate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">IsClosed </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="radio" class="flat" name="iCheck" checked="@Model.IsClosed"> Disabled
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">TimeLogged </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.TimeLogged">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueVisibility </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueVisibility">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Disabled </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="radio" class="flat" name="iCheck1" checked="@Model.Disabled"> Disabled
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">ProjectCode </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.ProjectCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">IssueVotes </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="@Model.IssueVotes">
+                            </div>
+                        </div>*@
+                    <div class="ln_solid"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Close</button>
+        <button type="reset" class="btn btn-primary">Cancel</button>
+    </div>
+</div>

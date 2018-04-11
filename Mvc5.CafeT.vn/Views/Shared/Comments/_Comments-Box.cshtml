@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.CommentView>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.Partial("Comments/_Comment", item)
+        </li>
+    }
+</ul>
+

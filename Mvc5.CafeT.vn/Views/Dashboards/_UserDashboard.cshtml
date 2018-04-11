@@ -1,0 +1,11 @@
+﻿
+<script type="text/javascript">
+        $.get('@Url.Action("GetDashboard", "Dashboard" )', function (data) {
+            $('#Dashboard').html(data);
+        });
+</script>
+
+<div id="Dashboard">
+    @Html.Raw(@ViewBag.Count)
+    2
+</div>

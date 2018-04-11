@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <a class="p-2 text-dark">
+            @Html.ActionLink("Chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </a>
+        <a class="btn btn-outline-primary" href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+    }
+}
+else
+{
+    <a class="btn btn-outline-primary">@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a>
+    <a class="btn btn-outline-primary">@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a>
+
+}

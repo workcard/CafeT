@@ -1,0 +1,123 @@
+﻿@using Web.Models
+@model Web.Models.Story
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Stories", new { id = Model.Id }, null)
+        @*@Html.Raw(" | ")
+        @Html.Raw(" Set ")
+
+        @if (Model.Repeat == RepeatType.None)
+        {
+            @Ajax.ActionLink("Daily ", "SetWorkOnRepeat", "WorkIssues", new { Id = Model.Id, repeat = RepeatType.Daily },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        
+        @if (Model.IsToday())
+        {
+            @Ajax.ActionLink("Tomorrow ", "SetWorkOnTime", "WorkIssues", new { Id = Model.Id, date = DateTime.Now.AddDays(1) },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (Model.IsTomorrow())
+        {
+            @Ajax.ActionLink("Today ", "SetWorkOnTime", "WorkIssues", new { Id = Model.Id, date = DateTime.Now },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (!Model.IsTomorrow() && !Model.IsToday())
+        {
+            @Ajax.ActionLink("Today ", "SetWorkOnTime", "WorkIssues", new { Id = Model.Id, date = DateTime.Now },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+            @Ajax.ActionLink("Tomorrow ", "SetWorkOnTime", "WorkIssues", new { Id = Model.Id, date = DateTime.Now.Date.AddDays(1) },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (!Model.IsNextDay(3))
+        {
+            @Ajax.ActionLink("Next Week ", "SetWorkOnTime", "WorkIssues", new { Id = Model.Id, date = DateTime.Now.Date.AddDays(7) },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        <br />
+        @Html.Raw("Mark as: ") <br />
+        @if (Model.Status != Web.Models.IssueStatus.Done)
+        {
+            @Ajax.ActionLink("Done ", "MarkAsDone", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-danger" })
+        }
+
+        @if (Model.Status != Web.Models.IssueStatus.Finished)
+        {
+            @Ajax.ActionLink("Finished ", "MarkAsFinished", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Status != Web.Models.IssueStatus.New)
+        {
+            @Ajax.ActionLink("New ", "EmailNotify", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Status != Web.Models.IssueStatus.ReOpen)
+        {
+            @Ajax.ActionLink("Re-Open ", "MarkAsNew", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Status != Web.Models.IssueStatus.Done)
+        {
+            @Ajax.ActionLink("Done ", "MarkAsTesting", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Status != Web.Models.IssueStatus.Testing)
+        {
+            @Ajax.ActionLink("Testing ", "MarkAsTesting", "WorkIssues", new { Id = Model.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default" })
+        }*@
+    </p>
+}
+@*<div id="Update-@Model.Id"></div>
+<div id="Status-@Model.Id"></div>*@

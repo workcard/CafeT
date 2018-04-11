@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.Models.QuestionModel>
+@using PagedList.Mvc;
+@using Mvc5.CafeT.vn.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<script type="text/javascript">
+        $.get('@Url.Action("GetNoAnswers", "JobModels", null)', function (data) {
+            $('#NoAnswer-box').html(data);
+        });
+</script>*@
+
+<div class="col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Tìm kiếm
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Index", "Questions", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+            {
+                @Html.TextBox("searchString", null, new { id = "Search" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+            }
+        </div>
+        <div class="panel-footer">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Create", "Create", "Questions", null, new { @class = "btn btn-success" })
+            }
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4>
+                Câu hỏi/Bài tập (@Model.Count)
+            </h4>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.Partial("_AdminQuestionMenu", Model)
+                }
+                else
+                {
+                    @Html.Partial("_UserQuestionMenu", Model)
+                }
+            }
+            else
+            {
+                @Html.Partial("_AdminQuestionMenu", Model)
+            }
+        </div>
+        <div class="panel-body" id="AjaxUpdate">
+            @Html.Partial("Questions/_Questions", Model)
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Questions", new { page }))
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+
+    <div id="searchResults"></div>
+</div>
+
+<div class="col-md-3">
+    <h4>Giải nhiều</h4>
+    <span>Các câu hỏi có nhiều lời giải</span>
+    @Html.Partial("Questions/_Questions", (IEnumerable<QuestionModel>)ViewBag.TopAnswers)
+</div>
+<div class="col-md-3">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4>Chưa có lời giải</h4>
+            <span>Các câu hỏi chưa có lời giải</span>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("Questions/_Questions", (IEnumerable<QuestionModel>)ViewBag.NoAnswers)
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+
+

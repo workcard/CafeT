@@ -1,0 +1,40 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+<div class="large-post-meta">
+    <hr />
+    @if (Model.Category != null)
+    {
+        <span>
+            <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @Model.Category.Name</a>
+        </span>
+    }
+    <span class="">Words: @Model.Processor.CountOfWords</span>
+    <small class="">&#124;</small>
+    <span class="">Links: @Model.Processor.UrlLinks.Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Emails: @Model.Processor.Emails.Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Questions: @Model.Processor.CountOfQuestions</span>
+    <small class="">&#124;</small>
+    <span class="">MathExps: @Model.Processor.MathExprs.Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Phrases: @Model.Processor.Phrases.Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Words (English): @Model.Processor.EnglihsWords.Count()</span>
+    <small class="">&#124;</small>
+    <span class="">Words (Vietnamese): @Model.Processor.VietnameseWords.Count()</span>
+    <br />
+    <span>
+        @if (!Model.GetKeyWords().IsNullTypeOrEmpty())
+        {
+            @Html.Raw("Từ khóa: ")
+            foreach (string _tag in Model.GetKeyWords())
+            {
+                if (!_tag.IsNullOrEmptyOrWhiteSpace() && _tag.HasLetter())
+                {
+                    @Html.ActionLink(_tag, "Search", "Articles", new { searchString = _tag }, null) @Html.Raw(";")
+                }
+            }
+        }
+    </span>
+</div>

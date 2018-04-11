@@ -1,0 +1,100 @@
+﻿@model SmartTracking.ViewModels.CIOTimesViewModel
+@using SmartTracking.Helpers;
+
+@{
+    ViewBag.Title = "TimesDashboard";
+}
+
+<script src="@Url.Content("~/Content/Extend/Date/bootstrap-datepicker.js")"></script>
+<link href="@Url.Content("~/Content/Extend/Date/datepicker.css")" rel="stylesheet" />
+
+<script>
+    $(function () {
+
+        // disabling dates
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#fromdate').datepicker({
+            onRender: function (date) {
+                //return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate());
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#todate')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#todate').datepicker({
+            onRender: function (date) {
+                return date.valueOf() < checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <form method="post" class="form-horizontal form-label-left" novalidate>
+                    <span class="section">Check performance on times</span>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="item form-group">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <label class="control-label">From Date:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "text", @readonly = true, placeholder = "MM/dd/yyyy", id = "fromdate" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="item form-group">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <label class="control-label">To Date:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", type = "text", @readonly = true, placeholder = "MM/dd/yyyy", id = "todate" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <button id="send" type="submit" class="btn btn-success">Check</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model.ListPerformances)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title green">
+                    <h2 class="red">(@String.Format("{0:dd/MM/yyyy}", item.Date))</h2>
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_ColGraphOnDayOfUser", item.PerformancesUsers)
+            </div>
+        </div>
+    }
+</div>
+

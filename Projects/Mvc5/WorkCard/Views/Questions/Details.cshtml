@@ -1,0 +1,39 @@
+﻿@model Web.Models.Question
+
+@{
+    ViewBag.Title = "Details";
+}
+@*<script type="text/javascript">
+    $.get('@Url.Action("LoadIssue", "WorkIssues", new { id = Model.IssueId})',
+        function (data) {
+            $('#issue-box').html(data);
+        });
+</script>
+<div id="issue-box"></div>*@
+
+
+<div class="container">
+    <div class="card-title">@Html.Raw(Model.Title)</div>
+    <div class="card-text">@Html.Raw(Model.Content)</div>
+    <div class="card-link">
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) @Html.Raw(" | ")
+            @Html.ActionLink("Delete", "Delete", "Questions", new { id = Model.Id }, null) @Html.Raw(" | ")
+            @Html.ActionLink("Back to List", "Index")
+            @Html.Raw(" | ")
+            @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = "CreateAnswer",
+                                            HttpMethod = "Get",
+                                            InsertionMode = InsertionMode.Replace
+                                        }, new { @class = "card-link" })
+        }
+    </div>
+    <div id="CreateAnswer"></div>
+    <p>
+        @Html.Partial("Answers/_Answers", Model.Answers)
+    </p>
+</div>
+

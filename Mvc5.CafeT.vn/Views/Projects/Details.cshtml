@@ -1,0 +1,60 @@
+﻿@model Mvc5.CafeT.vn.Models.ProjectModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<script type="text/javascript">
+        $.get('@Url.Action("GetAritlces", "Projects", new {projectId = Model.Id, page = 10 })', function (data) {
+            $('#Articles').html(data);
+        });
+</script>
+
+<div class="row single-wrapper">
+    <div class="col-md-8">
+        <div class="widget">
+            <h4>@Model.Name</h4>
+            <p class="text-justify">
+                @Html.Raw(Model.Description)
+            </p>
+            <div id="Files" class="col-md-4">
+                @if (Model.Files != null && Model.Files.Count > 0)
+                {
+                    <h5>Tài liệu </h5>
+                    @Html.Partial("Files/_Files", Model.Files)
+                }
+            </div>
+        </div>
+        <p>
+            @Ajax.ActionLink("Articles (" + Model.Articles.Count + ")", "GetArticles", "Projects", new { id = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)
+                    @Ajax.ActionLink("Content", "GetContent", "Articles", new { articleId = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)
+                    @Ajax.ActionLink("Add Article", "AddArticle", "Projects", new { projectId = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)
+        </p>
+        <div id="Articles"></div>
+    </div>
+    <div id="authors-box" class="col-md-4 pull-right"></div>
+    <div id="meta2-box" class="col-md-4 pull-right"></div>
+    <div id="meta3-box" class="col-md-4 pull-right"></div>
+    <div id="by-authors-box" class="col-md-4 pull-right"></div>
+    <div id="comments-box" class="col-md-4 pull-right"></div>
+    <div id="Results" class="col-md-4 pull-right"></div>
+</div>
+    

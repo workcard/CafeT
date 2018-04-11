@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SmartTracking.ViewModels.GraphItem>
+@using SmartTracking.Helpers;
+
+
+<div class="x_content">
+    @foreach (var item in Model)
+    {
+        <div class="widget_summary">
+            <div class="w_left w_25">
+                <a target="_blank" href="@Url.Content("~/CIO/StaffDashboard?userName=")@item.x">
+                    <span>@item.x</span>
+                </a>
+            </div>
+            <div class="w_center w_55">
+                <div class="progress">
+                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@item.y" aria-valuemin="0" aria-valuemax="100" style="width: @item.y%;">
+                        <span class="sr-only">@item.y% Complete</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w_right w_20">
+                <span>@item.y.ToString("0")%</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+</div>
+

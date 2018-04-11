@@ -1,0 +1,16 @@
+﻿@model Web.ModelViews.MonthSummary
+
+ 
+
+<div class="mdl-card mdl-shadow--2dp todo">
+    <ul>
+        @foreach (var day in Model.days)
+    {
+        <li>
+            @Html.Partial("_TodaySummary", day)
+        </li>
+
+}
+    </ul>
+   
+</div>

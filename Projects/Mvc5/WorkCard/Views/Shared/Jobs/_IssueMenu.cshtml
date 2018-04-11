@@ -1,0 +1,48 @@
+﻿@using Web.Models
+@using CafeT.Objects.Enums
+@model Web.Models.WorkIssue
+
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.Status != IssueStatus.Done)
+        {
+            <div class="pull-left col-sm-8">
+                @Html.Raw("Mark as: ") <br />
+                @{
+                    foreach (IssueStatus p in Enum.GetValues(typeof(IssueStatus)))
+                    {
+                        if (p != Model.Status)
+                        {
+                            @Ajax.ActionLink(p.ToString(), "MarkStatus", "WorkIssues", new { Id = Model.Id, status = p },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "btn btn-default btn-xs" })
+                        }
+                    }
+                }
+            </div>
+            <div class="pull-right col-sm-4">
+                
+                @Html.Raw("Change to: ")
+                @foreach (MoveTimeType p in Enum.GetValues(typeof(MoveTimeType)))
+                {
+                    @Ajax.ActionLink(p.ToString(), "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = p },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "Menu-" + Model.Id.ToString(),
+                                    HttpMethod = "Post",
+                                }, new { @class = "btn btn-default btn-xs" })
+                }
+            </div>
+        }
+
+}
+</div>
+<div class="row">
+    <div id="Menu-@Model.Id.ToString()" class="label label-info"></div>
+    <div id="Status-@Model.Id.ToString()" class="label label-info"></div>
+</div>
+

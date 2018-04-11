@@ -1,0 +1,61 @@
+﻿@model Mvc5.CafeT.vn.Models.IndexViewModel
+@using Mvc5.CafeT.vn.Models;
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+}
+<script type="text/javascript">
+        $.get('@Url.Action("GetAllUnPublishedByUser", "Articles", new { view="Articles/_ArticleTitles" } )', function (data) {
+            $('#UnPublishArticles').html(data);
+        });
+</script>
+<script type="text/javascript">
+        $.get('@Url.Action("GetNews", "Questions", new { n = 10 } )', function (data) {
+            $('#Questions').html(data);
+        });
+</script>
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Quản lý tài khoản</h4>
+            <hr>
+        </div>
+        <div class="review-posts row m30">
+            <p class="text-success">@ViewBag.StatusMessage</p>
+
+            <div class="col-md-3">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.Partial("Menus/_AdminMenu")
+                    }
+                    @Html.Partial("Menus/_UserMenu")
+                }
+            </div>
+
+            <div class="col-md-9">
+                <div class="container-fluid">
+                    @Html.Partial("_UserProfile", (ApplicationUser)ViewBag.User)
+                </div>
+                <div id="Update" class="container-fluid">
+                    @Html.Partial("_UserInformation", (ApplicationUser)ViewBag.User)
+                </div>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#">Bài viết</a></li>
+                    <li role="presentation">
+                        <a href="#">Chưa duyệt
+                            <span class="badge">42</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">Đã duyệt</a>
+                    </li>
+                </ul>
+                <div id="UnPublishArticles"></div>
+                <div id="Questions"></div>
+            </div>
+            
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->

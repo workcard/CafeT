@@ -1,0 +1,15 @@
+{
+  "web": {
+    "client_id": "678084179903-47qnkji0ft4ouj5qp509985r490g137j.apps.googleusercontent.com",
+    "project_id": "cafet-1031",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "oewqz-6pYrzIjonmnMxMVg2R",
+    "redirect_uris": [
+      "https://script.google.com/oauthcallback",
+      "http://localhost:58647/signin-google",
+      "http://cafet.vn/signin-google"
+    ]
+  }
+}

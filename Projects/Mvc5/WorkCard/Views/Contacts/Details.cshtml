@@ -1,0 +1,34 @@
+﻿@using Web.ModelViews
+@model Web.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-title">
+            @if (!Model.LastName.IsNullOrEmptyOrWhiteSpace())
+            {
+                @Html.Raw(Model.LastName)
+                @Html.Raw(" ")
+            }
+            @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
+            {
+                @Html.Raw(Model.FirstName)
+            }
+            @Html.Raw(Model.Email) | @Html.Raw(Model.HomePhone) | @Html.Raw(Model.MobilePhone)
+        </div>
+        <div class="card-text">
+            @Html.Raw(Model.About)
+        </div>
+        <div class="card-link">
+            @Html.Partial("Contacts/_ContactMenu")
+        </div>
+    </div>
+    <div class="col-md-12">
+        @Html.Partial("Issues/_Issues", (IEnumerable<IssueView>)ViewBag.Issues)
+    </div>
+</div>
+
+

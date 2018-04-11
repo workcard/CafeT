@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.QuestionModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    @*<div class="widget-title">
+        <h4>Câu hỏi/Bài tập 
+            <span>
+                <a href="/cau-hoi">Xem tất cả (@ViewBag.CountQuestions)</a>
+            </span>
+        </h4>
+    </div>*@
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @*@Html.Partial("Questions/_Question", item)*@
+                @Html.Partial("Questions/_QuestionInfo", item)
+            </li>
+        }
+    </ul>
+}
+

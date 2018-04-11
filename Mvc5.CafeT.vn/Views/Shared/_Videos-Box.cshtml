@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.YouTubeView>
+
+<div class="post-review col-md-12 col-sm-12 col-xs-12" style="min-height: 250px;">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div style="position:relative;height:0;padding-bottom:56.25%">
+                @Html.Raw(item.EmbedUrl)
+            </div>
+        }
+    }
+</div>

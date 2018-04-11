@@ -1,0 +1,25 @@
+﻿@using CafeT.Text
+@using CafeT.Time
+@using System.Globalization
+
+@model Web.Models.Story
+
+<div class="card-box kanban-box">
+    <div class="kanban-detail">
+        @if (Model.Title != null && Model.Title.Length > 0)
+        {
+            <h4><a href="#">@Html.ActionLink(Model.Title, "Details", "Stories", new { id = Model.Id }, null)</a> </h4>
+        }
+        <ul class="list-inline m-b-0">
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top"
+                   title="" data-original-title="3 Comments">
+                    <i class="zmdi zmdi-comment-outline"></i>
+                </a>
+            </li>
+            <li>
+                @Html.Raw(Model.CreatedDate.Value.TimeAgo())
+            </li>
+        </ul>
+    </div>
+</div>
