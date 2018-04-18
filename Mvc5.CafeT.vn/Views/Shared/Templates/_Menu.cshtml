@@ -33,6 +33,10 @@
                             </ul>
                         </li>
                         <li><a href="/lien-he">Liên hệ</a></li>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            @Html.Partial("LoginPartial")
+                        }
                     </ul>
                     <ul class="nav navbar-nav navbar-right searchandbag">
                         <li class="dropdown searchdropdown hasmenu">

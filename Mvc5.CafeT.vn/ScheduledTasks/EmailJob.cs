@@ -1,16 +1,12 @@
 ﻿using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.Services;
 using Quartz;
-using Repository.Pattern.UnitOfWork;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Mvc5.CafeT.vn.ScheduledTasks
-{    
+{
     public class EmailJob : IJob
     {
         protected EmailService Service;
@@ -40,6 +36,11 @@ namespace Mvc5.CafeT.vn.ScheduledTasks
             {                
                 DailySummary _summary = new DailySummary();
             }
+        }
+
+        Task IJob.Execute(IJobExecutionContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

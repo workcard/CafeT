@@ -1,7 +1,6 @@
 ﻿using CafeT.BusinessObjects;
 using CafeT.BusinessObjects.ELearning;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

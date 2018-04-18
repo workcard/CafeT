@@ -1,6 +1,6 @@
 ﻿using CafeT.BusinessObjects;
-using CafeT.Text;
 using CafeT.Html;
+using CafeT.Text;
 using System;
 
 namespace Mvc5.CafeT.vn.Models

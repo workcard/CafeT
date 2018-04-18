@@ -1,22 +1,14 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
-using Owin;
 using Mvc5.CafeT.vn.Models;
+using Owin;
+using System;
 using System.Configuration;
-using Microsoft.Owin.Security;
-using System.Globalization;
-using System.Web;
-using Microsoft.Owin.Security.OpenIdConnect;
-using System.Threading.Tasks;
-//using Microsoft_Graph_ASPNET_Snippets.TokenStorage;
-using System.IdentityModel.Claims;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Tokens;
-//using Microsoft_Graph_ASPNET_Snippets.Utils;
+
 
 namespace Mvc5.CafeT.vn
 {
@@ -88,7 +80,7 @@ namespace Mvc5.CafeT.vn
                 ClientSecret = "9-iX_IMhX9U_zcRGytnZIfEQ"
             });
 
-            app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
+            //app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
             //app.UseCookieAuthentication(new CookieAuthenticationOptions());
         }
     }

@@ -1,11 +1,5 @@
-﻿using CafeT.Enumerable;
-using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.ModelViews;
-using Repository.Pattern.UnitOfWork;
-using System;
-using System.Collections.Generic;
+﻿using Repository.Pattern.UnitOfWork;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers

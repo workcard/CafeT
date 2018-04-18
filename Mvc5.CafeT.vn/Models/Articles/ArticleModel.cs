@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using CafeT.BusinessObjects;
+﻿using CafeT.BusinessObjects;
 using CafeT.Text;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Mvc5.CafeT.vn.Models
 {
-   
+
     public class ArticleModel : Article//, ICloneable
     {
         public string EnglishContent { set; get; }

@@ -1,16 +1,22 @@
 ﻿
+using Calendar.ASP.NET.MVC5;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Util.Store;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using System.Security.Claims;
 using Web.Models;
 
 namespace Web
 {
     public partial class Startup
     {
+        
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -58,7 +64,36 @@ namespace Web
             //app.UseFacebookAuthentication(
             //   appId: "1881899035187732",
             //   appSecret: "34cca799157cc2a4cb808e76e1328ff3");
+            //var google = new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    AccessType = "offline",     // Request a refresh token.
+            //    ClientId = "367301950518-821q4o7bgd9c6aai8gb41itj8ergfgih.apps.googleusercontent.com",
+            //    ClientSecret = "mZNCYvAWm-Y9XF4E_Q86Xut7",
+            //    Provider = new GoogleOAuth2AuthenticationProvider()
+            //    {
+            //        OnAuthenticated = async context =>
+            //        {
+            //            var userId = context.Id;
+            //            context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
 
+            //            var tokenResponse = new TokenResponse()
+            //            {
+            //                AccessToken = context.AccessToken,
+            //                RefreshToken = context.RefreshToken,
+            //                ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
+            //                Issued = DateTime.Now,
+            //            };
+
+            //            await dataStore.StoreAsync(userId, tokenResponse);
+            //        },
+            //    },
+            //};
+
+            //foreach (var scope in MyRequestedScopes.Scopes)
+            //{
+            //    google.Scope.Add(scope);
+            //}
+            //app.UseGoogleAuthentication(google);
             app.UseGoogleAuthentication(
                 clientId: "367301950518-821q4o7bgd9c6aai8gb41itj8ergfgih.apps.googleusercontent.com",
                 clientSecret: "mZNCYvAWm-Y9XF4E_Q86Xut7");

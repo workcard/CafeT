@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using CafeT.Text;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Mvc5.CafeT.vn.Models;
-using CafeT.Text;
-using System.IO;
-using System.Net;
 using Repository.Pattern.UnitOfWork;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

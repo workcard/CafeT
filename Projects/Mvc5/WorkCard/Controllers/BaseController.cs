@@ -4,9 +4,19 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Managers;
 using Web.Models;
+using Web.Services;
 
 namespace Web.Controllers
 {
+
+    public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
+    {
+        protected override Google.Apis.Auth.OAuth2.Mvc.FlowMetadata FlowData
+        {
+            get { return new AppFlowMetadata(); }
+        }
+    }
+
     public class BaseController : Controller
     {
         protected int STORIES_COUNT_TOVIEW = 5;

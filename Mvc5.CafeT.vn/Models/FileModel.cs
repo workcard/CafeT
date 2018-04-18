@@ -1,7 +1,7 @@
-﻿using System;
-using CafeT.BusinessObjects;
-using System.Linq;
+﻿using CafeT.BusinessObjects;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Models
 {

@@ -1,13 +1,9 @@
-﻿using CafeT.Time;
+﻿using CafeT.Enumerable;
 using Mvc5.CafeT.vn.Models;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
-using CafeT.Text;
-using CafeT.MathText;
-using CafeT.Enumerable;
 
 namespace Mvc5.CafeT.vn.Managers
 {

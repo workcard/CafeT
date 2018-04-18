@@ -28,3 +28,6 @@ else
     </ul>
 }
 <div id="Dashboard"></div>
+<div class="alert-danger">
+    @Html.ActionLink("Hello " + @User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+</div>

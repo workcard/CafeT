@@ -1,12 +1,12 @@
-﻿using Mvc5.CafeT.vn.ModelViews;
-using System.Collections.Generic;
-using System.Linq;
-using CafeT.Text;
+﻿using CafeT.Text;
 using Mvc5.CafeT.vn.Managers;
 using Mvc5.CafeT.vn.Models;
-using Repository.Pattern.UnitOfWork;
+using Mvc5.CafeT.vn.ModelViews;
 using Mvc5.CafeT.vn.Services;
+using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Mappers
 {
@@ -48,15 +48,15 @@ namespace Mvc5.CafeT.vn.Mappers
         }
         #endregion
 
-        public static FileModel GoogleFileToModel(Google.Apis.Drive.v3.Data.File file)
+        public static FileModel GoogleFileToModel(Google.Apis.Drive.v2.Data.File file)
         {
             FileModel fileModel = new FileModel();
             fileModel.Id = Guid.NewGuid();
-            fileModel.FileName = file.Name;
+            fileModel.FileName = file.Title;
             if (file.HasThumbnail.HasValue && file.HasThumbnail.Value)
                 fileModel.AvatarPath = file.ThumbnailLink;
             fileModel.FullPath = file.Id;
-            fileModel.SizeInB = file.Size.Value;
+            //fileModel.SizeInB = file.s.Value;
             fileModel.Description = file.Description;
             fileModel.CreatedBy = file.Owners[0].DisplayName;
             return fileModel;

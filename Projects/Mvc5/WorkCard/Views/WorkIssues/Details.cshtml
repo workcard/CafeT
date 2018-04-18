@@ -75,8 +75,13 @@ UpdateTargetId = "AddQuestion",
 HttpMethod = "Get",
 }, new { @class = "btn btn-outline-danger" })
                     @Html.ActionLink("To article", "ToArticle", new { id = Model.Id })
+                    @Html.ActionLink("GetTaskAsync", "GetTaskAsync", "WorkIssues")
+/*GetTaskAsync*/
+
                     @Html.Raw(" | ")
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("ToCalendar", "ToCalendar", "WorkIssues", new { id = Model.Id }, null)
                     @Html.Raw(" | ")
                     @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, null)
                     @Html.Raw(" | ")

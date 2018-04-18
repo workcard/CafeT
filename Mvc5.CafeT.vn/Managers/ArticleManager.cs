@@ -1,16 +1,15 @@
-﻿using CafeT.Text;
-using CafeT.SmartObjects;
+﻿using CafeT.Enumerable;
+using CafeT.Html;
+using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
 using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using CafeT.Html;
 using System.Drawing;
 using System.Drawing.Imaging;
-using CafeT.Enumerable;
+using System.IO;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Managers
 {

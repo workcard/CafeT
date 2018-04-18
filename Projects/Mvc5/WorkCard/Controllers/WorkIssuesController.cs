@@ -1,14 +1,23 @@
 ﻿using AutoMapper;
+//using CafeT.GoogleServices;
 using CafeT.Objects.Enums;
 using CafeT.Text;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Mvc;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Owin;
 using PagedList;
 using Repository.Pattern.UnitOfWork;
+//using SyncMyCal.Calendars;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +25,7 @@ using Web.Managers;
 using Web.Mappers;
 using Web.Models;
 using Web.ModelViews;
+using Web.Services;
 
 namespace Web.Controllers
 {
@@ -419,6 +429,87 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public void AddEvent(CalendarService service, Event item)
+        {
+            //var service = new CalendarService(new BaseClientService.Initializer()
+            //{
+            //    HttpClientInitializer = Credential,
+            //    ApplicationName = ApplicationName,
+            //});
+            var list = service.CalendarList.List().Execute();
+            var myCalendar = list.Items.SingleOrDefault(c => c.Summary == "WorkCard.vn");
+
+            if (myCalendar != null)
+            {
+                var newEventRequest = service.Events.Insert(item, myCalendar.Id);
+                var eventResult = newEventRequest.Execute();
+            }
+        }
+        public async Task<ActionResult> ToCalendar(Guid id, CancellationToken cancellationToken)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                AuthorizeAsync(cancellationToken);
+
+            if (result.Credential != null)
+            {
+                var service = new CalendarService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "WorkCard.vn"
+                });
+
+                var _object = IssueManager.GetById(id);
+                var _event = new Google.Apis.Calendar.v3.Data.Event();
+                EventDateTime start = new EventDateTime();
+                start.DateTime = _object.Start.Value;
+                EventDateTime end = new EventDateTime();
+                end.DateTime = _object.End.Value;
+                _event.Summary = _object.Title;
+                _event.Location = "WorkCard.vn";
+                _event.Start = start;
+                _event.End = end;
+                _event.Description = "From WorkCard.vn";
+                this.AddEvent(service, _event);
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("_Message", string.Empty);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+        }
+        //[Authorize]
+        //public async Task<ActionResult> ToCalendar(Guid id)
+        //{
+        //    //GoogleServices google = new GoogleServices();
+        //    var _object = IssueManager.GetById(id);
+        //    GoogleCalendar calendar = new GoogleCalendar();
+        //    bool _isConnected = calendar.ConnectCalendar();
+        //    if(_isConnected)
+        //    {
+        //        var _event = new Google.Apis.Calendar.v3.Data.Event();
+        //        EventDateTime start = new EventDateTime();
+        //        start.DateTime = _object.Start.Value;
+        //        EventDateTime end = new EventDateTime();
+        //        end.DateTime = _object.End.Value;
+        //        _event.Summary = _object.Title;
+        //        _event.Location = "WorkCard.vn";
+        //        _event.Start = start;
+        //        _event.End = end;
+        //        _event.Description = "From WorkCard.vn";
+        //        calendar.AddEvent(_event);
+        //    }
+
+        //    if (Request.IsAjaxRequest())
+        //    {
+        //        return PartialView("_Message", string.Empty);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpPost]
         [Authorize]
