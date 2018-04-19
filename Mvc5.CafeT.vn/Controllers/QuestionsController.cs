@@ -1,12 +1,12 @@
-﻿using CafeT.Enumerable;
-using CafeT.Text;
-using Mvc5.CafeT.vn.Models;
-using PagedList;
-using Repository.Pattern.UnitOfWork;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Repository.Pattern.UnitOfWork;
+using Mvc5.CafeT.vn.Models;
+using PagedList;
+using CafeT.Text;
+using CafeT.Enumerable;
+using System.Collections.Generic;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

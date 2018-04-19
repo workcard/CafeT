@@ -1,12 +1,13 @@
-﻿using Mvc5.CafeT.vn.Models;
-using Repository.Pattern.UnitOfWork;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Net;
 using System.Web.Mvc;
+using Mvc5.CafeT.vn.Models;
+using Repository.Pattern.UnitOfWork;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

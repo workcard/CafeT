@@ -1,4 +1,10 @@
 ﻿//using EyeOpen.Imaging;
+using Mvc5.CafeT.vn.ModelViews;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Net;
 using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers

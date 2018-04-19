@@ -413,6 +413,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CommandsController.cs" />
@@ -470,11 +471,17 @@
     <Compile Include="Migrations\201804040409345_UpdateIssue.Designer.cs">
       <DependentUpon>201804040409345_UpdateIssue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804180816069_addArticle.cs" />
+    <Compile Include="Migrations\201804180816069_addArticle.Designer.cs">
+      <DependentUpon>201804180816069_addArticle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Identity\AdminViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -816,6 +823,8 @@
     <Content Include="Views\WorkIssues\GetTaskAsync.cshtml" />
     <Content Include="Views\Calendar\UpcomingEvents.cshtml" />
     <Content Include="Views\Calendar\IndexAsync.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
+    <Content Include="Views\Articles\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -843,6 +852,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804040409345_UpdateIssue.resx">
       <DependentUpon>201804040409345_UpdateIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180816069_addArticle.resx">
+      <DependentUpon>201804180816069_addArticle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

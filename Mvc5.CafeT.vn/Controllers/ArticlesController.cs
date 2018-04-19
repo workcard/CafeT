@@ -1,19 +1,19 @@
-﻿using CafeT.BusinessObjects;
-using CafeT.Enumerable;
-using CafeT.Html;
-using CafeT.Objects;
-using CafeT.SmartObjects;
-using CafeT.Text;
-using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.ModelViews;
-using Mvc5.CafeT.vn.Services;
-using PagedList;
+﻿using Mvc5.CafeT.vn.Models;
 using Repository.Pattern.UnitOfWork;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using Mvc5.CafeT.vn.ModelViews;
+using CafeT.Text;
+using PagedList;
+using System.Collections.Generic;
+using Mvc5.CafeT.vn.Services;
+using CafeT.BusinessObjects;
+using CafeT.Enumerable;
+using CafeT.SmartObjects;
+using CafeT.Html;
+using CafeT.Objects;
+using System.Threading.Tasks;
 
 
 namespace Mvc5.CafeT.vn.Controllers
@@ -388,7 +388,7 @@ namespace Mvc5.CafeT.vn.Controllers
         }
 
         // GET: Articles/Create
-        //[Authorize]
+        [Authorize]
         public ActionResult Create()
         {
             ArticleModel _article = new ArticleModel("Create" + DateTime.Today.DayOfYear.ToString());

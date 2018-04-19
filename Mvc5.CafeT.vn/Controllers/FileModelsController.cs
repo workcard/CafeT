@@ -1,11 +1,15 @@
-﻿using CafeT.Text;
+﻿using CafeT.Enumerable;
+using CafeT.GoogleServices;
+using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
+using PagedList;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,76 +23,76 @@ namespace Mvc5.CafeT.vn.Controllers
         {
         }
 
-        //public ActionResult Index(int? page)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(100).Result;
-        //    files = files.Where(t => t.HasThumbnail.HasValue && t.HasThumbnail.Value)
-        //        .Where(t => t.Name.Length > 10)
-        //        .OrderByDescending(t => t.CreatedTime);
+        public ActionResult Index(int? page)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var files = service.GetFilesAsync(100).Result;
+            files = files.Where(t => t.HasThumbnail.HasValue && t.HasThumbnail.Value)
+                .Where(t => t.Name.Length > 10)
+                .OrderByDescending(t => t.CreatedTime);
 
-        //    List<FileModel> list = new List<FileModel>();
-        //    if (files != null && files.Count() > 0)
-        //    {
-        //        foreach (var file in files)
-        //        {
-        //            FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
-        //            list.Add(fileModel);
-        //        }
-        //    }
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS)));
-        //    }
-        //    return View("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
-        //}
+            List<FileModel> list = new List<FileModel>();
+            if (files != null && files.Count() > 0)
+            {
+                foreach (var file in files)
+                {
+                    FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
+                    list.Add(fileModel);
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return (PartialView("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS)));
+            }
+            return View("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
+        }
 
         
 
-        //public ActionResult GetNewFiles(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(n).Result.TakeMax(n);
-        //    List<FileModel> list = new List<FileModel>();
-        //    if (files != null && files.Count() > 0)
-        //    {
-        //        foreach (var file in files)
-        //        {
-        //            FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
-        //            list.Add(fileModel);
-        //        }
-        //    }
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Files/_Files", list));
-        //    }
-        //    return View("Files/_Files", list);
-        //}
+        public ActionResult GetNewFiles(int? n)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var files = service.GetFilesAsync(n).Result.TakeMax(n);
+            List<FileModel> list = new List<FileModel>();
+            if (files != null && files.Count() > 0)
+            {
+                foreach (var file in files)
+                {
+                    FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
+                    list.Add(fileModel);
+                }
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return (PartialView("Files/_Files", list));
+            }
+            return View("Files/_Files", list);
+        }
 
-        //public ActionResult GetGoogleDocument(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(n).Result.TakeMax(n);
-        //    var file = files.ToArray()[0];
+        public ActionResult GetGoogleDocument(int? n)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var files = service.GetFilesAsync(n).Result.TakeMax(n);
+            var file = files.ToArray()[0];
 
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Messages/_GoogleView", file));
-        //    }
-        //    return View("Messages/_GoogleView", file);
-        //}
+            if (Request.IsAjaxRequest())
+            {
+                return (PartialView("Messages/_GoogleView", file));
+            }
+            return View("Messages/_GoogleView", file);
+        }
 
-        //public ActionResult UploadToGoolgle(HttpPostedFileBase file)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    string path = Server.MapPath("~/Temp/Capture.PNG");
-        //    var result = service.UploadAsync(path).Result;
-        //    return View("Messages/_HtmlString", result.Name + "|" + result.OriginalFilename);
-        //}
+        public ActionResult UploadToGoolgle(HttpPostedFileBase file)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            string path = Server.MapPath("~/Temp/Capture.PNG");
+            var result = service.UploadAsync(path).Result;
+            return View("Messages/_HtmlString", result.Name + "|" + result.OriginalFilename);
+        }
 
         public ActionResult Create()
         {
@@ -248,50 +252,50 @@ namespace Mvc5.CafeT.vn.Controllers
             return View("_UploadCompleted");
         }
 
-        //[HttpPost]
-        //public ActionResult DownloadFromGoogle(string id)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var _file = service.GetFileAsync(id).Result;
-        //    string saveTo = @"C:\FilesFromGoogle\" + _file.Name;
-        //    var result = service.DownloadFileAsync(_file, saveTo);
-        //    if(Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("Messages/_HtmlString", result.Result);
-        //    }
-        //    return View("Messages/_HtmlString", result.Result);
-        //}
-        //[HttpPost]
-        //public ActionResult GetFileFromGoogle(string id)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var _file = service.GetFileAsync(id).Result;
-        //    string saveTo = @"C:\FilesFromGoogle\" + _file.Name;
-        //    var result = service.DownloadFileAsync(_file, saveTo);
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("Messages/_HtmlString", result.Result);
-        //    }
-        //    return View("Messages/_HtmlString", result.Result);
-        //}
+        [HttpPost]
+        public ActionResult DownloadFromGoogle(string id)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var _file = service.GetFileAsync(id).Result;
+            string saveTo = @"C:\FilesFromGoogle\" + _file.Name;
+            var result = service.DownloadFileAsync(_file, saveTo);
+            if(Request.IsAjaxRequest())
+            {
+                return PartialView("Messages/_HtmlString", result.Result);
+            }
+            return View("Messages/_HtmlString", result.Result);
+        }
+        [HttpPost]
+        public ActionResult GetFileFromGoogle(string id)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var _file = service.GetFileAsync(id).Result;
+            string saveTo = @"C:\FilesFromGoogle\" + _file.Name;
+            var result = service.DownloadFileAsync(_file, saveTo);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Messages/_HtmlString", result.Result);
+            }
+            return View("Messages/_HtmlString", result.Result);
+        }
 
-        //[HttpPost]
-        //public async Task<ActionResult> UpdateGoogleFileAsync(string id)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var _file = await service.GetFileAsync(id);
+        [HttpPost]
+        public async Task<ActionResult> UpdateGoogleFileAsync(string id)
+        {
+            Uploader service = new Uploader(UserName);
+            service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
+            var _file = await service.GetFileAsync(id);
             
-        //    var file = await service.UpdateAsync(_file);
-        //    var _last = await service.GetFileAsync(id);
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("Messages/_HtmlString", _last.Description);
-        //    }
-        //    return View("Messages/_HtmlString", _last.Description);
-        //}
+            var file = await service.UpdateAsync(_file);
+            var _last = await service.GetFileAsync(id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Messages/_HtmlString", _last.Description);
+            }
+            return View("Messages/_HtmlString", _last.Description);
+        }
 
         //public FileResult Download(Guid id)
         //{

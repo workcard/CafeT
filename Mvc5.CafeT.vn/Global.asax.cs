@@ -1,7 +1,10 @@
-﻿using Mvc5.CafeT.vn.Models;
+﻿using Mvc5.CafeT.vn.Mappers;
+using Mvc5.CafeT.vn.Models;
 using Mvc5.CafeT.vn.ModelViews;
+using Mvc5.CafeT.vn.ScheduledTasks;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,21 +25,21 @@ namespace Mvc5.CafeT.vn
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<QuestionModel, QuestionView>()
-                    .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                    .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy))
-                    //.ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => src.Title.GetVnKeywords()))
-                    //.ForMember(dest => dest.Emails, opt => opt.MapFrom(src => src.Title.GetEmails()))
-                    ;
-                //.ForMember(dest => dest.RecipientId, opt => opt.MapFrom(src => src.Recipient.Id))
-                //.ForMember(dest => dest.FromName, opt => opt.MapFrom(src => src.From.Name))
-                //.ForMember(dest => dest.RecipientName, opt => opt.MapFrom(src => src.Recipient.Name));
-            });
+            //AutoMapper.Mapper.Initialize(cfg =>
+            //{
+            //    cfg.CreateMap<QuestionModel, QuestionView>()
+            //        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            //        .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy))
+            //        //.ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => src.Title.GetVnKeywords()))
+            //        //.ForMember(dest => dest.Emails, opt => opt.MapFrom(src => src.Title.GetEmails()))
+            //        ;
+            //    //.ForMember(dest => dest.RecipientId, opt => opt.MapFrom(src => src.Recipient.Id))
+            //    //.ForMember(dest => dest.FromName, opt => opt.MapFrom(src => src.From.Name))
+            //    //.ForMember(dest => dest.RecipientName, opt => opt.MapFrom(src => src.Recipient.Name));
+            //});
             //AutoMapperConfiguration.Configure();
             Application["TotalOnlineUsers"] = 0;
-            //JobScheduler.Start();
+            JobScheduler.Start();
         }
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {

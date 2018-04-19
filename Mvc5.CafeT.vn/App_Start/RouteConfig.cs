@@ -21,12 +21,12 @@ namespace Mvc5.CafeT.vn
             #endregion Home
             
             #region Account
-            routes.MapRoute(
-                name: "Login",
-                url: "dang-nhap",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Login",
+            //    url: "dang-nhap",
+            //    defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
             routes.MapRoute(
                 name: "Register",
@@ -88,12 +88,12 @@ namespace Mvc5.CafeT.vn
                 namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
             );
             
-            routes.MapRoute(
-                name: "Articles-Create",
-                url: "dang-bai-viet",
-                defaults: new { controller = "Articles", action = "Create", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Articles-Create",
+            //    url: "dang-bai-viet",
+            //    defaults: new { controller = "Articles", action = "Create", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
             routes.MapRoute(
                 name: "Articles-Details",

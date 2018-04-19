@@ -1,6 +1,6 @@
 ﻿using CafeT.BusinessObjects;
-using CafeT.Time;
 using System;
+using CafeT.Time;
 using System.Timers;
 
 namespace Mvc5.CafeT.vn.Models

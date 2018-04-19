@@ -1,5 +1,0 @@
-{
-  "DataProvider": "sqlserver",
-  "DataConnectionString": "Data Source=103.3.245.27\\SQL2014;Initial Catalog=cafetvn_CambodiaMarket;Integrated Security=False;Persist Security Info=False;User ID=mathbot_admin;Password=P@$$w0rdSQL",
-  "RawDataSettings": {}
-}

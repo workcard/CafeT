@@ -1,4 +1,5 @@
 ﻿using CafeT.Html;
+using CafeT.SmartObjects;
 using CafeT.Text;
 using HtmlAgilityPack;
 using Mvc5.CafeT.vn.Models;

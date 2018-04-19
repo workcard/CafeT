@@ -1,21 +1,20 @@
-﻿using CafeT.Text;
-using CaptchaMvc.HtmlHelpers;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Mvc5.CafeT.vn.Helpers;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Mvc5.CafeT.vn.Models;
+using System.IO;
+using CafeT.Text;
+using System.Collections.Generic;
+using System;
+using CaptchaMvc.HtmlHelpers;
 
 namespace Mvc5.CafeT.vn.Controllers
-{ 
-    //[RequireHttps]
+{
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -55,8 +54,7 @@ namespace Mvc5.CafeT.vn.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+       
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -90,6 +88,8 @@ namespace Mvc5.CafeT.vn.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        HttpRuntime.Cache["signedInUserID"] = UserManager.FindByEmail(model.Email).Id.ToString();
+
                         //if the list exists, add this user to it
                         if (HttpRuntime.Cache["LoggedInUsers"] != null)
                         {
@@ -104,7 +104,6 @@ namespace Mvc5.CafeT.vn.Controllers
                                 HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
                             }
                         }
-
                         //the list does not exist so create it
                         else
                         {
@@ -115,17 +114,10 @@ namespace Mvc5.CafeT.vn.Controllers
                             //add the list into the cache
                             HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
                         }
-                        ApplicationUser user = UserManager.FindByName(model.Email);
+
                         var folder = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/Uploads/" + model.Email.Replace("@", "_"));
                         if (!Directory.Exists(folder))
-                            try
-                            {
-                                Directory.CreateDirectory(folder);
-                            }
-                            catch(Exception ex)
-                            {
-                                //WriteLog.LogError(ex);
-                            }
+                            Directory.CreateDirectory(folder);
                         return RedirectToLocal(returnUrl);
                     }
                 case SignInStatus.LockedOut:
@@ -185,6 +177,7 @@ namespace Mvc5.CafeT.vn.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [ValidateInput(false)]
         public ActionResult Register()
         {
             return View();
@@ -474,7 +467,7 @@ namespace Mvc5.CafeT.vn.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "WorkIssues");
+            return RedirectToAction("Index", "Home");
         }
 
         //

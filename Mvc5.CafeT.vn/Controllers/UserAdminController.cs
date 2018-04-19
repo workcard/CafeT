@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using Mvc5.CafeT.vn.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Mvc5.CafeT.vn.Models;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

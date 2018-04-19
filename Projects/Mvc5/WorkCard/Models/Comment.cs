@@ -13,11 +13,5 @@ namespace Web.Models
         public Guid? JobId { set; get; }
 
         public Comment() : base() { }
-
-        public bool IsOf(string userName)
-        {
-            if (!CreatedBy.IsNullOrEmptyOrWhiteSpace() && CreatedBy.ToLower() == userName.ToLower()) return true;
-            return false;
-        }
     }
 }

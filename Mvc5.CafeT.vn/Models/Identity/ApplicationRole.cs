@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System;
 
 namespace Mvc5.CafeT.vn.Models

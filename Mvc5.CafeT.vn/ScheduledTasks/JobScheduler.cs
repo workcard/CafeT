@@ -1,10 +1,15 @@
-﻿namespace Mvc5.CafeT.vn.ScheduledTasks
+﻿using Mvc5.CafeT.vn.Models;
+using Quartz;
+using Quartz.Impl;
+using System.Linq;
+
+namespace Mvc5.CafeT.vn.ScheduledTasks
 {
     public static class JobScheduler
     {
         public static void Start()
         {
-            //IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+            //IScheduler scheduler =  StdSchedulerFactory.GetDefaultScheduler();
             //scheduler.Start();
 
             //IJobDetail job = JobBuilder.Create<EmailJob>().Build();

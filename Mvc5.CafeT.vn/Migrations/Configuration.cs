@@ -3,16 +3,17 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
+    using System;
     using System.Data.Entity.Migrations;
 
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Mvc5.CafeT.vn.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "ApplicationDbContext";
+            ContextKey = "Mvc5.CafeT.vn.Models.ApplicationDbContext";
         }
 
         
@@ -50,7 +51,9 @@
                 
                 result = userManager.SetLockoutEnabled(user.Id, false);
                 userManager.AddToRole(user.Id, roleName);
-            }      
+            }
+            
+            //db.ArticleCategories.AddOrUpdate(new ArticleCategory() { Id = Guid.NewGuid(), Name = "Tất cả" });            
         }        
     }
 }

@@ -1,42 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="~/Content/material-dashboard-lite-master/images/DB_16х16.png">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WorkCard.vn</title>
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900' rel='stylesheet'
-          type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- inject:css -->
-    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet">*@
-    <script src="https://cdn.ckeditor.com/4.9.0/standard/ckeditor.js"></script>
-
-
-    <script src="~/Scripts/bootstrap.min.js"></script>
-
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
-        });
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-    <script src="~/Scripts/popper-utils.js"></script>
-    <script src="~/Scripts/popper-utils.min.js"></script>
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/bootstrap.css">
-</head>
-@*<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -52,30 +16,57 @@
             enable_page_level_ads: true
         });
     </script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="~/Assets/Templates/Techmag/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/Assets/Templates/Techmag/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Assets/Templates/Techmag/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Assets/Templates/Techmag/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Assets/Templates/Techmag/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Assets/Templates/Techmag/images/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Assets/Templates/Techmag/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Assets/Templates/Techmag/images/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Assets/Templates/Techmag/images/apple-touch-icon-152x152.png">
+    <!-- TEMPLATE STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/bbpress.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/style.css">
+    <!-- CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/custom.css">
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    
+    <script language="javascript" type="text/javascript">
+        SyntaxHighlighter.config.bloggerMode = true;
+        SyntaxHighlighter.autoloader(
+            'c-sharp csharp http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js',
+            'javascript jscript js http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js',
+            'xml xhtml xslt html xhtml http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js'
+        );
+        SyntaxHighlighter.all();
+    </script>
 
-
-
+    <script src="~/Assets/Templates/Techmag/js/bootstrap.js"></script>
+    <script src="~/Assets/Templates/Techmag/js/plugins.js"></script>
+    
     <script type="text/javascript" async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
-   
+    <script type="text/javascript" async
+            src="  https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js">
+    </script>
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
         tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
         });
     </script>
-
     @RenderSection("Styles", false)
     @Scripts.Render("~/bundles/jquery")
-</head>*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+</head>
 <body>
     @RenderPage("~/Views/Shared/Templates/_Social.cshtml")
     <div id="wrapper">
@@ -83,7 +74,6 @@
         @RenderPage("~/Views/Shared/Templates/_Menu.cshtml")
         <div class="container sitecontainer bgw">
             <div class="row">
-                @Html.Partial("Account/_LoginPartial")
                 @RenderBody()
             </div>
         </div>

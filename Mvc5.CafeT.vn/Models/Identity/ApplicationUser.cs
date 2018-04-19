@@ -32,6 +32,7 @@ namespace Mvc5.CafeT.vn.Models
 
         [Display(Name = "Giới thiệu")]
         public string About { set; get; }
+        public int? BugNetUserId { set; get; }
 
         public ApplicationUser()
         {

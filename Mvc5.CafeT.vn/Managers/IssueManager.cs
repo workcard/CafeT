@@ -1,5 +1,5 @@
-﻿using CafeT.Objects;
-using CafeT.Time;
+﻿using CafeT.Time;
+using CafeT.Objects;
 using Mvc5.CafeT.vn.Models;
 using Repository.Pattern.UnitOfWork;
 using System;

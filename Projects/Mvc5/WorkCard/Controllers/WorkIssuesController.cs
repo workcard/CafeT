@@ -482,34 +482,26 @@ namespace Web.Controllers
                 return new RedirectResult(result.RedirectUri);
             }
         }
-        //[Authorize]
-        //public async Task<ActionResult> ToCalendar(Guid id)
-        //{
-        //    //GoogleServices google = new GoogleServices();
-        //    var _object = IssueManager.GetById(id);
-        //    GoogleCalendar calendar = new GoogleCalendar();
-        //    bool _isConnected = calendar.ConnectCalendar();
-        //    if(_isConnected)
-        //    {
-        //        var _event = new Google.Apis.Calendar.v3.Data.Event();
-        //        EventDateTime start = new EventDateTime();
-        //        start.DateTime = _object.Start.Value;
-        //        EventDateTime end = new EventDateTime();
-        //        end.DateTime = _object.End.Value;
-        //        _event.Summary = _object.Title;
-        //        _event.Location = "WorkCard.vn";
-        //        _event.Start = start;
-        //        _event.End = end;
-        //        _event.Description = "From WorkCard.vn";
-        //        calendar.AddEvent(_event);
-        //    }
+        private ApplicationDbContext db = new ApplicationDbContext();
+        [Authorize]
+        public async Task<ActionResult> ToArticle(Guid id)
+        {
+           
+            Article article = new Article();
+            var _object = IssueManager.GetById(id);
+            article.Title = _object.Title;
+            article.Description = _object.Description;
+            article.Content = _object.Content;
+            article.CreatedBy = User.Identity.Name;
 
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("_Message", string.Empty);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            db.Articles.Add(article);
+            await db.SaveChangesAsync();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Message", string.Empty);
+            }
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         [Authorize]

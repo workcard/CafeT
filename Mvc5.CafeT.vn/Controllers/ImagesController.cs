@@ -1,13 +1,13 @@
-﻿using Mvc5.CafeT.vn.Helpers;
-using Mvc5.CafeT.vn.Models;
-using System;
-using System.Configuration;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Net;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Net;
+using Mvc5.CafeT.vn.Models;
+using Mvc5.CafeT.vn.Helpers;
+using System.Configuration;
+using System.Web;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

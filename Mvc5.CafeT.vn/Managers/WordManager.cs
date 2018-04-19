@@ -1,10 +1,11 @@
-﻿using CafeT.Text;
-using CafeT.Translators;
-using Mvc5.CafeT.vn.Models;
+﻿using Mvc5.CafeT.vn.Models;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mvc5.CafeT.vn.Helpers;
+using CafeT.Translators;
+using CafeT.Text;
 
 namespace Mvc5.CafeT.vn.Managers
 {

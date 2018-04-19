@@ -71,6 +71,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.8.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -85,9 +88,6 @@
     </Reference>
     <Reference Include="Google.Apis.Auth, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth.Mvc, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.Mvc.1.32.2\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
@@ -105,6 +105,9 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.32.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis.Script.v1, Version=1.32.2.1201, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Script.v1.1.32.2.1201\lib\net45\Google.Apis.Script.v1.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis.Translate.v2, Version=1.32.2.875, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Translate.v2.1.32.2.875\lib\net45\Google.Apis.Translate.v2.dll</HintPath>
     </Reference>
@@ -113,6 +116,9 @@
     </Reference>
     <Reference Include="MariGold.HtmlParser, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MariGold.HtmlParser.1.0.1\lib\net35\MariGold.HtmlParser.dll</HintPath>
+    </Reference>
+    <Reference Include="MariGold.OpenXHTML, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MariGold.OpenXHTML.2.3.0\lib\net40\MariGold.OpenXHTML.dll</HintPath>
     </Reference>
     <Reference Include="MarkdownDeep">
       <HintPath>..\Projects\Mvc5\WorkCard\bin\MarkdownDeep.dll</HintPath>
@@ -129,6 +135,9 @@
     <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.WindowsServer, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
     </Reference>
@@ -144,10 +153,16 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.1\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Graph, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.1.8.1\lib\net45\Microsoft.Graph.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Graph.Core, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Graph.Core.1.8.1\lib\net45\Microsoft.Graph.Core.dll</HintPath>
     </Reference>
@@ -162,6 +177,9 @@
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.2.1\lib\net451\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.2.1\lib\net451\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.1\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
@@ -189,6 +207,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.4.0.0\lib\net451\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
@@ -224,6 +245,9 @@
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
     </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
@@ -239,6 +263,9 @@
       <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.1\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
     </Reference>
@@ -258,14 +285,8 @@
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
@@ -297,9 +318,6 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -380,7 +398,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\GoogleController.cs" />
     <Compile Include="Controllers\DashboardsController.cs" />
     <Compile Include="Controllers\InterviewModelsController.cs" />
@@ -390,6 +407,118 @@
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Managers\WordManager.cs" />
+    <Compile Include="Migrations\201709210701297_ChangeStatus.cs" />
+    <Compile Include="Migrations\201709210701297_ChangeStatus.Designer.cs">
+      <DependentUpon>201709210701297_ChangeStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710021957450_AddInterview.cs" />
+    <Compile Include="Migrations\201710021957450_AddInterview.Designer.cs">
+      <DependentUpon>201710021957450_AddInterview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710050840503_UpdateQuestions.cs" />
+    <Compile Include="Migrations\201710050840503_UpdateQuestions.Designer.cs">
+      <DependentUpon>201710050840503_UpdateQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710050856209_UpdateInterviews.cs" />
+    <Compile Include="Migrations\201710050856209_UpdateInterviews.Designer.cs">
+      <DependentUpon>201710050856209_UpdateInterviews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710051001446_UpdateInterviews1.cs" />
+    <Compile Include="Migrations\201710051001446_UpdateInterviews1.Designer.cs">
+      <DependentUpon>201710051001446_UpdateInterviews1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710060228543_UpdateIntervew.cs" />
+    <Compile Include="Migrations\201710060228543_UpdateIntervew.Designer.cs">
+      <DependentUpon>201710060228543_UpdateIntervew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710060335253_UpdateIntervew1.cs" />
+    <Compile Include="Migrations\201710060335253_UpdateIntervew1.Designer.cs">
+      <DependentUpon>201710060335253_UpdateIntervew1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710060815491_UpdateIntervew2.cs" />
+    <Compile Include="Migrations\201710060815491_UpdateIntervew2.Designer.cs">
+      <DependentUpon>201710060815491_UpdateIntervew2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710100806339_UpdateDb.cs" />
+    <Compile Include="Migrations\201710100806339_UpdateDb.Designer.cs">
+      <DependentUpon>201710100806339_UpdateDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710100811519_UpdateDb2.cs" />
+    <Compile Include="Migrations\201710100811519_UpdateDb2.Designer.cs">
+      <DependentUpon>201710100811519_UpdateDb2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710110249169_UpdateDb1.cs" />
+    <Compile Include="Migrations\201710110249169_UpdateDb1.Designer.cs">
+      <DependentUpon>201710110249169_UpdateDb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710110538175_UpdateDb4.cs" />
+    <Compile Include="Migrations\201710110538175_UpdateDb4.Designer.cs">
+      <DependentUpon>201710110538175_UpdateDb4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710221508024_ModifyDb.cs" />
+    <Compile Include="Migrations\201710221508024_ModifyDb.Designer.cs">
+      <DependentUpon>201710221508024_ModifyDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710221707509_UpdateDb5.cs" />
+    <Compile Include="Migrations\201710221707509_UpdateDb5.Designer.cs">
+      <DependentUpon>201710221707509_UpdateDb5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710231102580_UpdateDb6.cs" />
+    <Compile Include="Migrations\201710231102580_UpdateDb6.Designer.cs">
+      <DependentUpon>201710231102580_UpdateDb6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710241459443_UpdateDb7.cs" />
+    <Compile Include="Migrations\201710241459443_UpdateDb7.Designer.cs">
+      <DependentUpon>201710241459443_UpdateDb7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710250150017_UpdateDb8.cs" />
+    <Compile Include="Migrations\201710250150017_UpdateDb8.Designer.cs">
+      <DependentUpon>201710250150017_UpdateDb8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710291513386_UpdateBigModify.cs" />
+    <Compile Include="Migrations\201710291513386_UpdateBigModify.Designer.cs">
+      <DependentUpon>201710291513386_UpdateBigModify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711011549271_UpdateDb9.cs" />
+    <Compile Include="Migrations\201711011549271_UpdateDb9.Designer.cs">
+      <DependentUpon>201711011549271_UpdateDb9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711020737353_UpdateDb10.cs" />
+    <Compile Include="Migrations\201711020737353_UpdateDb10.Designer.cs">
+      <DependentUpon>201711020737353_UpdateDb10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711021421121_UpdateDb11.cs" />
+    <Compile Include="Migrations\201711021421121_UpdateDb11.Designer.cs">
+      <DependentUpon>201711021421121_UpdateDb11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031707411_UpdateWordModel.cs" />
+    <Compile Include="Migrations\201711031707411_UpdateWordModel.Designer.cs">
+      <DependentUpon>201711031707411_UpdateWordModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031727533_UpdateWordModel1.cs" />
+    <Compile Include="Migrations\201711031727533_UpdateWordModel1.Designer.cs">
+      <DependentUpon>201711031727533_UpdateWordModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130421492_UpdateDb12.cs" />
+    <Compile Include="Migrations\201711130421492_UpdateDb12.Designer.cs">
+      <DependentUpon>201711130421492_UpdateDb12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130646553_UpdateDb13.cs" />
+    <Compile Include="Migrations\201711130646553_UpdateDb13.Designer.cs">
+      <DependentUpon>201711130646553_UpdateDb13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711140306528_UpdateDb14.cs" />
+    <Compile Include="Migrations\201711140306528_UpdateDb14.Designer.cs">
+      <DependentUpon>201711140306528_UpdateDb14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711140418368_UpdateDb15.cs" />
+    <Compile Include="Migrations\201711140418368_UpdateDb15.Designer.cs">
+      <DependentUpon>201711140418368_UpdateDb15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804190315494_UpdateApplicationUser.cs" />
+    <Compile Include="Migrations\201804190315494_UpdateApplicationUser.Designer.cs">
+      <DependentUpon>201804190315494_UpdateApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ApplicationSetting.cs" />
     <Compile Include="Models\Articles\ArticleCollection.cs" />
     <Compile Include="Models\ExamModel.cs" />
@@ -405,6 +534,14 @@
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Managers\ArtilceCategoryManager.cs" />
     <Compile Include="Managers\AppSettingManager.cs" />
+    <Compile Include="Migrations\201709110322170_InitDb.cs" />
+    <Compile Include="Migrations\201709110322170_InitDb.Designer.cs">
+      <DependentUpon>201709110322170_InitDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709120214111_UpdateDb3.cs" />
+    <Compile Include="Migrations\201709120214111_UpdateDb3.Designer.cs">
+      <DependentUpon>201709120214111_UpdateDb3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Identity\AdminViewModel.cs" />
     <Compile Include="Models\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Models\Identity\ApplicationUserManager.cs" />
@@ -420,7 +557,6 @@
     <Compile Include="Controllers\CompanyModelsController.cs" />
     <Compile Include="Controllers\CuriculumsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
-    <Compile Include="Controllers\FileModelsController.cs" />
     <Compile Include="Controllers\ImageModelsController.cs" />
     <Compile Include="Controllers\IssuesController.cs" />
     <Compile Include="Controllers\JobModelsController.cs" />
@@ -521,6 +657,130 @@
     <Content Include="App_Data\Crawlers\Output\ThuVienVatLy.txt" />
     <Content Include="App_Data\Crawlers\Output\TinhTe.txt" />
     <Content Include="App_Data\Crawlers\Output\VMF.txt" />
+    <Content Include="Assets\Customizes\css\style.css" />
+    <Content Include="Assets\Customizes\images\arduino-lap.vn.gif" />
+    <Content Include="Assets\Customizes\images\arduino-lap.vn.png" />
+    <Content Include="Assets\Customizes\images\article_default.jpg" />
+    <Content Include="Assets\Customizes\images\avatar_default.png" />
+    <Content Include="Assets\Customizes\images\avatar_default_boy.png" />
+    <Content Include="Assets\Customizes\images\avatar_default_girl.png" />
+    <Content Include="Assets\Customizes\images\chuyen-hoa.gif" />
+    <Content Include="Assets\Customizes\images\chuyen-hoa.png" />
+    <Content Include="Assets\Customizes\images\chuyen-ly.gif" />
+    <Content Include="Assets\Customizes\images\chuyen-ly.png" />
+    <Content Include="Assets\Customizes\images\chuyen-tin.gif" />
+    <Content Include="Assets\Customizes\images\chuyen-tin.png" />
+    <Content Include="Assets\Customizes\images\chuyen-toan.gif" />
+    <Content Include="Assets\Customizes\images\chuyen-toan.png" />
+    <Content Include="Assets\Customizes\images\ebook-test.png" />
+    <Content Include="Assets\Customizes\images\ebook_default.jpg" />
+    <Content Include="Assets\Customizes\images\job_default.jpg" />
+    <Content Include="Assets\Customizes\images\MicroHome.png" />
+    <Content Include="Assets\Templates\Techmag\css\bbpress.css" />
+    <Content Include="Assets\Templates\Techmag\css\bootstrap.css" />
+    <Content Include="Assets\Templates\Techmag\css\custom.css" />
+    <Content Include="Assets\Templates\Techmag\css\flexslider.css" />
+    <Content Include="Assets\Templates\Techmag\css\font-awesome.min.css" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfont3295-2.html" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfont3295.html" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfont3295.svg" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular-2.html" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.html" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-114x114.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-120x120.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-144x144.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-152x152.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-57x57.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-72x72.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon-76x76.png" />
+    <Content Include="Assets\Templates\Techmag\images\apple-touch-icon.png" />
+    <Content Include="Assets\Templates\Techmag\images\avatar.png" />
+    <Content Include="Assets\Templates\Techmag\images\favicon.ico" />
+    <Content Include="Assets\Templates\Techmag\images\image-404.jpg" />
+    <Content Include="Assets\Templates\Techmag\images\logo.png" />
+    <Content Include="Assets\Templates\Techmag\js\bootstrap.js" />
+    <Content Include="Assets\Templates\Techmag\js\jquery.flexslider.js" />
+    <Content Include="Assets\Templates\Techmag\js\jquery.min.js" />
+    <Content Include="Assets\Templates\Techmag\js\map.js" />
+    <Content Include="Assets\Templates\Techmag\js\plugins.js" />
+    <Content Include="Assets\Templates\Techmag\style.css" />
+    <Content Include="Assets\Templates\Techmag\upload\avatar_01.png" />
+    <Content Include="Assets\Templates\Techmag\upload\avatar_02.png" />
+    <Content Include="Assets\Templates\Techmag\upload\avatar_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\avatar_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\avatar_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\banner_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\banner_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\banner_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_06.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_07.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_08.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_09.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\big_news_10.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\carrer_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\carrer_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\carrer_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\carrer_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\job.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\jobbg.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\job_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\job_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\job_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\job_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\mini_widget_06.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_06.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_07.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\news_08.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\reviewbg.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_06.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_07.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_08.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_09.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_10.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_11.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_12.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_mini_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\review_mini_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\single.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\team_01.html" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_01.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_02.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_03.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_04.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_05.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_06.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_07.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_08.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_09.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_10.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_11.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_12.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_13.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_14.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_15.jpg" />
+    <Content Include="Assets\Templates\Techmag\upload\widget_16.jpg" />
     <Content Include="Content\avatar\border-anim-h.gif" />
     <Content Include="Content\avatar\border-anim-v.gif" />
     <Content Include="Content\avatar\border-h.gif" />
@@ -560,6 +820,12 @@
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\avatar\jquery.awesome-cropper.js" />
     <Content Include="Scripts\avatar\jquery.imgareaselect.js" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfont3295.eot" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfont3295.woff" />
+    <Content Include="Assets\Templates\Techmag\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="LICENSE.md" />
     <Content Include="App_Code\client_secrets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -997,6 +1263,10 @@
     <Content Include="Scripts\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -1005,11 +1275,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1474,6 +1739,98 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709110322170_InitDb.resx">
+      <DependentUpon>201709110322170_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709120214111_UpdateDb3.resx">
+      <DependentUpon>201709120214111_UpdateDb3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709210701297_ChangeStatus.resx">
+      <DependentUpon>201709210701297_ChangeStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021957450_AddInterview.resx">
+      <DependentUpon>201710021957450_AddInterview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710050840503_UpdateQuestions.resx">
+      <DependentUpon>201710050840503_UpdateQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710050856209_UpdateInterviews.resx">
+      <DependentUpon>201710050856209_UpdateInterviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710051001446_UpdateInterviews1.resx">
+      <DependentUpon>201710051001446_UpdateInterviews1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710060228543_UpdateIntervew.resx">
+      <DependentUpon>201710060228543_UpdateIntervew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710060335253_UpdateIntervew1.resx">
+      <DependentUpon>201710060335253_UpdateIntervew1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710060815491_UpdateIntervew2.resx">
+      <DependentUpon>201710060815491_UpdateIntervew2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100806339_UpdateDb.resx">
+      <DependentUpon>201710100806339_UpdateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100811519_UpdateDb2.resx">
+      <DependentUpon>201710100811519_UpdateDb2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710110249169_UpdateDb1.resx">
+      <DependentUpon>201710110249169_UpdateDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710110538175_UpdateDb4.resx">
+      <DependentUpon>201710110538175_UpdateDb4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710221508024_ModifyDb.resx">
+      <DependentUpon>201710221508024_ModifyDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710221707509_UpdateDb5.resx">
+      <DependentUpon>201710221707509_UpdateDb5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710231102580_UpdateDb6.resx">
+      <DependentUpon>201710231102580_UpdateDb6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710241459443_UpdateDb7.resx">
+      <DependentUpon>201710241459443_UpdateDb7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710250150017_UpdateDb8.resx">
+      <DependentUpon>201710250150017_UpdateDb8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710291513386_UpdateBigModify.resx">
+      <DependentUpon>201710291513386_UpdateBigModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711011549271_UpdateDb9.resx">
+      <DependentUpon>201711011549271_UpdateDb9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711020737353_UpdateDb10.resx">
+      <DependentUpon>201711020737353_UpdateDb10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021421121_UpdateDb11.resx">
+      <DependentUpon>201711021421121_UpdateDb11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031707411_UpdateWordModel.resx">
+      <DependentUpon>201711031707411_UpdateWordModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031727533_UpdateWordModel1.resx">
+      <DependentUpon>201711031727533_UpdateWordModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130421492_UpdateDb12.resx">
+      <DependentUpon>201711130421492_UpdateDb12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130646553_UpdateDb13.resx">
+      <DependentUpon>201711130646553_UpdateDb13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711140306528_UpdateDb14.resx">
+      <DependentUpon>201711140306528_UpdateDb14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711140418368_UpdateDb15.resx">
+      <DependentUpon>201711140418368_UpdateDb15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804190315494_UpdateApplicationUser.resx">
+      <DependentUpon>201804190315494_UpdateApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
@@ -1516,9 +1873,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

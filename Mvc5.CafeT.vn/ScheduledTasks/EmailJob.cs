@@ -1,12 +1,17 @@
 ﻿using Mvc5.CafeT.vn.Models;
+using Mvc5.CafeT.vn.Services;
 using Quartz;
+using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Mvc5.CafeT.vn.ScheduledTasks
-{
+{    
     public class EmailJob : IJob
     {
         protected EmailService Service;

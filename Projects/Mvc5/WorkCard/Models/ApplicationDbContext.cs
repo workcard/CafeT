@@ -14,6 +14,7 @@ namespace Web.Models
         }
 
         public DbSet<WorkIssue> Issues { get; set; }
+        public DbSet<Article> Articles { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -74,6 +75,6 @@ namespace Web.Models
             }
         }
 
-        public System.Data.Entity.DbSet<Web.ModelViews.IssueView> IssueViews { get; set; }
+        //public System.Data.Entity.DbSet<Web.ModelViews.IssueView> IssueViews { get; set; }
     }
 }
