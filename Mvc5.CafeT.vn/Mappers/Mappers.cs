@@ -1,12 +1,12 @@
-﻿using Mvc5.CafeT.vn.ModelViews;
-using System.Collections.Generic;
-using System.Linq;
-using CafeT.Text;
+﻿using CafeT.Text;
 using Mvc5.CafeT.vn.Managers;
 using Mvc5.CafeT.vn.Models;
-using Repository.Pattern.UnitOfWork;
+using Mvc5.CafeT.vn.ModelViews;
 using Mvc5.CafeT.vn.Services;
+using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Mappers
 {

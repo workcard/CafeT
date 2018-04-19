@@ -1,10 +1,6 @@
-﻿using Mvc5.CafeT.vn.Mappers;
-using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.ModelViews;
-using Mvc5.CafeT.vn.ScheduledTasks;
+﻿using Mvc5.CafeT.vn.ScheduledTasks;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;

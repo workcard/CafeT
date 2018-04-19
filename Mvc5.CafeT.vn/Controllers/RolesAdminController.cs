@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Mvc5.CafeT.vn.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Collections.Generic;
-using Mvc5.CafeT.vn.Models;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

@@ -1,4 +1,9 @@
-﻿<div class="widget">
+﻿<script type="text/javascript">
+        $.get('@Url.Action("GetUserProfile", "Home", null)', function (data) {
+            $('#Profile').html(data);
+        });
+</script>
+<div class="widget">
     <div class="widget-title">
         <h4>Tài khoản</h4>
         <hr>
@@ -6,6 +11,7 @@
     <div class="mini-widget carrier-widget m30" style="text-align: center">
         @RenderPage("~/Views/Shared/Account/_LoginPartial.cshtml")
     </div><!-- end social -->
+    <div id="Profile"></div>
 </div>
 @RenderPage("~/Views/Shared/Templates/_Left-PageFacebook.cshtml")
 

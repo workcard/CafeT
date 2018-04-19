@@ -5,8 +5,9 @@
     ViewBag.Title = "Quản lý tài khoản";
 }
 <script type="text/javascript">
-        $.get('@Url.Action("GetAllUnPublishedByUser", "Articles", new { view="Articles/_ArticleTitles" } )', function (data) {
-            $('#UnPublishArticles').html(data);
+    $.get('@Url.Action("GetAllUnPublishedByUser", "Articles", new { view="Articles/_ArticleTitles" } )',
+        function (data) {
+            $('#Update-List').html(data);
         });
 </script>
 <script type="text/javascript">
@@ -38,24 +39,33 @@
                 <div class="container-fluid">
                     @Html.Partial("_UserProfile", (ApplicationUser)ViewBag.User)
                 </div>
-                <div id="Update" class="container-fluid">
+                @*<div id="Update" class="container-fluid">
                     @Html.Partial("_UserInformation", (ApplicationUser)ViewBag.User)
-                </div>
+                </div>*@
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#">Bài viết</a></li>
-                    <li role="presentation">
-                        <a href="#">Chưa duyệt
-                            <span class="badge">42</span>
-                        </a>
+                    <li class="nav-item">
+                        @Ajax.ActionLink("Articles (Đã xuất bản)", "GetAllPublished", "Articles", null,
+                          new AjaxOptions
+                          {
+                              UpdateTargetId = "Update-List",
+                              InsertionMode = InsertionMode.Replace,
+                              HttpMethod = "Post"
+                          }, null)
                     </li>
-                    <li role="presentation">
-                        <a href="#">Đã duyệt</a>
+                    <li class="nav-item">
+                        @Ajax.ActionLink("Articles (Chưa xuất bản)", "GetAllUnPublished", "Articles", null,
+                          new AjaxOptions
+                          {
+                              UpdateTargetId = "Update-List",
+                              InsertionMode = InsertionMode.Replace,
+                              HttpMethod = "Post"
+                          }, null)
                     </li>
                 </ul>
-                <div id="UnPublishArticles"></div>
-                <div id="Questions"></div>
+                <div id="Update-List"></div>
             </div>
-            
-        </div><!-- end review-post -->
-    </div><!-- end widget -->
+        </div>
+    </div>
+   
+    <div id="Questions"></div>
 </div><!-- end col -->

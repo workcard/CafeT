@@ -1,58 +1,21 @@
-﻿using System.Web.Mvc;
-using Repository.Pattern.UnitOfWork;
-using System.Linq;
-using Mvc5.CafeT.vn.ModelViews;
-using System.Collections.Generic;
-using CafeT.Enumerable;
+﻿using CafeT.Enumerable;
 using Mvc5.CafeT.vn.Models;
+using Mvc5.CafeT.vn.ModelViews;
 using PagedList;
+using Repository.Pattern.UnitOfWork;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using CafeT.GoogleServices;
-using System;
+using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers
 {
-    
     public class HomeController : BaseController
     {
-        private string UserName { set; get; } = "taipm.vn@gmail.com";
+        //private string UserName { set; get; } = "taipm.vn@gmail.com";
         public HomeController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {            
         }
-
-        //public async Task<ActionResult> ReadDoc(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/AppScripts.json");
-        //    var files = service.ReadGoogleDoc(string.Empty);
-            
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Files/_Files", files));
-        //    }
-        //    return View("Files/_Files", files);
-        //}
-
-        //public async Task<ActionResult> GetNewFilesAsync(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(n).Result.TakeMax(n);
-        //    List<FileModel> list = new List<FileModel>();
-        //    if(files != null && files.Count()>0)
-        //    {
-        //        foreach(var file in files)
-        //        {
-        //            FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
-        //            list.Add(fileModel);
-        //        }
-        //    }
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Files/_Files", list));
-        //    }
-        //    return View("Files/_Files", list);
-        //}
 
         public ActionResult Index()
         {

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- SITE META -->
-    <title>@ViewBag.Title</title>
+    <title>ChuyenTin.vn - Đam mê tin học</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -68,16 +68,16 @@
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-    @RenderPage("~/Views/Shared/Templates/_Social.cshtml")
+    @RenderPage("~/Views/Shared/Layouts/_Social.cshtml")
     <div id="wrapper">
-        @RenderPage("~/Views/Shared/Templates/_Top.cshtml")
-        @RenderPage("~/Views/Shared/Templates/_Menu.cshtml")
+        @RenderPage("~/Views/Shared/Layouts/_Top.cshtml")
+        @RenderPage("~/Views/Shared/Layouts/_Menu.cshtml")
         <div class="container sitecontainer bgw">
             <div class="row">
                 @RenderBody()
             </div>
         </div>
-        @RenderPage("~/Views/Shared/Templates/_Footer.cshtml")
+        @RenderPage("~/Views/Shared/Layouts/_Footer.cshtml")
     </div>
     <!-- END SITE -->
    

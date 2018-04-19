@@ -2,9 +2,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @Html.Raw(@User.Identity.Name)
-    <hr />
-    @Html.Raw("Đã thuộc: " + Model.CountOfRemembered) <br />
-    @Html.Raw("Chưa thuộc: " + Model.CountOfNewWords)
-    <div id="Dashboard"></div>
+
+    @Html.Raw("Đã thuộc: ")
+    <span class="badge badge-success">@Model.CountOfRemembered</span>
+    <br />
+    @Html.Raw("Từ mới: ")
+    <span class="badge badge-danger">@Model.CountOfNewWords</span>
 }

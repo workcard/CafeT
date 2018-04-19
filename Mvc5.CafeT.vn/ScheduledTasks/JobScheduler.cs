@@ -1,9 +1,4 @@
-﻿using Mvc5.CafeT.vn.Models;
-using Quartz;
-using Quartz.Impl;
-using System.Linq;
-
-namespace Mvc5.CafeT.vn.ScheduledTasks
+﻿namespace Mvc5.CafeT.vn.ScheduledTasks
 {
     public static class JobScheduler
     {

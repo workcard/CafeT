@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using System.Net;
-using System.Web.Mvc;
+﻿using Microsoft.AspNet.Identity;
 using Mvc5.CafeT.vn.Models;
 using Repository.Pattern.UnitOfWork;
-using Microsoft.AspNet.Identity;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

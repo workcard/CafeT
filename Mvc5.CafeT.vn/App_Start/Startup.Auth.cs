@@ -96,18 +96,13 @@
 
 
 //using Calendar.ASP.NET.MVC5;
-using Google.Apis.Auth.OAuth2.Responses;
-using Google.Apis.Util.Store;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Mvc5.CafeT.vn.Models;
 using Owin;
 using System;
-using System.Security.Claims;
-using Mvc5.CafeT.vn.Models;
 
 namespace Mvc5.CafeT.vn
 {

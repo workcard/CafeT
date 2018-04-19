@@ -1,16 +1,15 @@
-﻿using CafeT.Text;
-using CafeT.SmartObjects;
+﻿using CafeT.Enumerable;
+using CafeT.Html;
+using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
 using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using CafeT.Html;
 using System.Drawing;
 using System.Drawing.Imaging;
-using CafeT.Enumerable;
+using System.IO;
+using System.Linq;
 
 namespace Mvc5.CafeT.vn.Managers
 {
@@ -76,6 +75,7 @@ namespace Mvc5.CafeT.vn.Managers
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
         }
+
         public IEnumerable<ArticleModel> GetAllUnPublished()
         {
             var _articles = _articleService.GetAll()
@@ -130,14 +130,6 @@ namespace Mvc5.CafeT.vn.Managers
         {
             List<string> _strs = new List<string>();
             var _tags = _articleService.GetAllTags();
-            //foreach(string _tag in _tags)
-            //{
-            //    if(!_tag.IsNullOrEmptyOrWhiteSpace())
-            //    {
-            //        var _words = new SmartText(_tag).Words.Select(t => t.Value);
-            //        _strs.AddRange(_words);
-            //    }
-            //}
             return _strs.Distinct();
         }
         
@@ -146,7 +138,7 @@ namespace Mvc5.CafeT.vn.Managers
             var _article = _articleService.GetById(id);            
             return _article;
         }
-
+        
         //public List<string> Process(Guid id)
         //{
         //    List<string> _objects = new List<string>();
@@ -233,7 +225,8 @@ namespace Mvc5.CafeT.vn.Managers
 
         public ArticleModel GetToView(Guid id, string userView)
         {
-            var _article = _articleService.GetById(id);
+            var _article = _unitOfWorkAsync.RepositoryAsync<ArticleModel>().
+                Find(id);
             _article.ToView(userView);
             Update(_article);
             return _article;
@@ -241,7 +234,8 @@ namespace Mvc5.CafeT.vn.Managers
 
         public bool Update(ArticleModel article)
         {
-            _articleService.Update(article);
+            _unitOfWorkAsync.RepositoryAsync<ArticleModel>().
+                Update(article);
             try
             {
                 _unitOfWorkAsync.SaveChanges();

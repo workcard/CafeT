@@ -25,7 +25,7 @@ else if (!Model.AvatarPath.IsNullOrEmptyOrWhiteSpace())
     </p>
 }
 <p>
-    @*@Html.Partial("Articles/_ArticleFooter", Model)*@
+    @Html.Partial("Articles/_ArticleMenu", Model)
 </p>
 <div id="LastComment-@Model.Id.ToString()"></div>
 

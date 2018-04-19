@@ -398,6 +398,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\FileModelsController.cs" />
     <Compile Include="Controllers\GoogleController.cs" />
     <Compile Include="Controllers\DashboardsController.cs" />
     <Compile Include="Controllers\InterviewModelsController.cs" />
@@ -407,118 +408,6 @@
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Managers\WordManager.cs" />
-    <Compile Include="Migrations\201709210701297_ChangeStatus.cs" />
-    <Compile Include="Migrations\201709210701297_ChangeStatus.Designer.cs">
-      <DependentUpon>201709210701297_ChangeStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710021957450_AddInterview.cs" />
-    <Compile Include="Migrations\201710021957450_AddInterview.Designer.cs">
-      <DependentUpon>201710021957450_AddInterview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710050840503_UpdateQuestions.cs" />
-    <Compile Include="Migrations\201710050840503_UpdateQuestions.Designer.cs">
-      <DependentUpon>201710050840503_UpdateQuestions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710050856209_UpdateInterviews.cs" />
-    <Compile Include="Migrations\201710050856209_UpdateInterviews.Designer.cs">
-      <DependentUpon>201710050856209_UpdateInterviews.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710051001446_UpdateInterviews1.cs" />
-    <Compile Include="Migrations\201710051001446_UpdateInterviews1.Designer.cs">
-      <DependentUpon>201710051001446_UpdateInterviews1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710060228543_UpdateIntervew.cs" />
-    <Compile Include="Migrations\201710060228543_UpdateIntervew.Designer.cs">
-      <DependentUpon>201710060228543_UpdateIntervew.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710060335253_UpdateIntervew1.cs" />
-    <Compile Include="Migrations\201710060335253_UpdateIntervew1.Designer.cs">
-      <DependentUpon>201710060335253_UpdateIntervew1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710060815491_UpdateIntervew2.cs" />
-    <Compile Include="Migrations\201710060815491_UpdateIntervew2.Designer.cs">
-      <DependentUpon>201710060815491_UpdateIntervew2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710100806339_UpdateDb.cs" />
-    <Compile Include="Migrations\201710100806339_UpdateDb.Designer.cs">
-      <DependentUpon>201710100806339_UpdateDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710100811519_UpdateDb2.cs" />
-    <Compile Include="Migrations\201710100811519_UpdateDb2.Designer.cs">
-      <DependentUpon>201710100811519_UpdateDb2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710110249169_UpdateDb1.cs" />
-    <Compile Include="Migrations\201710110249169_UpdateDb1.Designer.cs">
-      <DependentUpon>201710110249169_UpdateDb1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710110538175_UpdateDb4.cs" />
-    <Compile Include="Migrations\201710110538175_UpdateDb4.Designer.cs">
-      <DependentUpon>201710110538175_UpdateDb4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221508024_ModifyDb.cs" />
-    <Compile Include="Migrations\201710221508024_ModifyDb.Designer.cs">
-      <DependentUpon>201710221508024_ModifyDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221707509_UpdateDb5.cs" />
-    <Compile Include="Migrations\201710221707509_UpdateDb5.Designer.cs">
-      <DependentUpon>201710221707509_UpdateDb5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710231102580_UpdateDb6.cs" />
-    <Compile Include="Migrations\201710231102580_UpdateDb6.Designer.cs">
-      <DependentUpon>201710231102580_UpdateDb6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710241459443_UpdateDb7.cs" />
-    <Compile Include="Migrations\201710241459443_UpdateDb7.Designer.cs">
-      <DependentUpon>201710241459443_UpdateDb7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710250150017_UpdateDb8.cs" />
-    <Compile Include="Migrations\201710250150017_UpdateDb8.Designer.cs">
-      <DependentUpon>201710250150017_UpdateDb8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710291513386_UpdateBigModify.cs" />
-    <Compile Include="Migrations\201710291513386_UpdateBigModify.Designer.cs">
-      <DependentUpon>201710291513386_UpdateBigModify.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711011549271_UpdateDb9.cs" />
-    <Compile Include="Migrations\201711011549271_UpdateDb9.Designer.cs">
-      <DependentUpon>201711011549271_UpdateDb9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711020737353_UpdateDb10.cs" />
-    <Compile Include="Migrations\201711020737353_UpdateDb10.Designer.cs">
-      <DependentUpon>201711020737353_UpdateDb10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711021421121_UpdateDb11.cs" />
-    <Compile Include="Migrations\201711021421121_UpdateDb11.Designer.cs">
-      <DependentUpon>201711021421121_UpdateDb11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711031707411_UpdateWordModel.cs" />
-    <Compile Include="Migrations\201711031707411_UpdateWordModel.Designer.cs">
-      <DependentUpon>201711031707411_UpdateWordModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711031727533_UpdateWordModel1.cs" />
-    <Compile Include="Migrations\201711031727533_UpdateWordModel1.Designer.cs">
-      <DependentUpon>201711031727533_UpdateWordModel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711130421492_UpdateDb12.cs" />
-    <Compile Include="Migrations\201711130421492_UpdateDb12.Designer.cs">
-      <DependentUpon>201711130421492_UpdateDb12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711130646553_UpdateDb13.cs" />
-    <Compile Include="Migrations\201711130646553_UpdateDb13.Designer.cs">
-      <DependentUpon>201711130646553_UpdateDb13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711140306528_UpdateDb14.cs" />
-    <Compile Include="Migrations\201711140306528_UpdateDb14.Designer.cs">
-      <DependentUpon>201711140306528_UpdateDb14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711140418368_UpdateDb15.cs" />
-    <Compile Include="Migrations\201711140418368_UpdateDb15.Designer.cs">
-      <DependentUpon>201711140418368_UpdateDb15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804190315494_UpdateApplicationUser.cs" />
-    <Compile Include="Migrations\201804190315494_UpdateApplicationUser.Designer.cs">
-      <DependentUpon>201804190315494_UpdateApplicationUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\ApplicationSetting.cs" />
     <Compile Include="Models\Articles\ArticleCollection.cs" />
     <Compile Include="Models\ExamModel.cs" />
@@ -534,14 +423,6 @@
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Managers\ArtilceCategoryManager.cs" />
     <Compile Include="Managers\AppSettingManager.cs" />
-    <Compile Include="Migrations\201709110322170_InitDb.cs" />
-    <Compile Include="Migrations\201709110322170_InitDb.Designer.cs">
-      <DependentUpon>201709110322170_InitDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709120214111_UpdateDb3.cs" />
-    <Compile Include="Migrations\201709120214111_UpdateDb3.Designer.cs">
-      <DependentUpon>201709120214111_UpdateDb3.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Identity\AdminViewModel.cs" />
     <Compile Include="Models\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Models\Identity\ApplicationUserManager.cs" />
@@ -705,82 +586,6 @@
     <Content Include="Assets\Templates\Techmag\js\map.js" />
     <Content Include="Assets\Templates\Techmag\js\plugins.js" />
     <Content Include="Assets\Templates\Techmag\style.css" />
-    <Content Include="Assets\Templates\Techmag\upload\avatar_01.png" />
-    <Content Include="Assets\Templates\Techmag\upload\avatar_02.png" />
-    <Content Include="Assets\Templates\Techmag\upload\avatar_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\avatar_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\avatar_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\banner_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\banner_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\banner_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_06.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_07.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_08.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_09.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\big_news_10.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\carrer_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\carrer_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\carrer_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\carrer_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\job.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\jobbg.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\job_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\job_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\job_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\job_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\mini_widget_06.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_06.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_07.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\news_08.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\reviewbg.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_06.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_07.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_08.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_09.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_10.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_11.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_12.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_mini_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\review_mini_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\single.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\team_01.html" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_01.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_02.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_03.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_04.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_05.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_06.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_07.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_08.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_09.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_10.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_11.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_12.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_13.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_14.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_15.jpg" />
-    <Content Include="Assets\Templates\Techmag\upload\widget_16.jpg" />
     <Content Include="Content\avatar\border-anim-h.gif" />
     <Content Include="Content\avatar\border-anim-v.gif" />
     <Content Include="Content\avatar\border-h.gif" />
@@ -1275,6 +1080,8 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1343,6 +1150,7 @@
     <Content Include="Scripts\SyntaxHighlighter\shCore.js" />
     <Content Include="Scripts\SyntaxHighlighter\shLegacy.js" />
     <Content Include="Temp\Capture.PNG" />
+    <Content Include="Views\Shared\Account\_UserProfile.cshtml" />
     <Content Include="Views\Shared\Questions\_QuestionsForHome.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1549,28 +1357,12 @@
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\_EditUserProfile.cshtml" />
     <Content Include="Views\Shared\Articles\_ArticleInfo.cshtml" />
-    <Content Include="Views\Shared\_UserArticles.cshtml" />
-    <Content Include="Views\Shared\_UserQuestions.cshtml" />
-    <Content Include="Views\Shared\_UserComments.cshtml" />
-    <Content Include="Views\Shared\_UserIssues.cshtml" />
     <Content Include="Views\Shared\Articles\_ArticleAuthors.cshtml" />
-    <Content Include="Views\Shared\Templates\_AdsNews.cshtml" />
-    <Content Include="Views\Shared\Templates\_Footer.cshtml" />
-    <Content Include="Views\Shared\Templates\_Header.cshtml" />
-    <Content Include="Views\Shared\Templates\_Left.cshtml" />
-    <Content Include="Views\Shared\Templates\_Menu.cshtml" />
-    <Content Include="Views\Shared\Templates\_Top.cshtml" />
-    <Content Include="Views\Shared\Templates\_Left-Follow.cshtml" />
-    <Content Include="Views\Shared\Templates\_Left-Activities.cshtml" />
-    <Content Include="Views\Shared\Templates\_Left-Ads.cshtml" />
-    <Content Include="Views\Shared\Templates\_Social.cshtml" />
-    <Content Include="Views\Shared\Templates\_Left-PageFacebook.cshtml" />
     <Content Include="Views\Shared\Files\_Files-Items.cshtml" />
     <Content Include="Views\Shared\_Jobs-Items.cshtml" />
     <Content Include="Views\Shared\_Jobs-Box.cshtml" />
     <Content Include="Views\FileModels\Create.cshtml" />
     <Content Include="Views\Shared\Files\_Files-Box.cshtml" />
-    <Content Include="Views\Manage\_UserInformation.cshtml" />
     <Content Include="Views\Shared\Articles\_Articles.cshtml" />
     <Content Include="Views\Shared\Comments\_Comments-Box.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
@@ -1608,14 +1400,8 @@
     <Content Include="Views\Shared\Messages\_Published.cshtml" />
     <Content Include="Views\Shared\Messages\_Menus.cshtml" />
     <Content Include="Views\Shared\Articles\_ArticleFooter.cshtml" />
-    <Content Include="Views\Shared\Articles\_Item.cshtml" />
-    <Content Include="Views\Shared\Articles\_Items.cshtml" />
-    <Content Include="Views\Shared\Articles\_ItemMenu.cshtml" />
-    <Content Include="Views\Shared\Articles\_ItemInfo.cshtml" />
     <Content Include="Views\Shared\Articles\_ArticleHeader.cshtml" />
-    <Content Include="Views\Shared\Articles\_ItemFooter.cshtml" />
     <Content Include="Views\Shared\Components\_List.cshtml" />
-    <Content Include="Views\Shared\Templates\_Table.cshtml" />
     <Content Include="Views\Shared\Layouts\_AdsNews.cshtml" />
     <Content Include="Views\Shared\Layouts\_Footer.cshtml" />
     <Content Include="Views\Shared\Layouts\_Header.cshtml" />
@@ -1654,7 +1440,6 @@
     <Content Include="Views\Shared\Words\_NewWords.cshtml" />
     <Content Include="Views\Shared\Articles\_ByAuthors.cshtml" />
     <Content Include="Views\Shared\Messages\_GoogleResults.cshtml" />
-    <Content Include="Views\Shared\Account\_UserProfile.cshtml" />
     <Content Include="Views\Shared\Messages\_GoogleImageResults.cshtml" />
     <Content Include="Views\Shared\Messages\_GoogleView.cshtml" />
     <Content Include="Views\Shared\Articles\_AddAvatar.cshtml" />
@@ -1737,98 +1522,6 @@
       <Project>{96608CDD-C8BD-407B-8C18-6A242350337D}</Project>
       <Name>Service.Pattern</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709110322170_InitDb.resx">
-      <DependentUpon>201709110322170_InitDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709120214111_UpdateDb3.resx">
-      <DependentUpon>201709120214111_UpdateDb3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709210701297_ChangeStatus.resx">
-      <DependentUpon>201709210701297_ChangeStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710021957450_AddInterview.resx">
-      <DependentUpon>201710021957450_AddInterview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710050840503_UpdateQuestions.resx">
-      <DependentUpon>201710050840503_UpdateQuestions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710050856209_UpdateInterviews.resx">
-      <DependentUpon>201710050856209_UpdateInterviews.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710051001446_UpdateInterviews1.resx">
-      <DependentUpon>201710051001446_UpdateInterviews1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710060228543_UpdateIntervew.resx">
-      <DependentUpon>201710060228543_UpdateIntervew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710060335253_UpdateIntervew1.resx">
-      <DependentUpon>201710060335253_UpdateIntervew1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710060815491_UpdateIntervew2.resx">
-      <DependentUpon>201710060815491_UpdateIntervew2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710100806339_UpdateDb.resx">
-      <DependentUpon>201710100806339_UpdateDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710100811519_UpdateDb2.resx">
-      <DependentUpon>201710100811519_UpdateDb2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710110249169_UpdateDb1.resx">
-      <DependentUpon>201710110249169_UpdateDb1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710110538175_UpdateDb4.resx">
-      <DependentUpon>201710110538175_UpdateDb4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221508024_ModifyDb.resx">
-      <DependentUpon>201710221508024_ModifyDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221707509_UpdateDb5.resx">
-      <DependentUpon>201710221707509_UpdateDb5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710231102580_UpdateDb6.resx">
-      <DependentUpon>201710231102580_UpdateDb6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710241459443_UpdateDb7.resx">
-      <DependentUpon>201710241459443_UpdateDb7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710250150017_UpdateDb8.resx">
-      <DependentUpon>201710250150017_UpdateDb8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710291513386_UpdateBigModify.resx">
-      <DependentUpon>201710291513386_UpdateBigModify.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711011549271_UpdateDb9.resx">
-      <DependentUpon>201711011549271_UpdateDb9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711020737353_UpdateDb10.resx">
-      <DependentUpon>201711020737353_UpdateDb10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711021421121_UpdateDb11.resx">
-      <DependentUpon>201711021421121_UpdateDb11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031707411_UpdateWordModel.resx">
-      <DependentUpon>201711031707411_UpdateWordModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031727533_UpdateWordModel1.resx">
-      <DependentUpon>201711031727533_UpdateWordModel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711130421492_UpdateDb12.resx">
-      <DependentUpon>201711130421492_UpdateDb12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711130646553_UpdateDb13.resx">
-      <DependentUpon>201711130646553_UpdateDb13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711140306528_UpdateDb14.resx">
-      <DependentUpon>201711140306528_UpdateDb14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711140418368_UpdateDb15.resx">
-      <DependentUpon>201711140418368_UpdateDb15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804190315494_UpdateApplicationUser.resx">
-      <DependentUpon>201804190315494_UpdateApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

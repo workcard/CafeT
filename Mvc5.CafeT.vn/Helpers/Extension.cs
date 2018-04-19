@@ -1,14 +1,12 @@
 ﻿using Common.Logging.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.DirectoryServices.AccountManagement;
 
 namespace Mvc5.CafeT.vn.Helpers
 {

@@ -9,9 +9,6 @@
     }
 }
 
-@*<link href="~/Content/avatar/imgareaselect-default.css" rel="stylesheet" />
-<link href="~/Content/avatar/jquery.awesome-cropper.css" rel="stylesheet" />*@
-
 <div class="media-left">
     <div class="media-left">
         <a href="javascript:void(0);">
@@ -26,46 +23,14 @@
     </div>
    
 </div>
-@*<div>
-    <form role="form" method="post" action="/Manage/UploadAvatar">
-        <input id="image" type="image" name="imageBase">
-        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu</button>
-    </form>
-</div>
-<p><a href="#" id="hl-crop-image">Lưu</a></p>
-<img id="my-cropped-image" src="#" style="display:none;" />*@
-@*<p>
-    <img id="my-origin-image" src="~/Images/funny_cat_v1.jpg" />
-</p>*@
+
 @using (Html.BeginForm("CropImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <label for="file">Upload Image:</label>
     <input type="file" name="file" id="file" style="width: 100%;" />
     <input type="submit" value="Upload" class="submit" />
 }
-@*<script src="~/Scripts/avatar/jquery.imgareaselect.js"></script>
-<script src="~/Scripts/avatar/jquery.awesome-cropper.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#imageBase').awesomeCropper(
-        { width: 110, height: 110, debug: true }
-        );
-    });
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>*@
 @section scripts{
 
     <script type="text/javascript">

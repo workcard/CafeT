@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using CafeT.GoogleManager;
 using Repository.Pattern.UnitOfWork;
 using System.Linq;
-using CafeT.GoogleManager;
+using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

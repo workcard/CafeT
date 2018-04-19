@@ -1,19 +1,19 @@
-﻿using Mvc5.CafeT.vn.Models;
-using Repository.Pattern.UnitOfWork;
-using System;
-using System.Linq;
-using System.Web.Mvc;
-using Mvc5.CafeT.vn.ModelViews;
-using CafeT.Text;
-using PagedList;
-using System.Collections.Generic;
-using Mvc5.CafeT.vn.Services;
-using CafeT.BusinessObjects;
+﻿using CafeT.BusinessObjects;
 using CafeT.Enumerable;
-using CafeT.SmartObjects;
 using CafeT.Html;
 using CafeT.Objects;
+using CafeT.SmartObjects;
+using CafeT.Text;
+using Mvc5.CafeT.vn.Models;
+using Mvc5.CafeT.vn.ModelViews;
+using Mvc5.CafeT.vn.Services;
+using PagedList;
+using Repository.Pattern.UnitOfWork;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 
 namespace Mvc5.CafeT.vn.Controllers
@@ -48,6 +48,13 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             List<ArticleModel> models = new List<ArticleModel>();
             models = _articleManager.GetAllUnPublished().ToList();
+            if(User.Identity.IsAuthenticated)
+            {
+                if (!User.IsInRole("Admin"))
+                {
+                    models = models.Where(t => t.IsOf(User.Identity.Name)).ToList();
+                }
+            }
             var _views = _mapper.ToViews(models);
 
             if (Request.IsAjaxRequest())
@@ -77,7 +84,6 @@ namespace Mvc5.CafeT.vn.Controllers
             return View("Articles/_Articles", _views.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
         }
 
-        // GET: Articles
         public ActionResult GetQuestions(Guid articleId)
         {
             var _objects = _articleManager.GetQuestions(articleId).ToList();
@@ -387,11 +393,10 @@ namespace Mvc5.CafeT.vn.Controllers
             return new SelectList(_categoryList, "Value", "Text");
         }
 
-        // GET: Articles/Create
         [Authorize]
         public ActionResult Create()
         {
-            ArticleModel _article = new ArticleModel("Create" + DateTime.Today.DayOfYear.ToString());
+            ArticleModel _article = new ArticleModel();
             ViewBag.Categories = GetSelectListCategories(_article);
 
             return View(_article);
@@ -467,7 +472,7 @@ namespace Mvc5.CafeT.vn.Controllers
             }
         }
 
-        // POST: Articles/Edit/NUMBER_GET_ITEMS
+        
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]

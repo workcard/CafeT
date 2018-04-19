@@ -1,16 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using CafeT.Text;
+using CaptchaMvc.HtmlHelpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Mvc5.CafeT.vn.Models;
-using System.IO;
-using CafeT.Text;
-using System.Collections.Generic;
 using System;
-using CaptchaMvc.HtmlHelpers;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Mvc5.CafeT.vn.Controllers
 {

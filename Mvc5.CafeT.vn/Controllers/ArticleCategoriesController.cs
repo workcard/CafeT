@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Mvc5.CafeT.vn.Models;
+using PagedList;
+using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Mvc5.CafeT.vn.Models;
-using Repository.Pattern.UnitOfWork;
-using PagedList;
 
 namespace Mvc5.CafeT.vn.Controllers
 {
