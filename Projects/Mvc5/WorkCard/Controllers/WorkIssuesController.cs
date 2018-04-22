@@ -432,11 +432,7 @@ namespace Web.Controllers
 
         public void AddEvent(CalendarService service, Event item)
         {
-            //var service = new CalendarService(new BaseClientService.Initializer()
-            //{
-            //    HttpClientInitializer = Credential,
-            //    ApplicationName = ApplicationName,
-            //});
+            
             var list = service.CalendarList.List().Execute();
             var myCalendar = list.Items.SingleOrDefault(c => c.Summary == "WorkCard.vn");
 
@@ -446,6 +442,7 @@ namespace Web.Controllers
                 var eventResult = newEventRequest.Execute();
             }
         }
+
         public async Task<ActionResult> ToCalendar(Guid id, CancellationToken cancellationToken)
         {
             var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).

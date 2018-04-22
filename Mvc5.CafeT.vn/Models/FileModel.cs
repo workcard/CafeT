@@ -29,8 +29,17 @@ namespace Mvc5.CafeT.vn.Models
 
         public FileModel(string fullPath) : base(fullPath)
         {
-            SizeToString = base.GetSizeAsString();
             CountDownloads = 0;
+            GetInfo();
+        }
+
+        public void GetInfo()
+        {
+            if(IsExits())
+            {
+                Title = FileName;
+                SizeToString = base.GetSizeAsString();
+            }
         }
 
         public Guid? ArticleId { set; get; }

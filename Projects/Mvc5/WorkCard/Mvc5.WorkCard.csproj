@@ -332,11 +332,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Connected Services\TranslatorService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\color-switcher.css" />
@@ -553,12 +548,6 @@
     <Content Include="Assets\images\clients\.DS_Store" />
     <Content Include="Assets\images\gallery\.DS_Store" />
     <Content Include="Assets\js\.DS_Store" />
-    <None Include="Connected Services\TranslatorService\configuration91.svcinfo" />
-    <None Include="Connected Services\TranslatorService\configuration.svcinfo" />
-    <None Include="Connected Services\TranslatorService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -575,29 +564,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </Content>
-    <None Include="Connected Services\TranslatorService\soap.wsdl" />
-    <None Include="Connected Services\TranslatorService\soap.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TranslatorService\soap1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TranslatorService\soap2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TranslatorService\soap3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TranslatorService\SoapService.wsdl" />
-    <Content Include="Connected Services\TranslatorService\Web.TranslatorService.GetTranslationsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\TranslatorService\Web.TranslatorService.TranslateArray2Response.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\TranslatorService\Web.TranslatorService.TranslateArrayResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="EmailTemplates\CreateIssueEmail.md" />
     <Content Include="Libs\Microsoft.Practices.ServiceLocation.dll" />
@@ -666,10 +632,8 @@
     <Content Include="Views\Shared\_DeleteMsg.cshtml" />
     <Content Include="Views\Shared\Contacts\_ContactMenu.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
-    <Content Include="Views\Shared\Partials\_Menu.cshtml" />
     <Content Include="Views\Shared\Partials\_Notifications.cshtml" />
     <Content Include="Views\Shared\Partials\_Profile.cshtml" />
-    <Content Include="Views\Shared\Partials\_MainMenu.cshtml" />
     <Content Include="Views\Shared\Issues\_AddPriceAjax.cshtml" />
     <Content Include="Views\Shared\Issues\_SetTimTodoAjax.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueMenu.cshtml" />
@@ -870,6 +834,10 @@
       <Project>{1214A9B7-70B8-4224-9FD1-12AA685A51B1}</Project>
       <Name>CafeT.Enumerable</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CafeT.GoogleManager\CafeT.GoogleManager.csproj">
+      <Project>{3ea25f9d-2ce7-45a5-9d92-aa6d717eee43}</Project>
+      <Name>CafeT.GoogleManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\CafeT.Html\CafeT.Html.csproj">
       <Project>{6f875b12-ce9c-46e4-a8b8-d8a1b0e2dfe2}</Project>
       <Name>CafeT.Html</Name>
@@ -909,9 +877,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\TranslatorService\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

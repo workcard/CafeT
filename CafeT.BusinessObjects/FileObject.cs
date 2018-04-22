@@ -144,7 +144,6 @@ namespace CafeT.BusinessObjects
         {
             if((Extension == ".doc")||(Extension == ".docx"))
             {
-
             }
             return;
         }

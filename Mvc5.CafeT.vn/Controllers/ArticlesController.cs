@@ -93,7 +93,15 @@ namespace Mvc5.CafeT.vn.Controllers
             }
             return View("Questions/_Questions", _objects);
         }
-
+        public ActionResult GetFiles(Guid articleId)
+        {
+            var _objects = _articleManager.GetFiles(articleId).ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Files/_Files", _objects);
+            }
+            return View("Files/_Files", _objects);
+        }
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult GetByAuthors(Guid articleId)
         {

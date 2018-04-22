@@ -1,4 +1,5 @@
 ﻿using CafeT.Enumerable;
+using CafeT.GoogleManager;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Data;
@@ -15,7 +16,7 @@ namespace Web.Controllers
     public class QuestionsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private const string SubscriptionKey = "3c45b3b12bda4d568939ab4fc7245944";
+        //private const string SubscriptionKey = "3c45b3b12bda4d568939ab4fc7245944";
         //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
         public QuestionsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
@@ -94,6 +95,17 @@ namespace Web.Controllers
             }
             return View(question);
         }
+        
+        public ActionResult Translate(Guid id)
+        {
+            Question question = QuestionManager.GetById(id);
+            string _dest = Translator.Translate(question.Content, "en");
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_NotifyMessage", _dest);
+            }
+            return View("_NotifyMessage", _dest);
+        }
 
         [HttpPost]
         [Authorize]
@@ -159,9 +171,7 @@ namespace Web.Controllers
             return View(question);
         }
 
-        // POST: Questions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]

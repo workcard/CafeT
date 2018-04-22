@@ -50,10 +50,10 @@
                                                                HttpMethod = "Get",
                                                                InsertionMode = InsertionMode.Replace
                                                            }, new { @class = "card-link" })
-@Ajax.ActionLink("Translate", "Translate", "Questions", new { questionId = Model.Id },
+@Ajax.ActionLink("Translate", "Translate", "Questions", new { id = Model.Id },
                                                            new AjaxOptions
                                                            {
-                                                               UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                                               UpdateTargetId = "Insert-" + Model.Id.ToString(),
                                                                HttpMethod = "Get",
                                                            }, new { @class = "card-link" })
 @if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.CreatedBy))

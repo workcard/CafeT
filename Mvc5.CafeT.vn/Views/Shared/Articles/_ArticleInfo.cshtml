@@ -9,16 +9,18 @@
     }
     <div class="small">
         @Html.Raw("By: " + Model.CreatedBy.GetFromBeginTo("@"))
-        @*<span id="#by-authors-box-@Model.Id.ToString()">@Model.Author.GetFullName()</span>*@
         <span>
             @Html.Raw(@Model.Processor.TimeToRead.ToReadable() + " minutes")
             @Html.Raw(" | ")
             @Html.Raw(@Model.Processor.CountOfWords.ToReadable() + " words")
         </span>
         <span>
-            <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</a>
+            <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> 
+            @Model.CreatedDate.TimeAgo()</a>
         </span>
         <small class="">&#124;</small>
-        <span class=""><a href="javascript:void(0);"><i class="fa fa-eye"></i> @Model.CountViews</a></span>
+        <span class=""><a href="javascript:void(0);">
+            <i class="fa fa-eye"></i> @Model.CountViews</a>
+        </span>
     </div>
 </div>

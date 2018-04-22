@@ -88,7 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager.cs" />
+    <Compile Include="GoogleManager.cs" />
+    <Compile Include="GoogleTranslator.cs" />
     <Compile Include="MyClaimTypes.cs" />
     <Compile Include="MyClientSecrets.cs" />
     <Compile Include="MyRequestedScopes.cs" />
@@ -97,6 +98,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CafeT.Objects\CafeT.Objects.csproj">
+      <Project>{E9909E52-25BE-4F82-873B-DAF2EC30DE76}</Project>
+      <Name>CafeT.Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

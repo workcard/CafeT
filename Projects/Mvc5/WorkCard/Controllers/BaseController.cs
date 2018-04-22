@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using CafeT.GoogleManager;
+using Microsoft.AspNet.Identity.Owin;
 using Repository.Pattern.UnitOfWork;
 using System.Web;
 using System.Web.Mvc;
@@ -33,7 +34,7 @@ namespace Web.Controllers
         protected JobManager JobManager { set; get; }
         protected ProjectManager ProjectManager { set; get; }
         protected EmailService EmailService { set; get; }
-
+        protected Translator Translator { set; get; }
         public BaseController(
             IUnitOfWorkAsync unitOfWorkAsync)
         {
@@ -44,6 +45,7 @@ namespace Web.Controllers
             QuestionManager = new QuestionManager(unitOfWorkAsync);
             ProjectManager = new ProjectManager(unitOfWorkAsync);
             EmailService = new EmailService();
+            Translator = new Translator();
         }
 
         //protected IArticleService _articleService;

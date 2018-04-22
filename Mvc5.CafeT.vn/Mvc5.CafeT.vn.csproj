@@ -598,6 +598,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\Logo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\SyntaxHighlighter\shCore.css" />
     <Content Include="Content\SyntaxHighlighter\shCoreDefault.css" />
@@ -1443,13 +1444,13 @@
     <Content Include="Views\Shared\Messages\_GoogleImageResults.cshtml" />
     <Content Include="Views\Shared\Messages\_GoogleView.cshtml" />
     <Content Include="Views\Shared\Articles\_AddAvatar.cshtml" />
+    <Content Include="Views\FileModels\_UploadCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Defaults\Images\" />
     <Folder Include="App_Data\Profiles\" />
     <Folder Include="App_Data\Tmp\" />
     <Folder Include="App_Data\Uploads\Images\" />
-    <Folder Include="Content\img\" />
     <Folder Include="Views\Shared\Reviews\" />
   </ItemGroup>
   <ItemGroup>

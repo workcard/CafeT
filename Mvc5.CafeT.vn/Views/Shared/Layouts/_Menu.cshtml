@@ -24,7 +24,9 @@
                         <li class="dropdown hasmenu">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Đăng bài <span class="fa fa-angle-down"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dang-bai-viet">Đăng bài viết</a></li>
+                                <li>
+                                    @Html.ActionLink("Viết bài", "Create", "Articles")
+                                </li>
                                 <li><a href="/dang-tai-lieu">Đăng tài liệu</a></li>
                             </ul>
                         </li>

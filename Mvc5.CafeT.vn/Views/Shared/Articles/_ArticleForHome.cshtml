@@ -6,23 +6,29 @@
         });
 </script>
 
+
 @Html.Partial("Articles/_ArticleHeader", Model)
 
 @Html.Partial("Articles/_ArticleInfo", Model)
 
-@if(Model.Avatar != null)
+
+@if (!Model.AvatarPath.IsNullOrEmptyOrWhiteSpace())
 {
-    @Html.Raw(Model.Avatar)
+    <div class="row">
+        <div class="col-md-3">
+            <img src="@Model.AvatarPath" width="180" height="150" />
+        </div>
+        <div class="col-md-9 text-justify">
+            @Html.Raw(Model.Summary)
+        </div>
+    </div>
+
 }
-else if (!Model.AvatarPath.IsNullOrEmptyOrWhiteSpace())
+else if (!Model.Summary.IsNullOrEmptyOrWhiteSpace())
 {
-    <img src="@Model.AvatarPath" width="180" height="150" />
-}
-@if (!Model.Summary.IsNullOrEmptyOrWhiteSpace())
-{
-    <p class="text-justify">
+    <div class="text-justify">
         @Html.Raw(Model.Summary)
-    </p>
+    </div>
 }
 <p>
     @Html.Partial("Articles/_ArticleMenu", Model)

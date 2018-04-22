@@ -4,6 +4,15 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="@Url.Content("~/Home/Index")">Trang chủ</a>
         <a class="p-2 text-dark" href="@Url.Content("~/WorkIssues/Index")">Cards</a>
+        @*<a class="p-2 text-dark" href="@Url.Content("~/WorkIssues/Create")">New issue</a>*@
+        @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
+                       null,
+                       new AjaxOptions
+                       {
+                           UpdateTargetId = "QuickIssue",
+                           HttpMethod = "Get",
+                           InsertionMode = InsertionMode.Replace
+                       }, null)
         <a class="p-2 text-dark" href="@Url.Content("~/Projects/Index")">Projects</a>
         <a class="p-2 text-dark" href="@Url.Content("~/Home/Dashboards")">Dashboards</a>
         <a class="p-2 text-dark" href="@Url.Content("~/Contacts/Index")">Contacts</a>
@@ -11,3 +20,4 @@
     </nav>
     @Html.Partial("Partials/_LoginPartial")
 </div>
+<div id="QuickIssue"></div>
