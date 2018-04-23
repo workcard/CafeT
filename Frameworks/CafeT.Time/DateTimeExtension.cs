@@ -27,7 +27,7 @@ namespace CafeT.Time
 
         public static bool IsToday(this DateTime value)
         {
-            if ((value != null) && (value.Date == DateTime.Now.Date)) return true;
+            if ((value != null) && (value.Date == DateTime.Today.Date)) return true;
             return false;
         }
         public static bool IsDay(this DateTime date, DateTime dateTime)

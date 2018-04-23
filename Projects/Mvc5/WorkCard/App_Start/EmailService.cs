@@ -6,6 +6,10 @@ using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Web.Controllers;
 using Web.Models;
 
 namespace Web
@@ -87,6 +91,16 @@ namespace Web
             }
             return Task.FromResult(0);
         }
+        //public string GenerateLink(WorkIssue model)
+        //{
+        //    return string.Empty;
+        //    //WorkIssue model
+        //}
+
+        public string GetUrl(WorkIssue model)
+        {
+            return "http://workcard.vn/workissues/details/" + model.Id.ToString();
+        }
 
         public Task SendAsync(WorkIssue model, string toEmail)
         {
@@ -94,7 +108,30 @@ namespace Web
             _msg.Subject = "[Issue] " + model.Title.HtmlToText().ToStandard();
 
             _msg.To.Add(new MailAddress(toEmail));
+            
+            _msg.IsBodyHtml = true;
             _msg.Body = model.Content;
+            _msg.Body += GetUrl(model);
+            using (SmtpClient client = new SmtpClient
+            {
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential("taipm@workcard.vn", "P@$$w0rdPMT")
+            })
+            {
+                client.Send(_msg);
+            }
+            return Task.FromResult(0);
+        }
+        
+        public Task SendAsync(string title, string content, string toEmail)
+        {
+            MailMessage _msg = new MailMessage();
+            _msg.Subject = title;
+
+            _msg.To.Add(new MailAddress(toEmail));
+            _msg.Body = content;
             _msg.IsBodyHtml = true;
 
             using (SmtpClient client = new SmtpClient
@@ -109,7 +146,6 @@ namespace Web
             }
             return Task.FromResult(0);
         }
-
         public void Dispose()
         {
             this.Dispose();

@@ -1,8 +1,14 @@
 ﻿using CafeT.GoogleManager;
 using Microsoft.AspNet.Identity.Owin;
 using Repository.Pattern.UnitOfWork;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Web.Managers;
 using Web.Models;
 using Web.Services;
@@ -27,7 +33,7 @@ namespace Web.Controllers
         protected string UploadFolder = "~/Profiles/Uploads/";
 
         protected readonly IUnitOfWorkAsync _unitOfWorkAsync;
-       
+
         protected IssuesManager IssueManager { set; get; }
         protected ContactManager ContactManager { set; get; }
         protected QuestionManager QuestionManager { set; get; }
@@ -35,6 +41,7 @@ namespace Web.Controllers
         protected ProjectManager ProjectManager { set; get; }
         protected EmailService EmailService { set; get; }
         protected Translator Translator { set; get; }
+        public BaseController() { }
         public BaseController(
             IUnitOfWorkAsync unitOfWorkAsync)
         {
@@ -89,6 +96,23 @@ namespace Web.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public static string RenderViewToString(ControllerContext context, string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = context.RouteData.GetRequiredString("action");
+
+            var viewData = new ViewDataDictionary(model);
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(context, viewName);
+                var viewContext = new ViewContext(context, viewResult.View, viewData, new TempDataDictionary(), sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
             }
         }
     }

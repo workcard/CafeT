@@ -16,11 +16,11 @@ namespace Web.Controllers
     public class QuestionsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //private const string SubscriptionKey = "3c45b3b12bda4d568939ab4fc7245944";
-        //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
+       
         public QuestionsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
+        public QuestionsController() : base() { }
 
         [HttpGet]
         public ActionResult GetLastAnswers(string id)

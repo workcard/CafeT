@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Web.Http;
 
 [assembly: OwinStartupAttribute(typeof(Web.Startup))]
 namespace Web
@@ -8,6 +9,9 @@ namespace Web
     {
         public void Configuration(IAppBuilder app)
         {
+            // Register Web API routing support before anything else
+            //GlobalConfiguration.Configure(WebApiConfig.Register);
+
             ConfigureAuth(app);
         }
     }

@@ -30,7 +30,7 @@
     }
     if (Model.IsCompleted())
     {
-        @Ajax.ActionLink("Re-Open", "MarkStatus", "WorkIssues", new { id = Model.Id, status = "New" },
+        @Ajax.ActionLink(" | Re-Open", "MarkStatus", "WorkIssues", new { id = Model.Id, status = "New" },
                                      new AjaxOptions
                                      {
                                          UpdateTargetId = "notify-" + Model.Id.ToString(),

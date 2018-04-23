@@ -139,7 +139,11 @@ namespace Web.Models
 
         public bool IsToday()
         {
-            if (End != null && End.HasValue && End.Value.IsToday()) return true;
+            if (End != null && End.HasValue && End.Value.IsToday())
+            {
+                return true;
+            }
+
             return false;
         }
         public bool IsInDay(DateTime date)
@@ -421,7 +425,7 @@ namespace Web.Models
 
         public void Notify(EmailService emailService)
         {
-            var _emails = GetEmails();
+            var _emails = GetEmails().Distinct();
             if(_emails != null && _emails.Count() > 0)
             {
                 foreach(string _email in _emails)

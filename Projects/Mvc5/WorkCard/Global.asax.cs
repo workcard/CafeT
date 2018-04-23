@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Web.Helpers;
 using Web.Models;
 using Web.ModelViews;
+using Web.ScheduledTasks;
 
 namespace Web
 {
@@ -15,6 +16,8 @@ namespace Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            System.Web.Http.GlobalConfiguration.Configure(WebApiConfig.Register);
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 
             ViewEngines.Engines.Clear();
@@ -38,6 +41,8 @@ namespace Web
                     //.ForMember(dest => dest.FromName, opt => opt.MapFrom(src => src.From.Name))
                     //.ForMember(dest => dest.RecipientName, opt => opt.MapFrom(src => src.Recipient.Name));
             });
+
+            JobScheduler.StartAsync().GetAwaiter().GetResult();
         }
         protected void Application_Error(Object sender, EventArgs e)
         {

@@ -32,8 +32,8 @@ namespace Web.Controllers
     [Authorize]
     public class WorkIssuesController : BaseController
     {
-        protected int PageSize = 5;
-
+        //protected int PageSize = 5;
+        public WorkIssuesController() : base() { }
         public WorkIssuesController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
@@ -203,6 +203,7 @@ namespace Web.Controllers
             return View(_view);
         }
 
+        
         [HttpGet]
         public async Task<ActionResult> Details(Guid? id)
         {
@@ -231,49 +232,36 @@ namespace Web.Controllers
             }
             return View(_view);
         }
-        public static string RenderViewToString(ControllerContext context, string viewName, object model)
-        {
-            if (string.IsNullOrEmpty(viewName))
-                viewName = context.RouteData.GetRequiredString("action");
 
-            var viewData = new ViewDataDictionary(model);
+        
 
-            using (var sw = new StringWriter())
-            {
-                var viewResult = ViewEngines.Engines.FindPartialView(context, viewName);
-                var viewContext = new ViewContext(context, viewResult.View, viewData, new TempDataDictionary(), sw);
-                viewResult.View.Render(viewContext, sw);
+        //public string BuildContent(string html)
+        //{
+        //    string[] _commands = html.ExtractAllBetween("{", "}");
+        //    if(_commands != null && _commands.Count()>0)
+        //    {
+        //        foreach(string _command in _commands)
+        //        {
+        //            if (_command.StartsWith("{?") && _command.EndsWith("}"))
+        //            {
+        //                if(_command.Contains(","))
+        //                {
+        //                    string _questionContent = _command.Split(new string[] { "," }, StringSplitOptions.None)[1];
 
-                return sw.GetStringBuilder().ToString();
-            }
-        }
-        public string BuildContent(string html)
-        {
-            string[] _commands = html.ExtractAllBetween("{", "}");
-            if(_commands != null && _commands.Count()>0)
-            {
-                foreach(string _command in _commands)
-                {
-                    if (_command.StartsWith("{?") && _command.EndsWith("}"))
-                    {
-                        if(_command.Contains(","))
-                        {
-                            string _questionContent = _command.Split(new string[] { "," }, StringSplitOptions.None)[1];
-
-                            var _question = new Question()
-                            {
-                                Title = HttpUtility.HtmlDecode(_questionContent.GetSentences()[0]),
-                                Content = _questionContent
-                            };
-                            string _htmlQuestion = RenderViewToString(ControllerContext, "Questions/_QuestionItem", _question);
-                            html = html.Replace(_command, _htmlQuestion);
-                        }
+        //                    var _question = new Question()
+        //                    {
+        //                        Title = HttpUtility.HtmlDecode(_questionContent.GetSentences()[0]),
+        //                        Content = _questionContent
+        //                    };
+        //                    string _htmlQuestion = RenderViewToString(ControllerContext, "Questions/_QuestionItem", _question);
+        //                    html = html.Replace(_command, _htmlQuestion);
+        //                }
                         
-                    }
-                }
-            }
-            return html;
-        }
+        //            }
+        //        }
+        //    }
+        //    return html;
+        //}
         public WorkIssue BuildContent(WorkIssue issue)
         {
             //var _questions = IssueManager.GetQuestionsBy(issue.Id);
@@ -639,5 +627,6 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
     }
 }
