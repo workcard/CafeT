@@ -1,0 +1,10 @@
+﻿@using CafeT.Text
+@model Web.Models.WorkIssue
+
+@if (Model.Title != null && Model.Title.Length > 0)
+    {
+ @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+    }
+<p>
+    @Html.Partial("Issues/_ItemMenu", Model)
+</p>

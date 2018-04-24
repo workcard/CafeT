@@ -10,11 +10,11 @@
         });
 </script>
 @*<script type="text/javascript">
-    $.get('@Url.Action("GetQuestionsHasAnswers", "WorkIssues", new { id = Model.Id.ToString()})',
-        function (data) {
-            $('#questionsHasAnswers-box').html(data);
-        });*@
-</script>
+        $.get('@Url.Action("GetQuestionsHasAnswers", "WorkIssues", new { id = Model.Id.ToString()})',
+            function (data) {
+                $('#questionsHasAnswers-box').html(data);
+            });
+    </script>*@
 <script type="text/javascript">
     $.get('@Url.Action("SearchBy", "WorkIssues", new { keyWord = Model.GetCommands().Where(t=>t.StartsWith("[")).FirstOrDefault()})',
         function (data) {
@@ -30,31 +30,31 @@
                         @Model.Title
                         <span class="badge badge-danger pull-right">@Model.Status</span>
                         @if (Model.Repeat != ScheduleType.None)
-    {
-                    <span class="badge badge-info pull-right">@Model.Repeat</span>
-}
+                        {
+                            <span class="badge badge-info pull-right">@Model.Repeat</span>
+                        }
                         <span class="badge badge-danger pull-right">@Model.IssueEstimation (phút)</span>
                         <span class="badge badge-danger pull-right">@Model.End.Value.ToShortTimeString()</span>
                         <hr />
 
                         @if (Model.Start.HasValue)
-    {
-                    @Model.Start.Value.ToShortDateString()
-                    @Html.Raw("-")
-}
+                        {
+                            @Model.Start.Value.ToShortDateString()
+                            @Html.Raw("-")
+                        }
                         @if (Model.End.HasValue)
-    {
-                    @Model.End.Value.ToShortDateString()
-}
+                        {
+                            @Model.End.Value.ToShortDateString()
+                        }
 
                         <div id="Update"></div>
 
                         By: @Model.CreatedBy
                         @if (!Model.Content.IsNullOrEmptyOrWhiteSpace())
-    {
-                    <span class=" badge badge-info">@Model.Content.ToWords().Count() từ</span>
-                    <span class=" badge badge-info">@Model.Content.GetEmails().Count() emails</span>
-}
+                        {
+                            <span class=" badge badge-info">@Model.Content.ToWords().Count() từ</span>
+                            <span class=" badge badge-info">@Model.Content.GetEmails().Count() emails</span>
+                        }
 
 
                     </div>
@@ -63,59 +63,59 @@
                     </div>
                     <div class="card-link">
                         @if (User.Identity.IsAuthenticated)
-    {
-        if (Model.IsOf(User.Identity.Name))
+                        {
+                            if (Model.IsOf(User.Identity.Name))
 
-        {
-                    @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
-new { issueId = Model.Id },
-new AjaxOptions
-{
-UpdateTargetId = "AddQuestion",
-HttpMethod = "Get",
-}, new { @class = "btn btn-outline-danger" })
-                    @Html.ActionLink("To article", "ToArticle", new { id = Model.Id })
-                    @Html.ActionLink("GetTaskAsync", "GetTaskAsync", "WorkIssues")
-/*GetTaskAsync*/
+                            {
+                                @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
+                 new { issueId = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "AddQuestion",
+                     HttpMethod = "Get",
+                 }, new { @class = "btn btn-outline-danger" })
+                                @Html.ActionLink("To article", "ToArticle", new { id = Model.Id })
+                                @Html.ActionLink("GetTaskAsync", "GetTaskAsync", "WorkIssues")
+                                /*GetTaskAsync*/
 
-                    @Html.Raw(" | ")
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-                    @Html.Raw(" | ")
-                    @Html.ActionLink("ToCalendar", "ToCalendar", "WorkIssues", new { id = Model.Id }, null)
-                    @Html.Raw(" | ")
-                    @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, null)
-                    @Html.Raw(" | ")
-                    @Ajax.ActionLink("Delete All Questions", "DeleteAllQuestions", "WorkIssues",
-new { Id = Model.Id },
-new AjaxOptions
-{
-UpdateTargetId = "Status-" + Model.Id.ToString(),
-HttpMethod = "Post",
-}, null)
-                    @Html.Raw(" | ")
-}
-
-
-                    @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
-new { id = Model.Id, status = "Done" },
-new AjaxOptions
-{
-UpdateTargetId = "Status-" + Model.Id.ToString(),
-HttpMethod = "Post",
-}, null)
-                    @Html.Raw(" | ")
-                    @Ajax.ActionLink("Notify", "Notify", "WorkIssues",
-new { id = Model.Id },
-new AjaxOptions
-{
-UpdateTargetId = "Status-" + Model.Id.ToString(),
-HttpMethod = "Post",
-}, null)
-                    @Html.Raw(" | ")
-                    @Html.ActionLink("Back to List", "Index")
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("ToCalendar", "ToCalendar", "WorkIssues", new { id = Model.Id }, null)
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, null)
+                                @Html.Raw(" | ")
+                                @Ajax.ActionLink("Delete All Questions", "DeleteAllQuestions", "WorkIssues",
+                 new { Id = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "Status-" + Model.Id.ToString(),
+                     HttpMethod = "Post",
+                 }, null)
+                                @Html.Raw(" | ")
+                            }
 
 
-}
+                            @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
+             new { id = Model.Id, status = "Done" },
+             new AjaxOptions
+             {
+                 UpdateTargetId = "Status-" + Model.Id.ToString(),
+                 HttpMethod = "Post",
+             }, null)
+                            @Html.Raw(" | ")
+                            @Ajax.ActionLink("Notify", "Notify", "WorkIssues",
+             new { id = Model.Id },
+             new AjaxOptions
+             {
+                 UpdateTargetId = "Status-" + Model.Id.ToString(),
+                 HttpMethod = "Post",
+             }, null)
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Back to List", "Index")
+
+
+                        }
                     </div>
                 </div>
                 <div id="AddQuestion"></div>
@@ -164,21 +164,21 @@ HttpMethod = "Post",
                     </div>
                     <ul class="list-group">
                         @foreach (string command in commands)
-    {
-        if (command.Contains("@"))
-        {
-                    <li class="list-group-item">
-                        @Html.Partial("_Command", command)
-                    </li>
-}
+                        {
+                            if (command.Contains("@"))
+                            {
+                                <li class="list-group-item">
+                                    @Html.Partial("_Command", command)
+                                </li>
+                            }
 
-else
-{
-                    <li class="list-group-item">
-                        @Html.Partial("_Command", command)
-                    </li>
-}
-}
+                            else
+                            {
+                                <li class="list-group-item">
+                                    @Html.Partial("_Command", command)
+                                </li>
+                            }
+                        }
                     </ul>
                 }
 
@@ -208,7 +208,7 @@ else
             <div class="card">
                 <div id="questions-box"></div>
             </div>
-            
+
         </div>
     </div>
 </div>

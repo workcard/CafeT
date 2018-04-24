@@ -23,19 +23,25 @@ namespace Web.ScheduledTasks
             IScheduler sched = await factory.GetScheduler();
             await sched.Start();
             
-            // define the job and tie it to our HelloJob class
             IJobDetail job = JobBuilder.Create<EmailJob>()
-                //.WithIdentity("myJob", "group1")
                 .Build();
 
-            // Trigger the job to run now, and then every 40 seconds
             ITrigger trigger = TriggerBuilder.Create()
-              //.WithIdentity("myTrigger", "group1")
-              .StartNow()
-              .WithSimpleSchedule(x => x
-                  .WithIntervalInMinutes(45)
-                  .RepeatForever())
-              .Build();
+                .WithDailyTimeIntervalSchedule
+                 (s =>
+                    s.WithIntervalInMinutes(60)
+                   .OnEveryDay()
+                   .WithRepeatCount(8)
+                   .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                 )
+                 .Build();
+
+              //.StartAt(DateBuilder.DateOf(7,0,0))
+              //.WithSimpleSchedule(x => x
+              //    .WithIntervalInMinutes(60)
+              //    .RepeatForever())
+              //.EndAt(DateBuilder.DateOf(18,0,0))
+              //.Build();
 
             await sched.ScheduleJob(job, trigger);
         }

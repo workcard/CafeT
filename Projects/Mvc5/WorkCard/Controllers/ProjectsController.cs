@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Web.Managers;
 using Web.Models;
+using Web.ModelViews;
 
 namespace Web.Controllers
 {
@@ -18,7 +19,20 @@ namespace Web.Controllers
         public ProjectsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
+        [HttpGet]
+        [Authorize]
+        public ActionResult LoadSummary(Guid id)
+        {
+            var project = ProjectManager.GetById(id);
+            var issues = ProjectManager.GetIssues(id);
+            ProjectSummary summary = new ProjectSummary(project,issues);
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Projects/_Summary", summary);
+            }
+            return RedirectToAction("Index");
+        }
         //[HttpPost]
         //public JsonResult AutoCompleted(string projectId, string Prefix)
         //{
@@ -26,7 +40,7 @@ namespace Web.Controllers
         //    Guid _projectId = Guid.NewGuid();
         //    if (!projectId.IsNullOrEmptyOrWhiteSpace())
         //        _projectId = Guid.Parse(projectId);
-            
+
         //    //Note : you can bind same list from database   
         //    Dictionary<string, string> _dict = new Dictionary<string, string>();
         //    var _contacts = ProjectManager.GetContacts(_projectId);

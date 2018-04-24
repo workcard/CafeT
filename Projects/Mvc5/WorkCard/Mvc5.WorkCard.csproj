@@ -434,7 +434,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\DateHelpers.cs" />
     <Compile Include="Helpers\IPerformance.cs" />
     <Compile Include="Helpers\IssuesHelper.cs" />
@@ -517,6 +516,7 @@
     <Compile Include="ModelViews\AccountViewModels.cs" />
     <Compile Include="ModelViews\ColumnGraphViewModel.cs" />
     <Compile Include="ModelViews\IndexIssuesViewModel.cs" />
+    <Compile Include="ModelViews\ProjectSummary.cs" />
     <Compile Include="ModelViews\TodaySummary.cs" />
     <Compile Include="ModelViews\ManageViewModels.cs" />
     <Compile Include="ModelViews\ProjectViewModels.cs" />
@@ -795,6 +795,10 @@
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueModel.cshtml" />
+    <Content Include="Views\Shared\Projects\_Item.cshtml" />
+    <Content Include="Views\Shared\Projects\_Summary.cshtml" />
+    <Content Include="Views\Shared\Issues\_ItemMenu.cshtml" />
+    <Content Include="Views\Projects\_IssueModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

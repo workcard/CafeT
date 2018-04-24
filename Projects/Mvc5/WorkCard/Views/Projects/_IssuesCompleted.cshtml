@@ -1,128 +1,31 @@
 ﻿@model IEnumerable<Web.Models.WorkIssue>
 
-@{
-    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
+<div class="card border-success">
+    <div class="card-header">
+        Completed
+        <span class="badge badge-danger">
+            @Model.Count() (issues)
+        </span>
+        <span class="badge badge-danger">
+            @{
+                var time = Model.Sum(t => t.IssueEstimation) / 60;
+                @Html.Raw(time.ToReadable() + " (h)");
+            }
 
-    <div class="card border-success">
-                          <div class="card-footer">
-                              Completed
-                              <span class="badge badge-danger">
-                                  @Model.Count() (issues)
-                              </span>
-                              <span class="badge badge-danger">
-                                  @{
-                                  var time = Model.Sum(t => t.IssueEstimation) / 60;
-                                  @Html.Raw(time.ToReadable() + " (h)");
-                                  }
-
-                              </span>
-                              <span class="badge badge-primary">
-                                  @Model.Sum(t => t.Price).ToReadable() (VND)
-                              </span>
-                          </div>
-                      </div>
-    <ul class="list-group">
-        @foreach (var item in items)
-        {
+        </span>
+        <span class="badge badge-primary">
+            @Model.Sum(t => t.Price).ToReadable() (VND)
+        </span>
+    </div>
+</div>
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
         <li class="list-group-item">
-
-            @if (item.IsToday())
-            {
-            <span class="badge badge-danger">Hôm nay</span>
-            }
-            @Html.ActionLink(item.Title, "Details", "WorkIssues", new { id = item.Id }, null)
-            <span class="badge badge-danger pull-right">@item.Status</span>
-            <br />
-            @if (item.IsVerified)
-            {
-            <span class="material-icons">verified_user</span>
-            }
-            <span class="small">@item.Price.ToReadable() (VND)</span>
-            <span class="small">@item.IssueEstimation (phút)</span>
-            <hr />
-            @if (item.End.HasValue)
-            {
-            <span class="badge badge-danger">@item.End.Value.ToShortDateString()</span>
-            }
-
-            <div id="Status-@item.Id.ToString()" class="container"></div>
-
-            <p class="pull-right">
-                @if (User.Identity.IsAuthenticated)
-                {
-                @Html.ActionLink("Edit", "Edit", "WorkIssues", new { id = item.Id }, null)
-                @Html.Raw(" | ")
-                @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = item.Id }, null)
-                @Html.Raw(" | ")
-                if (!item.IsCompleted())
-                {
-                @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues", new { id = item.Id, status = "Done" },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                @Html.Raw(" | ")
-                @Ajax.ActionLink("Verify", "Verify", "WorkIssues", new { id = item.Id },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                @Html.Raw(" | ")
-                }
-                if (item.IsCompleted())
-                {
-                @Ajax.ActionLink("Re-Open", "MarkStatus", "WorkIssues", new { Id = item.Id, status = "New" },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                @Html.Raw(" | ")
-                }
-                @Ajax.ActionLink("+ 5 (min)", "AddTimeToDo", "WorkIssues", new { Id = item.Id, minutes = 5 },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                @Html.Raw(" | ")
-                if (!item.IsToday())
-                {
-                @Ajax.ActionLink("Today", "SetWorkOnTime", "WorkIssues", new { Id = item.Id, date = DateTime.Now.ToString() },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                }
-                else
-                {
-                @Ajax.ActionLink("Tomorrow", "SetWorkOnTime", "WorkIssues",
-                new { Id = item.Id, date = DateTime.Now.AddDays(1).ToString() },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-
-
-                }
-                @Ajax.ActionLink(" | Next week", "SetWorkOnTime", "WorkIssues",
-                new { Id = item.Id, date = DateTime.Now.AddDays(5).ToString() },
-                new AjaxOptions
-                {
-                UpdateTargetId = "Status-" + item.Id.ToString(),
-                HttpMethod = "Post",
-                }, null)
-                }
-            </p>
+            @Html.Partial("_IssueModel", item)
         </li>
-        }
-    </ul>
-}
-
+    }
+</ul>
 
 
 

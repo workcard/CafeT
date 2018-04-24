@@ -1,10 +1,22 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
+using Web.Managers;
 using Web.Models;
 using Web.ModelViews;
 
 namespace Web.Mappers
 {
+    //public class ProjectMapper
+    //{
+    //    public static ProjectSummary ToSummary(Project project)
+    //    {
+    //        using (var manager = new ProjectManager(unitOfWorkAsync))
+    //        {
+
+    //        }
+    //    }
+    //}
+
     public class IssueMappers
     {
         public static List<IssueView> IssuesToViews(List<WorkIssue> models)

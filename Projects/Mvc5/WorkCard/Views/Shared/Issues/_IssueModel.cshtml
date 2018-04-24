@@ -5,14 +5,14 @@
     @if (Model.Title != null && Model.Title.Length > 0)
     {
     <div class="card-body">
-        @if (!Model.Content.IsNullOrEmptyOrWhiteSpace() && Model.HasImage())
+        @*@if (!Model.Content.IsNullOrEmptyOrWhiteSpace() && Model.HasImage())
         {
-        <div class="featured-image">
-            <a href="#">
-                <img src="assets/images/blog/featured1.jpg" alt="">
-            </a>
-        </div>
-        }
+            <div class="featured-image">
+                <a href="#">
+                    <img src="assets/images/blog/featured1.jpg" alt="">
+                </a>
+            </div>
+        }*@
         <div class="card-title">
             @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
             <span class="badge badge-primary badge-pill pull-right">14</span>

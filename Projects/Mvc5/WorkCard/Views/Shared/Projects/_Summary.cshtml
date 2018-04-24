@@ -1,0 +1,26 @@
+﻿@model Web.ModelViews.ProjectSummary
+
+<div class="row">
+    <div class="col-md-6">
+        Cost
+        <span class="badge badge-info">@Model.Cost.ToReadable() (VND)</span>
+    </div>
+    <div class="col-md-6">
+        Time
+        <span class="badge badge-info">@Model.TimeToDo.ToReadable() (Minutes)</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Issues
+        <span class="badge badge-primary">@Model.Issues.Count()</span>
+    </div>
+    <div class="col-md-4">
+        Completed
+        <span class="badge badge-success">@Model.CompletedIssues.Count()</span>
+    </div>
+    <div class="col-md-4">
+        News
+        <span class="badge badge-danger">@Model.NewIssues.Count()</span>
+    </div>
+</div>

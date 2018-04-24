@@ -1,3 +1,27 @@
-﻿@model string
+﻿@using CafeT.Objects.Enums;
+@model CafeT.Objects.Enums.IssueStatus
 
-@Html.Raw(Model)
+@if (Model == IssueStatus.New)
+{
+    @Html.Raw("New")
+}
+else if (Model == IssueStatus.Doing)
+{
+    @Html.Raw("Doing")
+}
+else if (Model == IssueStatus.Done)
+{
+    @Html.Raw("Done")
+}
+else if (Model == IssueStatus.Finished)
+{
+    @Html.Raw("Finished")
+}
+else if (Model == IssueStatus.ReOpen)
+{
+    @Html.Raw("ReOpen")
+}
+else if (Model == IssueStatus.Testing)
+{
+    @Html.Raw("Testing")
+}

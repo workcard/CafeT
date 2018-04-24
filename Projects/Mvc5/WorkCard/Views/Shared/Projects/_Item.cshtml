@@ -1,0 +1,35 @@
+﻿@model Web.Models.Project
+
+
+<script type="text/javascript">
+    $.get('@Url.Action("LoadSummary", "Projects", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#summary-@Model.Id.ToString()').html(data);
+        });
+</script>
+
+@*<div class="col-md-8">
+    @Html.ActionLink(Model.Title, "Details", "Projects", new { id = Model.Id }, null)
+</div>
+<div class="col-md-4">
+    Cost <span class="badge badge-info">@Mode</span>
+</div>*@
+@*@if(Model.HasImages())
+    {
+
+    }*@
+@Html.ActionLink(Model.Title, "Details", "Projects", new { id = Model.Id }, null)
+<p class="text-justify">
+    @Html.Raw(Model.Description)
+</p>
+<div id="summary-@Model.Id.ToString()"></div>
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsOf(User.Identity.Name))
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Projects", new { id = Model.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", "Projects", new { id = Model.Id }, null) |
+        </p>
+    }
+}
