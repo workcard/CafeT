@@ -60,6 +60,10 @@ namespace Web.Models
                     ApplicationGroupId = gr.ApplicationGroupId
                 }).ToTable("ApplicationGroupRoles");
 
+            modelBuilder.Entity<Url>()
+               .Ignore(t => t.Page)
+               .Ignore(t=>t.IsLoaded);
+
         }
 
         public void SyncObjectState<TEntity>(TEntity entity) where TEntity : class, IObjectState

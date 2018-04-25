@@ -3,16 +3,15 @@
 @{
     ViewBag.Title = "Details";
 }
-@*<script type="text/javascript">
+<script type="text/javascript">
     $.get('@Url.Action("LoadIssue", "WorkIssues", new { id = Model.IssueId})',
         function (data) {
             $('#issue-box').html(data);
         });
 </script>
-<div id="issue-box"></div>*@
-
 
 <div class="container">
+    <div id="issue-box"></div>
     <div class="card-title">@Html.Raw(Model.Title)</div>
     <div class="card-text">@Html.Raw(Model.Content)</div>
     <div class="card-link">
@@ -23,12 +22,12 @@
             @Html.ActionLink("Back to List", "Index")
             @Html.Raw(" | ")
             @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
-                                        new AjaxOptions
-                                        {
-                                            UpdateTargetId = "CreateAnswer",
-                                            HttpMethod = "Get",
-                                            InsertionMode = InsertionMode.Replace
-                                        }, new { @class = "card-link" })
+                                             new AjaxOptions
+                                             {
+                                                 UpdateTargetId = "CreateAnswer",
+                                                 HttpMethod = "Get",
+                                                 InsertionMode = InsertionMode.Replace
+                                             }, new { @class = "card-link" })
         }
     </div>
     <div id="CreateAnswer"></div>

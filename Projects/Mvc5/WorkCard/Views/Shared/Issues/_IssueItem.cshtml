@@ -29,7 +29,7 @@
             }
             <div class="card-title">
                 @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
-                <span class="badge badge-primary badge-pill pull-right">@Model.End.Value.ToShortTimeString()</span>
+                <span class="badge badge-primary">@Model.End.Value.ToShortTimeString()</span>
             </div>
             <div class="card-text">
                 @Html.Raw(Model.Content)

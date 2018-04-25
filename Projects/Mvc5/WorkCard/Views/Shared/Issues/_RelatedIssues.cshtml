@@ -1,0 +1,53 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Web.ModelViews.IssueView>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+<div id="Issues">
+    <div class="card border-success">
+        <div class="card-footer">
+            Liên quan
+            <span class="badge badge-danger">
+                @Model.Count() (issues)
+            </span>
+            <span class="badge badge-danger">
+                @{
+                    var time = Model.Sum(t => t.IssueEstimation) / 60;
+                    @Html.Raw(time.ToReadable() + " (h)");
+                }
+
+            </span>
+            <span class="badge badge-primary">
+                @Model.Sum(t => t.Price).ToReadable() (VND)
+            </span>
+        </div>
+    </div>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @Html.Partial("Issues/_IssueRelated", item)
+            </li>
+        }
+    </ul>
+    <div class="panel-footer">
+        @Html.PagedListPager(Model, page => Url.Action("SearchBy", new { keyword = ViewBag.Keyword, page }),
+                 PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                 {
+                     Display = PagedListDisplayMode.IfNeeded,
+                     MaximumPageNumbersToDisplay = 5
+                 },
+                 new AjaxOptions
+                 {
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get",
+                     UpdateTargetId = "Issues",
+                     LoadingElementId = "divProcessing"
+                 }))
+    </div>
+</div>
+                
+}
+
+
+
+

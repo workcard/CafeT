@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Repository.Pattern.UnitOfWork;
 using Web.Models;
 
 namespace Web.Controllers

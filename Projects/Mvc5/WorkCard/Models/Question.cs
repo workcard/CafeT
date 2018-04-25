@@ -32,5 +32,10 @@ namespace Web.Models
             if (Answers == null || Answers.Count() < 1) return false;
             return true;
         }
+
+        public void Notify(EmailService emailService)
+        {
+            emailService.SendAsync(this);
+        }
     }
 }

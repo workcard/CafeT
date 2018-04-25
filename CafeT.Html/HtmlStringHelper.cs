@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using CafeT.Text;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,7 +146,6 @@ namespace CafeT.Html
             {
                 _tags.Add(matches[i].ToString());
             }
-            //to obtain non duplicate list
             _tags = _tags.Distinct().ToList();
 
             return _tags.ToArray();
@@ -168,22 +168,27 @@ namespace CafeT.Html
             }
             return _Nodes;
         }
-        public static IEnumerable<string> GetAllDivs(this string htmlString)
+        public static IEnumerable<string> GetAllIds(this string htmlString)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(htmlString);
 
             List<HtmlNode> _Nodes = doc.DocumentNode.Descendants().Where(x =>
                                         (x.Attributes["id"] != null))
-                                            //&& x.Attributes["id"].Value.Contains(name))
                                             .ToList();
-            //if (_Nodes == null || _Nodes.Count == 0)
-            //{
-            //    _Nodes = doc.DocumentNode.Descendants().Where(x =>
-            //                            (x.Name == name))
-            //                                .ToList();
-            //}
             return _Nodes.Select(t=>t.Id).ToList();
+        }
+        public static IEnumerable<string> GetAllClasses(this string htmlString)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlString);
+
+            List<HtmlNode> _Nodes = doc.DocumentNode.Descendants().Where(x =>
+                                        (x.Attributes["class"] != null))
+                                            .ToList();
+            return _Nodes.Select(t => t.Name)
+                .Where(t=>!t.IsNullOrEmpty())
+                .ToList();
         }
         public static IEnumerable<HtmlNode> GetNodesById(this string htmlString, string name)
         {

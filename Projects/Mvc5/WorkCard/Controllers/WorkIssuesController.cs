@@ -1,25 +1,20 @@
 ﻿using AutoMapper;
-//using CafeT.GoogleServices;
+using CafeT.Html;
 using CafeT.Objects.Enums;
 using CafeT.Text;
-using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
-using Owin;
 using PagedList;
 using Repository.Pattern.UnitOfWork;
-//using SyncMyCal.Calendars;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Web.Managers;
 using Web.Mappers;
@@ -32,27 +27,26 @@ namespace Web.Controllers
     [Authorize]
     public class WorkIssuesController : BaseController
     {
-        //protected int PageSize = 5;
         public WorkIssuesController() : base() { }
         public WorkIssuesController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
 
         #region Search
-        public async Task<ActionResult> SearchBy(string keyWord)
+        public async Task<ActionResult> SearchBy(string keyWord, int? page)
         {
+            ViewBag.Keyword = keyWord;
             var _objects = _unitOfWorkAsync.RepositoryAsync<WorkIssue>()
                                 .Query().Select().Where(t => t.GetCommands().Count() > 0)
                                 .Where(t => t.GetCommands().Contains(keyWord)).ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
             if (Request.IsAjaxRequest())
             {
-                return PartialView("Issues/_Issues", _views);
+                return PartialView("Issues/_RelatedIssues",
+                    _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
             }
             return View("Index", _views);
         }
-
-        
         #endregion
 
 
@@ -121,6 +115,36 @@ namespace Web.Controllers
             return View("Index", _views);
         }
         [HttpGet]
+        public async Task<ActionResult> GetUpcomingIssues(int? page)
+        {
+            if (page == null) page = 1;
+            var _objects = IssueManager.GetAllOf(User.Identity.Name);
+            _objects = _objects.Where(t => t.IsUpcoming(1)).ToList();
+            var _views = IssueMappers.IssuesToViews(_objects);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_IssuesUpcoming",
+                    _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
+            }
+            return View("Index", _views);
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetToVerifyIssues(int? page)
+        {
+            if (page == null) page = 1;
+            var _objects = IssueManager.GetAllOf(User.Identity.Name);
+            _objects = _objects.Where(t => !t.IsVerified).ToList();
+            var _views = IssueMappers.IssuesToViews(_objects);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_IssuesToVerify",
+                    _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
+            }
+            return View("Index", _views);
+        }
+        [HttpGet]
         public ActionResult GetQuestionsMustAnswer(string id)
         {
             var Id = Guid.Parse(id);
@@ -166,8 +190,7 @@ namespace Web.Controllers
             var _questions = IssueManager.GetQuestionsBy(id);
             foreach(var _question in _questions)
             {
-                _unitOfWorkAsync.RepositoryAsync<Question>()
-                    .Delete(_question.Id);
+                QuestionManager.Delete(_question.Id);
             }
             try
             {
@@ -179,6 +202,7 @@ namespace Web.Controllers
                 return RedirectToAction("Errors");
             }
         }
+
         [HttpGet]
         public async Task<ActionResult> LoadIssue(Guid? id)
         {
@@ -262,26 +286,60 @@ namespace Web.Controllers
         //    }
         //    return html;
         //}
-        public WorkIssue BuildContent(WorkIssue issue)
+
+        public WorkIssue ProcessEmbedUrls(WorkIssue issue)
         {
-            //var _questions = IssueManager.GetQuestionsBy(issue.Id);
             var _commands = issue.GetCommands();
-            if(_commands != null && _commands.Count()>0)
+            if (_commands != null && _commands.Count() > 0)
             {
-                foreach(string _command in _commands)
+                foreach (string command in _commands)
                 {
-                    if(_command.CountOf(",")>=2)
+                    var _command = new Command(command);
+                    if(_command.Type== Models.CommandType.IsUrl)
                     {
-                        string _id = _command.Split(new string[] { "," },StringSplitOptions.None)[1]
-                            .Replace("#",string.Empty);
+                        try
+                        {
+                            string _id = command.Split(new string[] { "," }, StringSplitOptions.None)[1]
+                                .Replace("#", string.Empty);
+                            Guid id = Guid.Parse(_id);
+                            var _url = UrlManager.GetById(id);
+                            _url.Load();
+                            if(_url.Title.IsNullOrEmptyOrWhiteSpace())
+                            {
+                                UrlManager.Update(_url);
+                            }
+                            string _htmlQuestion = RenderViewToString(ControllerContext, "Urls/_EmbedUrl", _url);
+                            issue.Content = issue.Content.Replace(command, _htmlQuestion);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    }                    
+                }
+            }
+            return issue;
+        }
+
+        public WorkIssue ProcessEmbedQuestions(WorkIssue issue)
+        {
+            var _commands = issue.GetCommands();
+            if (_commands != null && _commands.Count() > 0)
+            {
+                foreach (string _command in _commands)
+                {
+                    if (_command.CountOf(",") >= 2)
+                    {
+                        string _id = _command.Split(new string[] { "," }, StringSplitOptions.None)[1]
+                            .Replace("#", string.Empty);
                         try
                         {
                             Guid id = Guid.Parse(_id);
                             var _question = QuestionManager.GetById(id);
                             string _htmlQuestion = RenderViewToString(ControllerContext, "Questions/_EmbedQuestion", _question);
-                            issue.Content = issue.Content.Replace(_command,_htmlQuestion);
+                            issue.Content = issue.Content.Replace(_command, _htmlQuestion);
                         }
-                       catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
@@ -290,6 +348,14 @@ namespace Web.Controllers
             }
             return issue;
         }
+
+        public WorkIssue BuildContent(WorkIssue issue)
+        {
+            issue = ProcessEmbedQuestions(issue);
+            issue = ProcessEmbedUrls(issue);
+            return issue;
+        }
+
         [HttpGet]
         public ActionResult GetAllExpired(string userName)
         {
@@ -401,7 +467,19 @@ namespace Web.Controllers
 
             return View(workIssue);
         }
-        
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> SetWorkOnTime(Guid id)
+        {
+            WorkIssue workIssue = IssueManager.GetById(id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_SetTime", workIssue);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> SetWorkOnTime(Guid id, string date)

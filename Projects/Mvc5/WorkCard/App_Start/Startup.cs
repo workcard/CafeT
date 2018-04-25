@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using System.Web.Http;
 
 [assembly: OwinStartupAttribute(typeof(Web.Startup))]
 namespace Web

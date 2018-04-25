@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Web.Models.Project>
+
+<div class="card">
+    <div class="card-body">
+        Projects <span class="badge badge-danger">@Model.Count()</span>
+    </div>
+    
+</div>
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.ActionLink(item.Title, "Details", "Projects", new { id = item.Id }, null)
+        </li>
+    }
+</ul>
+

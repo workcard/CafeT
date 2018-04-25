@@ -88,30 +88,30 @@
       <HintPath>..\..\..\packages\FSharp.Core.4.3.4\lib\net45\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Apis, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.1.32.2\lib\net45\Google.Apis.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.dll</HintPath>
+    <Reference Include="Google.Apis.Auth, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Auth.1.33.0\lib\net45\Google.Apis.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.Mvc, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Auth.Mvc.1.32.2\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
+    <Reference Include="Google.Apis.Auth.Mvc, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Auth.Mvc.1.33.0\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Auth.1.33.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Calendar.v3, Version=1.32.2.1193, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab" />
-    <Reference Include="Google.Apis.Core, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Core.1.32.2\lib\net45\Google.Apis.Core.dll</HintPath>
+    <Reference Include="Google.Apis.Core, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Core.1.33.0\lib\net45\Google.Apis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Drive.v2, Version=1.32.2.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Drive.v2.1.32.2.1194\lib\net45\Google.Apis.Drive.v2.dll</HintPath>
+    <Reference Include="Google.Apis.Drive.v2, Version=1.33.0.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Drive.v2.1.33.0.1194\lib\net45\Google.Apis.Drive.v2.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Drive.v3, Version=1.32.2.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Drive.v3.1.32.2.1194\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.33.0.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Drive.v3.1.33.0.1194\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.1.32.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\HtmlAgilityPack.1.8.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -208,6 +208,9 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="MiniProfiler, Version=3.2.0.157, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MiniProfiler.3.2.0.157\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -227,6 +230,9 @@
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Collections.Immutable.1.4.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -413,6 +419,7 @@
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\AuthCallbackController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CommandsController.cs" />
@@ -451,30 +458,6 @@
     <Compile Include="Managers\IssuesManager.cs" />
     <Compile Include="Mappers\IssueMappers.cs" />
     <Compile Include="Mappers\ProjectMappers.cs" />
-    <Compile Include="Migrations\201803280712235_UpdateDb.cs" />
-    <Compile Include="Migrations\201803280712235_UpdateDb.Designer.cs">
-      <DependentUpon>201803280712235_UpdateDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804010535552_AddViewers.cs" />
-    <Compile Include="Migrations\201804010535552_AddViewers.Designer.cs">
-      <DependentUpon>201804010535552_AddViewers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804020536525_UpdateDbForSeed.cs" />
-    <Compile Include="Migrations\201804020536525_UpdateDbForSeed.Designer.cs">
-      <DependentUpon>201804020536525_UpdateDbForSeed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031318371_UpdateDb1.cs" />
-    <Compile Include="Migrations\201804031318371_UpdateDb1.Designer.cs">
-      <DependentUpon>201804031318371_UpdateDb1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804040409345_UpdateIssue.cs" />
-    <Compile Include="Migrations\201804040409345_UpdateIssue.Designer.cs">
-      <DependentUpon>201804040409345_UpdateIssue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804180816069_addArticle.cs" />
-    <Compile Include="Migrations\201804180816069_addArticle.Designer.cs">
-      <DependentUpon>201804180816069_addArticle.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
@@ -640,7 +623,7 @@
     <Content Include="Views\Shared\Partials\_Notifications.cshtml" />
     <Content Include="Views\Shared\Partials\_Profile.cshtml" />
     <Content Include="Views\Shared\Issues\_AddPriceAjax.cshtml" />
-    <Content Include="Views\Shared\Issues\_SetTimTodoAjax.cshtml" />
+    <Content Include="Views\Shared\Issues\_SetTime.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueMenu.cshtml" />
     <Content Include="Views\Jobs\Create2.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
@@ -799,10 +782,22 @@
     <Content Include="Views\Shared\Projects\_Summary.cshtml" />
     <Content Include="Views\Shared\Issues\_ItemMenu.cshtml" />
     <Content Include="Views\Projects\_IssueModel.cshtml" />
+    <Content Include="Views\WorkIssues\_DetailsMenu.cshtml" />
+    <Content Include="Views\Shared\Issues\_IssuesPaging.cshtml" />
+    <Content Include="Views\Shared\Issues\_RelatedIssues.cshtml" />
+    <Content Include="Views\Shared\Issues\_IssueRelated.cshtml" />
+    <Content Include="Views\Projects\_List.cshtml" />
+    <Content Include="Views\Urls\Create.cshtml" />
+    <Content Include="Views\Urls\Delete.cshtml" />
+    <Content Include="Views\Urls\Details.cshtml" />
+    <Content Include="Views\Urls\Edit.cshtml" />
+    <Content Include="Views\Urls\Index.cshtml" />
+    <Content Include="Views\Shared\Urls\_EmbedUrl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\" />
+    <Folder Include="Views\AuthCallback\" />
     <Folder Include="Views\Commands\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
@@ -812,24 +807,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803280712235_UpdateDb.resx">
-      <DependentUpon>201803280712235_UpdateDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804010535552_AddViewers.resx">
-      <DependentUpon>201804010535552_AddViewers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804020536525_UpdateDbForSeed.resx">
-      <DependentUpon>201804020536525_UpdateDbForSeed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031318371_UpdateDb1.resx">
-      <DependentUpon>201804031318371_UpdateDb1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804040409345_UpdateIssue.resx">
-      <DependentUpon>201804040409345_UpdateIssue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804180816069_addArticle.resx">
-      <DependentUpon>201804180816069_addArticle.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

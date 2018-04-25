@@ -1,5 +1,7 @@
 ﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Web.Models;
 
 namespace Web.Managers
@@ -11,8 +13,16 @@ namespace Web.Managers
         public UrlManager(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
-
-        public async System.Threading.Tasks.Task<bool> AddAsync(Url url)
+        public Url GetById(Guid id)
+        {
+            return _unitOfWorkAsync.RepositoryAsync<Url>().Find(id);
+        }
+        public void Update(Url url)
+        {
+            _unitOfWorkAsync.RepositoryAsync<Url>().Update(url);
+            _unitOfWorkAsync.SaveChangesAsync();
+        }
+        public async Task<bool> AddAsync(Url url)
         {
             var _myUrls = db.Urls.Where(t => t.CreatedBy == url.CreatedBy).Select(t => t.Address);
             if (!_myUrls.Contains(url.Address))

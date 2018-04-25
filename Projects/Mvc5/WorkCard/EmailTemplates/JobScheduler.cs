@@ -1,6 +1,5 @@
 ﻿using Quartz;
 using Quartz.Impl;
-using System.Collections.Specialized;
 using System.Threading.Tasks;
 
 namespace Web.ScheduledTasks
@@ -31,8 +30,9 @@ namespace Web.ScheduledTasks
                  (s =>
                     s.WithIntervalInMinutes(60)
                    .OnEveryDay()
-                   .WithRepeatCount(8)
+                   //.WithRepeatCount(8)
                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(7, 0))
+                   .EndingDailyAt(TimeOfDay.HourAndMinuteOfDay(13, 0))
                  )
                  .Build();
 

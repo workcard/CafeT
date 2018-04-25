@@ -31,17 +31,16 @@
           type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- inject:css -->
-
     @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">*@
+        rel="stylesheet">*@
     <script src="https://cdn.ckeditor.com/4.9.0/standard/ckeditor.js"></script>
 
 
     <script src="~/Scripts/bootstrap.min.js"></script>
-   
+
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    
+
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
         tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
@@ -51,10 +50,11 @@
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/bootstrap.css">
+    @StackExchange.Profiling.MiniProfiler.RenderIncludes()
 </head>
 <body>
     
-    <div class="container">
+    <div class="container-fluid">
         @Html.Partial("Partials/_Header")
         
         <main class="row">

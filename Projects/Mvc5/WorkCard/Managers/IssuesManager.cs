@@ -93,7 +93,6 @@ namespace Web.Managers
         public bool Insert(WorkIssue issue)
         {
             string[] _commands = issue.GetCommands();
-
             if(_commands != null && _commands.Count()>0)
             {
                 foreach(string _command in _commands)
@@ -109,10 +108,19 @@ namespace Web.Managers
                         question.Content = command.Body;
                         question.CreatedBy = issue.CreatedBy;
                         _unitOfWorkAsync.RepositoryAsync<Question>().Insert(question);
-
                         issue.Content = issue.Content
                             .Replace(_command, _command.AddAfter(',',",#" + question.Id.ToString()));
 
+                    }
+                    else if(command.Type == Models.CommandType.IsUrl)
+                    {
+                        var urlModel = new Url(command.Header);
+                        urlModel.Load();
+                        urlModel.CreatedBy = issue.CreatedBy;
+                        urlModel.IssueId = issue.Id;
+                        _unitOfWorkAsync.RepositoryAsync<Url>().Insert(urlModel);
+                        issue.Content = issue.Content
+                                .Replace(_command, command.Text.AddAfter(',', ",#" + urlModel.Id.ToString()));
                     }
                 }
             }
@@ -153,6 +161,19 @@ namespace Web.Managers
 
                             issue.Content = issue.Content
                                 .Replace(_command, _command.AddAfter(',', ",#" + question.Id.ToString()));
+
+                        }
+                        if (command.Type == Models.CommandType.IsUrl)
+                        {
+                            Url url = new Url();
+                            url.Id = Guid.NewGuid();
+                            url.IssueId = issue.Id;
+                            url.Title = HttpUtility.HtmlDecode(command.Title);
+                            url.CreatedBy = issue.CreatedBy;
+                            _unitOfWorkAsync.RepositoryAsync<Url>().Insert(url);
+
+                            issue.Content = issue.Content
+                                .Replace(_command, _command.AddAfter(',', ",#" + url.Id.ToString()));
 
                         }
                     }

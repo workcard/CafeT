@@ -117,9 +117,14 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 question.CreatedBy = User.Identity.Name;
-                db.Questions.Add(question);
+                //db.Questions.Add(question);
+                //await db.SaveChangesAsync();
 
-                await db.SaveChangesAsync();
+                var insterted = QuestionManager.Insert(question);
+                if(insterted)
+                {
+                    question.Notify(EmailService);
+                }
 
                 if (Request.IsAjaxRequest())
                 {

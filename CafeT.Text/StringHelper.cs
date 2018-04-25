@@ -692,6 +692,15 @@ namespace CafeT.Text
             }
             return text;
         }
+        public static string AddBefore(this string text, char c, string after)
+        {
+            if (text.Contains(c))
+            {
+                int index = text.LastIndexOf(c);
+                text = text.Insert(index-1, after);
+            }
+            return text;
+        }
         public static string AddLineBefore(this string text, string before)
         {
             return before + "\n" + text;

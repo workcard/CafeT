@@ -1,7 +1,4 @@
-﻿using CafeT.Text;
-using System;
-
-namespace Web.Models
+﻿namespace Web.Models
 {
     //public class AppModel:BaseObject {
     //    public string AppName { set; get; } = string.Empty;

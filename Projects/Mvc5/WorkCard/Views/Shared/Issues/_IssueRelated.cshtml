@@ -1,0 +1,25 @@
+﻿@using CafeT.Text
+
+@model Web.ModelViews.IssueView
+
+
+@if (Model.Title != null && Model.Title.Length > 0)
+{
+    @*if (!Model.Content.IsNullOrEmptyOrWhiteSpace() && Model.HasImage())
+        {
+            <div class="featured-image">
+                <a href="#">
+                    <img src="assets/images/blog/featured1.jpg" alt="">
+                </a>
+            </div>
+        }*@
+    @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+    if (Model.IsUpcoming(1))
+    {
+        <span class="badge badge-success">@Model.End.Value.ToShortDateString()</span>
+    }
+    else
+    {
+        <span class="badge badge-success">@Model.End.Value.TimeAgo()</span>
+    }
+}

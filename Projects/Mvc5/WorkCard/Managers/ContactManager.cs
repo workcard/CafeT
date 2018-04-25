@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CafeT.Text;
+using Repository.Pattern.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CafeT.Text;
-using Repository.Pattern.UnitOfWork;
 using Web.Models;
 
 namespace Web.Managers

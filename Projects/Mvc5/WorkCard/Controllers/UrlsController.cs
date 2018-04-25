@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CafeT.Html;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -12,11 +13,7 @@ namespace Web.Controllers
     public class UrlsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Urls
-#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         public async Task<ActionResult> Index()
-#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             var _objects = db.Urls.AsEnumerable();
             if(User.Identity.IsAuthenticated)
@@ -26,7 +23,7 @@ namespace Web.Controllers
             return View(_objects);
         }
 
-        // GET: Urls/Details/5
+       
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -38,6 +35,10 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
+            //var page = new WebPage(url.Address);
+            //page.Load();
+            url.Load();
+            ViewBag.Title = url.Title;
             return View(url);
         }
 

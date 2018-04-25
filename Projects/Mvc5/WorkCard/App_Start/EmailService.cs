@@ -3,13 +3,11 @@ using CafeT.Objects.Enums;
 using CafeT.Text;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Web.Controllers;
 using Web.Models;
 
 namespace Web
@@ -91,27 +89,23 @@ namespace Web
             }
             return Task.FromResult(0);
         }
-        //public string GenerateLink(WorkIssue model)
-        //{
-        //    return string.Empty;
-        //    //WorkIssue model
-        //}
-
-        public string GetUrl(WorkIssue model)
+     
+        public string GetIssueUrl(WorkIssue model)
         {
             return "http://workcard.vn/workissues/details/" + model.Id.ToString();
         }
-
+        public string GetQuestionUrl(Question model)
+        {
+            return "http://workcard.vn/Questions/details/" + model.Id.ToString();
+        }
         public Task SendAsync(WorkIssue model, string toEmail)
         {
             MailMessage _msg = new MailMessage();
             _msg.Subject = "[Issue] " + model.Title.HtmlToText().ToStandard();
-
             _msg.To.Add(new MailAddress(toEmail));
-            
             _msg.IsBodyHtml = true;
             _msg.Body = model.Content;
-            _msg.Body += GetUrl(model);
+            _msg.Body += "<br />" + GetIssueUrl(model);
             using (SmtpClient client = new SmtpClient
             {
                 EnableSsl = true,
@@ -124,7 +118,59 @@ namespace Web
             }
             return Task.FromResult(0);
         }
+
         
+        public Task SendAsync(Question model)
+        {
+            MailMessage _msg = new MailMessage();
+            if(!model.Title.IsNullOrEmptyOrWhiteSpace())
+            _msg.Subject = "[?] " + model.Title.HtmlToText().ToStandard();
+            else
+            {
+                _msg.Subject = "[?] " + model.Content.HtmlToText().ToStandard()
+                    .GetFirstSentence();
+            }
+
+            _msg.IsBodyHtml = true;
+            _msg.Body = model.Content;
+            _msg.Body += "<br /> Link: " + GetQuestionUrl(model);
+           
+            List<string> toEmails = model.Content.GetEmails().ToList();
+            toEmails.Add(model.CreatedBy);
+
+            if(model.IssueId.HasValue)
+            {
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    var issue = dbContext.Issues.Find(model.IssueId.Value);
+                    List<string> emails = issue.GetEmails().ToList();
+                    toEmails.AddRange(emails);
+
+                    _msg.Body += "<br /> Trong issue: " + issue.Title;
+                    _msg.Body += "<br /> Link: " + GetIssueUrl(issue);
+                }
+            }
+
+            toEmails = toEmails.Distinct().ToList();
+
+            foreach(var toEmail in toEmails)
+            {
+                _msg.To.Add(new MailAddress(toEmail));
+            }
+            
+            using (SmtpClient client = new SmtpClient
+            {
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential("taipm@workcard.vn", "P@$$w0rdPMT")
+            })
+            {
+                client.Send(_msg);
+            }
+            return Task.FromResult(0);
+        }
+
         public Task SendAsync(string title, string content, string toEmail)
         {
             MailMessage _msg = new MailMessage();
@@ -146,6 +192,7 @@ namespace Web
             }
             return Task.FromResult(0);
         }
+
         public void Dispose()
         {
             this.Dispose();

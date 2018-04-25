@@ -14,26 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using Calendar.ASP.NET.MVC5;
-using Calendar.ASP.NET.MVC5.Models;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Mvc;
-using Google.Apis.Auth.OAuth2.Responses;
-using Google.Apis.Calendar.v3;
 using Google.Apis.Drive.v2;
-using Google.Apis.Json;
 using Google.Apis.Services;
-using Google.Apis.Util.Store;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Web.Models;
 using Web.Services;

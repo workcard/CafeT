@@ -36,7 +36,7 @@
 }
     </ul>
     <div class="panel-footer">
-        @Html.PagedListPager(Model, page => Url.Action("GetTodayIssues", new { page }),
+        @Html.PagedListPager(Model, page => Url.Action("GetTodayIssues", new { keyword = ViewBag.Keyword, page }),
                       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
                       {
                           Display = PagedListDisplayMode.IfNeeded,

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
-using Web.Managers;
+using System.Linq;
 using Web.Models;
 using Web.ModelViews;
 
@@ -27,7 +27,7 @@ namespace Web.Mappers
                 var _view = Mapper.Map<WorkIssue, IssueView>(model);
                 views.Add(_view);
             }
-            return views;
+            return views.OrderBy(t=>t.CreatedDate).ToList();
         }
 
         //public static NewIssue NewIssueToViewModel(WorkIssue model)

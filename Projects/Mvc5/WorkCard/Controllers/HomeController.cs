@@ -3,7 +3,6 @@ using Repository.Pattern.UnitOfWork;
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using Web.Mappers;
 using Web.Models;
 using Web.ModelViews;
 
@@ -17,12 +16,6 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            if(User.Identity.IsAuthenticated)
-            {
-                var _objects = IssueManager.SeeList(User.Identity.Name);
-                var _views = IssueMappers.IssuesToViews(_objects.ToList());
-                return View("Index", _views);
-            }
             return View("Index");
         }
         public ActionResult Dashboards()

@@ -1,0 +1,52 @@
+﻿@model Web.ModelViews.IssueView
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsOf(User.Identity.Name))
+
+    {
+        @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
+              new { issueId = Model.Id },
+              new AjaxOptions
+              {
+                  UpdateTargetId = "AddQuestion",
+                  HttpMethod = "Get",
+              }, new { @class = "btn btn-outline-danger" })
+        @Html.ActionLink("To article", "ToArticle", new { id = Model.Id })
+        @Html.ActionLink("GetTaskAsync", "GetTaskAsync", "WorkIssues")
+        @Html.Raw(" | ")
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.Raw(" | ")
+        @Html.ActionLink("ToCalendar", "ToCalendar", "WorkIssues", new { id = Model.Id }, null)
+        @Html.Raw(" | ")
+        @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, null)
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Delete All Questions", "DeleteAllQuestions", "WorkIssues",
+              new { Id = Model.Id },
+              new AjaxOptions
+              {
+                  UpdateTargetId = "Status-" + Model.Id.ToString(),
+                  HttpMethod = "Post",
+              }, null)
+        @Html.Raw(" | ")
+    }
+    @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
+         new { id = Model.Id, status = "Done" },
+         new AjaxOptions
+         {
+             UpdateTargetId = "Status-" + Model.Id.ToString(),
+             HttpMethod = "Post",
+         }, null)
+    @Html.Raw(" | ")
+    @Ajax.ActionLink("Notify", "Notify", "WorkIssues",
+         new { id = Model.Id },
+         new AjaxOptions
+         {
+             UpdateTargetId = "Status-" + Model.Id.ToString(),
+             HttpMethod = "Post",
+         }, null)
+    @Html.Raw(" | ")
+    @Html.ActionLink("Back to List", "Index")
+}
+<div id="AddQuestion">
+
+</div>

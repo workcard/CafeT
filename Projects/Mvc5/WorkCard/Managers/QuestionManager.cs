@@ -12,10 +12,10 @@ namespace Web.Managers
         {
         }
        
-
         public Question GetById(Guid id)
         {
-            return dbContext.Questions.FindAsync(id).Result;
+            return _unitOfWorkAsync.RepositoryAsync<Question>()
+                .Find(id);
         }
 
         public List<Question> GetAll()
@@ -64,6 +64,7 @@ namespace Web.Managers
                 .Where(t => t.QuestionId == id)
                 .ToList();
         }
+
         public bool HasAnswers(Guid id)
         {
             var _answers = GetAnswers(id);

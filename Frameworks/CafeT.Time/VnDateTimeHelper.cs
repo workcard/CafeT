@@ -55,13 +55,13 @@ namespace CafeT.Time
             else if (timeSpan <= TimeSpan.FromHours(24))
             {
                 result = timeSpan.Hours > 1 ?
-                    String.Format("{0} hours", timeSpan.Hours) :
+                    String.Format("-{0} hours", timeSpan.Hours) :
                     "an hour";
             }
             else if (timeSpan <= TimeSpan.FromDays(30))
             {
                 result = timeSpan.Days > 1 ?
-                    String.Format("{0} days", timeSpan.Days) :
+                    String.Format("-{0} days", timeSpan.Days) :
                     "yesterday";
             }
             else if (timeSpan <= TimeSpan.FromDays(365))

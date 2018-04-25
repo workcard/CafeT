@@ -1,0 +1,31 @@
+﻿@model Web.Models.WorkIssue
+
+
+@if (!Model.IsToday())
+{
+    @Ajax.ActionLink(" | Today", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.ToString() },
+                                                   new AjaxOptions
+                                                   {
+                                                       UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                       HttpMethod = "Post",
+                                                   }, null)
+}
+@if (!Model.IsTomorrow())
+{
+    @Ajax.ActionLink(" | Tomorrow", "SetWorkOnTime", "WorkIssues",
+                                                   new { Id = Model.Id, date = DateTime.Now.AddDays(1).ToString() },
+                                                   new AjaxOptions
+                                                   {
+                                                       UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                       HttpMethod = "Post",
+                                                   }, null)
+}
+
+@Ajax.ActionLink(" | Next week", "SetWorkOnTime", "WorkIssues",
+                                        new { Id = Model.Id, date = DateTime.Now.AddDays(5).ToString() },
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = "time-" + Model.Id.ToString(),
+                                            HttpMethod = "Post",
+                                        }, null)
+<div id="time-@Model.Id.ToString()"></div>

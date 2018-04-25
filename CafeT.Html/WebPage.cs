@@ -43,7 +43,6 @@ namespace CafeT.Html
     {
         HtmlWeb web = new HtmlWeb();
         HtmlDocument html;
-        //public SmartHtml HtmlSmart { set; get; }
         public string Domain { set; get; }
         public string PathConfig { set; get; }
         public string Url { set; get; }
@@ -58,7 +57,7 @@ namespace CafeT.Html
         public List<string> Links { set; get; } = new List<string>();
         public List<string> InternalLinks { set; get; } = new List<string>();
         public List<string> ExternalLinks { set; get; } = new List<string>();
-        
+        public IEnumerable<HtmlNode> Nodes { set; get; }
         public List<string> Keywords { set; get; } = new List<string>(); //Keyword start with #
         HtmlParseError Errors { set; get; }
 
@@ -71,40 +70,9 @@ namespace CafeT.Html
 
         public WebPage(string url)
         {
-            if(url.IsUrl())
-            {
-                Url = url;
-                Domain = GetDomain();
-                web = new HtmlWeb();
-                html = web.Load(Url);
-                HtmlContent = html.DocumentNode.OuterHtml;
-                TextContent = HtmlContent.HtmlToText();
-                var _allLinks = HtmlContent.GetUrls();
-                GetHtmlTables();
-                BuildKeywords();
-                CssDivs = HtmlContent.GetAllDivs().ToList();
-                
-
-
-                foreach (string _link in _allLinks)
-                {
-                    if (_link.StartsWith("/"))
-                    {
-                        string _url = Url.GetBefore(Domain) + Domain + _link;
-                        Links.Add(_url);
-                    }
-                    else
-                    {
-                        Links.Add(_link);
-                    }
-                }
-                if(Links != null)
-                {
-                    InternalLinks = Links.Where(t => t.StartsWith(Url.GetBefore(Domain) + Domain)).ToList();
-                }
-                GetImages("jpg");
-            }
+            Url = url;
         }
+
         public void BuildKeywords()
         {
             #region Url
@@ -182,22 +150,32 @@ namespace CafeT.Html
         //    HtmlContent = _minTag;
         //}
 
-        //public void LoadTitle()
-        //{
-        //    if (HtmlSmart.Nodes == null || HtmlSmart.Nodes.Count() == 0)
-        //    {
-        //        Title = string.Empty;
-        //    }
-        //    string _minTag = HtmlSmart.Nodes.Where(t => t.CanTitle())
-        //        .Where(t => t.InnerText.ToStandard().GetCountWords() > 5)
-        //        .Select(t => t.InnerText.ToStandard()).OrderBy(t => t.GetCountWords()).FirstOrDefault();
-        //    Title = _minTag;
-        //}
+        public void LoadTitle()
+        {
+            var nodes = Nodes
+                .Where(t => (t.OuterHtml.HtmlToText().ToStandard().GetCountWords() >= 5)
+                && (t.OuterHtml.HtmlToText().ToStandard().GetCountWords() <= 35));
+
+            foreach (HtmlNode node in nodes)
+            {
+                if (node.OuterHtml.Contains("title"))
+                {
+                    Title = node.InnerText.HtmlToText().ToStandard().GetFirstSentence();
+                    return;
+                }
+                else
+                {
+                    Title = nodes.FirstOrDefault().InnerText.HtmlToText().ToStandard();
+                    return;
+                }
+            }
+        }
 
         public List<HtmlNode> GetNodesByClass(string className)
         {
             return html.DocumentNode.GetNodesByClasses(className);
         }
+
         public void GetImages(string ext)
         {
             var imageLinks = Links.Where(t => t.Contains(ext)).ToList();
@@ -211,10 +189,47 @@ namespace CafeT.Html
             }
             Images = imageLinks;
         }
-        //public void GetNodeBy(string className)
-        //{
-        //    var allElementsWithClassFloat =
-        //        html.DocumentNode.SelectNodes("//*[contains(@class,'float')]");
-        //}
+       
+        public bool IsLoaded = false;
+        public List<string> CssIds { set; get; } = new List<string>();
+        public void Load()
+        {
+            if (IsLoaded) return;
+            if (Url.IsUrl())
+            {
+                Domain = GetDomain();
+                web = new HtmlWeb();
+                html = web.Load(Url);
+                HtmlContent = html.DocumentNode.OuterHtml;
+                TextContent = HtmlContent.HtmlToText();
+                var _allLinks = HtmlContent.GetUrls();
+                GetHtmlTables();
+                BuildKeywords();
+                CssIds = HtmlContent.GetAllIds().ToList();
+                CssClasses = HtmlContent.GetAllClasses()
+                    .ToList();
+                Nodes = html.GetNodes().Where(t => t.IsCssClass());
+                    //.Where(t=>t.OuterHtml.Contains("class"));
+                foreach (string _link in _allLinks)
+                {
+                    if (_link.StartsWith("/"))
+                    {
+                        string _url = Url.GetBefore(Domain) + Domain + _link;
+                        Links.Add(_url);
+                    }
+                    else
+                    {
+                        Links.Add(_link);
+                    }
+                }
+                if (Links != null)
+                {
+                    InternalLinks = Links.Where(t => t.StartsWith(Url.GetBefore(Domain) + Domain)).ToList();
+                }
+                GetImages("jpg");
+                LoadTitle();
+                IsLoaded = true;
+            }
+        }
     }
 }

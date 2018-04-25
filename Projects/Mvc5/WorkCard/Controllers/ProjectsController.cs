@@ -33,6 +33,18 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        [Authorize]
+        public ActionResult LoadProjects()
+        {
+            var projects = ProjectManager.GetAllOf(User.Identity.Name);
+            
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_List", projects);
+            }
+            return RedirectToAction("Index");
+        }
         //[HttpPost]
         //public JsonResult AutoCompleted(string projectId, string Prefix)
         //{

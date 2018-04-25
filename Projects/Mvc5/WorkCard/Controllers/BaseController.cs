@@ -1,40 +1,28 @@
 ﻿using CafeT.GoogleManager;
 using Microsoft.AspNet.Identity.Owin;
 using Repository.Pattern.UnitOfWork;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using Web.Managers;
 using Web.Models;
-using Web.Services;
 
 namespace Web.Controllers
 {
-
-    public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
-    {
-        protected override Google.Apis.Auth.OAuth2.Mvc.FlowMetadata FlowData
-        {
-            get { return new AppFlowMetadata(); }
-        }
-    }
+    
 
     public class BaseController : Controller
     {
         protected int STORIES_COUNT_TOVIEW = 5;
         protected int ISSUES_COUNT_TOVIEW = 15;
         protected int Const_DefaultGetItems = 10;
-        protected int PageSize = 10;
+        protected int PageSize = 5;
         protected string UploadFolder = "~/Profiles/Uploads/";
 
         protected readonly IUnitOfWorkAsync _unitOfWorkAsync;
 
         protected IssuesManager IssueManager { set; get; }
+        protected UrlManager UrlManager { set; get; }
         protected ContactManager ContactManager { set; get; }
         protected QuestionManager QuestionManager { set; get; }
         protected JobManager JobManager { set; get; }
@@ -47,6 +35,7 @@ namespace Web.Controllers
         {
             _unitOfWorkAsync = unitOfWorkAsync;
             IssueManager = new IssuesManager(unitOfWorkAsync);
+            UrlManager = new UrlManager(unitOfWorkAsync);
             ContactManager = new ContactManager(unitOfWorkAsync);
             JobManager = new JobManager(unitOfWorkAsync);
             QuestionManager = new QuestionManager(unitOfWorkAsync);

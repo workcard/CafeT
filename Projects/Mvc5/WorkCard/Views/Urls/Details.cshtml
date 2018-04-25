@@ -5,8 +5,8 @@
 }
 
 <h2>Details</h2>
-
-<div>
+@Html.Raw(ViewBag.Title)
+<div class="col-md-6">
     <h4>Url</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -132,6 +132,28 @@
 
     </dl>
 </div>
+@*<div class="col-md-3">
+    @{ 
+        var page = (CafeT.Html.WebPage)ViewBag.Page;
+        @Html.Raw("Title: " + page.Title)
+    var nodes = page.Nodes.Where(t => t.Name=="div"&& t.InnerText.GetCountWords() >= 5 && t.InnerText.GetCountWords() <= 35)
+    .Select(t=>t.InnerText.GetMaxWords(20).WordsToString())
+    .Distinct();
+    <ul class="list-group">
+        @foreach (var node in nodes)
+    {
+        <li class="list-group-item">
+            @Html.Raw(node)
+        </li>
+
+}
+
+}
+    </ul>
+        
+    }
+</div>
+<div class="col-md-3"></div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

@@ -27,6 +27,7 @@ namespace Web.Models
             }
             return false;
         }
+
         public Command(string command)
         {
             Text = command;
@@ -35,6 +36,10 @@ namespace Web.Models
                 Text = command
                     .Replace("{",string.Empty)
                     .Replace("}",string.Empty);
+                if(!Text.Contains(","))
+                {
+                    Text = Text.AddAfter(",");
+                }
                 if(Text.Contains(","))
                 {
                     string[] elements = Text.Split(new string[] { "," }, StringSplitOptions.None);
@@ -47,6 +52,17 @@ namespace Web.Models
                     if (Header.IsEmail()) Type = CommandType.IsEmail;
                     if (Header.IsUrl()) Type = CommandType.IsUrl;
                 }
+                //else //If is one statement not include {,}
+                //{
+                //    Header = Text;
+                //    Body = Text;
+                //    Title = Body.GetFirstSentence();
+                //    Type = CommandType.None;
+                //    if (Header.Contains("?")) Type = CommandType.IsQuestion;
+                //    if (Header.Contains("$$")) Type = CommandType.IsLatex;
+                //    if (Header.IsEmail()) Type = CommandType.IsEmail;
+                //    if (Header.IsUrl()) Type = CommandType.IsUrl;
+                //}
             }
         }
 

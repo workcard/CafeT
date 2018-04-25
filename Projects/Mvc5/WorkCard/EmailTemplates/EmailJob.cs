@@ -1,20 +1,8 @@
-﻿
-using CafeT.Enumerable;
-using CafeT.Objects.Enums;
+﻿using CafeT.Objects.Enums;
 using Quartz;
-using Repository.Pattern.Ef6;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
 using System.Linq;
-using System.Net.Configuration;
-using System.Net.Mail;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Configuration;
-using Web;
-using Web.Managers;
 using Web.Models;
 
 namespace Web.ScheduledTasks

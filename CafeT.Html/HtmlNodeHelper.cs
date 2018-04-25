@@ -124,7 +124,8 @@ namespace CafeT.Html
 
         public static bool IsTitle(this HtmlNode node)
         {
-            if (node.Name.ToLower().Contains("title"))
+            if (node.Name.ToLower().Contains("title")
+                || node.InnerText.GetCountWords() >= 5)
                 return true;
             return false;
         }

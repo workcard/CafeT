@@ -33,6 +33,8 @@ namespace Web.Models
         public List<string> Numbers { set; get; }
         public List<DateTime> Times { set; get; }
         public List<string> Emails { set; get; }
+        //[NotMapped]
+        //public List<string> Links { set; get; }
         public List<string> HasTags { set; get; }
         public List<string> Members { set; get; }
         public List<string> Viewers { set; get; } = new List<string>();
@@ -347,7 +349,12 @@ namespace Web.Models
             }
             return _innerMembers.ToArray();
         }
-
+        public string[] GetLinks()
+        {
+            List<string> _links = new List<string>();
+            _links = Content.GetUrls().Distinct().ToList();
+            return _links.ToArray();
+        }
         public void MoveToday()
         {
             Start = DateTime.Today.StartWorkingTime();

@@ -4,6 +4,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <script type="text/javascript">
     $.get('@Url.Action("LoadSummary", "Projects", new { id = Model.Id.ToString()})',
         function (data) {
@@ -34,5 +35,5 @@
         <div class="col-md-6">
             @Html.Partial("_IssuesCompleted", Model.Issues.Where(t => t.IsCompleted()))
         </div>
-    </div>>
+    </div>
 </div>

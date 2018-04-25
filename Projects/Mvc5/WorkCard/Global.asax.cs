@@ -1,4 +1,5 @@
 ﻿using CafeT.Text;
+using StackExchange.Profiling;
 using System;
 using System.Threading;
 using System.Web.Mvc;
@@ -20,11 +21,10 @@ namespace Web
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new RazorViewEngine());
-
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
 
             log4net.Config.XmlConfigurator.Configure();
 
@@ -43,6 +43,17 @@ namespace Web
             });
 
             JobScheduler.StartAsync().GetAwaiter().GetResult();
+        }
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                MiniProfiler.Start();
+            }
+        }
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Stop();
         }
         protected void Application_Error(Object sender, EventArgs e)
         {
