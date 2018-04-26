@@ -12,28 +12,26 @@
         });
 </script>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            @Html.Raw(Model.Title)
+<div class="card">
+    <div class="card-header">
+        @Html.Raw(Model.Title)
+    </div>
+    <div class="card-body">
+        <div id="summary-@Model.Id.ToString()"></div>
+        <div class="card-text">
+            @Html.Raw(Model.Description)
         </div>
-        <div class="card-body">
-            <div id="summary-@Model.Id.ToString()"></div>
-            <div class="card-text">
-                @Html.Raw(Model.Description)
-            </div>
-            <div class="card-link">
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
+        <div class="card-link">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            @Html.Partial("_IssuesUpcoming", Model.Issues.Where(t => !t.IsCompleted()))
-        </div>
-        <div class="col-md-6">
-            @Html.Partial("_IssuesCompleted", Model.Issues.Where(t => t.IsCompleted()))
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        @Html.Partial("_IssuesUpcoming", Model.Issues.Where(t => !t.IsCompleted()))
+    </div>
+    <div class="col-md-6">
+        @Html.Partial("_IssuesCompleted", Model.Issues.Where(t => t.IsCompleted()))
     </div>
 </div>

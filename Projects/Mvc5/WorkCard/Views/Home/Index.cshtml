@@ -40,12 +40,7 @@
             $('#upcomming-box').html(data);
         });
 </script>
-<script type="text/javascript">
-    $.get('@Url.Action("LoadProjects", "Projects", null)',
-        function (data) {
-            $('#projects-panel').html(data);
-        });
-</script>
+
 @if (!User.Identity.IsAuthenticated)
 {
     <div class="container">
@@ -54,23 +49,17 @@
 }
 else
 {
-    <div class="col-md-2">
-        <div id="projects-panel"></div>
-    </div>
-    <div class="col-md-10">
-        <div class="row">
-            <div class="col-md-4">
-                <div id="today-box"></div>
-            </div>
-            <div class="col-md-4">
-                <div id="upcomming-box"></div>
-                
-            </div>
-            <div class="col-md-4">
-                <div id="summary-box"></div>
-                <div id="verify-box"></div>
-                <div id="completed-box"></div>
-            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="today-box"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="upcomming-box"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="summary-box"></div>
+            <div id="verify-box"></div>
+            <div id="completed-box"></div>
         </div>
     </div>
 }

@@ -3,7 +3,6 @@
 
 
 <div class="card">
-    @*@using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post, new WorkIssue() { }))*@
     @using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
@@ -11,14 +10,11 @@
         <div class="card-body">
             @Html.Raw("Thêm việc ...")
             <br />
-            <div class="form-group">
-                @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
-                <script>
-                    CKEDITOR.replace('Content');
-                </script>
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-
-            </div>
+            @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
+            <script>
+                CKEDITOR.replace('Content');
+            </script>
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             <input type="submit" value="Create" class="btn btn-outline-primary" />
         </div>
     }

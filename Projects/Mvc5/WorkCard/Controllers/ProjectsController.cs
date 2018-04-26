@@ -41,7 +41,7 @@ namespace Web.Controllers
             
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_List", projects);
+                return PartialView("_Projects", projects);
             }
             return RedirectToAction("Index");
         }

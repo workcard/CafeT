@@ -1,26 +1,33 @@
 ﻿
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <a class="my-0 mr-md-auto font-weight-normal" href="@Url.Content("~/Home/Index")">WorkCard.vn</a>
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="@Url.Content("~/Home/Index")">Trang chủ</a>
-        <a class="p-2 text-dark" href="@Url.Content("~/WorkIssues/Index")">Cards</a>
-        @*<a class="p-2 text-dark" href="@Url.Content("~/WorkIssues/Create")">New issue</a>*@
-        @if (User.Identity.IsAuthenticated)
-    {
-        @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="@Url.Content("~/Home/Index")">WorkCard.vn</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Content("~/Home/Index")">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Content("~/WorkIssues/Index")">Cards</a>
+            </li>
+            <li class="nav-item">
+                @if (User.Identity.IsAuthenticated)
+            {
+                @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
                    null,
                    new AjaxOptions
                    {
                        UpdateTargetId = "QuickIssue",
                        HttpMethod = "Get",
                        InsertionMode = InsertionMode.Replace
-                   }, null)
-}
-        <a class="p-2 text-dark" href="@Url.Content("~/Projects/Index")">Projects</a>
-        <a class="p-2 text-dark" href="@Url.Content("~/Home/Dashboards")">Dashboards</a>
-        <a class="p-2 text-dark" href="@Url.Content("~/Contacts/Index")">Contacts</a>
-        <a class="p-2 text-dark" href="#">Hướng dẫn</a>
-    </nav>
-    @Html.Partial("Partials/_LoginPartial")
-</div>
-<div id="QuickIssue"></div>
+                   }, new { @class = "nav-link" })
+        }
+            </li>
+        </ul>
+        @Html.Partial("Partials/_LoginPartial")
+    </div>
+</nav>
+
+

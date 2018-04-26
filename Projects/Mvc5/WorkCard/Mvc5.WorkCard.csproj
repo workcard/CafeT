@@ -786,13 +786,15 @@
     <Content Include="Views\Shared\Issues\_IssuesPaging.cshtml" />
     <Content Include="Views\Shared\Issues\_RelatedIssues.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueRelated.cshtml" />
-    <Content Include="Views\Projects\_List.cshtml" />
+    <Content Include="Views\Projects\_Projects.cshtml" />
     <Content Include="Views\Urls\Create.cshtml" />
     <Content Include="Views\Urls\Delete.cshtml" />
     <Content Include="Views\Urls\Details.cshtml" />
     <Content Include="Views\Urls\Edit.cshtml" />
     <Content Include="Views\Urls\Index.cshtml" />
     <Content Include="Views\Shared\Urls\_EmbedUrl.cshtml" />
+    <Content Include="Views\Shared\_SearchBox.cshtml" />
+    <Content Include="Views\Shared\Projects\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

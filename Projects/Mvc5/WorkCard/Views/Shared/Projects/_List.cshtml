@@ -1,0 +1,8 @@
+﻿<script type="text/javascript">
+    $.get('@Url.Action("LoadProjects", "Projects", null)',
+        function (data) {
+            $('#projects-panel').html(data);
+        });
+</script>
+<div id="projects-panel">
+</div>

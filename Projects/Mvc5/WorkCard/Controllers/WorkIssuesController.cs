@@ -426,6 +426,18 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(!workIssue.IsValid())
+                {
+                    if(Request.IsAjaxRequest())
+                    {
+                        return PartialView("_NotifyMessage", "Issue is not valid");
+                    }
+                    else
+                    {
+                        return View("_NotifyMessage", "Issue is not valid");
+                    }
+                }
+
                 workIssue.CreatedBy = User.Identity.Name;
                 workIssue.PrepareToCreate();
                 workIssue.Update();
@@ -443,6 +455,7 @@ namespace Web.Controllers
                         workIssue.ProjectId = _selectProjects.FirstOrDefault().Id;
                     }
                 }
+
                 IssueManager.Insert(workIssue);
               
                 if(workIssue.HasInnerMembers())
