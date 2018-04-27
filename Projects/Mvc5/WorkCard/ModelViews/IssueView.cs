@@ -365,5 +365,14 @@ namespace Web.ModelViews
 
             return commands.ToArray();
         }
+
+        public bool IsRunning()
+        {
+            if (Start.HasValue && End.HasValue && DateTime.Now.IsInRange(Start.Value, End.Value))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

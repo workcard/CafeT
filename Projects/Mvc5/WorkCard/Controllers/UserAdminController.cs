@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using CafeT.Enumerable;
+using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -66,13 +67,26 @@ namespace Web.Controllers
             }
         }
 
-        
+        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await UserManager.Users.ToListAsync());
         }
 
-
+        [HttpGet]
+        public async Task<ActionResult> LoadUsers(int? n)
+        {
+            var _all = await UserManager.Users.ToListAsync();
+            var _objects = _all.TakeMax(n.Value);
+           
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Users", _objects);
+            }
+            return View("Index", _objects);
+        }
+        
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -80,8 +94,6 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = await UserManager.FindByIdAsync(id);
-
-            // Show the groups the user belongs to:
             var userGroups = await this.GroupManager.GetUserGroupsAsync(id);
             ViewBag.GroupNames = userGroups.Select(u => u.Name).ToList();
             return View(user);
@@ -90,7 +102,6 @@ namespace Web.Controllers
 
         public ActionResult Create()
         {
-            // Show a list of available groups:
             ViewBag.GroupsList = 
                 new SelectList(this.GroupManager.Groups, "Id", "Name");
             return View();
@@ -111,7 +122,6 @@ namespace Web.Controllers
                 var adminresult = await UserManager
                     .CreateAsync(user, userViewModel.Password);
 
-                //Add User to the selected Groups 
                 if (adminresult.Succeeded)
                 {
                     if (selectedGroups != null)

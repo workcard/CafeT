@@ -1,0 +1,39 @@
+﻿@model Web.Models.WorkIssue
+
+@Html.Raw("Thêm : ")
+<span class="btn btn-outline-success">
+    @Ajax.ActionLink("5m", "AddTimeToDo", "WorkIssues", new { id = Model.Id, minutes = 5 },
+                                                           new AjaxOptions
+                                                           {
+                                                               UpdateTargetId = "TimeToDo-" + Model.Id.ToString(),
+                                                               HttpMethod = "Post",
+                                                           }, null)
+</span>
+<span class="btn btn-outline-success">
+    @Ajax.ActionLink("10m", "AddTimeToDo", "WorkIssues",
+                                                               new { Id = Model.Id, minutes = 10 },
+                                                               new AjaxOptions
+                                                               {
+                                                                   UpdateTargetId = "TimeToDo-" + Model.Id.ToString(),
+                                                                   HttpMethod = "Post",
+                                                               }, null)
+</span>
+<span class="btn btn-outline-success">
+    @Ajax.ActionLink("15m", "AddTimeToDo", "WorkIssues",
+                                                    new { Id = Model.Id, minutes = 15 },
+                                                    new AjaxOptions
+                                                    {
+                                                        UpdateTargetId = "TimeToDo-" + Model.Id.ToString(),
+                                                        HttpMethod = "Post",
+                                                    }, null)
+</span>
+<span class="btn btn-outline-success">
+    @Ajax.ActionLink("30", "AddTimeToDo", "WorkIssues",
+                                                        new { Id = Model.Id, minutes = 30 },
+                                                        new AjaxOptions
+                                                        {
+                                                            UpdateTargetId = "TimeToDo-" + Model.Id.ToString(),
+                                                            HttpMethod = "Post",
+                                                        }, null)
+</span>
+<div id="TimeToDo-@Model.Id.ToString()" class="badge badge-danger"></div>

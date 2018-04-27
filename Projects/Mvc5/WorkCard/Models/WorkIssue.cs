@@ -33,8 +33,7 @@ namespace Web.Models
         public List<string> Numbers { set; get; }
         public List<DateTime> Times { set; get; }
         public List<string> Emails { set; get; }
-        //[NotMapped]
-        //public List<string> Links { set; get; }
+        
         public List<string> HasTags { set; get; }
         public List<string> Members { set; get; }
         public List<string> Viewers { set; get; } = new List<string>();
@@ -405,7 +404,6 @@ namespace Web.Models
 
         public string[] GetEmails()
         {
-            //List<string> _emails = new List<string>();
             if (Title.HasEmail()) Emails = Title.GetEmails().ToList();
             if (Content.HasEmail()) Emails.AddRange(Content.GetEmails().ToList());
             Emails.Add(CreatedBy);
@@ -430,17 +428,27 @@ namespace Web.Models
             return commands.ToArray();
         }
 
+        #region Notification
         public void Notify(EmailService emailService)
         {
             var _emails = GetEmails().Distinct();
-            if(_emails != null && _emails.Count() > 0)
+            if (_emails != null && _emails.Count() > 0)
             {
-                foreach(string _email in _emails)
+                foreach (string _email in _emails)
                 {
                     emailService.SendAsync(this, _email);
                 }
             }
         }
+        #endregion
 
+        public bool IsRunning()
+        {
+            if(Start.HasValue && End.HasValue && Start.Value.IsInRange(DateTime.Now, End.Value))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 
 namespace Web.Models
 {
+    //public class UserProfile
+    //{
+    //    [Key]
+    //    public Guid Id { set; get; }
+    //    public string UserId { set; get; }
+    //    public DateTime CreatedDate { set; get; }
+    //    public string ActivityName { set; get; }
+    //    public DateTimeOffset LastActivityDate { get; set; }
+    //}
+
     public class ApplicationUser : IdentityUser<string, ApplicationUserLogin,
         ApplicationUserRole, ApplicationUserClaim>
     {
@@ -18,7 +28,6 @@ namespace Web.Models
         [Display(Name = "Họ & chữ lót")]
         public string LastName { get; set; }
 
-
         [Display(Name = "Ngày sinh")]
         public DateTime? Birthday { set; get; }
 
@@ -29,16 +38,18 @@ namespace Web.Models
         public int? Points { set; get; }
 
         public int? CountViews { set; get; }
-
         [Display(Name = "Giới thiệu")]
         public string About { set; get; }
-        public int? BugNetUserId { set; get; }
+        
+        public DateTime CreatedDate { set; get; }
+        public DateTime LastUpatedDate { set; get; }
 
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
             Points = 0;
             CountViews = 0;
+            CreatedDate = DateTime.Now;
         }
 
         public string GetFullName()

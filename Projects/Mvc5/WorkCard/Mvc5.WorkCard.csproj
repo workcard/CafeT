@@ -104,11 +104,11 @@
     <Reference Include="Google.Apis.Core, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Google.Apis.Core.1.33.0\lib\net45\Google.Apis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Drive.v2, Version=1.33.0.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Drive.v2.1.33.0.1194\lib\net45\Google.Apis.Drive.v2.dll</HintPath>
+    <Reference Include="Google.Apis.Drive.v2, Version=1.33.0.1198, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Drive.v2.1.33.0.1198\lib\net45\Google.Apis.Drive.v2.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Drive.v3, Version=1.33.0.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Google.Apis.Drive.v3.1.33.0.1194\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.33.0.1198, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Apis.Drive.v3.1.33.0.1198\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
@@ -458,6 +458,22 @@
     <Compile Include="Managers\IssuesManager.cs" />
     <Compile Include="Mappers\IssueMappers.cs" />
     <Compile Include="Mappers\ProjectMappers.cs" />
+    <Compile Include="Migrations\201804270351425_UserProfile.cs" />
+    <Compile Include="Migrations\201804270351425_UserProfile.Designer.cs">
+      <DependentUpon>201804270351425_UserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804270423249_UserProfile1.cs" />
+    <Compile Include="Migrations\201804270423249_UserProfile1.Designer.cs">
+      <DependentUpon>201804270423249_UserProfile1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804270428029_UserProfile2.cs" />
+    <Compile Include="Migrations\201804270428029_UserProfile2.Designer.cs">
+      <DependentUpon>201804270428029_UserProfile2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804270525116_Update.cs" />
+    <Compile Include="Migrations\201804270525116_Update.Designer.cs">
+      <DependentUpon>201804270525116_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
@@ -795,6 +811,8 @@
     <Content Include="Views\Shared\Urls\_EmbedUrl.cshtml" />
     <Content Include="Views\Shared\_SearchBox.cshtml" />
     <Content Include="Views\Shared\Projects\_List.cshtml" />
+    <Content Include="Views\UsersAdmin\_Users.cshtml" />
+    <Content Include="Views\Shared\Issues\_AddTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -809,6 +827,18 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804270351425_UserProfile.resx">
+      <DependentUpon>201804270351425_UserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804270423249_UserProfile1.resx">
+      <DependentUpon>201804270423249_UserProfile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804270428029_UserProfile2.resx">
+      <DependentUpon>201804270428029_UserProfile2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804270525116_Update.resx">
+      <DependentUpon>201804270525116_Update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

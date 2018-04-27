@@ -578,7 +578,17 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> AddTimeToDo(Guid id)
+        {
+            WorkIssue workIssue = IssueManager.GetById(id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_AddTime", workIssue);
+            }
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddTimeToDo(Guid id, int minutes)

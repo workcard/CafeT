@@ -88,6 +88,13 @@ namespace Web.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        //var profile = new UserProfile()
+                        //{
+                        //    ActivityName = "Register",
+                        //    CreatedDate = DateTime.Now,
+                        //    LastActivityDate = DateTime.Now
+                        //};
+
                         //if the list exists, add this user to it
                         if (HttpRuntime.Cache["LoggedInUsers"] != null)
                         {
@@ -211,8 +218,14 @@ namespace Web.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
+                    Birthday = model.Birthday,
                     About = model.About,
-                    Birthday = model.Birthday
+                    //Profile = new UserProfile()
+                    //{
+                    //    ActivityName = "Register",
+                    //    CreatedDate = DateTime.Now,
+                    //    LastActivityDate = DateTime.Now
+                    //}
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -437,7 +450,13 @@ namespace Web.Controllers
                     UserName = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Email = model.Email
+                    Email = model.Email,
+                    //Profile = new UserProfile()
+                    //{
+                    //    ActivityName = "Register",
+                    //    CreatedDate = DateTime.Now,
+                    //    LastActivityDate = DateTime.Now
+                    //}
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

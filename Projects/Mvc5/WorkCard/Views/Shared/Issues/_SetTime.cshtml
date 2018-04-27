@@ -1,24 +1,57 @@
 ﻿@model Web.Models.WorkIssue
 
-
+@if (Model.IsToday())
+{
+    @Html.Raw("Sau: ")<br />
+    @Ajax.ActionLink(" 5m", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.AddMinutes(5).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
+    @Ajax.ActionLink("| 10m ", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.AddMinutes(10).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
+    @Ajax.ActionLink("| 60m ", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.AddMinutes(60).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
+    @Ajax.ActionLink("| 2h ", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.AddDays(2).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
+    @Ajax.ActionLink("| -2h ", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.AddDays(-2).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
+}
 @if (!Model.IsToday())
 {
     @Ajax.ActionLink(" | Today", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = DateTime.Now.ToString() },
-                                                   new AjaxOptions
-                                                   {
-                                                       UpdateTargetId = "time-" + Model.Id.ToString(),
-                                                       HttpMethod = "Post",
-                                                   }, null)
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
 }
 @if (!Model.IsTomorrow())
 {
     @Ajax.ActionLink(" | Tomorrow", "SetWorkOnTime", "WorkIssues",
-                                                   new { Id = Model.Id, date = DateTime.Now.AddDays(1).ToString() },
-                                                   new AjaxOptions
-                                                   {
-                                                       UpdateTargetId = "time-" + Model.Id.ToString(),
-                                                       HttpMethod = "Post",
-                                                   }, null)
+                                                                       new { Id = Model.Id, date = DateTime.Now.AddDays(1).ToString() },
+                                                                       new AjaxOptions
+                                                                       {
+                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                           HttpMethod = "Post",
+                                                                       }, null)
 }
 
 @Ajax.ActionLink(" | Next week", "SetWorkOnTime", "WorkIssues",

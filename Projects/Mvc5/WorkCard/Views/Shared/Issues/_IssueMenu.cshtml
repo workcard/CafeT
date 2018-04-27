@@ -4,49 +4,56 @@
 <div class="small">
     @if (User.Identity.IsAuthenticated)
     {
-        <div id="notify-@Model.Id.ToString()" class="badge badge-success"></div>
+        <div id="notify-@Model.Id.ToString()"></div>
         if (!Model.IsCompleted())
         {
             @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues", new { id = Model.Id, status = "Done" },
-                                                             new AjaxOptions
-                                                             {
-                                                                 UpdateTargetId = "notify-" + Model.Id.ToString(),
-                                                                 HttpMethod = "Post",
-                                                             }, null)
+                                                                  new AjaxOptions
+                                                                  {
+                                                                      UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                                                      HttpMethod = "Post",
+                                                                  }, null)
             @Html.Raw(" | ")
-            @Ajax.ActionLink("+ 5 (min)", "AddTimeToDo", "WorkIssues", new { id = Model.Id, minutes = 5 },
-                                                      new AjaxOptions
-                                                      {
-                                                          UpdateTargetId = "notify-" + Model.Id.ToString(),
-                                                          HttpMethod = "Post",
-                                                      }, null)
+            @Ajax.ActionLink("Add time", "AddTimeToDo", "WorkIssues", new { id = Model.Id },
+                                                           new AjaxOptions
+                                                           {
+                                                               UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                                               HttpMethod = "Get",
+                                                           }, null)
         }
         if (!Model.IsVerified)
         {
             @Ajax.ActionLink(" | Verify", "Verify", "WorkIssues", new { id = Model.Id },
-                                                         new AjaxOptions
-                                                         {
-                                                             UpdateTargetId = "notify-" + Model.Id.ToString(),
-                                                             HttpMethod = "Post",
-                                                         }, null)
+                                                              new AjaxOptions
+                                                              {
+                                                                  UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                                                  HttpMethod = "Post",
+                                                              }, null)
         }
         if (Model.IsCompleted())
         {
             @Ajax.ActionLink("Re-Open", "MarkStatus", "WorkIssues", new { id = Model.Id, status = IssueStatus.ReOpen },
-                                                             new AjaxOptions
-                                                             {
-                                                                 UpdateTargetId = "notify-" + Model.Id.ToString(),
-                                                                 HttpMethod = "Post",
-                                                             }, null)
+                                                                  new AjaxOptions
+                                                                  {
+                                                                      UpdateTargetId = "notify-" + Model.Id.ToString(),
+                                                                      HttpMethod = "Post",
+                                                                  }, null)
         }
         <span id="ActionTime-@Model.Id.ToString()">
-            @Ajax.ActionLink(" | SetTime", "SetWorkOnTime", "WorkIssues", new { id = Model.Id },
-                                                        new AjaxOptions
-                                                        {
-                                                            UpdateTargetId = "ActionTime-" + Model.Id.ToString(),
-                                                            HttpMethod = "Get",
-                                                            InsertionMode = InsertionMode.Replace
-                                                        }, null)
+            @Ajax.ActionLink(" | Set Time", "SetWorkOnTime", "WorkIssues", new { id = Model.Id },
+                                                             new AjaxOptions
+                                                             {
+                                                                 UpdateTargetId = "ActionTime-" + Model.Id.ToString(),
+                                                                 HttpMethod = "Get",
+                                                                 InsertionMode = InsertionMode.Replace
+                                                             }, null)
         </span>
+        @Ajax.ActionLink(" | Hỏi", "AddQuestion", "Questions",
+                   new { issueId = Model.Id },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "notify-" + Model.Id.ToString(),
+                       HttpMethod = "Get",
+                   }, null)
     }
 </div>

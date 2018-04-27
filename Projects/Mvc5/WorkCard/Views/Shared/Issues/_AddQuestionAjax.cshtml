@@ -1,24 +1,23 @@
 ﻿@model Web.Models.Question
 
-<div id="@Model.Id.ToString()" class="panel panel-border panel-success"></div>
-<div id="Post">
+@*<div id="@Model.Id.ToString()" class="panel panel-border panel-success"></div>*@
+<div id="@Model.Id.ToString()">
     @using (Ajax.BeginForm("AjaxCreate", "Questions", new { issueId = Model.IssueId },
     new AjaxOptions
     {
         HttpMethod = "POST",
         UpdateTargetId = @Model.Id.ToString(),
-        InsertionMode = InsertionMode.InsertBefore
+        InsertionMode = InsertionMode.Replace
     },
     null))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => Model.Id)
         @Html.HiddenFor(model => Model.CreatedDate)
-    <div class="card-box">
-        <textarea id="Content" name="Content" rows="1" class="form-control" placeholder="Bạn muốn hỏi gì?"></textarea>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-        
+        <div class="card-box">
+            <textarea id="Content" name="Content" rows="1" class="form-control" placeholder="Bạn muốn hỏi gì?"></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     }
 </div>
 

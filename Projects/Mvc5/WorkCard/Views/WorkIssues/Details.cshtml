@@ -23,133 +23,129 @@
             $('#sameTag-box').html(data);
         });
 </script>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">
-                        @Model.Title
-                        <span class="badge badge-danger pull-right">@Model.Status</span>
-                        @if (Model.Repeat != ScheduleType.None)
-                        {
-                            <span class="badge badge-info pull-right">@Model.Repeat</span>
-                        }
-                        <span class="badge badge-danger pull-right">@Model.IssueEstimation (phút)</span>
-                        <span class="badge badge-danger pull-right">@Model.End.Value.ToShortTimeString()</span>
-                        <hr />
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    @Model.Title
+                    <span class="badge badge-danger pull-right">@Model.Status</span>
+                    @if (Model.Repeat != ScheduleType.None)
+                    {
+                        <span class="badge badge-info pull-right">@Model.Repeat</span>
+                    }
+                    <span class="badge badge-danger pull-right">@Model.IssueEstimation (phút)</span>
+                    <span class="badge badge-danger pull-right">@Model.End.Value.ToShortTimeString()</span>
+                    <hr />
 
-                        @if (Model.Start.HasValue)
-                        {
-                            @Model.Start.Value.ToShortDateString()
-                            @Html.Raw("-")
-                        }
-                        @if (Model.End.HasValue)
-                        {
-                            @Model.End.Value.ToShortDateString()
-                        }
+                    @if (Model.Start.HasValue)
+                    {
+                        @Model.Start.Value.ToShortDateString()
+                        @Html.Raw("-")
+                    }
+                    @if (Model.End.HasValue)
+                    {
+                        @Model.End.Value.ToShortDateString()
+                    }
 
-                        <div id="Update"></div>
+                    <div id="Update"></div>
 
-                        By: @Model.CreatedBy
-                        @if (!Model.Content.IsNullOrEmptyOrWhiteSpace())
-                        {
-                            <span class=" badge badge-info">@Model.Content.ToWords().Count() từ</span>
-                            <span class=" badge badge-info">@Model.Content.GetEmails().Count() emails</span>
-                        }
-                    </div>
-                    <p class="text-justify">
-                        @Html.Raw(Model.Content)
-                    </p>
-                    <p>
-                        @Html.Partial("_DetailsMenu", Model)
-                    </p>
+                    By: @Model.CreatedBy
+                    @if (!Model.Content.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        <span class=" badge badge-info">@Model.Content.ToWords().Count() từ</span>
+                        <span class=" badge badge-info">@Model.Content.GetEmails().Count() emails</span>
+                    }
                 </div>
+                <p class="text-justify">
+                    @Html.Raw(Model.Content)
+                </p>
+                <p>
+                    @Html.Partial("_DetailsMenu", Model)
+                </p>
             </div>
-            <div id="questionsHasAnswers-box"></div>
-            <div id="questions-box"></div>
         </div>
-        <div class="col-md-4">
-            @if (Model.GetEmails() != null && Model.GetEmails().Count() > 0)
-            {
-                <div class="card">
-                    <div class="card-header">Contacts</div>
-                    <ul class="list-group">
-                        @foreach (string email in Model.GetEmails().Distinct())
-                        {
-                            <li class="list-group-item">
-                                @Html.ActionLink(email, "GetContact", "Contacts", new { email = email }, null)
-                                @Html.Raw(" | ")
-                                @Html.ActionLink("Send email", "SendEmail", "WorkIssues", new { toEmail = email, issueId = Model.Id }, null)
-                            </li>
-                        }
-                    </ul>
-
-                </div>
-                <div class="card">
-                    <div class="card-header">Tags</div>
-                    <ul class="list-group">
-                        @foreach (var command in Model.GetCommands().Distinct())
-                        {
-                            if (command.StartsWith("["))
-                            {
-                                <li class="list-group-item">
-                                    @Html.ActionLink(command, "SearchBy", "WorkIssues", new { keyWord = command }, null)
-                                </li>
-                            }
-
-                        }
-                    </ul>
-
-                </div>
-            }
-            <div id="sameTag-box"></div>
-            @{
-                var commands = Model.GetCommands().Distinct();
-                if (commands != null && commands.Count() > 0)
-                {
-                    <div class="card-header">
-                        Commands
-                    </div>
-                    <ul class="list-group">
-                        @foreach (string command in commands)
-                        {
-                            if (command.Contains("@"))
-                            {
-                                <li class="list-group-item">
-                                    @Html.Partial("_Command", command)
-                                </li>
-                            }
-
-                            else
-                            {
-                                <li class="list-group-item">
-                                    @Html.Partial("_Command", command)
-                                </li>
-                            }
-                        }
-                    </ul>
-                }
-
-            }
+        <div id="questionsHasAnswers-box"></div>
+        <div id="questions-box"></div>
+    </div>
+    <div class="col-md-4">
+        @if (Model.GetEmails() != null && Model.GetEmails().Count() > 0)
+        {
             <div class="card">
-                <div class="card-header">Đã xem bởi: </div>
+                <div class="card-header">Contacts</div>
                 <ul class="list-group">
-                    @foreach (string userName in Model.Viewers.Distinct())
+                    @foreach (string email in Model.GetEmails().Distinct())
                     {
                         <li class="list-group-item">
-                            @Html.Raw(userName)
+                            @Html.ActionLink(email, "GetContact", "Contacts", new { email = email }, null)
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Send email", "SendEmail", "WorkIssues", new { toEmail = email, issueId = Model.Id }, null)
                         </li>
                     }
                 </ul>
+
             </div>
-        </div>
-        <div class="col-md-4">
-            <div id="questions-box"></div>
+            <div class="card">
+                <div class="card-header">Tags</div>
+                <ul class="list-group">
+                    @foreach (var command in Model.GetCommands().Distinct())
+                    {
+                        if (command.StartsWith("["))
+                        {
+                            <li class="list-group-item">
+                                @Html.ActionLink(command, "SearchBy", "WorkIssues", new { keyWord = command }, null)
+                            </li>
+                        }
+
+                    }
+                </ul>
+
+            </div>
+        }
+        <div id="sameTag-box"></div>
+        @{
+            var commands = Model.GetCommands().Distinct();
+            if (commands != null && commands.Count() > 0)
+            {
+                <div class="card-header">
+                    Commands
+                </div>
+                <ul class="list-group">
+                    @foreach (string command in commands)
+                    {
+                        if (command.Contains("@"))
+                        {
+                            <li class="list-group-item">
+                                @Html.Partial("_Command", command)
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="list-group-item">
+                                @Html.Partial("_Command", command)
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+
+        }
+        <div class="card">
+            <div class="card-header">Đã xem bởi: </div>
+            <ul class="list-group">
+                @foreach (string userName in Model.Viewers.Distinct())
+                {
+                    <li class="list-group-item">
+                        @Html.Raw(userName)
+                    </li>
+                }
+            </ul>
         </div>
     </div>
-
+    <div class="col-md-4">
+        <div id="questions-box"></div>
+    </div>
 </div>
-
 
 

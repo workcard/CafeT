@@ -24,6 +24,8 @@ namespace Web.Models
         public DbSet<Story> Stories { get; set; }
         public DbSet<Url> Urls { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        //public DbSet<UserProfile> UserProfiles { get; set; }
+
 
         // Add the ApplicationGroups property:
         public virtual IDbSet<ApplicationGroup> ApplicationGroups { get; set; }

@@ -3,7 +3,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
+    var items = Model.OrderBy(t => t.Start.Value).AsEnumerable();
 <div id="Today">
     <div class="card border-success">
         <div class="card-footer">

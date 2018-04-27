@@ -1,31 +1,22 @@
 ﻿@model Web.ModelViews.IssueView
-@*<script type="text/javascript">
-        $.get('@Url.Action("LoadInfo", "WorkIssues", new { id = Model.Id })',
-            function (data) {
-                $('#Update-@Model.Id.ToString()').html(data);
-            });
-    </script>*@
+
+@if (Model.IsToday())
+{
+    <span class="badge badge-danger">Hôm nay</span>
+}
+@Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+<span class="badge badge-danger">@Model.Status</span>
+<br />
 <div class="small">
-    @if (Model.IsToday())
-    {
-        <span class="badge badge-danger">Hôm nay</span>
-    }
+    @Model.Start.Value.ToShortDateString().DeleteEndTo("/") |
+    @Model.Start.Value.ToShortTimeString() - @Model.End.Value.ToShortTimeString()
     <span class="small badge badge-success">@Model.IssueEstimation (m)</span>
-    <span class="small">@Model.Price.ToReadable() (VND)</span>
-    <span class="text-danger">@Model.Status</span>
-    <span class="badge badge-danger">@Model.End.Value.ToShortDateString().DeleteEndTo("/")</span>
-    <span class="badge badge-success">@Model.End.Value.ToShortTimeString()</span>
+    <span>@Model.Price.ToReadable() (VND)</span>
     @if (Model.IsVerified)
     {
         <span class="small material-icons">verified_user</span>
     }
 </div>
-@*<br />*@
-@Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
-
-
-
-
 <hr />
 <div id="Status-@Model.Id.ToString()" class="container"></div>
 

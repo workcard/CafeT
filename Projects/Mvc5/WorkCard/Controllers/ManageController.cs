@@ -47,7 +47,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(applicationUser.UserName);
-                user.About = applicationUser.About;
+                //user.About = applicationUser.About;
                 UserManager.Update(user);
                 return RedirectToAction("Index");
             }
