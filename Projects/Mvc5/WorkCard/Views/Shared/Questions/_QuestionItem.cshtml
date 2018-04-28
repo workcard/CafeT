@@ -1,71 +1,47 @@
 ﻿@model Web.Models.Question
 
-@*@if (Model != null)
-{
-    <script type="text/javascript">
-    $.get('@Url.Action("GetLastAnswers", "Questions", new { id = Model.Id.ToString()})',
-        function (data) {
-            $('#answers-box-@Model.Id.ToString()').html(data);
-        });
-    </script>
-    <div class="row">
-        <div class="col-md-2">
-            {?}
-        </div>
-        <div class="col-md-10">
-            @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
-            {
-                @Model.Title <hr />
-            }
-
-            @Model.CreatedBy : @Model.CreatedDate.Value.TimeAgo()
-        </div>
-    </div>
-}*@
-
-<div class="row">
-    <div class="col-md-2">
-        {?}
-    </div>
-    <div class="col-md-10">
-        @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
-        {
-            @Model.Title <hr />
-        }
-
+<div class="col-md-12">
+    @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+    {
+        @Html.ActionLink("{?} : " + @Model.Title, "Details", "Questions", new { id = Model.Id }, null)
+    }
+    @Html.Raw(Model.Content)
+    <hr />
+    <div class="small">
         @Model.CreatedBy : @Model.CreatedDate.Value.TimeAgo()
     </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        
+            @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
+                                                          new AjaxOptions
+                                                          {
+                                                              UpdateTargetId = "Insert-" + Model.Id.ToString(),
+                                                              HttpMethod = "Get",
+                                                              InsertionMode = InsertionMode.Replace
+                                                          }, new { @class = "card-link" })
+            @Ajax.ActionLink("Translate", "Translate", "Questions", new { id = Model.Id },
+                                                              new AjaxOptions
+                                                              {
+                                                                  UpdateTargetId = "Insert-" + Model.Id.ToString(),
+                                                                  HttpMethod = "Get",
+                                                              }, new { @class = "card-link" })
+
+            if (Model.IsOf(User.Identity.Name) || User.IsInRole("Admin"))
+            {
+                @Ajax.ActionLink(" Xóa ", "Delete", "Questions", new { id = Model.Id },
+                                                      new AjaxOptions
+                                                      {
+                                                          UpdateTargetId = Model.Id.ToString(),
+                                                          HttpMethod = "Post",
+                                                          InsertionMode = InsertionMode.Replace
+                                                      },
+                                                      new { @class = "card-link" })
+            }
+        
+
+    }
+    <div id="@Model.Id.ToString()"></div>
+    <div id="Insert-@Model.Id.ToString()"></div>
+    <div id="answers-box-@Model.Id.ToString()"></div>
 </div>
-
-
-<p>
-    @Html.Raw(Model.Content)
-</p>
-<div id="@Model.Id.ToString()"></div>
-@Html.ActionLink("Chi tiết", "Details", "Questions", new { id = Model.Id }, null)
-@Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
-                                                           new AjaxOptions
-                                                           {
-                                                               UpdateTargetId = "Insert-" + Model.Id.ToString(),
-                                                               HttpMethod = "Get",
-                                                               InsertionMode = InsertionMode.Replace
-                                                           }, new { @class = "card-link" })
-@Ajax.ActionLink("Translate", "Translate", "Questions", new { id = Model.Id },
-                                                           new AjaxOptions
-                                                           {
-                                                               UpdateTargetId = "Insert-" + Model.Id.ToString(),
-                                                               HttpMethod = "Get",
-                                                           }, new { @class = "card-link" })
-@if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.CreatedBy))
-{
-    @Ajax.ActionLink(" Xóa ", "Delete", "Questions", new { id = Model.Id },
-                                                                             new AjaxOptions
-                                                                             {
-                                                                                 UpdateTargetId = Model.Id.ToString(),
-                                                                                 HttpMethod = "Post",
-                                                                                 InsertionMode = InsertionMode.Replace
-                                                                             },
-                                                                             new { @class = "card-link" })
-}
-<div id="Insert-@Model.Id.ToString()"></div>
-<div id="answers-box-@Model.Id.ToString()"></div>

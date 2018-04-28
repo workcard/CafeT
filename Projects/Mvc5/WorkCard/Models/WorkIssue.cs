@@ -39,7 +39,6 @@ namespace Web.Models
         public List<string> Viewers { set; get; } = new List<string>();
         public bool IsClosed { set; get; }
         public bool IsVerified { set; get; } = false;
-
         
         public WorkIssue():base()
         {

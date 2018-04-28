@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 
-namespace Calendar.ASP.NET.MVC5
+namespace Web
 {
     internal static class MyClaimTypes
     {

@@ -1,20 +1,4 @@
-﻿/*
-Copyright 2015 Google Inc
-
-Licensed under the Apache License, Version 2.0(the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-using Google.Apis.Auth.OAuth2.Mvc;
+﻿using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
 using System;
@@ -41,23 +25,58 @@ namespace Web.Controllers
                 var service = new DriveService(new BaseClientService.Initializer
                 {
                     HttpClientInitializer = result.Credential,
-                    ApplicationName = "ASP.NET MVC Sample"
+                    ApplicationName = "WorkCard.vn"
                 });
 
-                // YOUR CODE SHOULD BE HERE..
-                // SAMPLE CODE:
                 var list = await service.Files.List().ExecuteAsync();
-                List<Project> projects = new List<Project>();
+                List<Document> projects = new List<Document>();
                 if (list.Items.Count > 0)
                 {
                     foreach(var item in list.Items)
                     {
-                        projects.Add(new Project() { Id = Guid.NewGuid(), Title = item.Title });
+                        projects.Add(new Document() { Id = Guid.NewGuid(), Title = item.Title,Path = item.DownloadUrl });
                     }
                 }
                 
                 ViewBag.Message = "FILE COUNT IS: " + list.Items.Count();
-                return View(projects);
+                return View("Files", projects);
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+        }
+
+        public async Task<ActionResult> GetFilesAsync(string keyword, CancellationToken cancellationToken)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                AuthorizeAsync(cancellationToken);
+
+            if (result.Credential != null)
+            {
+                var service = new DriveService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "WorkCard.vn"
+                });
+
+                var list = await service.Files.List().ExecuteAsync();
+                var files = list.Items.Where(t => t.Title.ToLower().Contains(keyword.ToLower()));
+
+                List<Document> docs = new List<Document>();
+                if (files != null && files.Count() > 0)
+                {
+                    foreach (var item in list.Items)
+                    {
+                        Document doc = new Document();
+                        doc.Title = item.Title;
+                        doc.Description = item.Description;
+                        doc.Path = item.DownloadUrl;
+                        docs.Add(doc);
+                    }
+                }
+                ViewBag.Message = "FILE COUNT IS: " + list.Items.Count();
+                return View("Files", docs);
             }
             else
             {

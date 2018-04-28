@@ -18,7 +18,7 @@ limitations under the License.
 using Google.Apis.Calendar.v3;
 using Google.Apis.Drive.v2;
 
-namespace Calendar.ASP.NET.MVC5
+namespace Web
 {
     internal static class MyRequestedScopes
     {

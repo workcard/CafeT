@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 
-namespace Calendar.ASP.NET.MVC5
+namespace Web
 {
     /// <summary>
     /// Holds the Google API client secrets. Replace the values below with credentials from your developer console

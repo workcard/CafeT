@@ -14,20 +14,22 @@
         @Html.HiddenFor(model => Model.Id)
         @Html.HiddenFor(model => Model.QuestionId)
         @Html.HiddenFor(model => Model.CreatedDate)
-        <div class="card-box">
-            <span class="input-icon icon-right">
-                Đáp: <br />
-            </span>
+    <div class="card-box">
+        <span class="input-icon icon-right">
+            Đáp: <br />
+        </span>
+        @Html.TextAreaFor(m => m.Content, 5, 40, new { @class = "form-control required",
+       style = "overflow:visible; max-width:100% !important;" })
 
-            <textarea id="Content" name="Content" rows="1" class="form-control" 
-                      placeholder="Post a new message">
-            </textarea>
-            <div class="p-t-10 pull-right">
-                <p>
-                    <input type="submit" value="Reply" class="btn btn-default" />
-                </p>
-            </div>
+        @*<textarea id="Content" name="Content" rows="1" au class="form-control"
+                  placeholder="Post a new message">
+            </textarea>*@
+        <div class="p-t-10 pull-right">
+            <p>
+                <input type="submit" value="Reply" class="btn btn-default" />
+            </p>
         </div>
+    </div>
     }
 </div>
 

@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="text-justify">
-        @Html.Raw(Model.Content)
+        @Html.Raw(Model.Content.Replace("\r\n","<br />"))
     </div>
     <hr />
     <span class="pull-right">

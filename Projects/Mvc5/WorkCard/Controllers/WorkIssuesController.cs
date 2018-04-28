@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CafeT.Html;
 using CafeT.Objects.Enums;
 using CafeT.Text;
 using Google.Apis.Auth.OAuth2.Mvc;
@@ -249,43 +248,12 @@ namespace Web.Controllers
             }
             workIssue = BuildContent(workIssue);
             var _view = Mapper.Map<WorkIssue, IssueView>(workIssue);
-            //_view.Content = BuildContent(_view.Content);
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssueItem", _view);
             }
             return View(_view);
         }
-
-        
-
-        //public string BuildContent(string html)
-        //{
-        //    string[] _commands = html.ExtractAllBetween("{", "}");
-        //    if(_commands != null && _commands.Count()>0)
-        //    {
-        //        foreach(string _command in _commands)
-        //        {
-        //            if (_command.StartsWith("{?") && _command.EndsWith("}"))
-        //            {
-        //                if(_command.Contains(","))
-        //                {
-        //                    string _questionContent = _command.Split(new string[] { "," }, StringSplitOptions.None)[1];
-
-        //                    var _question = new Question()
-        //                    {
-        //                        Title = HttpUtility.HtmlDecode(_questionContent.GetSentences()[0]),
-        //                        Content = _questionContent
-        //                    };
-        //                    string _htmlQuestion = RenderViewToString(ControllerContext, "Questions/_QuestionItem", _question);
-        //                    html = html.Replace(_command, _htmlQuestion);
-        //                }
-                        
-        //            }
-        //        }
-        //    }
-        //    return html;
-        //}
 
         public WorkIssue ProcessEmbedUrls(WorkIssue issue)
         {
@@ -509,17 +477,30 @@ namespace Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public void AddEvent(CalendarService service, Event item)
+        public bool AddEvent(CalendarService service, Event item)
         {
             
             var list = service.CalendarList.List().Execute();
+            var calendars = list.Items;
+            if(calendars.Select(t=>t.Summary.ToLower().Contains("WorkCard.vn".ToLower())) == null)
+            {
+                Google.Apis.Calendar.v3.Data.Calendar newCalendar = new Google.Apis.Calendar.v3.Data.Calendar();
+                newCalendar.Summary = "WorkCard.vn";
+                newCalendar.Description = "Dùng để quản lý công việc với WorkCard.vn";
+                newCalendar.Location = "WorkCard.vn";
+
+                service.Calendars.Insert(newCalendar);
+            }
+
             var myCalendar = list.Items.SingleOrDefault(c => c.Summary == "WorkCard.vn");
 
             if (myCalendar != null)
             {
                 var newEventRequest = service.Events.Insert(item, myCalendar.Id);
                 var eventResult = newEventRequest.Execute();
+                return true;
             }
+            return false;
         }
 
         public async Task<ActionResult> ToCalendar(Guid id, CancellationToken cancellationToken)
@@ -536,7 +517,7 @@ namespace Web.Controllers
                 });
 
                 var _object = IssueManager.GetById(id);
-                var _event = new Google.Apis.Calendar.v3.Data.Event();
+                var _event = new Event();
                 EventDateTime start = new EventDateTime();
                 start.DateTime = _object.Start.Value;
                 EventDateTime end = new EventDateTime();
@@ -546,10 +527,18 @@ namespace Web.Controllers
                 _event.Start = start;
                 _event.End = end;
                 _event.Description = "From WorkCard.vn";
-                this.AddEvent(service, _event);
+                bool _isAdded = AddEvent(service, _event);
+                
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("_Message", string.Empty);
+                    if (_isAdded)
+                    {
+                        return PartialView("_Message", "Đã thêm.");
+                    }
+                    else
+                    {
+                        return PartialView("_Message", "Lỗi. Không thêm vào Google Calendar được.");
+                    }
                 }
                 return RedirectToAction("Index");
             }

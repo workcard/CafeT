@@ -1,6 +1,4 @@
-﻿using CafeT.GoogleManager;
-//using Calendar.ASP.NET.MVC5;
-using Google.Apis.Auth.OAuth2;
+﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Util.Store;
