@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CafeT.Enumerable;
+using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -16,7 +18,16 @@ namespace Web.Controllers
         {
             return View(await db.Articles.ToListAsync());
         }
-
+        public async Task<ActionResult> GetLastestArticles(int? n)
+        {
+            var articles = await db.Articles.ToListAsync();
+            articles = articles.OrderByDescending(t => t.CreatedDate).ToList();
+            if(Request.IsAjaxRequest())
+            {
+                return PartialView("_Articles", articles.TakeMax(n.Value));
+            }
+            return View("Index", articles.TakeMax(n.Value));
+        }
         // GET: Articles/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
@@ -33,6 +44,7 @@ namespace Web.Controllers
         }
 
         // GET: Articles/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -43,11 +55,15 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [ValidateInput(false)]
         public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,Content,ProjectId,IssueId,QuestionId,JobId,CreatedDate,UpdatedDate,UpdatedBy,CreatedBy")] Article article)
         {
             if (ModelState.IsValid)
             {
                 article.Id = Guid.NewGuid();
+                article.CreatedBy = User.Identity.Name;
+                article.CreatedDate = DateTime.Now;
                 db.Articles.Add(article);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -57,6 +73,7 @@ namespace Web.Controllers
         }
 
         // GET: Articles/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -76,10 +93,14 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,Content,ProjectId,IssueId,QuestionId,JobId,CreatedDate,UpdatedDate,UpdatedBy,CreatedBy")] Article article)
+        [Authorize]
+        [ValidateInput(false)]
+        public async Task<ActionResult> Edit(Article article)
         {
             if (ModelState.IsValid)
             {
+                article.UpdatedBy = User.Identity.Name;
+                article.UpdatedDate = DateTime.Now;
                 db.Entry(article).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -87,7 +108,7 @@ namespace Web.Controllers
             return View(article);
         }
 
-        // GET: Articles/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)

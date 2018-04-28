@@ -395,7 +395,12 @@ namespace Web.Models
             }
             return Message;
         }
-
+        public bool Contains(string keyword)
+        {
+            if (!Title.IsNullOrEmptyOrWhiteSpace() && Title.ToLower().Contains(keyword.ToLower())) return true;
+            if (!Content.IsNullOrEmptyOrWhiteSpace() &&  Content.ToLower().Contains(keyword.ToLower())) return true;
+            return false;
+        }
         public void AddTimeToDo(int minutes)
         {
             IssueEstimation = IssueEstimation + minutes;

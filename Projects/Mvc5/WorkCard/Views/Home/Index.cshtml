@@ -1,6 +1,4 @@
-﻿@*@model IEnumerable<Web.ModelViews.IssueView>*@
-
-@{
+﻿@{
     ViewBag.Title = "WorkCard.vn - Quản trị công việc 4.0";
 }
 
@@ -40,6 +38,12 @@
             $('#upcomming-box').html(data);
         });
 </script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetLastestArticles", "Articles", new { n = 1})',
+        function (data) {
+            $('#articles-box').html(data);
+        });
+</script>
 
 @if (!User.Identity.IsAuthenticated)
 {
@@ -59,7 +63,8 @@ else
         </div>
         <div class="col-md-4">
             <div id="summary-box"></div>
-           <div id="questions-box"></div>
+            <div id="articles-box"></div>
+            <div id="questions-box"></div>
             <div id="completed-box"></div>
         </div>
     </div>

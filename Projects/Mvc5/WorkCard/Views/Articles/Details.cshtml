@@ -5,71 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.Raw(Model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.Raw(Model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProjectId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IssueId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IssueId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuestionId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuestionId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JobId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JobId)
-        </dd>
-
-    </dl>
+<h4>@Html.Raw(Model.Title)</h4>
+<div class="small">
+    @Model.CreatedBy at @Model.CreatedDate.Value.TimeAgo()
 </div>
+@Html.Raw(Model.Description)
+<hr />
+@Html.Raw(Model.Content)
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.IsOf(User.Identity.Name) || User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", "Articles", new { id = Model.Id }, null)
+            @Html.ActionLink(" | Delete", "Delete", "Articles", new { id = Model.Id }, null)
+        }
+    }
 </p>

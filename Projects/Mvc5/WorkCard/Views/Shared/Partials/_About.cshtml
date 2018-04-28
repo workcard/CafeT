@@ -1,99 +1,60 @@
-﻿<!-- Services Section -->
-<section class="Material-service-section section-padding">
-    <div class="container">
-        <div class="row">
-            <!-- Section Titile -->
-            <div class="col-md-12 wow animated fadeInLeft" data-wow-delay=".2s">
-                <h1 class="section-title">
-                    Tại sao nên chọn WorkCard.vn để quản lý công việc và dự án
-                </h1>
+﻿<script type="text/javascript">
+    $.get('@Url.Action("GetLastestArticles", "Articles", new { n = 5})',
+        function (data) {
+            $('#Articles').html(data);
+        });
+</script>
+<div class="row">
+    <div class="col-md-8">
+        <div id="Articles"></div>
+    </div>
+    <div class="col-md-4">
+        <div class="media">
+            <div class="media-left">
+                <i class="material-icons pulse-shrink mdi mdi-arrange-send-backward"></i>
+            </div>
+            <div class="media-body">
+                <h2 class="subtitle"><a href="#">ĐƠN GIẢN VÀ DỄ SỬ DỤNG</a></h2>
+                <p>
+                    Bạn chỉ cần đăng ký (01) tài khoản hợp lệ và Đăng nhập là có thể sử dụng được WorkCard.vn để quản lý dự án và công việc cá nhân của mình
+                </p>
             </div>
         </div>
-        <!-- Services Widget Section -->
-        <div class="row">
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".3s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-arrange-send-backward"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">ĐƠN GIẢN VÀ DỄ SỬ DỤNG</a></h2>
-                        <p>
-                            Bạn chỉ cần đăng ký (01) tài khoản hợp lệ và Đăng nhập là có thể sử dụng được WorkCard.vn để quản lý dự án và công việc cá nhân của mình
-                        </p>
-                    </div>
-                </div>
+        <div class="media">
+            <div class="media-left">
+                <i class="material-icons pulse-shrink mdi mdi-code-tags-check"></i>
             </div>
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".4s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-code-tags-check"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">MIỄN PHÍ và LUÔN LUÔN MIỄN PHÍ</a></h2>
-                        <p>
-                            WorkCard.vn thực hiện chính sách miễn phí trọn đời cho người dùng (cá nhân). Bạn không cần phải chi trả bất cứ khoản chi phí nào để sử dụng WorkCard.vn
-                        </p>
-                    </div>
-                </div>
+            <div class="media-body">
+                <h2 class="subtitle"><a href="#">MIỄN PHÍ và LUÔN LUÔN MIỄN PHÍ</a></h2>
+                <p>
+                    WorkCard.vn thực hiện chính sách miễn phí trọn đời cho người dùng (cá nhân). Bạn không cần phải chi trả bất cứ khoản chi phí nào để sử dụng WorkCard.vn
+                </p>
             </div>
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".5s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-grid"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">TỐC ĐỘ VÀ SỰ ỔN ĐỊNH</a></h2>
-                        <p>
-                            WorkCard.vn được hosting tại Google Cloud VPS, do đó đảm bảo tốc độ truy cập và sự ổn định cao
-                        </p>
-                    </div>
-                </div>
+        </div>
+        <div class="media">
+            <div class="media-left">
+                <i class="material-icons pulse-shrink mdi mdi-grid"></i>
             </div>
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".6s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-update"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">NGUYÊN TẮC QUẢN TRỊ CÔNG VIỆC 4.0</a></h2>
-                        <p>
-                            1) Dễ dàng tạo và quản lý công việc của mình
-                            2) Thường xuyên nhắc nhở bạn để tập trung vào mục tiêu
-                            3) Có gợi ý để giúp bạn hoàn thành công việc nhanh chóng
-                        </p>
-                    </div>
-                </div>
+            <div class="media-body">
+                <h2 class="subtitle"><a href="#">TỐC ĐỘ VÀ SỰ ỔN ĐỊNH</a></h2>
+                <p>
+                    WorkCard.vn được hosting tại Google Cloud VPS, do đó đảm bảo tốc độ truy cập và sự ổn định cao
+                </p>
             </div>
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".7s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-speedometer"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">Speed Optimized</a></h2>
-                        <p>Excepteur sint occaecat cupi datat non proidt, sunt in culpa qui offi cia deserunt</p>
-                    </div>
-                </div>
+        </div>
+        <div class="media">
+            <div class="media-left">
+                <i class="material-icons pulse-shrink mdi mdi-update"></i>
             </div>
-            <!-- Service Widgets -->
-            <div class="col-md-6 col-lg-4 col-xl-4 single-service-widget wow animated fadeInUp" data-wow-delay=".8s">
-                <div class="media">
-                    <div class="media-left">
-                        <i class="material-icons pulse-shrink mdi mdi-shape-plus"></i>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="subtitle"><a href="#">Fully Customizable</a></h2>
-                        <p>Excepteur sint occaecat cupi datat non proidt, sunt in culpa qui offi cia deserunt</p>
-                    </div>
-                </div>
+            <div class="media-body">
+                <h2 class="subtitle"><a href="#">NGUYÊN TẮC QUẢN TRỊ CÔNG VIỆC 4.0</a></h2>
+                <p>
+                    1) Dễ dàng tạo và quản lý công việc của mình
+                    2) Thường xuyên nhắc nhở bạn để tập trung vào mục tiêu
+                    3) Có gợi ý để giúp bạn hoàn thành công việc nhanh chóng
+                </p>
             </div>
         </div>
     </div>
-</section>
-<!-- Services Section End -->
+</div>
+

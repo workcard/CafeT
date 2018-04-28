@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<Web.Models.Question>
 
+<div class="card border-success">
+            <div class="card-header">
+                Hỏi / Đáp
+                <span class="badge badge-danger">
+                    @Model.Count()
+                </span>
+            </div>
+        </div>
 <ul class="list-group">
     @foreach (var item in Model)
     {

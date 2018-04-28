@@ -32,12 +32,22 @@ namespace Web.Controllers
         }
 
         #region Search
-        public async Task<ActionResult> SearchBy(string keyWord, int? page)
+        public async Task<ActionResult> SearchBy(string keyWord, int? page, FormCollection collection)
         {
-            ViewBag.Keyword = keyWord;
+            if(!keyWord.IsNullOrEmptyOrWhiteSpace())
+            {
+                keyWord = collection["Keyword"];
+            }
+            else
+            {
+                ViewBag.Keyword = keyWord;
+            }
+
+            if (keyWord.IsNullOrEmptyOrWhiteSpace()) keyWord = "";
+
             var _objects = _unitOfWorkAsync.RepositoryAsync<WorkIssue>()
-                                .Query().Select().Where(t => t.GetCommands().Count() > 0)
-                                .Where(t => t.GetCommands().Contains(keyWord)).ToList();
+                                .Query().Select().Where(t => t.Contains(keyWord))
+                                .ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
             if (Request.IsAjaxRequest())
             {

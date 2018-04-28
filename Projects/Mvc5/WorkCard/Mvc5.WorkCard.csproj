@@ -648,7 +648,6 @@
     <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
-    <Content Include="Views\Shared\_ProjectItem.cshtml" />
     <Content Include="Views\Shared\Issues\_ShareIssue.cshtml" />
     <Content Include="Views\Shared\Contacts\_Contacts.cshtml" />
     <Content Include="Views\Shared\Contacts\_ContactItem.cshtml" />
@@ -676,7 +675,6 @@
     <Content Include="Views\Shared\Partials\_Header.cshtml" />
     <Content Include="Views\WorkIssues\Create.cshtml" />
     <Content Include="Views\Shared\Partials\_About.cshtml" />
-    <Content Include="Views\Shared\Partials\_Welcome.cshtml" />
     <Content Include="Views\Shared\Issues\_MarkAsDone.cshtml" />
     <Content Include="Views\WorkIssues\Details.cshtml" />
     <Content Include="Web.config">
@@ -749,7 +747,6 @@
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Shared\Questions\_QuestionItem.cshtml" />
     <Content Include="Views\Shared\Issues\_AddQuestion.cshtml" />
-    <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Home\_Manage.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\Home\_RegisterExternal.cshtml" />
@@ -837,6 +834,10 @@
     <Content Include="Views\UsersAdmin\_Users.cshtml" />
     <Content Include="Views\Shared\Issues\_AddTime.cshtml" />
     <Content Include="Views\Calendar\Files.cshtml" />
+    <Content Include="Views\Articles\_Articles.cshtml" />
+    <Content Include="Views\Articles\_Article.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

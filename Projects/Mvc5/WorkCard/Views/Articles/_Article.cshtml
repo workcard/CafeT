@@ -1,0 +1,21 @@
+﻿@model Web.Models.Article
+
+<div class="row">
+    @Html.ActionLink(Model.Title, "Details", "Articles", new { id = Model.Id }, null)
+    <hr />
+    <div class="small">
+        @Html.Raw(Model.CreatedBy) | @Model.CreatedDate.Value.TimeAgo()
+    </div>
+    <p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (Model.IsOf(User.Identity.Name) || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", "Articles", new { id = Model.Id }, null)
+                @Html.ActionLink(" | Delete", "Delete", "Articles", new { id = Model.Id }, null)
+            }
+        }
+    </p>
+</div>
+
+

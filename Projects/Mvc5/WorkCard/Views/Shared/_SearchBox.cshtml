@@ -1,13 +1,12 @@
-﻿@using (Html.BeginForm("Index", "WorkIssues", FormMethod.Post))
+﻿@using (Html.BeginForm("SearchBy", "WorkIssues", FormMethod.Post))
 {
-    
-<div class="row">
-    <div class="col-8 col-sm pr-sm-0">
-        <input type="text" name="search" id="search" value="Thẻ công việc ..."
-               placeholder="Search accounts, contracts and transactions" class="form-control">
+    <div class="row">
+        <div class="col-8 col-sm pr-sm-0">
+            <input type="text" name="Keyword" id="Keyword" value="Thẻ công việc ..."
+                   placeholder="Search accounts, contracts and transactions" class="form-control">
+        </div>
+        <div class="col-4 col-sm-auto pl-sm-0">
+            <input type="submit" value="Search" class="btn btn-primary btn-block" />
+        </div>
     </div>
-    <div class="col-4 col-sm-auto pl-sm-0">
-        <input type="submit" value="Search" class="btn btn-primary btn-block" />
-    </div>
-</div>
 }
