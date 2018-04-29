@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CafeT.Text;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -32,10 +33,10 @@ namespace Web.Models
         }
     }
 
-    public class AuditingContext : DbContext
-    {
-        public DbSet<Audit> AuditRecords { get; set; }
-    }
+    //public class AuditingContext : DbContext
+    //{
+    //    public DbSet<Audit> AuditRecords { get; set; }
+    //}
 
     public class AuditAttribute : ActionFilterAttribute
     {
@@ -46,12 +47,17 @@ namespace Web.Models
         {
             //Stores the Request in an Accessible object
             var request = filterContext.HttpContext.Request;
-
+            var sessionIdentifier = string.Empty;
             //Generate the appropriate key based on the user's Authentication Cookie
             //This is overkill as you should be able to use the Authorization Key from
             //Forms Authentication to handle this. 
-            var sessionIdentifier = string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(request.Cookies[FormsAuthentication.FormsCookieName].Value)).Select(s => s.ToString("x2")));
-
+            if (request.Cookies[FormsAuthentication.FormsCookieName] != null)
+            {
+                sessionIdentifier = string.Join("", MD5.Create()
+                .ComputeHash(Encoding.ASCII.GetBytes(request.Cookies[FormsAuthentication.FormsCookieName].Value))
+                .Select(s => s.ToString("x2")));
+            }
+            
             //Generate an audit
             Audit audit = new Audit()
             {
@@ -65,10 +71,12 @@ namespace Web.Models
             };
 
             //Stores the Audit in the Database
-            AuditingContext context = new AuditingContext();
-            context.AuditRecords.Add(audit);
-            context.SaveChanges();
-
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.AuditRecords.Add(audit);
+                context.SaveChanges();
+            }
+            
             base.OnActionExecuting(filterContext);
         }
 

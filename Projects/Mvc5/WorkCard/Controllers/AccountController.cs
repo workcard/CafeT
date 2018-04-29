@@ -88,13 +88,7 @@ namespace Web.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        //var profile = new UserProfile()
-                        //{
-                        //    ActivityName = "Register",
-                        //    CreatedDate = DateTime.Now,
-                        //    LastActivityDate = DateTime.Now
-                        //};
-
+                        
                         //if the list exists, add this user to it
                         if (HttpRuntime.Cache["LoggedInUsers"] != null)
                         {

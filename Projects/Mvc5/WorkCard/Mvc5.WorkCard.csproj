@@ -443,6 +443,7 @@
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\AuthCallbackController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -498,8 +499,18 @@
     <Compile Include="Migrations\201804270525116_Update.Designer.cs">
       <DependentUpon>201804270525116_Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804291055198_UpdateDocument.cs" />
+    <Compile Include="Migrations\201804291055198_UpdateDocument.Designer.cs">
+      <DependentUpon>201804291055198_UpdateDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291629567_AddAudit.cs" />
+    <Compile Include="Migrations\201804291629567_AddAudit.Designer.cs">
+      <DependentUpon>201804291629567_AddAudit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\AuditingExampleModels.cs" />
+    <Compile Include="Models\AuditingModels.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\Command.cs" />
@@ -633,6 +644,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Audit\PostingExample.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Questions\_Questions.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueItemExpired.cshtml" />
@@ -838,6 +850,11 @@
     <Content Include="Views\Articles\_Article.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Audit\AuditRecords.cshtml" />
+    <Content Include="Views\Audit\Index.cshtml" />
+    <Content Include="Views\Audit\LevelOne.cshtml" />
+    <Content Include="Views\Audit\LevelThree.cshtml" />
+    <Content Include="Views\Audit\LevelTwo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -863,6 +880,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804270525116_Update.resx">
       <DependentUpon>201804270525116_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291055198_UpdateDocument.resx">
+      <DependentUpon>201804291055198_UpdateDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291629567_AddAudit.resx">
+      <DependentUpon>201804291629567_AddAudit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
