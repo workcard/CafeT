@@ -31,7 +31,11 @@ namespace Web
                     "email",
                     CalendarService.Scope.CalendarReadonly,
                     CalendarService.Scope.Calendar,
-                    DriveService.Scope.Drive
+                    DriveService.Scope.Drive,
+                    DriveService.Scope.DriveMetadata,
+                    DriveService.Scope.DriveFile,
+                    DriveService.Scope.DriveAppdata,
+                    DriveService.Scope.DriveScripts
                 };
             }
         }

@@ -1,6 +1,7 @@
-﻿using Google.Apis.Auth.OAuth2.Mvc;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Drive.v2;
-using Google.Apis.Drive.v2.Data;
+//using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Web.Models;
 using Web.Services;
+using Google.Apis.Download;
+using CafeT.Text;
+using System.Data.Entity;
+using Google.Apis.Drive.v2.Data;
+//using System.IO;
 
 namespace Web.Controllers
 {
@@ -36,7 +42,14 @@ namespace Web.Controllers
                     foreach(var item in list.Items)
                     {
                         projects.Add(new Document()
-                        { Id = Guid.NewGuid(), Title = item.Title,Path = item.DownloadUrl, GDriveId = item.Id
+                        {
+                            Id = Guid.NewGuid(),
+                            Title = item.Title,
+                            DownloadUrl = item.DownloadUrl,
+                            GDriveId = item.Id,
+                            Description = item.Description,
+                            //Size = double.Parse(item.FileSize.ToString()),
+                            UpdatedBy = item.LastModifyingUserName
                     });
                     }
                 }
@@ -88,7 +101,7 @@ namespace Web.Controllers
             }
         }
 
-       
+
 
         /// Download a file
         /// Documentation: https://developers.google.com/drive/v2/reference/files/get
@@ -122,7 +135,7 @@ namespace Web.Controllers
                 return false;
             }
         }
-        
+
         public async Task<ActionResult> DownloadFromGoogleAsync(string id, CancellationToken cancellationToken)
         {
             var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
@@ -137,12 +150,16 @@ namespace Web.Controllers
                 });
                 var list = await service.Files.List().ExecuteAsync();
                 var _item = list.Items.Where(t => t.Id == id).FirstOrDefault();
-                if(_item != null)
+
+                var request = service.Files.Get(id);
+
+
+                if (_item != null)
                 {
                     string saveTo = @"C:\FilesFromGoogle\" + _item.Title;
                     var _isDownloaded = DownloadFile(service, _item, saveTo);
                 }
-                
+
                 if (Request.IsAjaxRequest())
                 {
                     return PartialView("_NotifyMessage", "Downloaded");
@@ -154,23 +171,146 @@ namespace Web.Controllers
                 return new RedirectResult(result.RedirectUri);
             }
         }
-        
 
-        ////[HttpPost]
-        ////public async Task<ActionResult> UpdateGoogleFileAsync(string id)
-        ////{
-        ////    Uploader service = new Uploader(UserName);
-        ////    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        ////    var _file = await service.GetFileAsync(id);
+        //private static void UploadFile(DriveService service)
+        //{
+        //    Google.Apis.Drive.v2.Data.File body = new Google.Apis.Drive.v2.Data.File();
+        //    body.Title = "test upload";
+        //    body.Description = "test upload";
+        //    body.MimeType = "application/vnd.ms-excel";
 
-        ////    var file = await service.UpdateAsync(_file);
-        ////    var _last = await service.GetFileAsync(id);
-        ////    if (Request.IsAjaxRequest())
-        ////    {
-        ////        return PartialView("Messages/_HtmlString", _last.Description);
-        ////    }
-        ////    return View("Messages/_HtmlString", _last.Description);
-        ////}
 
+        //    // File's content.
+        //    byte[] byteArray = System.IO.File.ReadAllBytes("/Temp/testUploadExcel.xlsx");
+        //    MemoryStream stream = new MemoryStream(byteArray);
+        //    try
+        //    {
+        //        FilesResource.InsertMediaUpload request = service.Files.Insert(body, stream, "application/vnd.google-apps.spreadsheet");
+
+        //        request.Upload();
+
+        //        Google.Apis.Drive.v2.Data.File file = request.ResponseBody;
+
+        //        // Uncomment the following line to print the File ID.
+        //        // Console.WriteLine("File ID: " + file.Id);
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("An error occurred: " + e.Message);
+        //    }
+        //}
+
+        public async Task<ActionResult> UpdateGoogleFileAsync(string id, CancellationToken cancellationToken)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                 AuthorizeAsync(cancellationToken);
+
+            if (result.Credential != null)
+            {
+                var service = new DriveService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "WorkCard.vn"
+                });
+                var list = await service.Files.List().ExecuteAsync();
+                var _item = list.Items.Where(t => t.Id == id).FirstOrDefault();
+
+                try
+                {
+                    _item.Description += "WorkCard.vn";
+                    _item.Shared = true;
+                    _item.CanComment = true;
+                    _item.Capabilities.CanDownload = true;
+                    _item.Capabilities.CanShare = true;
+                    // Send the request to the API.
+                    FilesResource.UpdateRequest request = service.Files.Update(_item,_item.Id);
+                    request.NewRevision = true;
+                    await request.ExecuteAsync();
+
+                    //service.Files.Update(_item, _item.Id);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                if(!_item.DownloadUrl.IsNullOrEmptyOrWhiteSpace())
+                {
+                    using (ApplicationDbContext context = new ApplicationDbContext())
+                    {
+                        var file = context.Documents.Where(t => t.GDriveId == id).FirstOrDefault();
+                        file.DownloadUrl = _item.DownloadUrl;
+                        context.Entry(file).State = EntityState.Modified;
+                        await context.SaveChangesAsync();
+                    }
+                }
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("_NotifyMessage", "Downloaded");
+                }
+                return View("_NotifyMessage", "Downloaded");
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+        }
+        //public async Task<ActionResult> Details(string id, CancellationToken cancellationToken)
+        //{
+        //    using(Ap)
+        //    var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+        //         AuthorizeAsync(cancellationToken);
+
+        //    if (result.Credential != null)
+        //    {
+        //        var service = new DriveService(new BaseClientService.Initializer
+        //        {
+        //            HttpClientInitializer = result.Credential,
+        //            ApplicationName = "WorkCard.vn"
+        //        });
+        //        var list = await service.Files.List().ExecuteAsync();
+        //        var _item = list.Items.Where(t => t.Id == id).FirstOrDefault();
+
+        //        try
+        //        {
+        //            _item.Description += "WorkCard.vn";
+        //            _item.Shared = true;
+        //            _item.CanComment = true;
+        //            _item.Capabilities.CanDownload = true;
+
+        //            // Send the request to the API.
+        //            FilesResource.UpdateRequest request = service.Files.Update(_item, _item.Id);
+        //            request.NewRevision = true;
+        //            await request.ExecuteAsync();
+
+        //            //service.Files.Update(_item, _item.Id);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine(ex.Message);
+        //        }
+
+        //        if (!_item.DownloadUrl.IsNullOrEmptyOrWhiteSpace())
+        //        {
+        //            using (ApplicationDbContext context = new ApplicationDbContext())
+        //            {
+        //                var file = context.Documents.Where(t => t.GDriveId == id).FirstOrDefault();
+        //                file.DownloadUrl = _item.DownloadUrl;
+        //                context.Entry(file).State = EntityState.Modified;
+        //                await context.SaveChangesAsync();
+        //            }
+        //        }
+        //        if (Request.IsAjaxRequest())
+        //        {
+        //            return PartialView("_NotifyMessage", "Downloaded");
+        //        }
+        //        return View("_NotifyMessage", "Downloaded");
+        //    }
+        //    else
+        //    {
+        //        return new RedirectResult(result.RedirectUri);
+        //    }
+        //}
     }
 }

@@ -451,6 +451,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\DocumentsController.cs" />
+    <Compile Include="Controllers\GoogleDrive.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -483,30 +484,6 @@
     <Compile Include="Managers\IssuesManager.cs" />
     <Compile Include="Mappers\IssueMappers.cs" />
     <Compile Include="Mappers\ProjectMappers.cs" />
-    <Compile Include="Migrations\201804270351425_UserProfile.cs" />
-    <Compile Include="Migrations\201804270351425_UserProfile.Designer.cs">
-      <DependentUpon>201804270351425_UserProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804270423249_UserProfile1.cs" />
-    <Compile Include="Migrations\201804270423249_UserProfile1.Designer.cs">
-      <DependentUpon>201804270423249_UserProfile1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804270428029_UserProfile2.cs" />
-    <Compile Include="Migrations\201804270428029_UserProfile2.Designer.cs">
-      <DependentUpon>201804270428029_UserProfile2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804270525116_Update.cs" />
-    <Compile Include="Migrations\201804270525116_Update.Designer.cs">
-      <DependentUpon>201804270525116_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804291055198_UpdateDocument.cs" />
-    <Compile Include="Migrations\201804291055198_UpdateDocument.Designer.cs">
-      <DependentUpon>201804291055198_UpdateDocument.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804291629567_AddAudit.cs" />
-    <Compile Include="Migrations\201804291629567_AddAudit.Designer.cs">
-      <DependentUpon>201804291629567_AddAudit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AuditingExampleModels.cs" />
@@ -612,6 +589,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="client_secrects.json" />
     <None Include="Properties\PublishProfiles\WorkCard - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -857,6 +835,7 @@
     <Content Include="Views\Audit\LevelTwo.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\" />
     <Folder Include="Views\AuthCallback\" />
@@ -869,24 +848,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804270351425_UserProfile.resx">
-      <DependentUpon>201804270351425_UserProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804270423249_UserProfile1.resx">
-      <DependentUpon>201804270423249_UserProfile1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804270428029_UserProfile2.resx">
-      <DependentUpon>201804270428029_UserProfile2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804270525116_Update.resx">
-      <DependentUpon>201804270525116_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804291055198_UpdateDocument.resx">
-      <DependentUpon>201804291055198_UpdateDocument.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804291629567_AddAudit.resx">
-      <DependentUpon>201804291629567_AddAudit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

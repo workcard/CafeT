@@ -96,7 +96,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Document.cs" />
     <Compile Include="EmailOnText.cs" />
     <Compile Include="CharExtension.cs" />
     <Compile Include="ExceptionHelper.cs" />
