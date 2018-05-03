@@ -28,7 +28,7 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
-        // GET: Comments/Details/5
+        
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)

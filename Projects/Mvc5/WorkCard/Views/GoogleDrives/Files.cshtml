@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Web.Models.Document>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@*@Html.Partial("_UploadFile")*@
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<a href="https://docs.google.com/document/d/1zGyfy5BDnoCrYC4knLVhKMIPofI_vX7JFnTdDZJcaSQ/edit?usp=sharing"> Xem
+</a>
+@Html.ActionLink("Download", "DownloadFromGoogleAsync", "GoogleDrives", new { id = "1AUKnPPQ9ANXysX3YfWUf37guxghQ0y9c" }, null) |
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)<br />
+                @Html.DisplayFor(modelItem => item.GDriveId)<br />
+                @if (!item.DownloadUrl.IsNullOrEmptyOrWhiteSpace())
+                {
+                    <a href="@item.DownloadUrl.DeleteEndTo("&e")">
+                        View (online)
+                    </a>
+                }
+
+                @Html.Raw("Description: " + item.Description) <br />
+                @Html.Raw(item.Size) <br />
+                @*@Html.Raw(item.Path) <br />*@
+                @Html.Raw(item.UpdatedDate) <br />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Download", "DownloadFromGoogleAsync", "GoogleDrives", new { id = item.GDriveId }, null) |
+                @Html.ActionLink("Update", "UpdateGoogleFileAsync", "GoogleDrives", new { id = item.GDriveId }, null) |
+                @Html.ActionLink("Details", "GetDetails", "GoogleDrives", new { id = item.GDriveId }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

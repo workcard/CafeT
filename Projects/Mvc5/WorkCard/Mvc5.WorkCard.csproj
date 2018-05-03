@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props')" />
@@ -18,7 +19,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Web</RootNamespace>
     <AssemblyName>Web</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44358</IISExpressSSLPort>
@@ -274,9 +275,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -446,12 +447,11 @@
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\AuthCallbackController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\GoogleDrivesController.cs" />
     <Compile Include="Controllers\CommandsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\DocumentsController.cs" />
-    <Compile Include="Controllers\GoogleDrive.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -484,6 +484,14 @@
     <Compile Include="Managers\IssuesManager.cs" />
     <Compile Include="Mappers\IssueMappers.cs" />
     <Compile Include="Mappers\ProjectMappers.cs" />
+    <Compile Include="Migrations\201805020404260_UpdateDocument.cs" />
+    <Compile Include="Migrations\201805020404260_UpdateDocument.Designer.cs">
+      <DependentUpon>201805020404260_UpdateDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805020731310_UpdateDocument1.cs" />
+    <Compile Include="Migrations\201805020731310_UpdateDocument1.Designer.cs">
+      <DependentUpon>201805020731310_UpdateDocument1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AuditingExampleModels.cs" />
@@ -545,7 +553,7 @@
     </Compile>
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\UserProfileRepositories.cs" />
-    <Compile Include="Services\GoogleCalendar.cs" />
+    <Compile Include="Services\AppFlowMetadata.cs" />
     <Compile Include="Services\IsssueService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -565,12 +573,6 @@
     <Content Include="Assets\images\clients\.DS_Store" />
     <Content Include="Assets\images\gallery\.DS_Store" />
     <Content Include="Assets\js\.DS_Store" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Header.css" />
     <Content Include="Content\List.css" />
     <Content Include="Content\Notes\DevNotes.txt" />
@@ -583,18 +585,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Libs\Microsoft.Practices.ServiceLocation.dll" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="client_secrects.json" />
     <None Include="Properties\PublishProfiles\WorkCard - Web Deploy.pubxml" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -603,10 +595,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -745,7 +733,6 @@
     <Content Include="Views\Shared\_WorkStatus.cshtml" />
     <Content Include="Views\Shared\Issues\_Issues.cshtml" />
     <Content Include="Views\Shared\Issues\_QuickCreateIssue.cshtml" />
-    <Content Include="Views\WorkIssues\_Create.cshtml" />
     <Content Include="Views\WorkIssues\Index.cshtml" />
     <Content Include="Views\Shared\Issues\_AddComment.cshtml" />
     <Content Include="Views\Home\_TodaySummary.cshtml" />
@@ -799,8 +786,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\Questions\_EmbedQuestion.cshtml" />
     <Content Include="Views\WorkIssues\GetTaskAsync.cshtml" />
-    <Content Include="Views\Calendar\UpcomingEvents.cshtml" />
-    <Content Include="Views\Calendar\IndexAsync.cshtml" />
+    <Content Include="Views\GoogleDrives\UpcomingEvents.cshtml" />
+    <Content Include="Views\GoogleDrives\IndexAsync.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueModel.cshtml" />
@@ -823,7 +810,7 @@
     <Content Include="Views\Shared\Projects\_List.cshtml" />
     <Content Include="Views\UsersAdmin\_Users.cshtml" />
     <Content Include="Views\Shared\Issues\_AddTime.cshtml" />
-    <Content Include="Views\Calendar\Files.cshtml" />
+    <Content Include="Views\GoogleDrives\Files.cshtml" />
     <Content Include="Views\Articles\_Articles.cshtml" />
     <Content Include="Views\Articles\_Article.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
@@ -833,6 +820,9 @@
     <Content Include="Views\Audit\LevelOne.cshtml" />
     <Content Include="Views\Audit\LevelThree.cshtml" />
     <Content Include="Views\Audit\LevelTwo.cshtml" />
+    <Content Include="Views\Shared\GoogleDrives\_UploadFile.cshtml" />
+    <Content Include="Views\Shared\GoogleDrives\Files.cshtml" />
+    <Content Include="Views\Articles\_Files.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -848,6 +838,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805020404260_UpdateDocument.resx">
+      <DependentUpon>201805020404260_UpdateDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805020731310_UpdateDocument1.resx">
+      <DependentUpon>201805020731310_UpdateDocument1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -945,8 +941,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Net.Compilers.2.8.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

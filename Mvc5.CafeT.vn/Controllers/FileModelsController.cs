@@ -1,4 +1,8 @@
 ﻿using CafeT.Text;
+using Google.Apis.Auth.OAuth2.Mvc;
+using GFile = Google.Apis.Drive.v2;
+using GDataFile = Google.Apis.Drive.v2.Data;
+using Google.Apis.Services;
 using Mvc5.CafeT.vn.Models;
 using PagedList;
 using Repository.Pattern.UnitOfWork;
@@ -7,6 +11,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,82 +20,105 @@ namespace Mvc5.CafeT.vn.Controllers
 {
     public class FileModelsController : BaseController
     {
-        //private string UserName { set; get; } = "taipm.vn@gmail.com";
-
         public FileModelsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
-        
-        //public ActionResult Index(int? page)
-        //{
-        //    //Uploader service = new Uploader(UserName);
-        //    //service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    //var files = service.GetFilesAsync(100).Result;
-        //    //files = files.Where(t => t.HasThumbnail.HasValue && t.HasThumbnail.Value)
-        //    //    .Where(t => t.Name.Length > 10)
-        //    //    .OrderByDescending(t => t.CreatedTime);
 
-        //    List<FileModel> list = new List<FileModel>();
-        //    list = _unitOfWorkAsync.RepositoryAsync<FileModel>().Query().Select().ToList();
-        //    //if (files != null && files.Count() > 0)
-        //    //{
-        //    //    foreach (var file in files)
-        //    //    {
-        //    //        list.Add(fileModel);
-        //    //    }
-        //    //}
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS)));
-        //    }
-        //    return View("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
-        //}
+        public ActionResult Index(int? page)
+        {
+          
+            List<FileModel> list = new List<FileModel>();
+            list = _unitOfWorkAsync.RepositoryAsync<FileModel>().Query().Select().ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return (PartialView("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS)));
+            }
+            return View("Index", list.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
+        }
+
+
 
         
+        private static string GetMimeType(string fileName)
+        {
+            string mimeType = "application/unknown";
+            string ext = System.IO.Path.GetExtension(fileName).ToLower();
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null)
+                mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
+        }
 
-        //public ActionResult GetNewFiles(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(n).Result.TakeMax(n);
-        //    List<FileModel> list = new List<FileModel>();
-        //    if (files != null && files.Count() > 0)
-        //    {
-        //        foreach (var file in files)
-        //        {
-        //            FileModel fileModel = Mappers.Mappers.GoogleFileToModel(file);
-        //            list.Add(fileModel);
-        //        }
-        //    }
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Files/_Files", list));
-        //    }
-        //    return View("Files/_Files", list);
-        //}
+        public async Task<ActionResult> UploadGoogleFileAsync(HttpPostedFileBase file, FileModel document, CancellationToken cancellationToken)
+        {
+            var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
+                 AuthorizeAsync(cancellationToken);
 
-        //public ActionResult GetGoogleDocument(int? n)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    var files = service.GetFilesAsync(n).Result.TakeMax(n);
-        //    var file = files.ToArray()[0];
+            if (result.Credential != null)
+            {
+                var service = new GFile.DriveService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "WorkCard.vn"
+                });
 
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return (PartialView("Messages/_GoogleView", file));
-        //    }
-        //    return View("Messages/_GoogleView", file);
-        //}
+                if (file != null)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        var fileName = System.IO.Path.GetFileName(file.FileName);
+                        var path = System.IO.Path.Combine(Server.MapPath("~/App_Data/Uploads/GoogleDrives"), fileName);
+                        file.SaveAs(path);
 
-        //public ActionResult UploadToGoolgle(HttpPostedFileBase file)
-        //{
-        //    Uploader service = new Uploader(UserName);
-        //    service.ClientSecrectFile = Server.MapPath("~/App_Code/client_secrets.json");
-        //    string path = Server.MapPath("~/Temp/Capture.PNG");
-        //    var result = service.UploadAsync(path).Result;
-        //    return View("Messages/_HtmlString", result.Name + "|" + result.OriginalFilename);
-        //}
+                        GDataFile.File _file = new GDataFile.File();
+                        _file.Title = file.FileName;
+                        _file.Description = "From WorkCard.vn; ";
+                        _file.MimeType = GetMimeType(file.FileName);
+                        _file.CanComment = true;
+                        _file.Shared = true;
+                        _file.Shareable = true;
+
+
+                        using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                        {
+                            try
+                            {
+                                GFile.FilesResource.InsertMediaUpload request = service.Files.Insert(_file, stream, _file.MimeType);
+                                await request.UploadAsync();
+                                if (request.ResponseBody != null)
+                                {
+                                    using (ApplicationDbContext context = new ApplicationDbContext())
+                                    {
+                                        document.Id = Guid.NewGuid();
+                                        document.Load(request.ResponseBody);
+                                        document.CreatedBy = User.Identity.Name;
+                                        document.CreatedDate = DateTime.Now;
+
+                                        context.Files.Add(document);
+                                        await context.SaveChangesAsync();
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("An error occurred: " + e.Message);
+                            }
+                        }
+                    }
+                    if (Request.IsAjaxRequest())
+                    {
+                        return PartialView();
+                    }
+                }
+
+                return RedirectToAction("Details", "Articles", new { id = document.ArticleId });
+            }
+            else
+            {
+                return new RedirectResult(result.RedirectUri);
+            }
+        }
+
 
         public ActionResult Create()
         {

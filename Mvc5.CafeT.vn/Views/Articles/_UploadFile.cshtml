@@ -17,9 +17,8 @@
 }
 
 @Html.Raw("Google Drives")
-@*@using (Html.BeginForm("UploadToGoolgle", "FileModels", new { articleId = Model.Id },
-                            FormMethod.Post, new { enctype = "multipart/form-data" }))*@
-@using (Html.BeginForm("UploadToGoolgle", "FileModels", new { articleId = Model.Id },
+
+@using (Html.BeginForm("UploadGoogleFileAsync", "FileModels", new { articleId = Model.Id },
                 FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

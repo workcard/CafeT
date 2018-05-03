@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Web.Models.Document>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    <p>
+        Tài liệu <span class="badge badge-danger"> @Model.Count() </span>
+    </p>
+    <ul class="list-group">
+        @foreach (var model in Model)
+        {
+            <li class="list-group-item">
+                @*@if(model.GFile.HasThumbnail.HasValue)
+                {
+                    var img = model.GFile.ThumbnailLink;
+                    <img src='@img' class="image-reponsize"/>
+                }*@
+                @Html.Raw(model.Title)<br />
+                @Html.Raw(model.GOwners)<br />
+                @Html.Raw("Description: " + model.Description) <br />
+                @Html.Raw(model.Size) <br />
+                @Html.Raw(model.UpdatedDate) <br />
+                @if(!model.DownloadUrl.IsNullOrEmptyOrWhiteSpace())
+                {
+                    string link = model.DownloadUrl.DeleteEndTo("&gd=true");
+                    <a href='@link'>View</a>
+                }
+                @Html.ActionLink("Download", "DownloadFromGoogleAsync", "GoogleDrives", new { id = model.GDriveId }, null)
+                @Html.ActionLink("Update", "UpdateGoogleFileAsync", "GoogleDrives", new { id = model.GDriveId }, null)
+                @Html.ActionLink("Details", "GetDetails", "GoogleDrives", new { id = model.GDriveId }, null)
+            </li>
+        }
+    </ul>
+}
+

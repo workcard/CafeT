@@ -1,30 +1,46 @@
 ﻿using CafeT.BusinessObjects;
+using Google.Apis.Drive.v2.Data;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Mvc5.CafeT.vn.Models
 {
     public class FileModel : FileObject
     {
-        [Display(Name = "Tiêu đề")]
         public string Title { set; get; }
-
-        [Display(Name = "Mô tả")]
         public string Description { set; get; }
-
         public string Tags { set; get; }
-        
         public int? CountDownloads { set; get; }
         public string SizeToString { set;get; }
-
         public ImageObject Image { set; get; }
-
-        [Display(Name = "Hình đại diện")]
         public string AvatarPath { set; get; }
+        public string Path { set; get; }
+        public string GDriveId { set; get; }
+        public IList<string> GOwners { set; get; }
+        public string DownloadUrl { set; get; }
+        public int CountOfDownload { set; get; } = 0;
+        public double Size { set; get; } = 0;
+
+
+        [NotMapped]
+        public File GFile { set; get; }
 
         public FileModel():base()
         {
+        }
+
+        public FileModel(File file):base()
+        {
+            Title = file.Title;
+            Description = file.Description;
+            DownloadUrl = file.DownloadUrl;
+            GDriveId = file.Id;
+            Size = double.Parse(file.FileSize.ToString());
+            GFile = file;
+            GOwners = file.OwnerNames;
         }
 
         public FileModel(string fullPath) : base(fullPath)
@@ -62,6 +78,17 @@ namespace Mvc5.CafeT.vn.Models
             string _ext = this.GetExtension();
             if (_imgExts.ToList().Contains(_ext)) return true;
             return false;
+        }
+
+        public void Load(File file)
+        {
+            Title = file.Title;
+            Description = file.Description;
+            DownloadUrl = file.DownloadUrl;
+            GDriveId = file.Id;
+            Size = double.Parse(file.FileSize.ToString());
+            GFile = file;
+            GOwners = file.OwnerNames;
         }
     }
 }

@@ -28,7 +28,22 @@ namespace Web.Controllers
             }
             return View("Index", articles.TakeMax(n.Value));
         }
-        // GET: Articles/Details/5
+
+        [HttpGet]
+        public async Task<ActionResult> GetDocuments(Guid articleId)
+        {
+            var _objects = await db.Documents
+                .Where(t=>t.ArticleId.HasValue && t.ArticleId.Value == articleId)
+                .ToListAsync();
+            var _views = _objects;
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Files", _views);
+            }
+            return RedirectToAction("Index");
+        }
+
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)

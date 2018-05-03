@@ -1,4 +1,11 @@
 ﻿@model Web.Models.Article
+@using Web.Models
+<script type="text/javascript">
+    $.get('@Url.Action("GetDocuments", "Articles", new { articleId = Model.Id.ToString()})',
+        function (data) {
+            $('#documents-box').html(data);
+        });
+</script>
 
 @{
     ViewBag.Title = "Details";
@@ -20,5 +27,8 @@
             @Html.ActionLink("Edit", "Edit", "Articles", new { id = Model.Id }, null)
             @Html.ActionLink(" | Delete", "Delete", "Articles", new { id = Model.Id }, null)
         }
+
+        @Html.Partial("GoogleDrives/_UploadFile", new Document() { ArticleId = Model.Id })
     }
 </p>
+<div id="documents-box"></div>

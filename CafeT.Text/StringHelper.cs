@@ -487,8 +487,13 @@ namespace CafeT.Text
         }
         public static string DeleteEndTo(this string text, string to)
         {
-            int _lastIndex = text.LastIndexOf(to);
-            return text.Substring(0, _lastIndex);
+            if (text.IsNullOrEmptyOrWhiteSpace()) return string.Empty;
+            if(text.Contains(to))
+            {
+                int _lastIndex = text.LastIndexOf(to);
+                return text.Substring(0, _lastIndex);
+            }
+            return text;
         }
         /// <summary>
         /// Exclude the token character (to)
@@ -498,8 +503,13 @@ namespace CafeT.Text
         /// <returns></returns>
         public static string GetFromBeginTo(this string text, string to)
         {
-            int _firstIndex = text.IndexOf(to);
-            return text.Substring(0, _firstIndex);
+            if (text.IsNullOrEmptyOrWhiteSpace()) return string.Empty;
+            if(text.Contains(to))
+            {
+                int _firstIndex = text.IndexOf(to);
+                return text.Substring(0, _firstIndex);
+            }
+            return text;
         }
         /// <summary>
         /// Exclude the token character (to)
@@ -509,8 +519,13 @@ namespace CafeT.Text
         /// <returns></returns>
         public static string GetFromEndTo(this string text, string to)
         {
-            int _lastIndex = text.LastIndexOf(to);
-            return text.Substring(_lastIndex + 1);
+            if (text.IsNullOrEmptyOrWhiteSpace()) return string.Empty;
+            if(text.Contains(to))
+            {
+                int _lastIndex = text.LastIndexOf(to);
+                return text.Substring(_lastIndex + 1);
+            }
+            return text;
         }
 
         /// <summary>
@@ -522,16 +537,14 @@ namespace CafeT.Text
         /// <returns></returns>
         public static string GetFromTo(this string text, string from, string to)
         {
-            try
+            if (text.IsNullOrEmptyOrWhiteSpace()) return string.Empty;
+            if (text.Contains(from))
             {
                 int _fromIndex = text.IndexOf(from);
                 int _toIndex = text.IndexAll(to).Where(t => t > _fromIndex).FirstOrDefault();
-                return text.Substring(_fromIndex+1, _toIndex-1);
+                return text.Substring(_fromIndex + 1, _toIndex - 1);
             }
-            catch
-            {
-                return string.Empty;
-            }
+            return text;
         }
         
 

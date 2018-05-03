@@ -1,6 +1,5 @@
-﻿
-@using Mvc5.CafeT.vn.Models
-@model Mvc5.CafeT.vn.Models.FileModel
+﻿@model Mvc5.CafeT.vn.Models.FileModel
+
 
 <span>
     @if (Model.LastUpdatedDate.HasValue)
@@ -11,10 +10,32 @@
     {
         @Html.Raw(Model.CreatedDate.ToShortDateString())
     }
-    
+
     @Html.Raw(" | Tải: ")
     @Html.Raw(Model.CountDownloads)
     @Html.Raw(" | Đã xem: ")
     @Html.Raw(Model.CountViews)
     @Html.Raw(" | " + Model.SizeToString)
 </span>
+@if (Model.IsExits(Model.FullPath))
+{
+    <span class="label label-info">
+        Server
+    </span>
+}
+else
+{
+    if (!Model.GDriveId.IsNullOrEmptyOrWhiteSpace())
+    {
+        <span class="label label-danger">
+            G-Drive
+        </span>
+    }
+    else
+    {
+        <p class="panel-info">
+            This file is not exits on your storage, pls check and update this file.
+        </p>
+    }
+
+}

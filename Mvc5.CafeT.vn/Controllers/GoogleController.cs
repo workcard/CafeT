@@ -18,10 +18,10 @@ namespace Mvc5.CafeT.vn.Controllers
             Keyword
         }
 
-        Manager google;
+        GoogleManager google;
         public GoogleController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
-            google = new Manager(key, engine);
+            google = new GoogleManager(key, engine);
         }
 
         public ActionResult GoogleSearch(string keywords)

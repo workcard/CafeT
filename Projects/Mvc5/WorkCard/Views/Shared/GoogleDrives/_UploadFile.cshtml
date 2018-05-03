@@ -1,0 +1,20 @@
+﻿@model Web.Models.Document
+
+@using (Html.BeginForm("UploadGoogleFileAsync", "GoogleDrives", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(mode => Model.Id)*@
+    @Html.HiddenFor(mode => Model.ArticleId)
+    @Html.HiddenFor(mode => Model.IssueId)
+    @Html.HiddenFor(mode => Model.JobId)
+
+    <fieldset>
+        <legend>Upload a file</legend>
+        <div class="editor-field">
+            <input type="file" id="uploadFile" name="file" />
+        </div>
+        <div class="editor-field">
+            <input type="submit" value="Upload" />
+        </div>
+    </fieldset>
+}

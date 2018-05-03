@@ -1,21 +1,17 @@
-﻿@using Web.Models
-@model Web.Models.WorkIssue
+﻿@model Web.Models.WorkIssue
 
-
-<div class="card">
-    @using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post, null))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => Model.Id)
-        <div class="card-body">
-            @Html.Raw("Thêm việc ...")
-            <br />
-            @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
-            <script>
-                CKEDITOR.replace('Content');
-            </script>
-            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            <input type="submit" value="Create" class="btn btn-outline-primary" />
-        </div>
-    }
-</div>
+@using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => Model.Id)
+    <div class="card-body">
+        @Html.Raw("Thêm việc ...")
+        <br />
+        @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
+        <script>
+            CKEDITOR.replace('Content');
+        </script>
+        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        <input type="submit" value="Create" class="btn btn-outline-primary" />
+    </div>
+}

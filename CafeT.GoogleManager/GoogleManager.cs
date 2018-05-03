@@ -25,11 +25,11 @@ namespace CafeT.GoogleManager
         {
         }
 
-        //public GoogleManager(string apiKey, String? searchEngineKey, string applicationName)
-        //{
-        //    Key = apiKey;
-        //    EngineKey = searchEngineKey;
-        //}
+        public GoogleManager(string apiKey, string searchEngineKey)
+        {
+            Key = apiKey;
+            EngineKey = searchEngineKey;
+        }
 
         private CseResource.ListRequest MakeSearchRequest(string keywords)
         {

@@ -7,74 +7,38 @@
         {
             if (!item.IsImage())
             {
-        <li class="list-group-item">
-            @if (!item.AvatarPath.IsNullOrEmptyOrWhiteSpace())
-    {
-        <img src="@item.AvatarPath" />
-}
-            @if (!item.Title.IsNullOrEmptyOrWhiteSpace())
-    {
-        @Html.ActionLink(item.Title, "Details", "FileModels", new { id = item.Id }, null)<br />
-}
-else if (!item.FileName.IsNullOrEmptyOrWhiteSpace())
-{
-        @Html.ActionLink(item.FileName, "Details", "FileModels", new { id = item.Id }, null)<br />
-}
-            @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
-    {
-        <span class="label label-danger">Mới</span>
-}
-else if (item.CreatedDate.AddDays(3) >= DateTime.Now)
-{
-        <span class="label label-danger">Mới</span>
-}
-            <p>
-                @Html.Raw(item.Description)
-            </p>
-            <div id="Description-@item.FullPath">
-                @Ajax.ActionLink("Update Description", "UpdateGoogleFileAsync", "FileModels", new { id = item.FullPath },
-             new AjaxOptions
-             {
-                 UpdateTargetId = "Description-" + item.FullPath,
-                 InsertionMode = InsertionMode.Replace,
-                 HttpMethod = "Post"
-             }, null)
-            </div>
-            @*<div id="Update-@item.FullPath">
-            @Ajax.ActionLink(" | Download", "DownloadFromGoogle", "FileModels", new { id = item.FullPath },
-            new AjaxOptions
-            {
-                UpdateTargetId = "Update-" + item.FullPath,
-                InsertionMode = InsertionMode.Replace,
-                HttpMethod = "Post"
-            }, null)
-        </div>*@
-            <div id="Update-@item.FullPath">
-                @Ajax.ActionLink(" | Download", "Download", "FileModels", new { id = item.Id },
-             new AjaxOptions
-             {
-                 UpdateTargetId = "Update-" + item.FullPath,
-                 InsertionMode = InsertionMode.Replace,
-                 HttpMethod = "Post"
-             }, null)
-            </div>
-            <div id="Update-@item.FullPath">
-                @Ajax.ActionLink(" | Download", "DownloadFile", "FileModels", new { fileName = item.FileName },
-             new AjaxOptions
-             {
-                 UpdateTargetId = "Update-" + item.FullPath,
-                 InsertionMode = InsertionMode.Replace,
-                 HttpMethod = "Post"
-             }, null)
-            </div>
-            @Html.ActionLink("Details", "View", "FileModels", new { id = item.Id }, null)
-            <span>
-                @Html.Partial("Files/_FileInfo", item)
-            </span>
-            <p>
-                @Html.Partial("Files/_FileMenu", item)
-            </p>
-        </li>
+                <li class="list-group-item">
+                    @if (!item.AvatarPath.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        <img src="@item.AvatarPath" />
+                    }
+                    @if (!item.Title.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(item.Title, "Details", "FileModels", new { id = item.Id }, null)<br />
+                    }
+                    else if (!item.FileName.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(item.FileName, "Details", "FileModels", new { id = item.Id }, null)<br />
+                    }
+                    @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
+                    {
+                        <span class="label label-danger">Mới</span>
+                    }
+                    else if (item.CreatedDate.AddDays(3) >= DateTime.Now)
+                    {
+                        <span class="label label-danger">Mới</span>
+                    }
+                    <p>
+                        @Html.Raw(item.Description)
+                    </p>
+
+                    <span>
+                        @Html.Partial("Files/_FileInfo", item)
+                    </span>
+                    <p>
+                        @Html.Partial("Files/_FileMenu", item)
+                    </p>
+                </li>
             }
 
         }

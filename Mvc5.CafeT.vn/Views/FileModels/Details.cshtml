@@ -61,52 +61,56 @@
         }
     </script>
 }
-<div class="col-md-6">
-    @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+    <div class="col-md-8">
+        @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
     {
         <h4>@Html.ActionLink(Model.Title, "Download", "FileModels", new { id = Model.Id }, null)</h4>
-    }
-    else
+}
+else
+{
+    @Html.ActionLink(Model.FileName, "Download", "FileModels", new { id = Model.Id }, null)
+
+}
+        <br />
+        @if (!Model.DownloadUrl.IsNullOrEmptyOrWhiteSpace())
     {
-        @Html.ActionLink(Model.FileName, "Download", "FileModels", new { id = Model.Id }, null)
-    }
-    <br />
+        if (Model.DownloadUrl.Contains("?e"))
+        {
+            <a href="@Model.DownloadUrl.DeleteEndTo("?e")">
+                View (online)
+            </a>
+        }
+
     <span>
         @Html.Partial("Files/_FileInfo", Model)
     </span>
     <p>
         @Html.Raw(Model.Description)
     </p>
-    @if (!Model.FullPath.IsNullOrEmptyOrWhiteSpace() && Model.IsExits(Path.Combine("~/",Model.FullPath)))
-    {
-        <p>
-            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
-            {
-                @Html.ActionLink("Edit", "Edit", "FileModels", new { id = Model.Id }, null)
-                @Html.Raw(" | ")
-                @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
-            }
-        </p>
-    }
-    else
-    {
-        <p class="panel-info">
-            This file is not exits on your storage, pls check and update this file.
-        </p>
-        <div class="panel-footer">
-            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
-            {
-                <input type="file" id="uploadFile" name="file" />
-                <a href="#" id="btnUpload" class="btn btn-primary">Upload</a>
-            }
-        </div>
-        if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
-        {
-            @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
-        }
-    }
-</div>
-<div class="col-md-6">
+}
+else
+{
+if (!Model.GDriveId.IsNullOrEmptyOrWhiteSpace())
+{
+    <span class="badge badge-info">G-Drive</span>
+}
+else
+{
+    <p class="panel-info">
+        This file is not exits on your storage, pls check and update this file.
+    </p>
+}
+
+if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+{
+    @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
+    @Html.Raw(" | ")
+    @Html.ActionLink("Edit", "Edit", "FileModels", new { id = Model.Id }, null)
+
+}
+}
+    </div>
+<div class="col-md-4">
     @if (ViewBag.News != null)
     {
         @Html.Partial("Files/_Files", (IEnumerable<FileModel>)ViewBag.NewFiles)
