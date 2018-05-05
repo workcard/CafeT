@@ -116,8 +116,8 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Script.v1, Version=1.33.0.1215, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Script.v1.1.33.0.1215\lib\net45\Google.Apis.Script.v1.dll</HintPath>
+    <Reference Include="Google.Apis.Script.v1, Version=1.33.0.1216, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Script.v1.1.33.0.1216\lib\net45\Google.Apis.Script.v1.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Translate.v2, Version=1.33.0.875, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Translate.v2.1.33.0.875\lib\net45\Google.Apis.Translate.v2.dll</HintPath>
@@ -171,11 +171,11 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Graph, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Graph.1.8.1\lib\net45\Microsoft.Graph.dll</HintPath>
+    <Reference Include="Microsoft.Graph, Version=1.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.1.9.0\lib\net45\Microsoft.Graph.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Graph.Core, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Graph.Core.1.8.1\lib\net45\Microsoft.Graph.Core.dll</HintPath>
+    <Reference Include="Microsoft.Graph.Core, Version=1.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.1.9.0\lib\net45\Microsoft.Graph.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Identity.Client, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.1.1.0-preview\lib\net45\Microsoft.Identity.Client.dll</HintPath>
@@ -227,6 +227,9 @@
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=3.2.0.157, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.3.2.0.157\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -423,7 +426,7 @@
     <Compile Include="Controllers\FileModelsController.cs" />
     <Compile Include="Controllers\GoogleController.cs" />
     <Compile Include="Controllers\DashboardsController.cs" />
-    <Compile Include="Controllers\InterviewModelsController.cs" />
+    <Compile Include="Controllers\WebPageController.cs" />
     <Compile Include="Controllers\WordModelsController.cs" />
     <Compile Include="Helpers\ArticleHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
@@ -434,16 +437,25 @@
     <Compile Include="Migrations\201805021051110_UpdateDb.Designer.cs">
       <DependentUpon>201805021051110_UpdateDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805040345121_UpdateArticle.cs" />
+    <Compile Include="Migrations\201805040345121_UpdateArticle.Designer.cs">
+      <DependentUpon>201805040345121_UpdateArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805040446502_UpdateBigDbModel.cs" />
+    <Compile Include="Migrations\201805040446502_UpdateBigDbModel.Designer.cs">
+      <DependentUpon>201805040446502_UpdateBigDbModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ApplicationSetting.cs" />
     <Compile Include="Models\Articles\ArticleCollection.cs" />
-    <Compile Include="Models\ExamModel.cs" />
+    <Compile Include="Models\BaseObject.cs" />
+    <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\WebPageModel.cs" />
     <Compile Include="Models\WordModel.cs" />
     <Compile Include="ModelViews\ArticleAuthorView.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\ArticleCategoriesController.cs" />
     <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\GroupsAdminController.cs" />
-    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
@@ -461,13 +473,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswerReviewModelsController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
-    <Compile Include="Controllers\CompanyModelsController.cs" />
-    <Compile Include="Controllers\CuriculumsController.cs" />
-    <Compile Include="Controllers\ExamsController.cs" />
-    <Compile Include="Controllers\ImageModelsController.cs" />
-    <Compile Include="Controllers\IssuesController.cs" />
-    <Compile Include="Controllers\JobModelsController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
@@ -476,22 +481,15 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\UrlsController.cs" />
-    <Compile Include="Controllers\WebPageController.cs" />
-    <Compile Include="Controllers\WorkModelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extension.cs" />
     <Compile Include="Helpers\YouTubeHelper.cs" />
-    <Compile Include="Managers\ExamManager.cs" />
     <Compile Include="Managers\CommentManager.cs" />
     <Compile Include="Managers\AnswerManager.cs" />
     <Compile Include="Managers\QuestionManager.cs" />
-    <Compile Include="Managers\WorkManager.cs" />
-    <Compile Include="Managers\JobManager.cs" />
     <Compile Include="Managers\UrlManager.cs" />
-    <Compile Include="Managers\ImageManager.cs" />
-    <Compile Include="Managers\IssueManager.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="Managers\ArticleManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
@@ -514,38 +512,26 @@
     <Compile Include="Models\Identity\ApplicationUserLogin.cs" />
     <Compile Include="Models\Identity\ApplicationUserRole.cs" />
     <Compile Include="Models\Articles\ArticleCategory.cs" />
-    <Compile Include="Models\CuriculumModel.cs" />
     <Compile Include="ModelViews\DailySummary.cs" />
-    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\Identity\GroupStoreBase.cs" />
-    <Compile Include="Models\IssuesModel.cs" />
-    <Compile Include="Models\JobModel.cs" />
     <Compile Include="Models\WorkModel.cs" />
     <Compile Include="ModelViews\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CommentModel.cs" />
-    <Compile Include="Models\CompanyModel.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\Articles\ArticleModel.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="ModelViews\AvatarImageViewModels.cs" />
     <Compile Include="ModelViews\CommentView.cs" />
     <Compile Include="ModelViews\QuestionView.cs" />
-    <Compile Include="ModelViews\JobView.cs" />
     <Compile Include="ModelViews\ManageViewModels.cs" />
     <Compile Include="Models\AnswerModel.cs" />
-    <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\UrlModel.cs" />
-    <Compile Include="Models\WebPageModel.cs" />
-    <Compile Include="Models\InterviewModel.cs" />
     <Compile Include="ModelViews\EvaluationViewModel.cs" />
     <Compile Include="ModelViews\ArticleView.cs" />
     <Compile Include="ModelViews\BaseView.cs" />
     <Compile Include="ModelViews\SliderModel.cs" />
-    <Compile Include="ModelViews\ImageView.cs" />
     <Compile Include="ModelViews\RegisterViewModel.cs" />
     <Compile Include="ModelViews\Structs\TableModel.cs" />
     <Compile Include="ModelViews\UserProfileView.cs" />
@@ -554,7 +540,6 @@
     <Compile Include="ScheduledTasks\EmailJob.cs" />
     <Compile Include="ScheduledTasks\JobScheduler.cs" />
     <Compile Include="Services\CommentService.cs" />
-    <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Helpers\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1224,9 +1209,6 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Urls\Index.cshtml" />
-    <Content Include="Views\WebPage\Details.cshtml" />
-    <Content Include="Views\WebPage\Create.cshtml" />
-    <Content Include="Views\WebPage\Index.cshtml" />
     <Content Include="Views\Questions\Create.cshtml" />
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
@@ -1260,33 +1242,12 @@
     <Content Include="Views\Urls\Details.cshtml" />
     <Content Include="Views\Urls\Create.cshtml" />
     <Content Include="Views\Urls\Edit.cshtml" />
-    <Content Include="Views\WebPage\Delete.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Shared\Files\_Files.cshtml" />
     <Content Include="Views\Shared\_Products.cshtml" />
     <Content Include="Views\Shared\_Urls.cshtml" />
     <Content Include="Views\FileModels\Details.cshtml" />
     <Content Include="Views\FileModels\Edit.cshtml" />
-    <Content Include="Views\JobModels\Create.cshtml" />
-    <Content Include="Views\JobModels\Delete.cshtml" />
-    <Content Include="Views\JobModels\Details.cshtml" />
-    <Content Include="Views\JobModels\Edit.cshtml" />
-    <Content Include="Views\JobModels\Index.cshtml" />
-    <Content Include="Views\CompanyModels\Create.cshtml" />
-    <Content Include="Views\CompanyModels\Delete.cshtml" />
-    <Content Include="Views\CompanyModels\Details.cshtml" />
-    <Content Include="Views\CompanyModels\Edit.cshtml" />
-    <Content Include="Views\CompanyModels\Index.cshtml" />
-    <Content Include="Views\CompanyModels\_AddJob.cshtml" />
-    <Content Include="Views\CompanyModels\_Jobs.cshtml" />
-    <Content Include="Views\JobModels\_AddQuestionForJob.cshtml" />
-    <Content Include="Views\JobModels\_QuestionsOfJob.cshtml" />
-    <Content Include="Views\Shared\_Jobs.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Shared\Status\_Published.cshtml" />
     <Content Include="Views\Shared\Status\_Drafted.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
@@ -1296,11 +1257,6 @@
     <Content Include="Views\WorkModels\Details.cshtml" />
     <Content Include="Views\WorkModels\Edit.cshtml" />
     <Content Include="Views\WorkModels\Index.cshtml" />
-    <Content Include="Views\Curiculums\Create.cshtml" />
-    <Content Include="Views\Curiculums\Delete.cshtml" />
-    <Content Include="Views\Curiculums\Details.cshtml" />
-    <Content Include="Views\Curiculums\Edit.cshtml" />
-    <Content Include="Views\Curiculums\Index.cshtml" />
     <Content Include="Views\Shared\_Curiculum.cshtml" />
     <Content Include="Views\Shared\Messages\_DeleteNotification.cshtml" />
     <Content Include="Views\Shared\Messages\_EditNotification.cshtml" />
@@ -1310,12 +1266,6 @@
     <Content Include="Views\Shared\Questions\_QuestionOfAnswer.cshtml" />
     <Content Include="Views\Shared\_Works.cshtml" />
     <Content Include="Views\Shared\_Companies.cshtml" />
-    <Content Include="Views\Issues\Create.cshtml" />
-    <Content Include="Views\Issues\Delete.cshtml" />
-    <Content Include="Views\Issues\Details.cshtml" />
-    <Content Include="Views\Issues\Edit.cshtml" />
-    <Content Include="Views\Issues\Index.cshtml" />
-    <Content Include="Views\Shared\_Job.cshtml" />
     <Content Include="Views\AnswerReviewModels\Create.cshtml" />
     <Content Include="Views\AnswerReviewModels\Delete.cshtml" />
     <Content Include="Views\AnswerReviewModels\Details.cshtml" />
@@ -1346,9 +1296,7 @@
     <Content Include="Views\CrawlerModels\Edit.cshtml" />
     <Content Include="Views\CrawlerModels\Index.cshtml" />
     <Content Include="Views\Shared\_Crawlers.cshtml" />
-    <Content Include="Views\JobModels\_JobMenu.cshtml" />
     <Content Include="Views\Shared\Questions\_QuestionMenu.cshtml" />
-    <Content Include="Views\JobModels\_JobInfo.cshtml" />
     <Content Include="Views\Shared\Files\_FileInfo.cshtml" />
     <Content Include="Views\Shared\Files\_FileMenu.cshtml" />
     <Content Include="Views\Questions\Delete.cshtml" />
@@ -1364,7 +1312,6 @@
     <Content Include="Views\Shared\Messages\_UploadCompleted.cshtml" />
     <Content Include="Views\Manage\_UserProfile.cshtml" />
     <Content Include="Views\Shared\Status\_Public.cshtml" />
-    <Content Include="Views\Shared\_Issues.cshtml" />
     <Content Include="Views\ArticleCategories\Create.cshtml" />
     <Content Include="Views\ArticleCategories\Delete.cshtml" />
     <Content Include="Views\ArticleCategories\Details.cshtml" />
@@ -1386,8 +1333,6 @@
     <Content Include="Views\Shared\Articles\_ArticleInfo.cshtml" />
     <Content Include="Views\Shared\Articles\_ArticleAuthors.cshtml" />
     <Content Include="Views\Shared\Files\_Files-Items.cshtml" />
-    <Content Include="Views\Shared\_Jobs-Items.cshtml" />
-    <Content Include="Views\Shared\_Jobs-Box.cshtml" />
     <Content Include="Views\FileModels\Create.cshtml" />
     <Content Include="Views\Shared\Files\_Files-Box.cshtml" />
     <Content Include="Views\Shared\Articles\_Articles.cshtml" />
@@ -1413,11 +1358,6 @@
     <Content Include="Views\Avatar\Upload.cshtml" />
     <Content Include="Views\Shared\Messages\_Verified.cshtml" />
     <Content Include="Views\Shared\Answers\_ToReview.cshtml" />
-    <Content Include="Views\InterviewModels\Create.cshtml" />
-    <Content Include="Views\InterviewModels\Delete.cshtml" />
-    <Content Include="Views\InterviewModels\Details.cshtml" />
-    <Content Include="Views\InterviewModels\Edit.cshtml" />
-    <Content Include="Views\InterviewModels\Index.cshtml" />
     <Content Include="Views\Shared\Interviews\_AddQuestion.cshtml" />
     <Content Include="Views\Shared\Questions\_UserCreateAnswer.cshtml" />
     <Content Include="Views\Answers\Delete.cshtml" />
@@ -1484,14 +1424,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CafeT.BusinessObjects\CafeT.BusinessObjects.csproj">
-      <Project>{e3fa76c2-4533-463d-aab5-17e5dd8269d3}</Project>
-      <Name>CafeT.BusinessObjects</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CafeT.EF6.Objects\CafeT.EF6.Objects.csproj">
       <Project>{8b0d379f-96dd-425f-9793-8de51fdc8706}</Project>
       <Name>CafeT.EF6.Objects</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\CafeT.Enumerable\CafeT.Enumerable.csproj">
       <Project>{1214A9B7-70B8-4224-9FD1-12AA685A51B1}</Project>
@@ -1555,6 +1490,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805021051110_UpdateDb.resx">
       <DependentUpon>201805021051110_UpdateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805040345121_UpdateArticle.resx">
+      <DependentUpon>201805040345121_UpdateArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805040446502_UpdateBigDbModel.resx">
+      <DependentUpon>201805040446502_UpdateBigDbModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

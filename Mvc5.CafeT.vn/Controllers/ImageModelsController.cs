@@ -1,6 +1,5 @@
 ﻿using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -19,11 +18,10 @@ namespace Mvc5.CafeT.vn.Controllers
         protected readonly Mappers.Mappers _mapper;
 
         public ImageModelsController(
-            IUnitOfWorkAsync unitOfWorkAsync,
-            IArticleService service):base(unitOfWorkAsync)
+            IUnitOfWorkAsync unitOfWorkAsync):base(unitOfWorkAsync)
         {
             _unitOfWorkAsync = unitOfWorkAsync;
-            _mapper = new Mappers.Mappers(_unitOfWorkAsync, service);
+            _mapper = new Mappers.Mappers(_unitOfWorkAsync);
         }
 
         // GET: ImageModels
@@ -110,7 +108,7 @@ namespace Mvc5.CafeT.vn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,FullPath,CreatedDate,CreatedBy,LastUpdatedDate,ArticleId,FileId,CourseId,ProjectId")] ImageModel imageModel)
+        public ActionResult Create([Bind(Include = "Id,Name,FullPath,CreatedDate,CreatedBy,UpdatedDate,ArticleId,FileId,CourseId,ProjectId")] ImageModel imageModel)
         {
             if (ModelState.IsValid)
             {
@@ -143,7 +141,7 @@ namespace Mvc5.CafeT.vn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,FullPath,CreatedDate,CreatedBy,LastUpdatedDate,ArticleId,FileId,CourseId,ProjectId")] ImageModel imageModel)
+        public ActionResult Edit([Bind(Include = "Id,Name,FullPath,CreatedDate,CreatedBy,UpdatedDate,ArticleId,FileId,CourseId,ProjectId")] ImageModel imageModel)
         {
             if (ModelState.IsValid)
             {

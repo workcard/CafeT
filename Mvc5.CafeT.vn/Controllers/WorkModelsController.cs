@@ -102,8 +102,8 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             if (ModelState.IsValid)
             {
-                workModel.LastUpdatedDate = DateTime.Now;
-                workModel.LastUpdatedBy = User.Identity.Name;
+                workModel.UpdatedDate = DateTime.Now;
+                workModel.UpdatedBy = User.Identity.Name;
                 db.Entry(workModel).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

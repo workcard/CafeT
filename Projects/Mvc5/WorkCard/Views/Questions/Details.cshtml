@@ -9,34 +9,40 @@
             $('#issue-box').html(data);
         });
 </script>
-
+@*<script type="text/javascript">
+    $.get('@Url.Action("LoadInfo", "Questions", new { id = Model.IssueId})',
+        function (data) {
+            $('#info-box').html(data);
+        });
+</script>*@
 <div class="row">
     <div class="col-md-8">
         <div class="card-title">@Html.Raw(Model.Title)</div>
-        <hr />
-        <div class="card-text">@Html.Raw(Model.Content)</div>
         <div class="small">
             @Html.Raw(Model.CreatedDate) by @Model.CreatedBy
         </div>
+        <hr />
+        <div class="card-text">@Html.Raw(Model.Content.ResizeImages())</div>
+
         <div class="card-link">
             @if (User.Identity.IsAuthenticated)
+        {
+            if (Model.IsOf(User.Identity.Name))
             {
-                if (Model.IsOf(User.Identity.Name))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) @Html.Raw(" | ")
-                    @Html.ActionLink("Delete", "Delete", "Questions", new { id = Model.Id }, null) @Html.Raw(" | ")
-                }
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "Questions", new { id = Model.Id }, null) @Html.Raw(" | ")
+        }
 
-                @Html.ActionLink("Back to List", "Index")
-                @Html.Raw(" | ")
-                @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
-                                                                          new AjaxOptions
-                                                                          {
-                                                                              UpdateTargetId = "CreateAnswer",
-                                                                              HttpMethod = "Get",
-                                                                              InsertionMode = InsertionMode.Replace
-                                                                          }, new { @class = "card-link" })
-            }
+        @Html.ActionLink("Back to List", "Index")
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
+                                                                   new AjaxOptions
+                                                                   {
+                                                                       UpdateTargetId = "CreateAnswer",
+                                                                       HttpMethod = "Get",
+                                                                       InsertionMode = InsertionMode.Replace
+                                                                   }, new { @class = "card-link" })
+}
         </div>
 
         <div id="CreateAnswer"></div>
@@ -45,6 +51,9 @@
         </p>
     </div>
     <div class="col-md-4">
+        <div id="info-box">
+            @Html.Partial("Questions/_QuestionInfo", Model)
+        </div>
         <div id="issue-box"></div>
     </div>
 </div>

@@ -1,5 +1,6 @@
-﻿using CafeT.BusinessObjects;
+﻿
 using System;
+using Web.Models;
 
 namespace Mvc5.CafeT.vn.Models
 {
@@ -10,7 +11,7 @@ namespace Mvc5.CafeT.vn.Models
         public string Description { set; get; }
         public string[] Tags { set; get; }
         public string Location { set; get; }
-        public Address Address { set; get; }
+        //public Address Address { set; get; }
         public double SalaryOnHour { set; get; }
         public WorkModel() : base()
         {

@@ -35,10 +35,10 @@
                     @Html.Raw("Giải bởi: " + item.CreatedBy)
                     @Html.Raw(" | ")
                     @Html.Raw(" lúc " + item.CreatedDate.TimeAgo())
-                    @if (item.LastUpdatedDate.HasValue)
+                    @if (item.UpdatedDate.HasValue)
                     {
-                        @Html.Raw(" | Cập nhật bởi: " + item.LastUpdatedBy)
-                        @Html.Raw(" lúc: " + item.LastUpdatedDate.Value.TimeAgo())
+                        @Html.Raw(" | Cập nhật bởi: " + item.UpdatedBy)
+                        @Html.Raw(" lúc: " + item.UpdatedDate.Value.TimeAgo())
                     }
                 </span>
             }

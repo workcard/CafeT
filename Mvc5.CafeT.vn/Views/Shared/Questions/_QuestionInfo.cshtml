@@ -18,10 +18,10 @@ else
     <h5>
         @Html.Raw(Model.CreatedDate.TimeAgo())
         @Html.Raw(" by " + Model.CreatedBy.GetFromBeginTo("@"))
-        @if (Model.LastUpdatedDate.HasValue)
+        @if (Model.UpdatedDate.HasValue)
         {
             @Html.Raw(" | Updated: ")
-            @Html.Raw(Model.LastUpdatedDate.Value.TimeAgo())
+            @Html.Raw(Model.UpdatedDate.Value.TimeAgo())
         }
 
         @if (Model.HasAnswer())

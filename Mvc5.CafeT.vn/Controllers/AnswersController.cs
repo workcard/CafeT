@@ -143,8 +143,8 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             try
             {
-                model.LastUpdatedDate = DateTime.Now;
-                model.LastUpdatedBy = User.Identity.Name;
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = User.Identity.Name;
                 if (_answerManager.Update(model))
                 {
                     if (Request.IsAjaxRequest())

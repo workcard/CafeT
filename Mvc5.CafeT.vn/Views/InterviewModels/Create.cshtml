@@ -11,8 +11,8 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model=>model.CreatedBy)
     @Html.HiddenFor(model => model.CreatedDate)
-    @Html.HiddenFor(model => model.LastUpdatedBy)
-    @Html.HiddenFor(model => model.LastUpdatedDate)
+    @Html.HiddenFor(model => model.UpdatedBy)
+    @Html.HiddenFor(model => model.UpdatedDate)
     @Html.HiddenFor(model => model.InterviewDate)
 
     <div class="form-horizontal">

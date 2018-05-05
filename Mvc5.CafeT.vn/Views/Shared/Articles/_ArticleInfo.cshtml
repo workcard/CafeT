@@ -9,11 +9,11 @@
     }
     <div class="small">
         @Html.Raw("By: " + Model.CreatedBy.GetFromBeginTo("@"))
-        <span>
+        @*<span>
             @Html.Raw(@Model.Processor.TimeToRead.ToReadable() + " minutes")
             @Html.Raw(" | ")
             @Html.Raw(@Model.Processor.CountOfWords.ToReadable() + " words")
-        </span>
+        </span>*@
         <span>
             <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> 
             @Model.CreatedDate.TimeAgo()</a>

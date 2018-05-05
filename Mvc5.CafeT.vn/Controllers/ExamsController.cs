@@ -141,8 +141,8 @@ namespace Mvc5.CafeT.vn.Controllers
             try
             {
                 // TODO: Add update logic here
-                model.LastUpdatedDate = DateTime.Now;
-                model.LastUpdatedBy = User.Identity.Name;
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = User.Identity.Name;
                 _unitOfWorkAsync.Repository<ExamModel>().Update(model);
                 _unitOfWorkAsync.SaveChanges();
                 return RedirectToAction("Details", new { id = model.Id });

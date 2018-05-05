@@ -1,7 +1,5 @@
 ﻿@model Mvc5.CafeT.vn.ModelViews.CommentView
 
-
-
 @using (Html.BeginForm("AddComment", "Articles", new { articleId = Model.ArticleId }, FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
@@ -15,10 +13,6 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="widget">
-            <div class="widget-title">
-                <h4>Thêm bình luận</h4>
-                <hr>
-            </div><!-- end widget-title -->
             <div class="commentform">
                 <form class="row">
                     <div class="col-md-12 col-sm-12">

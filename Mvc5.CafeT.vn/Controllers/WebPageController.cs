@@ -1,6 +1,5 @@
 ﻿using Mvc5.CafeT.vn.Managers;
 using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Web.Mvc;
@@ -9,14 +8,11 @@ namespace Mvc5.CafeT.vn.Controllers
 {
     public class WebPageController : BaseController
     {
-        protected readonly Mappers.Mappers _mapper;
         protected readonly ArticleManager _manager;
 
-        public WebPageController(IUnitOfWorkAsync unitOfWorkAsync, IArticleService service) : base(unitOfWorkAsync)
+        public WebPageController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
-            _unitOfWorkAsync = unitOfWorkAsync;
-            _manager = new ArticleManager(service, _unitOfWorkAsync);
-            _mapper = new Mappers.Mappers(_unitOfWorkAsync, service);
+            _manager = new ArticleManager(_unitOfWorkAsync);
         }
 
         // GET: WebPage

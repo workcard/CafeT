@@ -1,9 +1,9 @@
 ﻿@model Mvc5.CafeT.vn.ModelViews.YouTubeView
 
 <div>
-    @if (Model.LastUpdatedDate.HasValue)
+    @if (Model.UpdatedDate.HasValue)
     {
-        @Html.Raw(Model.LastUpdatedDate.Value.TimeAgo())
+        @Html.Raw(Model.UpdatedDate.Value.TimeAgo())
         @Html.Raw(" by: " + Model.CreatedBy.GetFromBeginTo("@"))
     }
     else

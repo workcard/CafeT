@@ -1,5 +1,5 @@
 ﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
-@using CafeT.BusinessObjects
+@using Mvc5.CafeT.vn.Models
 
 @if (User.Identity.IsAuthenticated && Model.IsOf(User.Identity.Name) ||(User.IsInRole("Admin")))
 {
@@ -20,7 +20,7 @@
     }
     else
     {
-        @Html.Raw(" | ")
+        @Html.Raw(" | Đã xuất bản. ")
         @Ajax.ActionLink("Lưu (nháp)", "ToDraft", "Articles", new { id = Model.Id },
                         new AjaxOptions
                         {
@@ -44,7 +44,7 @@
     else
     {
         @Html.Raw(" | ")
-        @Ajax.ActionLink("Công khai", "ToPrivate", "Articles", new { id = Model.Id },
+        @Ajax.ActionLink("Riêng tư", "ToPrivate", "Articles", new { id = Model.Id },
                         new AjaxOptions
                         {
                             UpdateTargetId = "Update-" + Model.Id.ToString(),

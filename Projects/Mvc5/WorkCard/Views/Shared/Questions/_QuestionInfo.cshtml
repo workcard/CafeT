@@ -1,0 +1,15 @@
+﻿@model Web.Models.Question
+
+<div class="col-md-12">
+    <h4>Post by: @Model.CreatedBy</h4>
+    Answers <span class="badge badge-danger pull-right">@Model.Answers.Count()</span><br />
+    <ul class="list-group">
+        @foreach (var answer in Model.Answers)
+        {
+        <li class="list-group-item">
+            @Html.Partial("Answers/_AnswerTitle", answer)
+        </li>
+        }
+    </ul>
+
+</div>

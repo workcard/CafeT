@@ -171,7 +171,7 @@ namespace Mvc5.CafeT.vn.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,InterviewDate,CreatedDate,CreatedBy,LastUpdatedDate,LastUpdatedBy,CountViews,LastViewAt,LastViewBy")] InterviewModel interviewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,InterviewDate,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,CountViews,LastViewAt,LastViewBy")] InterviewModel interviewModel)
         {
             if (ModelState.IsValid)
             {

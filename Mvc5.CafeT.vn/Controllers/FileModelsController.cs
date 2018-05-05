@@ -1,7 +1,6 @@
 ﻿using CafeT.Text;
 using Google.Apis.Auth.OAuth2.Mvc;
-using GFile = Google.Apis.Drive.v2;
-using GDataFile = Google.Apis.Drive.v2.Data;
+using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Mvc5.CafeT.vn.Models;
 using PagedList;
@@ -15,6 +14,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using GDataFile = Google.Apis.Drive.v2.Data;
+using GFile = Google.Apis.Drive.v2;
 
 namespace Mvc5.CafeT.vn.Controllers
 {
@@ -78,15 +79,25 @@ namespace Mvc5.CafeT.vn.Controllers
                         _file.Shared = true;
                         _file.Shareable = true;
 
-
                         using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
                         {
                             try
                             {
                                 GFile.FilesResource.InsertMediaUpload request = service.Files.Insert(_file, stream, _file.MimeType);
                                 await request.UploadAsync();
+
                                 if (request.ResponseBody != null)
                                 {
+                                    Permission permission = new Permission
+                                    {
+                                        Type = "anyone",
+                                        Role = "writer",
+                                        WithLink = true
+                                    };
+
+                                    var a = service.Permissions.Insert(permission, request.ResponseBody.Id);
+                                    await a.ExecuteAsync();
+
                                     using (ApplicationDbContext context = new ApplicationDbContext())
                                     {
                                         document.Id = Guid.NewGuid();
@@ -174,8 +185,8 @@ namespace Mvc5.CafeT.vn.Controllers
                             if (!path.IsNullOrEmptyOrWhiteSpace())
                             {
                                 FileModel _file = new FileModel(UploadFolder + User.Identity.Name.Replace("@", "_") + "/" + fileName);
-                                _file.LastUpdatedDate = DateTime.Now;
-                                _file.LastUpdatedBy = User.Identity.Name;
+                                _file.UpdatedDate = DateTime.Now;
+                                _file.UpdatedBy = User.Identity.Name;
                                 if (_fileManager.Update(_file))
                                 {
                                     return new HttpResponseMessage()
@@ -433,7 +444,7 @@ namespace Mvc5.CafeT.vn.Controllers
             var _object = _unitOfWorkAsync.Repository<FileModel>().Find(id);
             if(_object != null)
             {
-                _object.Title = _object.GetFileName();
+                _object.Title = _object.FileName;
                 return View(_object);
             }
             else
@@ -452,8 +463,8 @@ namespace Mvc5.CafeT.vn.Controllers
             try
             {
                 // TODO: Add update logic here
-                model.LastUpdatedBy = User.Identity.Name;
-                model.LastUpdatedDate = DateTime.Now;
+                model.UpdatedBy = User.Identity.Name;
+                model.UpdatedDate = DateTime.Now;
                 if (!string.IsNullOrWhiteSpace(imageBase))
                 {
                     ////var image = ImageUtility.Base64ToImage(imageBase.Replace("data:image/png;base64,", ""));

@@ -1,8 +1,7 @@
 namespace Mvc5.CafeT.vn.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateDb : DbMigration
     {
         public override void Up()

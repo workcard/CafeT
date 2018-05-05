@@ -1,7 +1,8 @@
-﻿using CafeT.BusinessObjects;
+﻿
 using CafeT.Html;
 using CafeT.Text;
 using System;
+using Web.Models;
 
 namespace Mvc5.CafeT.vn.Models
 {

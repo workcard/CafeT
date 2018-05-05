@@ -9,10 +9,10 @@
         @*<div class="col-md-2">
                 @Html.Raw(item.CreatedDate.TimeAgo())
                 @Html.Raw(" By: " + item.CreatedBy.GetFromBeginTo("@"))
-                @if (item.LastUpdatedDate.HasValue)
+                @if (item.UpdatedDate.HasValue)
                 {
-                    @Html.Raw(" | Cập nhật: " + item.LastUpdatedBy.GetFromBeginTo("@"))
-                    @Html.Raw(" lúc: " + item.LastUpdatedDate)
+                    @Html.Raw(" | Cập nhật: " + item.UpdatedBy.GetFromBeginTo("@"))
+                    @Html.Raw(" lúc: " + item.UpdatedDate)
                 }
                 <br />
                 @Html.Raw("Vews: " + item.CountViews)

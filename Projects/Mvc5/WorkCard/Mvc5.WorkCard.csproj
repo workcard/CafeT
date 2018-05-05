@@ -823,6 +823,8 @@
     <Content Include="Views\Shared\GoogleDrives\_UploadFile.cshtml" />
     <Content Include="Views\Shared\GoogleDrives\Files.cshtml" />
     <Content Include="Views\Articles\_Files.cshtml" />
+    <Content Include="Views\Shared\Questions\_QuestionInfo.cshtml" />
+    <Content Include="Views\Shared\Answers\_AnswerTitle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

@@ -153,7 +153,7 @@ namespace Mvc5.CafeT.vn.Managers
         {
             var _models = _unitOfWorkAsync.RepositoryAsync<QuestionModel>().Query()
                 .Select()
-                .Where(t=>t.IsVerified && t.IsNew(days))
+                .Where(t=>t.IsVerified && t.IsNews(days))
                 .OrderByDescending(t => t.CreatedDate)
                 .TakeMax(n);
             return _models;

@@ -22,10 +22,10 @@
     </h5>
     <span>
         @Html.Raw(Model.CreatedDate.TimeAgo()) @Html.Raw(" By: " + Model.CreatedBy.GetFromBeginTo("@"))
-        @if (Model.LastUpdatedDate.HasValue)
+        @if (Model.UpdatedDate.HasValue)
         {
-            @Html.Raw(" | Cập nhật: " + Model.LastUpdatedBy.GetFromBeginTo("@"))
-            @Html.Raw(" lúc: " + Model.LastUpdatedDate.Value.TimeAgo())
+            @Html.Raw(" | Cập nhật: " + Model.UpdatedBy.GetFromBeginTo("@"))
+            @Html.Raw(" lúc: " + Model.UpdatedDate.Value.TimeAgo())
         }
     </span>
     @Html.Raw(Model.Content)

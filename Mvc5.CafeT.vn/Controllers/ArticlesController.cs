@@ -1,12 +1,10 @@
-﻿using CafeT.BusinessObjects;
-using CafeT.Enumerable;
+﻿using CafeT.Enumerable;
 using CafeT.Html;
 using CafeT.Objects;
 using CafeT.SmartObjects;
 using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
 using Mvc5.CafeT.vn.ModelViews;
-using Mvc5.CafeT.vn.Services;
 using PagedList;
 using Repository.Pattern.UnitOfWork;
 using System;
@@ -20,13 +18,11 @@ namespace Mvc5.CafeT.vn.Controllers
 {
     public class ArticlesController : BaseController
     {
-        public ArticlesController(IUnitOfWorkAsync unitOfWorkAsync, IArticleService articleService) : base(unitOfWorkAsync)
-        {
-            _unitOfWorkAsync = unitOfWorkAsync;            
+        public ArticlesController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
+        {  
         }
 
-       
-        [OutputCache(Duration = 60, VaryByParam = "none")]
+        //[OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult GetTopViews(int? page)
         {
             var _objects = _articleManager.GetAllPublished()
@@ -42,7 +38,7 @@ namespace Mvc5.CafeT.vn.Controllers
             return View("Articles/_Articles", _views.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
         }
 
-        [OutputCache(Duration = 60, VaryByParam = "none")]
+        //[OutputCache(Duration = 60, VaryByParam = "none")]
         [Authorize]        
         public ActionResult GetAllUnPublished(int? page, string searchString)
         {
@@ -64,7 +60,7 @@ namespace Mvc5.CafeT.vn.Controllers
             return View("Articles/_Articles", _views.ToPagedList(pageNumber: page ?? 1, pageSize: PAGE_ITEMS));
         }
 
-        [OutputCache(Duration = 60, VaryByParam = "none")]
+        //[OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult GetAllPublished(int? page, string searchString)
         {
             List<ArticleModel> models = new List<ArticleModel>();
@@ -105,7 +101,7 @@ namespace Mvc5.CafeT.vn.Controllers
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult GetByAuthors(Guid articleId)
         {
-            var _model = _articleManager.GetById(articleId);
+            var _model = _articleManager.GetByIdAsync(articleId).Result;
             var _models = _articleManager.GetAllPublished(_model.CreatedBy);
             _models = _models.Where(t => t.Id != articleId)
                 .OrderByDescending(t=>t.CountViews)
@@ -122,7 +118,7 @@ namespace Mvc5.CafeT.vn.Controllers
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult GetAuthors(Guid articleId)
         {
-            var _model = _articleManager.GetById(articleId);
+            var _model = _articleManager.GetByIdAsync(articleId).Result;
             var _authors = UserManager.FindByNameAsync(_model.CreatedBy).Result;
 
             if (Request.IsAjaxRequest())
@@ -140,7 +136,7 @@ namespace Mvc5.CafeT.vn.Controllers
         
         public Dictionary<string,int[]> GetArticlesWords(Guid articleId)
         {
-            ArticleModel _article = _articleManager.GetById(articleId);
+            ArticleModel _article = _articleManager.GetByIdAsync(articleId).Result;
             VnTextCrawler _crawler = new VnTextCrawler();
             _crawler.Run(_article.Content.HtmlToText());
 
@@ -156,7 +152,7 @@ namespace Mvc5.CafeT.vn.Controllers
         [OutputCache(Duration = 60, VaryByParam = "none")]
         public async Task<ActionResult> GetEnglishWords(Guid articleId)
         {
-            ArticleModel _article = _articleManager.GetById(articleId);
+            ArticleModel _article = _articleManager.GetByIdAsync(articleId).Result;
             VnTextCrawler _crawler = new VnTextCrawler();
             _crawler.Run(_article.Content.HtmlToText());
 
@@ -266,9 +262,9 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             try
             {
-                var _object = _articleManager.GetById(model.ArticleId.Value);
+                var _object = _articleManager.GetByIdAsync(model.ArticleId.Value).Result;
                 _object.AvatarPath = model.Link;
-                _object.LastUpdatedBy = User.Identity.Name;
+                _object.UpdatedBy = User.Identity.Name;
                 _articleManager.Update(_object);
 
                 if (Request.IsAjaxRequest())
@@ -353,11 +349,11 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             try
             {
-                var _object = _articleManager.GetById(articleId);
+                var _object = _articleManager.GetByIdAsync(articleId).Result;
                 if(!_object.Followers.Contains(User.Identity.Name))
                 {
                     _object.Followers = _object.Followers + User.Identity.Name + ";";
-                    _object.LastUpdatedBy = User.Identity.Name;
+                    _object.UpdatedBy = User.Identity.Name;
                     _articleManager.Update(_object);
                 }
                 
@@ -406,11 +402,9 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             ArticleModel _article = new ArticleModel();
             ViewBag.Categories = GetSelectListCategories(_article);
-
             return View(_article);
         }
 
-        // POST: Articles/Create
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
@@ -419,64 +413,61 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             ViewBag.Categories = GetSelectListCategories(article);
 
-            try
+            article.CreatedBy = User.Identity.Name;
+            if (_articleManager.Insert(article))
             {
-                article.CreatedBy = User.Identity.Name;
-                if (_articleManager.Insert(article))
+                var _urls = article.Content.GetYouTubeUrls();
+                if (_urls != null && _urls.Length > 0)
                 {
-                    var _urls = article.Content.GetYouTubeUrls();
-                    if(_urls != null && _urls.Length > 0)
+                    foreach (string _url in _urls)
                     {
-                        foreach(string _url in _urls)
-                        {
-                            var _model = new UrlModel(_url);
-                            _urlManager.Insert(_model);
-                        }
+                        var _model = new UrlModel(_url);
+                        _urlManager.Insert(_model);
                     }
                 }
-                return View(article);
+                return View("Details", _mapper.ToView(article));
             }
-            catch
-            {
-                return View(article);
-            }
+            return View(article);
         }
         [Authorize]
         public ActionResult Edit(Guid id)
         {
-            var _model = _articleManager.GetById(id);
-            if (_model != null)
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                var _categories = _unitOfWorkAsync.Repository<ArticleCategory>().Query().Select();
-                List<SelectListItem> _categoryList = new List<SelectListItem>();
-
-                ArticleCategory _default = new ArticleCategory();
-
-                if (_model.CategoryId.HasValue)
+                var _model = context.Articles.Find(id);
+                if (_model != null)
                 {
-                    _default = _articleCategoryManager.GetById(_model.CategoryId.Value);
-                }
+                    var _categories = _unitOfWorkAsync.Repository<ArticleCategory>().Query().Select();
+                    List<SelectListItem> _categoryList = new List<SelectListItem>();
 
-                foreach (var item in _categories)
-                {
-                    _categoryList.Add(new SelectListItem()
+                    ArticleCategory _default = new ArticleCategory();
+
+                    if (_model.CategoryId.HasValue)
                     {
-                        Text = item.Name,
-                        Value = item.Id.ToString(),
-                        Selected = (item == _default ? true : false)
-                    });
+                        _default = _articleCategoryManager.GetById(_model.CategoryId.Value);
+                    }
+
+                    foreach (var item in _categories)
+                    {
+                        _categoryList.Add(new SelectListItem()
+                        {
+                            Text = item.Name,
+                            Value = item.Id.ToString(),
+                            Selected = (item == _default ? true : false)
+                        });
+                    }
+
+                    var selectList = new SelectList(_categoryList, "Value", "Text");
+
+                    ViewBag.Categories = selectList;
+
+                    var _view = _mapper.ToView(_model);
+                    return View(_view);
                 }
-
-                var selectList = new SelectList(_categoryList, "Value", "Text");
-
-                ViewBag.Categories = selectList;
-
-                var _view = _mapper.ToView(_model);
-                return View(_view);
-            }
-            else
-            {
-                return HttpNotFound();
+                else
+                {
+                    return HttpNotFound();
+                }
             }
         }
 
@@ -486,14 +477,14 @@ namespace Mvc5.CafeT.vn.Controllers
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]                
         
-        public ActionResult Edit(Guid id, ArticleView view, FormCollection collection)
+        public ActionResult Edit(ArticleView view)
         {
             try
             {
                 ArticleModel _article = _mapper.ToModel(view);
-                _article.LastUpdatedDate = DateTime.Now;
+                _article.UpdatedDate = DateTime.Now;
                 _article.Status = PublishStatus.IsDrafted;
-                _article.LastUpdatedBy = User.Identity.Name;
+                _article.UpdatedBy = User.Identity.Name;
                 if (_articleManager.Update(_article))
                 {
                     return RedirectToAction("Details", new { id = _article.Id });
@@ -511,7 +502,7 @@ namespace Mvc5.CafeT.vn.Controllers
         public ActionResult ToPublish(Guid id)
         {
             AjaxView = "Messages/_Published";
-            var _model = _articleManager.GetById(id);
+            var _model = _articleManager.GetByIdAsync(id).Result;
             _model.Status = PublishStatus.IsPublished;
             _articleManager.Update(_model);
             if (Request.IsAjaxRequest())
@@ -527,12 +518,12 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             try
             {
-                var _model = _articleManager.GetById(id);
+                var _model = _articleManager.GetByIdAsync(id).Result;
                 _model.Status = PublishStatus.IsPublished;
                 _articleManager.Update(_model);
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("_Public");
+                    return PartialView("Messages/_Message", "Đã công khai");
                 }
                 return RedirectToAction("Index");
             }
@@ -548,9 +539,9 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             try
             {
-                var _model = _articleManager.GetById(id);
+                var _model = _articleManager.GetByIdAsync(id).Result;
                 _model.Status = PublishStatus.IsDrafted;
-                _model.LastUpdatedBy = User.Identity.Name;
+                _model.UpdatedBy = User.Identity.Name;
                 _articleManager.Update(_model);
                 if (Request.IsAjaxRequest())
                 {
@@ -567,7 +558,7 @@ namespace Mvc5.CafeT.vn.Controllers
         [Authorize]
         public ActionResult Delete(Guid id)
         {
-            var _model = _articleManager.GetById(id);
+            var _model = _articleManager.GetByIdAsync(id);
             if(_model != null)
             {
                 return View(_model);
@@ -583,7 +574,7 @@ namespace Mvc5.CafeT.vn.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(ArticleModel model)
         {
-            if (_articleManager.Delete(model))
+            if (_articleManager.DeleteAsync(model).Result)
             {
                 return RedirectToAction("Index", "Articles");
             }

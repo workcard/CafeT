@@ -11,7 +11,7 @@ namespace Mvc5.CafeT.vn.Helpers
     {
         public static IEnumerable<ArticleModel> GetAllAfter(this IEnumerable<ArticleModel> collection, DateTime time)
         {
-            return collection.Where(t => t.CreatedDate.IsLaterOrEquals(time)).OrderByDescending(t=>t.CreatedDate);
+            return collection.Where(t => t.CreatedDate.Value.IsLaterOrEquals(time)).OrderByDescending(t=>t.CreatedDate);
         }
         public static IEnumerable<ArticleModel> SearchBy(this IEnumerable<ArticleModel> collection, string searchString)
         {
@@ -31,7 +31,7 @@ namespace Mvc5.CafeT.vn.Helpers
         }
         public static IEnumerable<ArticleModel> GetAllBefore(this IEnumerable<ArticleModel> collection, DateTime time)
         {
-            return collection.Where(t => !t.CreatedDate.IsLaterOrEquals(time)).OrderByDescending(t => t.CreatedDate);
+            return collection.Where(t => !t.CreatedDate.Value.IsLaterOrEquals(time)).OrderByDescending(t => t.CreatedDate);
         }
     }
 }

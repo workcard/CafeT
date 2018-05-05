@@ -2,7 +2,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mvc5.CafeT.vn.Controllers;
 using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
 using Repository.Pattern.Repositories;
@@ -69,12 +68,12 @@ namespace Mvc5.CafeT.vn
             //.RegisterType<IRepositoryAsync<ApplicationSetting>, Repository<ApplicationSetting>>()
 
             container
-               .RegisterType<IArticleService, ArticleService>()
+               //.RegisterType<IArticleService, ArticleService>()
                .RegisterType<IRepositoryAsync<ArticleModel>, Repository<ArticleModel>>()
                .RegisterType<IRepositoryAsync<ArticleCategory>, Repository<ArticleCategory>>()
                .RegisterType<IRepositoryAsync<FileModel>, Repository<FileModel>>()
-               .RegisterType<IRepositoryAsync<CourseModel>, Repository<CourseModel>>()
-               .RegisterType<IRepositoryAsync<JobModel>, Repository<JobModel>>()
+               //.RegisterType<IRepositoryAsync<CourseModel>, Repository<CourseModel>>()
+               //.RegisterType<IRepositoryAsync<JobModel>, Repository<JobModel>>()
                .RegisterType<IRepositoryAsync<ProjectModel>, Repository<ProjectModel>>()
                .RegisterType<IRepositoryAsync<QuestionModel>, Repository<QuestionModel>>()
                .RegisterType<IRepositoryAsync<WordModel>, Repository<WordModel>>()

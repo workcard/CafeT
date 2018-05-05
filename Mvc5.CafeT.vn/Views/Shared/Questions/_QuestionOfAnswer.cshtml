@@ -6,15 +6,15 @@
     @Html.Raw("Created by:" + Model.CreatedBy)
     @Html.Raw(" on ")
     @Html.Raw(Model.CreatedDate.ToShortDateString())
-    @if (!Model.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+    @if (!Model.UpdatedBy.IsNullOrEmptyOrWhiteSpace())
     {
-        @Html.Raw(Model.LastUpdatedBy)
+        @Html.Raw(Model.UpdatedBy)
         @Html.Raw(" on ")
 
     }
-    @if (Model.LastUpdatedDate != null && Model.LastUpdatedDate.HasValue)
+    @if (Model.UpdatedDate != null && Model.UpdatedDate.HasValue)
     {
-        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+        @Html.Raw(Model.UpdatedDate.Value.ToShortDateString())
     }
     <br />
     @if (ViewBag.Article != null)

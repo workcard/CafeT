@@ -59,7 +59,7 @@
                     }
                 </div>
                 <p class="text-justify">
-                    @Html.Raw(Model.Content)
+                    @Html.Raw(Model.Content.ResizeImages())
                 </p>
                 <p>
                     @Html.Partial("_DetailsMenu", Model)

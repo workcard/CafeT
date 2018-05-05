@@ -9,8 +9,6 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    
-
     public class BaseController : Controller
     {
         protected int STORIES_COUNT_TOVIEW = 5;
@@ -30,8 +28,7 @@ namespace Web.Controllers
         protected EmailService EmailService { set; get; }
         protected Translator Translator { set; get; }
         public BaseController() { }
-        public BaseController(
-            IUnitOfWorkAsync unitOfWorkAsync)
+        public BaseController(IUnitOfWorkAsync unitOfWorkAsync)
         {
             _unitOfWorkAsync = unitOfWorkAsync;
             IssueManager = new IssuesManager(unitOfWorkAsync);

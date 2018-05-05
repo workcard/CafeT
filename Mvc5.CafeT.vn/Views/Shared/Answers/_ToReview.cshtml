@@ -9,10 +9,10 @@
             @Html.Raw("Views: " + Model.CountViews)
             @Html.Raw("Trả lời bởi: " + Model.CreatedBy)
             @Html.Raw("lúc: " + Model.CreatedDate.ToShortDateString())
-            @if (Model.LastUpdatedDate.HasValue)
+            @if (Model.UpdatedDate.HasValue)
             {
-                @Html.Raw("Sửa lần cuối bởi: " + Model.LastUpdatedBy)
-                @Html.Raw("lúc: " + Model.LastUpdatedDate.Value.ToShortDateString())
+                @Html.Raw("Sửa lần cuối bởi: " + Model.UpdatedBy)
+                @Html.Raw("lúc: " + Model.UpdatedDate.Value.ToShortDateString())
             }
         </span>
     </div>

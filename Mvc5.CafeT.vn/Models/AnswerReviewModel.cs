@@ -1,6 +1,6 @@
-﻿using CafeT.BusinessObjects;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Web.Models;
 
 namespace Mvc5.CafeT.vn.Models
 {

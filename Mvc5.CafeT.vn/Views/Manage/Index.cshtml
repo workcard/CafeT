@@ -4,17 +4,17 @@
 @{
     ViewBag.Title = "Quản lý tài khoản";
 }
-<script type="text/javascript">
+@*<script type="text/javascript">
     $.get('@Url.Action("GetAllUnPublishedByUser", "Articles", new { view="Articles/_ArticleTitles" } )',
         function (data) {
             $('#Update-List').html(data);
         });
-</script>
-<script type="text/javascript">
+</script>*@
+@*<script type="text/javascript">
         $.get('@Url.Action("GetNews", "Questions", new { n = 10 } )', function (data) {
             $('#Questions').html(data);
         });
-</script>
+</script>*@
 <div class="col-md-12">
     <div class="widget">
         <div class="widget-title">
@@ -39,9 +39,6 @@
                 <div class="container-fluid">
                     @Html.Partial("_UserProfile", (ApplicationUser)ViewBag.User)
                 </div>
-                @*<div id="Update" class="container-fluid">
-                    @Html.Partial("_UserInformation", (ApplicationUser)ViewBag.User)
-                </div>*@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         @Ajax.ActionLink("Articles (Đã xuất bản)", "GetAllPublished", "Articles", null,
@@ -66,6 +63,5 @@
             </div>
         </div>
     </div>
-   
     <div id="Questions"></div>
 </div><!-- end col -->

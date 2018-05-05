@@ -14,7 +14,6 @@ namespace Mvc5.CafeT.vn.Controllers
 
         public ProjectsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
-            _unitOfWorkAsync = unitOfWorkAsync;
         }
 
         // GET: Articles
@@ -160,7 +159,7 @@ namespace Mvc5.CafeT.vn.Controllers
             try
             {
                 // TODO: Add update logic here
-                model.LastUpdatedBy = User.Identity.Name;
+                model.UpdatedBy = User.Identity.Name;
                 if(_projectManager.Update(model))
                 {
                     return RedirectToAction("Index");

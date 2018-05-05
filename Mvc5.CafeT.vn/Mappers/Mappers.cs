@@ -2,7 +2,6 @@
 using Mvc5.CafeT.vn.Managers;
 using Mvc5.CafeT.vn.Models;
 using Mvc5.CafeT.vn.ModelViews;
-using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -14,10 +13,9 @@ namespace Mvc5.CafeT.vn.Mappers
     {
         protected readonly ArticleManager _manager;
 
-        public Mappers(IUnitOfWorkAsync unitOfWorkAsync,
-            IArticleService service)
+        public Mappers(IUnitOfWorkAsync unitOfWorkAsync)
         {
-            _manager = new ArticleManager(service, unitOfWorkAsync);
+            _manager = new ArticleManager(unitOfWorkAsync);
         }
 
         #region Articles
@@ -30,8 +28,8 @@ namespace Mvc5.CafeT.vn.Mappers
             _model.Tags = view.Tags;
             _model.CreatedBy = view.CreatedBy;
             _model.CreatedDate = view.CreatedDate;
-            _model.LastUpdatedDate = view.LastUpdatedDate;
-            _model.LastUpdatedBy = view.LastUpdatedBy;
+            _model.UpdatedDate = view.UpdatedDate;
+            _model.UpdatedBy = view.UpdatedBy;
             _model.Title = view.Title;
             _model.Summary = view.Summary;
             _model.Content = view.Content;
@@ -48,19 +46,19 @@ namespace Mvc5.CafeT.vn.Mappers
         }
         #endregion
 
-        public static FileModel GoogleFileToModel(Google.Apis.Drive.v3.Data.File file)
-        {
-            FileModel fileModel = new FileModel();
-            fileModel.Id = Guid.NewGuid();
-            fileModel.FileName = file.Name;
-            if (file.HasThumbnail.HasValue && file.HasThumbnail.Value)
-                fileModel.AvatarPath = file.ThumbnailLink;
-            fileModel.FullPath = file.Id;
-            fileModel.SizeInB = file.Size.Value;
-            fileModel.Description = file.Description;
-            fileModel.CreatedBy = file.Owners[0].DisplayName;
-            return fileModel;
-        }
+        //public static FileModel GoogleFileToModel(Google.Apis.Drive.v3.Data.File file)
+        //{
+        //    FileModel fileModel = new FileModel();
+        //    fileModel.Id = Guid.NewGuid();
+        //    fileModel.FileName = file.Name;
+        //    if (file.HasThumbnail.HasValue && file.HasThumbnail.Value)
+        //        fileModel.AvatarPath = file.ThumbnailLink;
+        //    fileModel.FullPath = file.Id;
+        //    fileModel.SizeInB = file.Size.Value;
+        //    fileModel.Description = file.Description;
+        //    fileModel.CreatedBy = file.Owners[0].DisplayName;
+        //    return fileModel;
+        //}
 
         public ArticleModel ToArticle(WebPageModel model)
         {
@@ -70,8 +68,8 @@ namespace Mvc5.CafeT.vn.Mappers
             _view.CreatedBy = model.CreatedBy;
             _view.Title = model.Title;
             _view.Content = model.Page.HtmlContent;
-            
-            if(model.Title != null)
+
+            if (model.Title != null)
             {
                 _view.Tags = model.Title.ToWords().First();
             }
@@ -84,22 +82,14 @@ namespace Mvc5.CafeT.vn.Mappers
 
         public  ArticleView ToView(ArticleModel model)
         {
-            try
+            ArticleView _view = new ArticleView(model);
+            if (model.CategoryId.HasValue)
             {
-                ArticleView _view = new ArticleView(model);
-                if (model.CategoryId.HasValue)
-                {
-                    _view.Category = _manager.GetCategory(model.CategoryId.Value);
-                }
-                _view.SetAvatar();
-                _view.ResizeImages();
-                return _view;
+                _view.Category = _manager.GetCategory(model.CategoryId.Value);
             }
-            catch(Exception ex)
-            {
-                System.Console.WriteLine(ex.Message);
-                return null;
-            }
+            _view.SetAvatar();
+            _view.ResizeImages();
+            return _view;
         }
 
         public List<ArticleView> ToViews(List<ArticleModel> models)
@@ -120,19 +110,19 @@ namespace Mvc5.CafeT.vn.Mappers
             return _views.ToList();
         }
 
-        public ExamView ToView(ExamModel model)
-        {
-            ExamView _view = new ExamView();
-            _view.Id = model.Id;
-            _view.CreatedDate = model.CreatedDate;
-            _view.CreatedBy = model.CreatedBy;
-            _view.Name = model.Name;
-            _view.Description = model.Description;
-            _view.QuestionCreate = new QuestionModel();
-            _view.QuestionCreate.ExamId = model.Id;
-            _view.CountViews = model.CountViews;
-            return _view;
-        }
+        //public ExamView ToView(ExamModel model)
+        //{
+        //    ExamView _view = new ExamView();
+        //    _view.Id = model.Id;
+        //    _view.CreatedDate = model.CreatedDate;
+        //    _view.CreatedBy = model.CreatedBy;
+        //    _view.Name = model.Name;
+        //    _view.Description = model.Description;
+        //    _view.QuestionCreate = new QuestionModel();
+        //    _view.QuestionCreate.ExamId = model.Id;
+        //    _view.CountViews = model.CountViews;
+        //    return _view;
+        //}
 
        
 
@@ -146,8 +136,8 @@ namespace Mvc5.CafeT.vn.Mappers
             _model.CourseId = view.CourseId;            
             _model.CreatedBy = view.CreatedBy;
             _model.CreatedDate = view.CreatedDate;
-            _model.LastUpdatedDate = view.LastUpdatedDate;
-            _model.LastUpdatedBy = view.LastUpdatedBy;
+            _model.UpdatedDate = view.UpdatedDate;
+            _model.UpdatedBy = view.UpdatedBy;
             _model.Title = view.Title;            
             _model.Content = view.Content;
             _model.CountViews = view.CountViews;
@@ -156,14 +146,15 @@ namespace Mvc5.CafeT.vn.Mappers
         }
         public CommentView ToView(CommentModel model)
         {
+            if (model is null) return null;
             CommentView _view = new CommentView();
             _view.Id = model.Id;
             _view.ProjectId = model.ProjectId;
             _view.CourseId = model.CourseId;
-            _view.CreatedDate = model.CreatedDate;
+            _view.CreatedDate = model.CreatedDate.Value;
             _view.CreatedBy = model.CreatedBy;
-            _view.LastUpdatedBy = model.LastUpdatedBy;
-            _view.LastUpdatedDate = model.LastUpdatedDate;
+            _view.UpdatedBy = model.UpdatedBy;
+            _view.UpdatedDate = model.UpdatedDate;
             _view.Title = model.Title;
             _view.Content = model.Content;
             _view.CountViews = model.CountViews;
@@ -171,7 +162,7 @@ namespace Mvc5.CafeT.vn.Mappers
             _view.ArticleId = model.ArticleId;
             if(model.ArticleId.HasValue)
             {
-                _view.Article = _manager.GetById(model.ArticleId.Value);
+                _view.Article = _manager.GetByIdAsync(model.ArticleId.Value).Result;
             }
             
             return _view;

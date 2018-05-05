@@ -28,65 +28,65 @@ namespace Mvc5.CafeT.vn
             //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
             //);
 
-            routes.MapRoute(
-                name: "Register",
-                url: "dang-ky",
-                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Register",
+            //    url: "dang-ky",
+            //    defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "ForgotPassword",
-                url: "quen-mat-khau",
-                defaults: new { controller = "Account", action = "ForgotPassword", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "ForgotPassword",
+            //    url: "quen-mat-khau",
+            //    defaults: new { controller = "Account", action = "ForgotPassword", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "ForgotPasswordConfirmation",
-                url: "xac-nhan-lay-lai-mat-khau",
-                defaults: new { controller = "Account", action = "ForgotPasswordConfirmation", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "ForgotPasswordConfirmation",
+            //    url: "xac-nhan-lay-lai-mat-khau",
+            //    defaults: new { controller = "Account", action = "ForgotPasswordConfirmation", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "ResetPassword",
-                url: "reset-mat-khau",
-                defaults: new { controller = "Account", action = "ResetPassword", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "ResetPassword",
+            //    url: "reset-mat-khau",
+            //    defaults: new { controller = "Account", action = "ResetPassword", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "Manage",
-                url: "quan-ly-tai-khoan",
-                defaults: new { controller = "Manage", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Manage",
+            //    url: "quan-ly-tai-khoan",
+            //    defaults: new { controller = "Manage", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
             #endregion Account
-            #region Interviews
-            routes.MapRoute(
-                name: "Interviews",
-                url: "Phong-van",
-                defaults: new { controller = "InterviewModels", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
-            #endregion
+            //#region Interviews
+            //routes.MapRoute(
+            //    name: "Interviews",
+            //    url: "Phong-van",
+            //    defaults: new { controller = "InterviewModels", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
+            //#endregion
             #region Articles
 
-            routes.MapRoute(
-                name: "Articles-Index",
-                url: "bai-viet",
-                defaults: new { controller = "Articles", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Articles-Index",
+            //    url: "bai-viet",
+            //    defaults: new { controller = "Articles", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "Index",
-                url: "Bai-tap",
-                defaults: new { controller = "Questions", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Index",
+            //    url: "Bai-tap",
+            //    defaults: new { controller = "Questions", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
             
             //routes.MapRoute(
             //    name: "Articles-Create",
@@ -95,101 +95,101 @@ namespace Mvc5.CafeT.vn
             //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
             //);
 
-            routes.MapRoute(
-                name: "Articles-Details",
-                url: "bai-viet/{id}/{seoName}",
-                defaults: new { controller = "Articles", action = "Details", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Articles-Details",
+            //    url: "bai-viet/{id}/{seoName}",
+            //    defaults: new { controller = "Articles", action = "Details", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "Articles-Edit",
-                url: "chinh-sua-bai-viet/{id}",
-                defaults: new { controller = "Articles", action = "Edit", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "Articles-Edit",
+            //    url: "chinh-sua-bai-viet/{id}",
+            //    defaults: new { controller = "Articles", action = "Edit", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            #endregion Articles
+            //#endregion Articles
 
-            #region ApplicationUsers
+            //#region ApplicationUsers
 
-            routes.MapRoute(
-                name: "ApplicationUsers-Details",
-                url: "thong-tin-thanh-vien/{id}",
-                defaults: new { controller = "ApplicationUsers", action = "Details", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "ApplicationUsers-Details",
+            //    url: "thong-tin-thanh-vien/{id}",
+            //    defaults: new { controller = "ApplicationUsers", action = "Details", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
             #endregion ApplicationUsers
 
-            #region FileModels
+            //#region FileModels
 
-            routes.MapRoute(
-                name: "FileModels-Index",
-                url: "tai-lieu",
-                defaults: new { controller = "FileModels", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "FileModels-Index",
+            //    url: "tai-lieu",
+            //    defaults: new { controller = "FileModels", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "FileModels-Create",
-                url: "dang-tai-lieu",
-                defaults: new { controller = "FileModels", action = "Create", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "FileModels-Create",
+            //    url: "dang-tai-lieu",
+            //    defaults: new { controller = "FileModels", action = "Create", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "FileModels-Details",
-                url: "chi-tiet-tai-lieu/{id}",
-                defaults: new { controller = "FileModels", action = "Details", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "FileModels-Details",
+            //    url: "chi-tiet-tai-lieu/{id}",
+            //    defaults: new { controller = "FileModels", action = "Details", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            #endregion FileModels
+            //#endregion FileModels
 
-            #region JobModels
+            //#region JobModels
 
-            routes.MapRoute(
-                name: "JobModels-Create",
-                url: "dang-tin-tuyen-dung",
-                defaults: new { controller = "JobModels", action = "Create", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "JobModels-Create",
+            //    url: "dang-tin-tuyen-dung",
+            //    defaults: new { controller = "JobModels", action = "Create", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "JobModels-Index",
-                url: "tuyen-dung",
-                defaults: new { controller = "JobModels", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "JobModels-Index",
+            //    url: "tuyen-dung",
+            //    defaults: new { controller = "JobModels", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "JobModels-Details",
-                url: "tuyen-dung/{id}",
-                defaults: new { controller = "JobModels", action = "Details", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "JobModels-Details",
+            //    url: "tuyen-dung/{id}",
+            //    defaults: new { controller = "JobModels", action = "Details", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            routes.MapRoute(
-                name: "JobModels-Edit",
-                url: "cap-nhat-tin-tuyen-dung/{id}",
-                defaults: new { controller = "JobModels", action = "Edit", id = UrlParameter.Optional },
-                namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
-            );
+            //routes.MapRoute(
+            //    name: "JobModels-Edit",
+            //    url: "cap-nhat-tin-tuyen-dung/{id}",
+            //    defaults: new { controller = "JobModels", action = "Edit", id = UrlParameter.Optional },
+            //    namespaces: new string[] { "Mvc5.CafeT.vn.Controllers" }
+            //);
 
-            #endregion JobModels
+            //#endregion JobModels
 
-            routes.MapRoute(
-                "ProductDetails", "Products/{id}/{seoName}",
-                new { controller = "Products", action = "Details", seoName = "" },
-                new { id = @"^\d+$" }
-            );
+            //routes.MapRoute(
+            //    "ProductDetails", "Products/{id}/{seoName}",
+            //    new { controller = "Products", action = "Details", seoName = "" },
+            //    new { id = @"^\d+$" }
+            //);
 
-            routes.MapRoute(
-                "ProjectDetails", "Projects/{id}/{seoName}",
-                new { controller = "Projects", action = "Details", seoName = "" },
-                new { id = @"^\d+$" }
-            );
+            //routes.MapRoute(
+            //    "ProjectDetails", "Projects/{id}/{seoName}",
+            //    new { controller = "Projects", action = "Details", seoName = "" },
+            //    new { id = @"^\d+$" }
+            //);
 
             routes.MapRoute(
                 name: "Default",

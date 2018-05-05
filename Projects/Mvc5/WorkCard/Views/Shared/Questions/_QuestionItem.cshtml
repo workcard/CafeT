@@ -5,7 +5,6 @@
     {
         @Html.ActionLink("{?} : " + @Model.Title, "Details", "Questions", new { id = Model.Id }, null)
     }
-    @Html.Raw(Model.Content)
     <hr />
     <div class="small">
         @Model.CreatedBy : @Model.CreatedDate.Value.TimeAgo()

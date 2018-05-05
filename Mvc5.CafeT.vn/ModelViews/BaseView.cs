@@ -9,8 +9,8 @@ namespace Mvc5.CafeT.vn.ModelViews
         public Guid Id { set; get; }
         public DateTime CreatedDate { set; get; }
         public string CreatedBy { set; get; }
-        public DateTime? LastUpdatedDate { set; get; }
-        public string LastUpdatedBy { set; get; }
+        public DateTime? UpdatedDate { set; get; }
+        public string UpdatedBy { set; get; }
 
         public string PageTitle { get; set; }
         public string MetaKeywords { get; set; }

@@ -143,8 +143,8 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             if (ModelState.IsValid)
             {
-                companyModel.LastUpdatedBy = User.Identity.Name;
-                companyModel.LastUpdatedDate = DateTime.Now;
+                companyModel.UpdatedBy = User.Identity.Name;
+                companyModel.UpdatedDate = DateTime.Now;
                 db.Entry(companyModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

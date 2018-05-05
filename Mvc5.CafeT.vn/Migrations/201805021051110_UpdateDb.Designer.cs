@@ -2,10 +2,9 @@
 namespace Mvc5.CafeT.vn.Migrations
 {
     using System.CodeDom.Compiler;
-    using System.Data.Entity.Migrations;
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
-    
+
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
     public sealed partial class UpdateDb : IMigrationMetadata
     {

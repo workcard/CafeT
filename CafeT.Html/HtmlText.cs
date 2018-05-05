@@ -1,6 +1,7 @@
 ﻿using CafeT.Enumerable;
 using CafeT.Text;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CafeT.Html
@@ -8,6 +9,28 @@ namespace CafeT.Html
     
     public static class HtmlText
     {
+        public static string ResizeImages(this string html)
+        {
+            var oldImages = html.GetImages().ToList();
+            string copy = html;
+            foreach (string img in oldImages)
+            {
+                string newImg = img.Replace(">", "");
+                string _width = @"width=" + "100%";
+                string _heigh = @"height=" + "auto";
+                if (!img.Contains("width"))
+                {
+                    newImg = newImg + _width;
+                }
+                if (!img.Contains("height"))
+                {
+                    newImg = newImg + _heigh;
+                }
+                newImg = newImg + ">";
+                copy = copy.Replace(img, newImg);
+            }
+            return copy;
+        }
         /// <summary>
         /// Return the first n words in the html
         /// </summary>

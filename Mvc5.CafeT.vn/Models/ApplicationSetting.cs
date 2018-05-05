@@ -1,5 +1,6 @@
-﻿using CafeT.BusinessObjects;
+﻿
 using System.Collections.Generic;
+using Web.Models;
 
 namespace Mvc5.CafeT.vn.Models
 {

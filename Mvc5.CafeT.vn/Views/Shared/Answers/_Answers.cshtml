@@ -6,7 +6,7 @@
         <li class="list-group-item">
             @Html.Raw(item.Name)
             @Html.DisplayFor(modelItem => item.QuestionId)
-            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            @Html.DisplayFor(modelItem => item.UpdatedDate)
             @Html.DisplayFor(modelItem => item.CreatedBy)
             @Html.Raw(item.CreatedDate.TimeAgo())
             @Html.DisplayFor(modelItem => item.IsCorrect)

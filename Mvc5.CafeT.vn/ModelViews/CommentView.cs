@@ -44,7 +44,7 @@ namespace Mvc5.CafeT.vn.ModelViews
         public ApplicationUser Author { set; get; }
         public string ImageAuthor { set; get; }
 
-        public List<ImageModel> ImageModels { get; set; }
+        //public List<ImageModel> ImageModels { get; set; }
 
         [Display(Name = "Hình đại diện")]
         public string AvatarPath { set; get; }
@@ -53,7 +53,7 @@ namespace Mvc5.CafeT.vn.ModelViews
         {
             Files = new List<FileModel>();
             Author = new ApplicationUser();
-            ImageModels = new List<ImageModel>();
+                //ImageModels = new List<ImageModel>();
         }
 
         public bool CanInsert()

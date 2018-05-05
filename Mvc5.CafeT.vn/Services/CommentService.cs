@@ -8,20 +8,20 @@ using System.Linq;
 
 namespace Mvc5.CafeT.vn.Services
 {
-    public interface ICommentService : IService<CommentModel>
-    {
-        #region CRUD
-        IEnumerable<CommentModel> GetAll();
-        CommentModel GetById(Guid id);
-        void Edit(CommentModel model);
-        void Delete(Guid id);
-        #endregion
-        #region Searching
-        IEnumerable<CommentModel> SearchBy(string keyWords);
-        #endregion
-    }
+    //public interface ICommentService : IService<CommentModel>
+    //{
+    //    #region CRUD
+    //    IEnumerable<CommentModel> GetAll();
+    //    CommentModel GetById(Guid id);
+    //    void Edit(CommentModel model);
+    //    void Delete(Guid id);
+    //    #endregion
+    //    #region Searching
+    //    IEnumerable<CommentModel> SearchBy(string keyWords);
+    //    #endregion
+    //}
 
-    public class CommentService : Service<CommentModel>, ICommentService
+    public class CommentService : Service<CommentModel>
     {
         public CommentService(IRepositoryAsync<CommentModel> repository) : base(repository)
         {
@@ -44,7 +44,7 @@ namespace Mvc5.CafeT.vn.Services
             _object.Title = model.Title;
             _object.Content = model.Content;
             _object.CreatedDate = model.CreatedDate;
-            _object.LastUpdatedDate = DateTime.Now;
+            _object.UpdatedDate = DateTime.Now;
 
             this.Update(_object);
         }

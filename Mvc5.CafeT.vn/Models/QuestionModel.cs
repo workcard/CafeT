@@ -1,7 +1,9 @@
-﻿using CafeT.BusinessObjects.ELearning;
+﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Web.Models;
 
 namespace Mvc5.CafeT.vn.Models
 {
@@ -11,8 +13,37 @@ namespace Mvc5.CafeT.vn.Models
         Writting
     }
 
-    public class QuestionModel:Question
+    public class QuestionModel:BaseObject
     {
+        [MaxLength(250)]
+        public string Title { set; get; }
+
+        public string Content { set; get; }
+
+        public string Authors { set; get; }
+        public bool IsVerified { set; get; }
+        public string VerifiedBy { set; get; }
+        public DateTime? VerifiedDate { set; get; }
+
+        public string Tags { set; get; }
+
+       
+        public virtual bool CanAddAnswer()
+        {
+            if (IsVerified)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool IsNews(int days)
+        {
+            if (this.CreatedDate.Value.AddDays(days) >= DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
         public int? Level { set; get; }
 
         public int? Marks { set; get; }
@@ -37,6 +68,9 @@ namespace Mvc5.CafeT.vn.Models
 
         public QuestionModel():base()
         {
+            Title = string.Empty;
+            Content = string.Empty;
+            IsVerified = false;
             EstimationTime = 45;
             Level = 0;
             Marks = 0;

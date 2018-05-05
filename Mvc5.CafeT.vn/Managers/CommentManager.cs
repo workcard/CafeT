@@ -9,9 +9,9 @@ namespace Mvc5.CafeT.vn.Managers
 {
     public class CommentManager:ObjectManager
     {
-        private readonly ICommentService _commentService;
+        private readonly CommentService _commentService;
 
-        public CommentManager(ICommentService service, IUnitOfWorkAsync unitOfWorkAsync):base(unitOfWorkAsync)
+        public CommentManager(CommentService service, IUnitOfWorkAsync unitOfWorkAsync):base(unitOfWorkAsync)
         {
             _commentService = service;
             _unitOfWorkAsync = unitOfWorkAsync;

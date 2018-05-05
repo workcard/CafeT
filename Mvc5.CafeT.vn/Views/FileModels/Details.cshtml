@@ -76,10 +76,11 @@ else
     {
         if (Model.DownloadUrl.Contains("?e"))
         {
-            <a href="@Model.DownloadUrl.DeleteEndTo("?e")">
+            var link = "https://drive.google.com/file/d/" + @Model.GDriveId + "/view";
+            <a href="@link">
                 View (online)
             </a>
-        }
+    }
 
     <span>
         @Html.Partial("Files/_FileInfo", Model)

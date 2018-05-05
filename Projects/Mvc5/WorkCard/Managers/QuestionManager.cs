@@ -22,6 +22,7 @@ namespace Web.Managers
         {
             return _unitOfWorkAsync.RepositoryAsync<Question>()
                 .Queryable()
+                .OrderByDescending(t => t.CreatedDate)
                 .ToList();
         }
 
@@ -30,6 +31,7 @@ namespace Web.Managers
             return _unitOfWorkAsync.RepositoryAsync<Question>()
                 .Queryable()
                 .Where(t => (t.CreatedBy.ToLower() == userName))
+                .OrderByDescending(t=>t.CreatedDate)
                 .ToList();
         }
         
@@ -62,6 +64,7 @@ namespace Web.Managers
             return _unitOfWorkAsync.RepositoryAsync<Answer>()
                 .Queryable()
                 .Where(t => t.QuestionId == id)
+                .OrderByDescending(t => t.CreatedDate)
                 .ToList();
         }
 

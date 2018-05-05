@@ -165,7 +165,7 @@ namespace Mvc5.CafeT.vn.Controllers
             try
             {
                 // TODO: Add insert logic here
-                model.LastUpdatedBy = User.Identity.Name;
+                model.UpdatedBy = User.Identity.Name;
                 _unitOfWorkAsync.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -186,8 +186,8 @@ namespace Mvc5.CafeT.vn.Controllers
         [HttpPost]
         public ActionResult Edit(UrlModel model)
         {
-            model.LastUpdatedDate = DateTime.Now;
-            model.LastUpdatedBy = User.Identity.Name;
+            model.UpdatedDate = DateTime.Now;
+            model.UpdatedBy = User.Identity.Name;
             _unitOfWorkAsync.Repository<UrlModel>().Update(model);
             try
             {

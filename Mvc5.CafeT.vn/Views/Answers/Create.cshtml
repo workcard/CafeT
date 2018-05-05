@@ -15,8 +15,8 @@
         <h4>AnswerModel</h4>
         @Html.HiddenFor(model=>model.CreatedDate)
         @Html.HiddenFor(model => model.CreatedBy)
-        @Html.HiddenFor(model => model.LastUpdatedBy)
-        @Html.HiddenFor(model => model.LastUpdatedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         

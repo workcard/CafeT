@@ -19,29 +19,29 @@ namespace Mvc5.CafeT.vn.Models
         //public DbSet<MenuModel> Menus { get; set; }
         public DbSet<WordModel> Words { get; set; }
         //public DbSet<MenuItemModel> MenuItems { get; set; }
-        public DbSet<CompanyModel> Companies { get; set; }
-        public DbSet<JobModel> Jobs { get; set; }
-        public DbSet<InterviewModel> Interviews { get; set; }
+        //public DbSet<CompanyModel> Companies { get; set; }
+        //public DbSet<JobModel> Jobs { get; set; }
+        //public DbSet<InterviewModel> Interviews { get; set; }
         public DbSet<WorkModel> Works { get; set; }
-        public DbSet<CuriculumModel> Curiculums { get; set; }
-        public DbSet<EventModel> Events { get; set; }
-        public DbSet<CourseModel> Courses { get; set; }
-        public DbSet<ExamModel> Exams { get; set; }
+        //public DbSet<CuriculumModel> Curiculums { get; set; }
+        //public DbSet<EventModel> Events { get; set; }
+        //public DbSet<CourseModel> Courses { get; set; }
+        //public DbSet<ExamModel> Exams { get; set; }
         public DbSet<ProjectModel> Projects { get; set; }
-        public DbSet<ProductModel> Products { get; set; }
+        //public DbSet<ProductModel> Products { get; set; }
         public DbSet<ArticleModel> Articles { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
         public DbSet<QuestionModel> Questions { get; set; }
-        public DbSet<ComplainModel> Complains { get; set; }
+        //public DbSet<ComplainModel> Complains { get; set; }
         public DbSet<AnswerModel> Answers { get; set; }
         public DbSet<AnswerReviewModel> AnswerReviews { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<FileModel> Files { get; set; }
-        public DbSet<IssueModel> Issues { get; set; }
-        public DbSet<ImageModel> Images { get; set; }
+        //public DbSet<IssueModel> Issues { get; set; }
+        //public DbSet<ImageModel> Images { get; set; }
         //public DbSet<CrawlerModel> Crawlers { get; set; }
         public DbSet<UrlModel> Urls { get; set; }
-        public DbSet<WebPageModel> WebPages { get; set; }
+        //public DbSet<WebPageModel> WebPages { get; set; }
 
         // Add the ApplicationGroups property:
         public virtual IDbSet<ApplicationGroup> ApplicationGroups { get; set; }

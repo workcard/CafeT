@@ -2,7 +2,6 @@
 using CafeT.Html;
 using CafeT.Text;
 using Mvc5.CafeT.vn.Models;
-using Mvc5.CafeT.vn.Services;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -10,16 +9,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mvc5.CafeT.vn.Managers
 {
     public class ArticleManager:ObjectManager
     {
-        private readonly IArticleService _articleService;
-
-        public ArticleManager(IArticleService service, IUnitOfWorkAsync unitOfWorkAsync):base(unitOfWorkAsync)
+        public ArticleManager(IUnitOfWorkAsync unitOfWorkAsync):base(unitOfWorkAsync)
         {
-            _articleService = service;
             _unitOfWorkAsync = unitOfWorkAsync;
         }
         public ArticleCategory GetCategory(Guid id)
@@ -70,24 +67,24 @@ namespace Mvc5.CafeT.vn.Managers
 
         public IEnumerable<ArticleModel> GetAllPublished()
         {
-            var _articles = _articleService.GetAll()
-                .Where(t => t.IsPublished())
+            var _articles = GetAll()
+                .Where(t => t.Status == PublishStatus.IsPublished)
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
         }
 
         public IEnumerable<ArticleModel> GetAllUnPublished()
         {
-            var _articles = _articleService.GetAll()
-                .Where(t => !t.IsPublished())
+            var _articles = GetAll()
+                .Where(t => t.Status != PublishStatus.IsPublished)
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
         }
 
         public IEnumerable<ArticleModel> GetAllPublished(string createBy)
         {
-            var _articles = _articleService.GetAll()
-                .Where(t => t.IsPublished() && t.CreatedBy == createBy)
+            var _articles = GetAll()
+                .Where(t => t.Status == PublishStatus.IsPublished && t.CreatedBy == createBy)
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
         }
@@ -98,9 +95,9 @@ namespace Mvc5.CafeT.vn.Managers
             return _articles;
         }
 
-        public IEnumerable<ArticleModel> Related(Guid id)
+        public async Task<IEnumerable<ArticleModel>> RelatedAsync(Guid id)
         {
-            var _article = GetById(id);
+            var _article = await GetByIdAsync(id);
             var _keywords = _article.GetKeywords();
             var _articles = GetAllPublished().Where(t=>t.Id != id);
             var _related = _articles.Where(t => !t.Tags.IsNullOrEmptyOrWhiteSpace() 
@@ -112,7 +109,7 @@ namespace Mvc5.CafeT.vn.Managers
         
         public IEnumerable<ArticleModel> GetAllDrafted()
         {
-            var _articles = _articleService.GetAll()
+            var _articles = GetAll()
                 .Where(t => !t.IsPublished())
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
@@ -120,7 +117,7 @@ namespace Mvc5.CafeT.vn.Managers
 
         public IEnumerable<ArticleModel> GetAllDrafted(string createBy)
         {
-            var _articles = _articleService.GetAll()
+            var _articles = GetAll()
                 .Where(t => t.IsOf(createBy) && !t.IsPublished())
                 .OrderByDescending(t => t.CreatedDate);
             return _articles;
@@ -129,14 +126,13 @@ namespace Mvc5.CafeT.vn.Managers
         public IEnumerable<string> GetAllTags()
         {
             List<string> _strs = new List<string>();
-            var _tags = _articleService.GetAllTags();
+            var _tags = GetAllTags();
             return _strs.Distinct();
         }
         
-        public ArticleModel GetById(Guid id)
+        public async Task<ArticleModel> GetByIdAsync(Guid id)
         {
-            var _article = _articleService.GetById(id);            
-            return _article;
+            return await _unitOfWorkAsync.RepositoryAsync<ArticleModel>().FindAsync(id);
         }
         
         //public List<string> Process(Guid id)
@@ -174,7 +170,7 @@ namespace Mvc5.CafeT.vn.Managers
         public string[] GetInnerImages(Guid id, string imgSourcePath)
         {
             List<string> images = new List<string>();
-            var _article = GetById(id);
+            var _article = GetByIdAsync(id).Result;
             if(_article != null)
             {
                 List<string> _images = new List<string>();
@@ -248,12 +244,12 @@ namespace Mvc5.CafeT.vn.Managers
             }
             
         }
-        public bool Delete(ArticleModel article)
+        public async Task<bool> DeleteAsync(ArticleModel article)
         {
-            _articleService.Delete(article);
             try
             {
-                _unitOfWorkAsync.SaveChanges();
+                await _unitOfWorkAsync.RepositoryAsync<ArticleModel>().DeleteAsync(article);
+                await _unitOfWorkAsync.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)

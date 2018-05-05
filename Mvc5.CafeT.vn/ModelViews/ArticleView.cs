@@ -1,4 +1,4 @@
-﻿using CafeT.BusinessObjects;
+﻿
 using CafeT.Html;
 using CafeT.SmartObjects;
 using CafeT.Text;
@@ -56,7 +56,7 @@ namespace Mvc5.CafeT.vn.ModelViews
         public string Tags { set; get; }
         public ApplicationUser Author { set; get; }
         public string ImageAuthor { set; get; }
-        public List<ImageModel> ImageModels { get; set; }
+        //public List<ImageModel> ImageModels { get; set; }
         public List<string> Images { set; get; } = new List<string>();
         public List<string> OldImages { set; get; } = new List<string>();
         [Display(Name = "Hình đại diện")]
@@ -67,21 +67,21 @@ namespace Mvc5.CafeT.vn.ModelViews
         {
             Files = new List<FileModel>();
             Author = new ApplicationUser();
-            ImageModels = new List<ImageModel>();
+            //ImageModels = new List<ImageModel>();
         }
 
         public ArticleView(ArticleModel model)
         {
             Files = new List<FileModel>();
             Author = new ApplicationUser();
-            ImageModels = new List<ImageModel>();
+            //ImageModels = new List<ImageModel>();
             Id = model.Id;
             ProjectId = model.ProjectId;
             CourseId = model.CourseId;
-            CreatedDate = model.CreatedDate;
+            CreatedDate = model.CreatedDate.Value;
             CreatedBy = model.CreatedBy;
-            LastUpdatedBy = model.LastUpdatedBy;
-            LastUpdatedDate = model.LastUpdatedDate;
+            UpdatedBy = model.UpdatedBy;
+            UpdatedDate = model.UpdatedDate;
             Title = model.Title;
             Scope = model.Scope;
             Status = model.Status;
@@ -101,9 +101,9 @@ namespace Mvc5.CafeT.vn.ModelViews
             {
                 Tags = model.Title.ToWords().First();
             }
-            Processor = new TextProcessor(Content);
-            VietnameseContent = Processor.Output;
-            EnglishContent = model.EnglishContent;
+            //Processor = new TextProcessor(Content);
+            //VietnameseContent = Processor.Output;
+            //EnglishContent = model.EnglishContent;
         }
 
         public string GetDescription(int n)
@@ -111,17 +111,17 @@ namespace Mvc5.CafeT.vn.ModelViews
             if (this.Summary.IsNullOrEmptyOrWhiteSpace()) return this.Summary.GetNWords(n);
             return this.Content.GetNWords(n);
         }
-        public string[] GetKeyWords()
-        {
-            TextProcessor processor = new TextProcessor(Title);
-            string[] _keywords = processor.GetVnKeywords();
-            string[] _tags = Tags.Split(new string[] { ";", "," }, StringSplitOptions.None)
-                .Where(t=> !t.IsNullOrEmptyOrWhiteSpace())
-                .ToArray();
-            return _keywords.AsEnumerable().Union(_tags.AsEnumerable())
-                .Distinct()
-                .ToArray();
-        }
+        //public string[] GetKeyWords()
+        //{
+        //    TextProcessor processor = new TextProcessor(Title);
+        //    string[] _keywords = processor.GetVnKeywords();
+        //    string[] _tags = Tags.Split(new string[] { ";", "," }, StringSplitOptions.None)
+        //        .Where(t=> !t.IsNullOrEmptyOrWhiteSpace())
+        //        .ToArray();
+        //    return _keywords.AsEnumerable().Union(_tags.AsEnumerable())
+        //        .Distinct()
+        //        .ToArray();
+        //}
 
         public void ResizeImages()
         {

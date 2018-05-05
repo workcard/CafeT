@@ -19,7 +19,7 @@
         });
 </script>
 <script type="text/javascript">
-        $.get('@Url.Action("GetNewFilesAsync", "Home", new { n = 10 })', function (data) {
+        $.get('@Url.Action("GetNews", "FileModels", new { n = 10 })', function (data) {
             $('#Files').html(data);
         });
 </script>

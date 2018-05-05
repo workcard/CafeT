@@ -20,7 +20,7 @@
                     {
                         @Html.ActionLink(item.FileName, "Details", "FileModels", new { id = item.Id }, null)<br />
                     }
-                    @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
+                    @if (item.UpdatedDate.HasValue && item.UpdatedDate.Value.AddDays(3) >= DateTime.Now)
                     {
                         <span class="label label-danger">Mới</span>
                     }

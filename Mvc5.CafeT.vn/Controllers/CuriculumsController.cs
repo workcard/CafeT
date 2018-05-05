@@ -90,8 +90,8 @@ namespace Mvc5.CafeT.vn.Controllers
         {
             if (ModelState.IsValid)
             {
-                curiculumModel.LastUpdatedDate = DateTime.Now;
-                curiculumModel.LastUpdatedBy = User.Identity.Name;
+                curiculumModel.UpdatedDate = DateTime.Now;
+                curiculumModel.UpdatedBy = User.Identity.Name;
                 db.Entry(curiculumModel).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

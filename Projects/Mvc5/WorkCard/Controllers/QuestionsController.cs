@@ -47,7 +47,8 @@ namespace Web.Controllers
         {
             var _objects = _unitOfWorkAsync.RepositoryAsync<Question>()
                 .Query().Select()
-                .OrderByDescending(t => t.UpdatedDate)
+                .OrderByDescending(t=>t.CreatedDate)
+                .ThenByDescending(t=>t.UpdatedDate)
                 .TakeMax(n)
                 .ToList();
 

@@ -1,5 +1,4 @@
 ﻿@using Mvc5.CafeT.vn.ModelViews
-@using Mvc5.CafeT.vn.Models
 @model ArticleView
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js"></script>
@@ -14,11 +13,11 @@
         $('#NewWords').html(data);
     });
 </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
     $.get('@Url.Action("GoogleSearch", "Google", new { keywords = Model.Tags})', function (data) {
         $('#Results').html(data);
     });
-</script>
+</script>*@
 <script type="text/javascript">
         $.get('@Url.Action("GetFiles", "Articles", new { articleId = Model.Id})', function (data) {
             $('#Files').html(data);
@@ -43,33 +42,23 @@
         <div class="widget">
             <h4>@Model.Title</h4>
             @Html.Partial("Articles/_ArticleInfo", Model)
+            @Html.Partial("Articles/_ArticleMenu", Model)
             <hr />
             <p class="text-justify">
-                @Html.Markdown(Model.Content)
-                <hr />
+                @if(!Model.AvatarPath.IsNullOrEmptyOrWhiteSpace())
+                {
+                    <img class="img-responsive" src="@Model.AvatarPath" />
+                }
                 @Html.Raw(Model.Content)
             </p>
             @Html.Partial("Articles/_ArticleFooter", Model)
-
-            <div id="Files" class="col-md-4">
-                @*@if (Model.HasFiles())
-                    {
-                        <h5>Tài liệu đính kèm</h5>
-                        @Html.Partial("Files/_Files", Model.Files)
-                    }*@
-            </div>
         </div>
         <div id="TextProcessor">
             @{
                 TextProcessor processor = new TextProcessor(Model.Content);
-                @*if (processor.Phrases != null & processor.Phrases.Count > 0)
-                    {
-                        @Html.Partial("Messages/_Menus", processor.Phrases);
-                    }*@
 
                 if (processor.Commands != null & processor.Commands.Count > 0)
                 {
-                    @*@Html.Partial("Messages/_Menus", processor.Commands);*@
                     foreach (string command in processor.Commands)
                     {
                         TextCommand _command = new TextCommand(command);
@@ -80,18 +69,17 @@
                 }
             }
         </div>
-        @Html.Partial("Articles/_AddAvatar", new ImageLink() { ArticleId = Model.Id })
         @Html.Partial("Comments/_AddComment", new CommentView() { ArticleId = Model.Id })
     </div>
     <div class="col-md-4">
-        @Html.Partial("Articles/_ArticleMenu", Model)
+        
+        <div id="authors-box">
+            <div id="by-authors-box"></div>
+        </div>
+        <div id="Files"></div>
+        <div id="NewWords"></div>
+        
+        <div id="comments-box"></div>
+        <div id="Results"></div>
     </div>
-    <div id="authors-box" class="col-md-4 pull-right"></div>
-    <div id="NewWords" class="col-md-4"></div>
-    @*<div id="meta2-box" class="col-md-4 pull-right"></div>
-        <div id="meta3-box" class="col-md-4 pull-right"></div>*@
-    <div id="by-authors-box" class="col-md-4 pull-right"></div>
-    <div id="comments-box" class="col-md-4 pull-right"></div>
-    <div id="Results" class="col-md-4 pull-right"></div>
-    @*<div id="Images" class="col-md-4 pull-right"></div>*@
 </div>

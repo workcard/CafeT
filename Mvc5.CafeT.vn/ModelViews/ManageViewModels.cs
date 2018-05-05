@@ -12,7 +12,7 @@ namespace Mvc5.CafeT.vn.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-        public UploadImageModel Image { set; get; }
+        //public UploadImageModel Image { set; get; }
     }
     //public class UserProfile
     //{

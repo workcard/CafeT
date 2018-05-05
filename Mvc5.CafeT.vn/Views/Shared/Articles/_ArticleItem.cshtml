@@ -9,7 +9,6 @@
     {
         Model.ResizeImages("40%", "100%");
         <h4><a href="/Articles/Details/@Model.Id">@Model.Title</a></h4>
-avatarUrl = Model.Images.FirstOrDefault();
         <div class="news-img">
             <a href="/Articles/Details/@Model.Id">
                 @Html.Raw(@avatarUrl);

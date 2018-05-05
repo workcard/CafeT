@@ -18,11 +18,11 @@
             @Html.Raw(Model.CreatedBy)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+            @Html.DisplayNameFor(model => model.UpdatedDate)
         </dt>
-        @if (Model.LastUpdatedDate.HasValue)
+        @if (Model.UpdatedDate.HasValue)
         {
-            @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+            @Html.Raw(Model.UpdatedDate.Value.ToShortDateString())
         }
         @if (ViewBag.Article != null)
         {

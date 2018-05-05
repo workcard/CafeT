@@ -1,0 +1,12 @@
+﻿@model Web.Models.Answer
+
+<div class="container">
+    <div class="text-justify">
+        @Html.Raw(Model.Content.Replace("\r\n", "<br />").TakeMaxWords(20))
+    </div>
+    @Html.ActionLink("Xem ...", "Details", "Answers", new { id = Model.Id }, null)
+    <hr />
+    <span class="pull-right">
+        @Model.CreatedBy: @Model.CreatedDate.Value.TimeAgo()
+    </span>
+</div>

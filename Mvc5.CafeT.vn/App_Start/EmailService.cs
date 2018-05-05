@@ -33,29 +33,29 @@ namespace Mvc5.CafeT.vn
             return Task.FromResult(0);
         }
 
-        public Task SendAsync(IssueModel model)
-        {
-            MailMessage _msg = new MailMessage("taipm.vn@gmail.com", "taipm.vn@outlook.com");
-            _msg.Subject = "[Issue] " + model.Title;
-            if (model.CreatedBy.IsEmail())
-            {
-                _msg.To.Add(new MailAddress(model.CreatedBy));
-                _msg.Body = model.Description;
-                _msg.IsBodyHtml = true;
+        //public Task SendAsync(IssueModel model)
+        //{
+        //    MailMessage _msg = new MailMessage("taipm.vn@gmail.com", "taipm.vn@outlook.com");
+        //    _msg.Subject = "[Issue] " + model.Title;
+        //    if (model.CreatedBy.IsEmail())
+        //    {
+        //        _msg.To.Add(new MailAddress(model.CreatedBy));
+        //        _msg.Body = model.Description;
+        //        _msg.IsBodyHtml = true;
 
-                using (SmtpClient client = new SmtpClient
-                {
-                    EnableSsl = true,
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    Credentials = new NetworkCredential(Email, Password)
-                })
-                {
-                    client.Send(_msg);
-                }
-            }
-            return Task.FromResult(0);
-        }
+        //        using (SmtpClient client = new SmtpClient
+        //        {
+        //            EnableSsl = true,
+        //            Host = "smtp.gmail.com",
+        //            Port = 587,
+        //            Credentials = new NetworkCredential(Email, Password)
+        //        })
+        //        {
+        //            client.Send(_msg);
+        //        }
+        //    }
+        //    return Task.FromResult(0);
+        //}
 
         public Task SendAsync(QuestionModel model)
         {

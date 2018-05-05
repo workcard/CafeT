@@ -79,10 +79,10 @@ namespace Mvc5.CafeT.vn.Controllers
                 _object.Answers = _questionManager.GetAnswers(id).ToList();
                 ViewBag.AnswerCreate = new AnswerModel() { QuestionId = id };
 
-                if(_object.JobId != null && _object.JobId.HasValue)
-                {
-                    ViewBag.Job = _jobManager.GetById(_object.JobId.Value);
-                }
+                //if(_object.JobId != null && _object.JobId.HasValue)
+                //{
+                //    ViewBag.Job = _jobManager.GetById(_object.JobId.Value);
+                //}
                 
                 return View(_object);
             }
@@ -279,8 +279,8 @@ namespace Mvc5.CafeT.vn.Controllers
         public ActionResult Edit(QuestionModel edit)
         {
             // TODO: Add update logic here
-            edit.LastUpdatedDate = DateTime.Now;
-            edit.LastUpdatedBy = User.Identity.Name;
+            edit.UpdatedDate = DateTime.Now;
+            edit.UpdatedBy = User.Identity.Name;
             _unitOfWorkAsync.Repository<QuestionModel>().Update(edit);
             try
             {

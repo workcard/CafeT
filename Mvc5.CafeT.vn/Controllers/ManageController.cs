@@ -145,8 +145,8 @@ namespace Mvc5.CafeT.vn.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Image = new UploadImageModel() { Width = 100, Height = 100 }
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                //Image = new UploadImageModel() { Width = 100, Height = 100 }
             };
 
             string _path = GetProfilePath();
@@ -157,11 +157,11 @@ namespace Mvc5.CafeT.vn.Controllers
                 ViewBag.Avatar = _user.AvatarPath;
             }
 
-            var _articles = _articleManager.GetAll()
-                .Where(t => t.IsOf(User.Identity.Name))
-                .ToList();
-            ViewBag.CountOfPublished = _articles.Where(t => t.IsPublished()).Count();
-            ViewBag.CountOfDrafted = _articles.Where(t => !t.IsPublished()).Count();
+            //var _articles = _articleManager.GetAll()
+            //    .Where(t => t.IsOf(User.Identity.Name))
+            //    .ToList();
+            //ViewBag.CountOfPublished = _articles.Where(t => t.IsPublished()).Count();
+            //ViewBag.CountOfDrafted = _articles.Where(t => !t.IsPublished()).Count();
             ViewBag.User = _user;
             return View(model);
         }

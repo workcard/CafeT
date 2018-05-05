@@ -18,12 +18,21 @@
         <span class="input-icon icon-right">
             Đáp: <br />
         </span>
-        @Html.TextAreaFor(m => m.Content, 5, 40, new { @class = "form-control required",
-       style = "overflow:visible; max-width:100% !important;" })
-
+        @*@Html.TextAreaFor(m => m.Content, 5, 40, new
+    {
+        @class = "form-control required",
+        style = "overflow:visible; max-width:100% !important;"
+    })*@
+        <div class="col-md-10">
+            @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
+            <script>
+                CKEDITOR.replace('Content');
+            </script>
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
         @*<textarea id="Content" name="Content" rows="1" au class="form-control"
-                  placeholder="Post a new message">
-            </textarea>*@
+              placeholder="Post a new message">
+        </textarea>*@
         <div class="p-t-10 pull-right">
             <p>
                 <input type="submit" value="Reply" class="btn btn-default" />
