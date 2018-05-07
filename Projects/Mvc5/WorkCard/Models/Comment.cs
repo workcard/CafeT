@@ -10,6 +10,8 @@ namespace Web.Models
         public Guid? IssueId { set; get; }
         public Guid? QuestionId { set; get; }
         public Guid? JobId { set; get; }
+        public Guid? ArticleId { set; get; }
+        public Guid? DocumentId { set; get; }
 
         public Comment() : base() { }
     }

@@ -1,11 +1,34 @@
 ﻿@model Web.Models.Job
 @using CafeT.Text
-@using Web.Models
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Title;
 }
 
+<script type="text/javascript">
+    $.get('@Url.Action("GetComments", "Jobs", new { id = Model.Id.ToString(), n=5})',
+        function (data) {
+            $('#comments-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetLastestQuestions", "Jobs", new { id = Model.Id.ToString(), n=5})',
+        function (data) {
+            $('#questions-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetIssues", "Jobs", new { id = Model.Id.ToString(), n=5})',
+        function (data) {
+            $('#issues-box').html(data);
+        });
+</script>
+<script type="text/javascript">
+    $.get('@Url.Action("GetLastestAppliers", "Jobs", new { id = Model.Id.ToString(), n=5})',
+        function (data) {
+            $('#appliers-box').html(data);
+        });
+</script>
 <script>
             var dt = '@ViewBag.EndDate';
             var dateAr = dt.split('-');
@@ -42,79 +65,79 @@
 
             timer = setInterval(showRemaining, 1000);
 </script>
+
+
 <div class="row">
     <div class="col-md-8">
-        <h4>
+        <h5>
             @Html.Raw(Model.Title)
-        </h4>
+            <span class="small badge badge-danger">@Model.Status</span>
+        </h5>
+        @Html.Raw("Lương: " + Model.Salary.Amout.ToReadable() + Model.Salary.Currency.ToString())
+        @Html.Raw("Bắt đầu: " + Model.Start)
+        @Html.Raw(" Hết hạn: " + Model.End.Value.ToShortDateString())
         <span id="countdown"></span>
+        @Html.Partial("Jobs/_JobMenu", Model)
         <hr />
         <div class="row">
             @if (Model.Tags != null && Model.Tags.Length > 0)
+        {
+            foreach (string tag in Model.Tags)
             {
-                foreach (string tag in Model.Tags)
+                if (tag.IsNullOrEmptyOrWhiteSpace())
                 {
-                    if (tag.IsNullOrEmptyOrWhiteSpace())
-                    {
-                        @Html.ActionLink(tag, "GetByTags", "Jobs", new { tag = tag }, null)
-                    }
-                }
-            }
-        </div>
-        <p class="row">
-            @Html.Raw(Model.Description)
-        </p>
-        <p class="row">
-            @Html.Raw(Model.Content)
-        </p>
-    </div>
-    <div class="col-md-4">
-       @Html.DisplayFor(model => model.Status)
-       @if (Model.Appliers != null && Model.Appliers.Count() > 0)
-       {
-            foreach (string applier in Model.Appliers)
-            {
-                @Html.Raw(applier)
+                    @Html.ActionLink(tag, "GetByTags", "Jobs", new { tag = tag }, null)
             }
         }
+    }
+        </div>
         <p>
-            @Html.ActionLink("Edit", "Edit", "Jobs", new { id = Model.Id }, null) |
-            @Html.ActionLink("Add comment", "CreateForJob", "Comments", new { jobId = Model.Id }, null) |
+            @Html.Raw(Model.Description)
+            @Html.Raw(Model.Content)
         </p>
-        <span class="pull-right">
-            @Ajax.ActionLink("Apply", "Apply", "Jobs", new { id = Model.Id },
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "Update-" + Model.Id.ToString(),
-                                HttpMethod = "Get",
-                            }, null)
-        </span>
+        @if (User.Identity.IsAuthenticated)
+    {
+        @Ajax.ActionLink("Hỏi", "AddQuestion", "Jobs",
+                      new { JobId = Model.Id },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "AddQuestion",
+                          HttpMethod = "Get",
+                          InsertionMode = InsertionMode.InsertBefore
+                      }, new { @class = "card-link" })
+
+        @Ajax.ActionLink("+ Comment", "AddComment", "Jobs",
+                      new { JobId = Model.Id },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "AddQuestion",
+                          HttpMethod = "Get",
+                          InsertionMode = InsertionMode.InsertBefore
+                      }, new { @class = "card-link" })
+        @Ajax.ActionLink("+ Issue", "AddIssue", "Jobs",
+                      new { jobId = Model.Id },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "AddQuestion",
+                          HttpMethod = "Get",
+                          InsertionMode = InsertionMode.InsertBefore
+                      }, new { @class = "card-link" })
+}
+
+        <div id="AddQuestion"></div>
+        <div class="row">
+            <div id="questions-box" class="col-md-6"></div>
+            <div id="comments-box" class="col-md-6"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div id="appliers-box"></div>
+        <div id="issues-box"></div>
+        
         <p>
             <div id="Update-@Model.Id.ToString()"></div>
         </p>
     </div>
-    <div class="row">
-        <div class="col-md-5">
-            @Html.Raw("Lương: " + Model.Salary.Amout.ToReadable() + Model.Salary.Currency.ToString())
-        </div>
-        <div class="col-md-5">
-            @Html.DisplayFor(model => model.Start)
-            @Html.Raw(" | ")
-            @Html.DisplayFor(model => model.End)
-        </div>
-    </div>
-    <div class="row">
-        <h4>Appliers</h4>
-        @if (Model.Appliers != null && Model.Appliers.Count() > 0)
-        {
-            foreach (string applier in Model.Appliers)
-            {
-                @Html.Raw(applier)
-            }
-        }
-    </div>
-    <div class="row">
-        @Html.Partial("Comments/_Comments", (IEnumerable<Comment>)ViewBag.Comments)
-    </div>
 </div>
+
 

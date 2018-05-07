@@ -92,7 +92,7 @@ namespace Web.Controllers
             question.IssueId = issueId;
             if(Request.IsAjaxRequest())
             {
-                return PartialView("Issues/_AddQuestionAjax", question);
+                return PartialView("Questions/_AddQuestionAjax", question);
             }
             return View(question);
         }
@@ -118,9 +118,6 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 question.CreatedBy = User.Identity.Name;
-                //db.Questions.Add(question);
-                //await db.SaveChangesAsync();
-
                 var insterted = QuestionManager.Insert(question);
                 if(insterted)
                 {
@@ -152,8 +149,7 @@ namespace Web.Controllers
 
                 if(question.IssueId.HasValue)
                 {
-                    return RedirectToAction("Details", "WorkIssues",  
-                        new { id = question.IssueId.Value });
+                    return RedirectToAction("Details", "WorkIssues",  new { id = question.Id});
                 }
                 return RedirectToAction("Index");
             }

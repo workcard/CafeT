@@ -34,8 +34,6 @@ namespace Web
             _msg.Body = model.Content;
             _msg.IsBodyHtml = true;
 
-            //_msg.To.Add(new MailAddress(toEmail));
-
             return _msg;
         }
 
@@ -145,7 +143,6 @@ namespace Web
                     var issue = dbContext.Issues.Find(model.IssueId.Value);
                     List<string> emails = issue.GetEmails().ToList();
                     toEmails.AddRange(emails);
-
                     _msg.Body += "<br /> Trong issue: " + issue.Title;
                     _msg.Body += "<br /> Link: " + GetIssueUrl(issue);
                 }

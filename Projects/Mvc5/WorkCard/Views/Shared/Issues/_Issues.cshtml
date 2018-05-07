@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Web.ModelViews.IssueView>
 
 @{
-    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
     <div class="card">
         <div class="card-header">
             Issues
@@ -20,7 +19,7 @@
             </span>
         </div>
         <ul class="list-group">
-            @foreach (var item in items)
+            @foreach (var item in Model)
             {
                 <li class="list-group-item">
 

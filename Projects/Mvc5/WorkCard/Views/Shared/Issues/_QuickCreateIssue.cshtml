@@ -1,12 +1,15 @@
 ﻿@model Web.Models.WorkIssue
 
-@using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post, null))
+@using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => Model.Id)
+    @Html.HiddenFor(model => Model.ProjectId)
+    @Html.HiddenFor(model => Model.JobId)
+
+    <h5>Thêm việc: </h5>
+    <hr />
     <div class="card-body">
-        @Html.Raw("Thêm việc ...")
-        <br />
         @Html.TextArea("Content", new { @id = "Content", AllowHtmlAttribute = new { @class = "form-control" } })
         <script>
             CKEDITOR.replace('Content');

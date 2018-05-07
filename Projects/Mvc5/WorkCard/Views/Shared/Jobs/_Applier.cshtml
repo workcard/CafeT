@@ -1,0 +1,7 @@
+﻿@model Web.Models.JobApplier
+
+@Html.Raw(Model.UserName)
+<div class="small">
+    Request: <span class="badge badge-danger">@Model.CreatedDate.Value.TimeAgo()</span>
+</div>
+

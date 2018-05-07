@@ -1,7 +1,10 @@
 ﻿@model Web.Models.Contact
 
-<div class="card-link">
-    @Html.ActionLink("Edit", "Edit", "Contacts", new { id = Model.Id }, null)
-    @Html.ActionLink("Details", "Details", "Contacts", new { id = Model.Id }, null)
-    @Html.ActionLink("Delete", "Delete", "Contacts", new { id = Model.Id }, null)
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card-link">
+        @Html.ActionLink("Edit", "Edit", "Contacts", new { id = Model.Id }, null)
+        @Html.ActionLink("Details", "Details", "Contacts", new { id = Model.Id }, null)
+        @Html.ActionLink("Delete", "Delete", "Contacts", new { id = Model.Id }, null)
+    </div>
+}

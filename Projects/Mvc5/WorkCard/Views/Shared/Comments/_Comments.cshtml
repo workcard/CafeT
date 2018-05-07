@@ -1,17 +1,19 @@
 ﻿@model IEnumerable<Web.Models.Comment>
 
 <div class="card-header">
-    <h4>Comments</h4>
-    <ul class="single-blog-post list-group">
-        @if (Model != null && Model.Count() > 0)
-        {
-            foreach (var model in Model)
-            {
-                <li class="list-group-item">
-                    @Html.Partial("Comments/_Comment", model)
-                </li>
-            }
-        }
-    </ul>
+    Comments
+    <span class="badge badge-danger">
+        @Model.Count()
+    </span>
 </div>
-
+<ul class="list-group">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var model in Model)
+        {
+            <li class="list-group-item">
+                @Html.Partial("Comments/_Comment", model)
+            </li>
+        }
+    }
+</ul>

@@ -11,9 +11,9 @@
         <div class="card-body">
             <div class="card-title">
                 @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
-            {
-                @Model.LastName @Html.Raw(" ") @Model.FirstName
-        }
+                {
+                    @Model.LastName @Html.Raw(" ") @Model.FirstName
+                }
                 <span class="badge badge-success">@Model.CreatedDate.Value.TimeAgo()</span>
                 <p>
                     Office: @Model.OfficeName |<span class="desc">@Model.Email</span>

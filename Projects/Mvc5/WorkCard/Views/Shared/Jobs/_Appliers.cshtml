@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Web.Models.JobApplier>
+
+<div class="card-header">
+    Ứng tuyển
+    <span class="badge badge-danger">
+        @Model.Count()
+    </span>
+</div>
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.Partial("Jobs/_Applier", item)
+        </li>
+    }
+</ul>
+
+

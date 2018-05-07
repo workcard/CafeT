@@ -16,8 +16,7 @@ namespace Web.Managers
 
         public Job GetById(Guid id)
         {
-            var _object = _unitOfWorkAsync.Repository<Job>().Find(id);
-            return _object;
+            return _unitOfWorkAsync.Repository<Job>().Find(id);
         }
 
         public List<Job> GetAllAsync(int? n)
@@ -32,7 +31,6 @@ namespace Web.Managers
         {
             return _unitOfWorkAsync.RepositoryAsync<Job>()
                 .Queryable()
-                //.Where(t=>t.Title.Contains("Hot"))
                 .OrderByDescending(c=>c.CreatedDate)
                 .TakeMax(n)
                 .ToList();
@@ -45,11 +43,11 @@ namespace Web.Managers
                 .ToList();
         }
 
-        public List<Job> GetAllOf(string userName,int?n)
+        public List<Job> GetAllOf(string userName,int? n)
         {
             return _unitOfWorkAsync.RepositoryAsync<Job>()
                 .Queryable()
-                .Where(t => (t.CreatedBy.ToLower() == userName) || (t.Owner.ToLower() == userName))
+                .Where(t => t.IsOf(userName))
                 .TakeMax(n)
                 .ToList();
         }
@@ -68,11 +66,8 @@ namespace Web.Managers
             return true;
         }
 
-        public bool Update(Guid id, Job model)
+        public bool Update(Job model)
         {
-            //var _object = GetById(id);
-            //_object = model;
-            //_object.UpdatedDate = DateTime.Now;
             _unitOfWorkAsync.Repository<Job>().Update(model);
             int _result = _unitOfWorkAsync.SaveChangesAsync().Result;
             if (_result < 0) return false;
@@ -87,12 +82,14 @@ namespace Web.Managers
             if (_result < 0) return false;
             return true;
         }
+
         public IEnumerable<Job> GetAllExpiredOf(string userName)
         {
             var _objects = _unitOfWorkAsync.Repository<Job>().Queryable().ToList();
             _objects = _objects.Where(t => t.IsOf(userName) && t.IsExpired()).ToList();
             return _objects;
         }
+
         public IEnumerable<Job> GetLastest(string userName)
         {
             var _objects = _unitOfWorkAsync.Repository<Job>().Queryable().ToList();

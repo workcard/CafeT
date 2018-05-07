@@ -10,38 +10,38 @@
                 <a class="nav-link" href="@Url.Content("~/Home/Index")">Trang chủ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Content("~/WorkIssues/Index")">Cards</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Content("~/Articles/Index")">Bài viết</a>
             </li>
 
             @if (User.Identity.IsAuthenticated)
-            {
-                <li class="nav-item">
-                    @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
-                         null,
-                         new AjaxOptions
-                         {
-                             UpdateTargetId = "QuickIssue",
-                             HttpMethod = "Get",
-                             InsertionMode = InsertionMode.Replace
-                         }, new { @class = "nav-link" })
-                </li>
-                if (User.IsInRole("Admin"))
-                {
-                    <li class="nav-item">
-                        @Html.ActionLink("Users", "Index", "UsersAdmin", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Roles", "Index", "RolesAdmin", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Group", "Index", "GroupsAdmin", null, new { @class = "nav-link" })
-                    </li>
-                }
-            }
-
+    {
+        <li class="nav-item">
+            @Ajax.ActionLink("Create issue", "LoadQuickIssue", "Home",
+              null,
+              new AjaxOptions
+              {
+                  UpdateTargetId = "QuickIssue",
+                  HttpMethod = "Get",
+                  InsertionMode = InsertionMode.Replace
+              }, new { @class = "nav-link" })
+        </li>
+if (User.IsInRole("Admin"))
+{
+        <li class="nav-item">
+            @Html.ActionLink("Users", "Index", "UsersAdmin", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Roles", "Index", "RolesAdmin", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Group", "Index", "GroupsAdmin", null, new { @class = "nav-link" })
+        </li>
+}
+}
+            
         </ul>
         @Html.Partial("Partials/_LoginPartial")
     </div>

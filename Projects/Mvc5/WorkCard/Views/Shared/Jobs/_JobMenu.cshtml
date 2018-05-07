@@ -1,0 +1,34 @@
+﻿@using CafeT.Text
+@using CafeT.Time
+@using System.Globalization
+
+@model Web.Models.Job
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Ajax.ActionLink("Apply", "Apply", "Jobs", new { id = Model.Id },
+                                             new AjaxOptions
+                                             {
+                                                 UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                                 HttpMethod = "Get",
+                                                 InsertionMode = InsertionMode.Replace
+                                             }, new { @class = "card-link" })
+    @Html.ActionLink("Edit", "Edit", "Jobs", new { id = Model.Id },
+                                        ////new AjaxOptions
+                                        ////{
+                                        ////    UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                        ////    HttpMethod = "Get",
+                                        ////    InsertionMode = InsertionMode.Replace
+                                        ////}, 
+                                        new { @class = "card-link" })
+    @Ajax.ActionLink("Delete", "Delete", "Jobs", new { id = Model.Id },
+                                   new AjaxOptions
+                                   {
+                                       UpdateTargetId = "Update-" + Model.Id.ToString(),
+                                       HttpMethod = "Get",
+                                       InsertionMode = InsertionMode.Replace
+                                   }, new { @class = "card-link" })
+}
+<p>
+    <div id="Update-@Model.Id.ToString()"></div>
+</p>

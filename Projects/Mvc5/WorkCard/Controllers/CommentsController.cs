@@ -11,7 +11,6 @@ namespace Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-       
         public async Task<ActionResult> Index()
         {
             return View(await db.Comments.ToListAsync());
@@ -62,13 +61,15 @@ namespace Web.Controllers
                 comment.CreatedDate = DateTime.Now;
                 db.Comments.Add(comment);
                 await db.SaveChangesAsync();
+                if(Request.IsAjaxRequest())
+                {
+                    return PartialView("_Comments/_Comment", comment);
+                }
                 return RedirectToAction("Index");
             }
 
             return View(comment);
         }
-
-        // GET: Comments/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -86,7 +87,7 @@ namespace Web.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,CreatedDate,UpdatedDate,UpdatedBy,CreatedBy")] Comment comment)
+        public async Task<ActionResult> Edit(Comment comment)
         {
             if (ModelState.IsValid)
             {

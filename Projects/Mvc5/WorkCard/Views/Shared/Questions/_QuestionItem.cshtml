@@ -5,13 +5,16 @@
     {
         @Html.ActionLink("{?} : " + @Model.Title, "Details", "Questions", new { id = Model.Id }, null)
     }
+    else
+    {
+        @Html.Raw(Model.Content)
+    }
     <hr />
     <div class="small">
         @Model.CreatedBy : @Model.CreatedDate.Value.TimeAgo()
     </div>
     @if (User.Identity.IsAuthenticated)
     {
-        
             @Ajax.ActionLink("Trả lời", "Create", "Answers", new { questionId = Model.Id },
                                                           new AjaxOptions
                                                           {
@@ -28,7 +31,7 @@
 
             if (Model.IsOf(User.Identity.Name) || User.IsInRole("Admin"))
             {
-                @Ajax.ActionLink(" Xóa ", "Delete", "Questions", new { id = Model.Id },
+                @Ajax.ActionLink("Xóa ", "Delete", "Questions", new { id = Model.Id },
                                                       new AjaxOptions
                                                       {
                                                           UpdateTargetId = Model.Id.ToString(),
@@ -37,8 +40,6 @@
                                                       },
                                                       new { @class = "card-link" })
             }
-        
-
     }
     <div id="@Model.Id.ToString()"></div>
     <div id="Insert-@Model.Id.ToString()"></div>

@@ -26,6 +26,7 @@ namespace Web.Controllers
     [Authorize]
     public class WorkIssuesController : BaseController
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public WorkIssuesController() : base() { }
         public WorkIssuesController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
@@ -40,21 +41,26 @@ namespace Web.Controllers
             }
             else
             {
-                ViewBag.Keyword = keyWord;
+                keyWord = string.Empty;
             }
 
-            if (keyWord.IsNullOrEmptyOrWhiteSpace()) keyWord = "";
+            ViewBag.Keyword = keyWord;
 
             var _objects = _unitOfWorkAsync.RepositoryAsync<WorkIssue>()
                                 .Query().Select().Where(t => t.Contains(keyWord))
+                                .OrderByDescending(t=>t.CreatedDate)
+                                .ThenByDescending(t=>t.UpdatedDate)
                                 .ToList();
+
             var _views = IssueMappers.IssuesToViews(_objects);
+
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_RelatedIssues",
                     _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
             }
-            return View("Index", _views);
+
+            return View("_SearchResults", _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
         }
         #endregion
 
@@ -366,7 +372,7 @@ namespace Web.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("Issues/_AddQuestionAjax", _question);
+                return PartialView("Questions/_AddQuestionAjax", _question);
             }
             return RedirectToAction("Index");
         }
@@ -383,6 +389,7 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
         [Authorize]
         public ActionResult Create()
         {
@@ -391,7 +398,6 @@ namespace Web.Controllers
                                 .Where(m => !string.IsNullOrWhiteSpace(m.Title))
                                 .OrderByDescending(t => t.CreatedDate).ToList();
             ViewBag.Issues = _objects.ToList();
-
             return View();
         }
 
@@ -428,7 +434,7 @@ namespace Web.Controllers
                         .Where(t => t.Title.ToLower().Contains(_tag))
                         .ToList();
                         
-                    if (_selectProjects != null && _selectProjects.Count() == 1)
+                    if (_selectProjects != null && _selectProjects.Any())
                     {
                         workIssue.ProjectId = _selectProjects.FirstOrDefault().Id;
                     }
@@ -448,12 +454,11 @@ namespace Web.Controllers
                         await ContactManager.AddContactAsync(_contact);
                     }
                 }
-
                 if(Request.IsAjaxRequest())
                 {
                     return PartialView("Issues/_IssueItem", workIssue);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "WorkIssues", new { id = workIssue.Id});
             }
 
             return View(workIssue);
@@ -482,7 +487,7 @@ namespace Web.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_WorkTime", "Work on " + date);
+                return PartialView("Issues/_WorkTime", "Work on " + date);
             }
             return RedirectToAction("Index");
         }
@@ -557,7 +562,7 @@ namespace Web.Controllers
                 return new RedirectResult(result.RedirectUri);
             }
         }
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
         [Authorize]
         public async Task<ActionResult> ToArticle(Guid id)
         {
@@ -598,7 +603,7 @@ namespace Web.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_WorkTime", "Work on " + workIssue.IssueEstimation);
+                return PartialView("Issues/_WorkTime", "Work on " + workIssue.IssueEstimation);
             }
             return RedirectToAction("Index");
         }
@@ -650,7 +655,7 @@ namespace Web.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_WorkStatus", status);
+                return PartialView("Issues/_WorkStatus", status);
             }
             return RedirectToAction("Index");
         }

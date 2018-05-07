@@ -16,6 +16,7 @@ namespace Web.Models
         public DbSet<WorkIssue> Issues { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobApplier> JobAppliers { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -24,7 +25,6 @@ namespace Web.Models
         public DbSet<Story> Stories { get; set; }
         public DbSet<Url> Urls { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        //public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Audit> AuditRecords { get; set; }
 
         // Add the ApplicationGroups property:

@@ -28,7 +28,8 @@ namespace Web.Models
         public ScheduleType Repeat { set; get; } = ScheduleType.None;
 
         public Guid? ProjectId { set; get; }
-        
+        public Guid? JobId { set; get; }
+
         public List<string> Tags { set; get; }
         public List<string> Numbers { set; get; }
         public List<DateTime> Times { set; get; }

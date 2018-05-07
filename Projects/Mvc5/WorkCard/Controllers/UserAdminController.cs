@@ -82,7 +82,7 @@ namespace Web.Controllers
            
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_Users", _objects);
+                return PartialView("Users/_Users", _objects);
             }
             return View("Index", _objects);
         }

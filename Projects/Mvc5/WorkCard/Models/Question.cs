@@ -10,9 +10,11 @@ namespace Web.Models
         public string Title { set; get; }
         public string Content { set; get; }
         public virtual IEnumerable<Answer> Answers { set; get; }
+
         public Guid? ProjectId { set; get; }
-        public Guid? StoryId { set; get; }
+        public Guid? JobId { set; get; }
         public Guid? IssueId { set; get; }
+        public Guid? ArticleId { set; get; }
 
         public bool IsRequired { set; get; } = false;
         public virtual IEnumerable<Contact> Contacts { set; get; }

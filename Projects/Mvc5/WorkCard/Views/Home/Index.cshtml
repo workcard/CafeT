@@ -9,6 +9,12 @@
         });
 </script>
 <script type="text/javascript">
+    $.get('@Url.Action("GetLastestJobs", "Jobs", new { n = 5 })',
+        function (data) {
+            $('#jobs-box').html(data);
+        });
+</script>
+<script type="text/javascript">
     $.get('@Url.Action("GetCompletedIssues", "WorkIssues", new { page = 1 })',
         function (data) {
             $('#completed-box').html(data);
@@ -56,12 +62,14 @@ else
     <div class="row">
         <div class="col-md-4">
             <div id="today-box"></div>
+            <div id="expired-box"></div>
         </div>
         <div class="col-md-4">
             <div id="verify-box"></div>
             <div id="upcomming-box"></div>
         </div>
         <div class="col-md-4">
+            <div id="jobs-box"></div>
             <div id="summary-box"></div>
             <div id="articles-box"></div>
             <div id="questions-box"></div>

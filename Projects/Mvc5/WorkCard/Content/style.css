@@ -33,12 +33,6 @@
     z-index: 99;
 }
 
-#header {
-    width: 100%;
-    height: 66px;
-    border-bottom: 1px solid orangered;
-}
-
 #sidebar-menu {
     background-color: #ffffff;
     padding-bottom: 20px;

@@ -25,10 +25,10 @@ namespace Web.Controllers
             {
                 _result = ContactManager.GetByEmail(_command).Email;
             }
-            else
-            {
-                _result = ContactManager.SearchByName(_command).FirstOrDefault().Email;
-            }
+            //else
+            //{
+            //    _result = ContactManager.SearchByName(_command).FirstOrDefault().Email;
+            //}
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_CommandResult", _result);

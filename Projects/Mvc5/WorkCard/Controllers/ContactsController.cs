@@ -82,14 +82,14 @@ namespace Web.Controllers
             {
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("_WorkTime", "Đã thêm");
+                    return PartialView("Issues/_WorkTime", "Đã thêm");
                 }
                 return RedirectToAction("Index");
             }
             {
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("_WorkTime", "Không thêm được. Thành viên này đã có");
+                    return PartialView("Issues/_WorkTime", "Không thêm được. Thành viên này đã có");
                 }
                 return RedirectToAction("Index");
             }

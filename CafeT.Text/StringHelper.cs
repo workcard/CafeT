@@ -542,7 +542,7 @@ namespace CafeT.Text
             {
                 int _fromIndex = text.IndexOf(from);
                 int _toIndex = text.IndexAll(to).Where(t => t > _fromIndex).FirstOrDefault();
-                return text.Substring(_fromIndex + 1, _toIndex - 1);
+                return text.Substring(_fromIndex + 1, _toIndex - _fromIndex-1);
             }
             return text;
         }

@@ -1,0 +1,14 @@
+﻿@model Web.Models.Comment
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Admin") || Model.IsOf(User.Identity.Name))
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Comments", new { id = Model.Id }, null)
+            @Html.ActionLink(" | Delete", "Delete", "Comments", new { id = Model.Id }, null)
+            @Html.ActionLink(" | Back to List", "Index")
+        </p>
+    }
+}
+

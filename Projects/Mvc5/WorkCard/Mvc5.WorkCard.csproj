@@ -366,79 +366,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Content Include="Assets\css\animate.css" />
-    <Content Include="Assets\css\bootstrap.min.css" />
-    <Content Include="Assets\css\color-switcher.css" />
-    <Content Include="Assets\css\colors\blue.css" />
-    <Content Include="Assets\css\colors\color.css" />
-    <Content Include="Assets\css\colors\deep-purple.css" />
-    <Content Include="Assets\css\colors\green.css" />
-    <Content Include="Assets\css\colors\indigo.css" />
-    <Content Include="Assets\css\colors\pink.css" />
-    <Content Include="Assets\css\colors\purple.css" />
-    <Content Include="Assets\css\colors\red.css" />
-    <Content Include="Assets\css\colors\yellow.css" />
-    <Content Include="Assets\css\magnific-popup.css" />
-    <Content Include="Assets\css\material.min.css" />
-    <Content Include="Assets\css\materialdesignicons.min.css" />
-    <Content Include="Assets\css\owl.carousel.css" />
-    <Content Include="Assets\css\responsive.css" />
-    <Content Include="Assets\css\ripples.min.css" />
-    <Content Include="Assets\css\slicknav.css" />
-    <Content Include="Assets\css\style.css" />
-    <Content Include="Assets\fonts\materialdesignicons-webfont.svg" />
-    <Content Include="Assets\images\about\video.jpg" />
-    <Content Include="Assets\images\blog\02.jpg" />
-    <Content Include="Assets\images\blog\03.jpg" />
-    <Content Include="Assets\images\blog\author-bg.jpg" />
-    <Content Include="Assets\images\blog\author.jpg" />
-    <Content Include="Assets\images\blog\comment1.jpg" />
-    <Content Include="Assets\images\blog\comment2.jpg" />
-    <Content Include="Assets\images\blog\comment3.jpg" />
-    <Content Include="Assets\images\blog\comment4.jpg" />
-    <Content Include="Assets\images\blog\featured1.jpg" />
-    <Content Include="Assets\images\blog\featured2.jpg" />
-    <Content Include="Assets\images\blog\featured3.jpg" />
-    <Content Include="Assets\images\blog\featured4.jpg" />
-    <Content Include="Assets\images\blog\featured4.png" />
-    <Content Include="Assets\images\blog\post-image.jpg" />
-    <Content Include="Assets\images\clients\client1.png" />
-    <Content Include="Assets\images\clients\client2.png" />
-    <Content Include="Assets\images\clients\client3.png" />
-    <Content Include="Assets\images\clients\client4.png" />
-    <Content Include="Assets\images\cta-bg.jpg" />
-    <Content Include="Assets\images\gallery\thum1.jpg" />
-    <Content Include="Assets\images\gallery\thum2.jpg" />
-    <Content Include="Assets\images\gallery\thum3.jpg" />
-    <Content Include="Assets\images\gallery\thum4.jpg" />
-    <Content Include="Assets\images\gallery\thum5.jpg" />
-    <Content Include="Assets\images\gallery\thum6.jpg" />
-    <Content Include="Assets\images\gallery\thum7.jpg" />
-    <Content Include="Assets\images\gallery\thum8.jpg" />
-    <Content Include="Assets\images\gallery\thum9.jpg" />
-    <Content Include="Assets\images\logo.png" />
-    <Content Include="Assets\images\map-marker.png" />
-    <Content Include="Assets\images\page-title-bg.jpg" />
-    <Content Include="Assets\js\bootstrap.min.js" />
-    <Content Include="Assets\js\color-switcher.js" />
-    <Content Include="Assets\js\contact-form-script.min.js" />
-    <Content Include="Assets\js\form-validator.min.js" />
-    <Content Include="Assets\js\jquery-min.js" />
-    <Content Include="Assets\js\jquery.counterup.min.js" />
-    <Content Include="Assets\js\jquery.inview.js" />
-    <Content Include="Assets\js\jquery.magnific-popup.min.js" />
-    <Content Include="Assets\js\jquery.mixitup.min.js" />
-    <Content Include="Assets\js\jquery.slicknav.js" />
-    <Content Include="Assets\js\jquery.vide.js" />
-    <Content Include="Assets\js\main.js" />
-    <Content Include="Assets\js\map.js" />
-    <Content Include="Assets\js\material.min.js" />
-    <Content Include="Assets\js\owl.carousel.min.js" />
-    <Content Include="Assets\js\popper.min.js" />
-    <Content Include="Assets\js\ripples.min.js" />
-    <Content Include="Assets\js\scroll-top.js" />
-    <Content Include="Assets\js\smoothscroll.js" />
-    <Content Include="Assets\js\wow.js" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
@@ -458,7 +385,6 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
-    <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Controllers\UrlsController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\WorkIssuesController.cs" />
@@ -474,7 +400,6 @@
     <Compile Include="Helpers\Pager.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Helpers\WriteLog.cs" />
-    <Compile Include="IssuesApiController.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\JobManager.cs" />
     <Compile Include="Managers\ProjectManager.cs" />
@@ -484,13 +409,13 @@
     <Compile Include="Managers\IssuesManager.cs" />
     <Compile Include="Mappers\IssueMappers.cs" />
     <Compile Include="Mappers\ProjectMappers.cs" />
-    <Compile Include="Migrations\201805020404260_UpdateDocument.cs" />
-    <Compile Include="Migrations\201805020404260_UpdateDocument.Designer.cs">
-      <DependentUpon>201805020404260_UpdateDocument.cs</DependentUpon>
+    <Compile Include="Migrations\201805070709220_UpdateQuestion.cs" />
+    <Compile Include="Migrations\201805070709220_UpdateQuestion.Designer.cs">
+      <DependentUpon>201805070709220_UpdateQuestion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805020731310_UpdateDocument1.cs" />
-    <Compile Include="Migrations\201805020731310_UpdateDocument1.Designer.cs">
-      <DependentUpon>201805020731310_UpdateDocument1.cs</DependentUpon>
+    <Compile Include="Migrations\201805070850315_UpdateQuestion1.cs" />
+    <Compile Include="Migrations\201805070850315_UpdateQuestion1.Designer.cs">
+      <DependentUpon>201805070850315_UpdateQuestion1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -557,22 +482,6 @@
     <Compile Include="Services\IsssueService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\css\.DS_Store" />
-    <Content Include="Assets\css\colors\.DS_Store" />
-    <Content Include="Assets\css\colors\color.map" />
-    <Content Include="Assets\css\responsive.map" />
-    <Content Include="Assets\css\style.map" />
-    <Content Include="Assets\fonts\.DS_Store" />
-    <Content Include="Assets\fonts\materialdesignicons-webfont.eot" />
-    <Content Include="Assets\fonts\materialdesignicons-webfont.ttf" />
-    <Content Include="Assets\fonts\materialdesignicons-webfont.woff" />
-    <Content Include="Assets\fonts\materialdesignicons-webfont.woff2" />
-    <Content Include="Assets\images\.DS_Store" />
-    <Content Include="Assets\images\about\.DS_Store" />
-    <Content Include="Assets\images\blog\.DS_Store" />
-    <Content Include="Assets\images\clients\.DS_Store" />
-    <Content Include="Assets\images\gallery\.DS_Store" />
-    <Content Include="Assets\js\.DS_Store" />
     <Content Include="Content\Header.css" />
     <Content Include="Content\List.css" />
     <Content Include="Content\Notes\DevNotes.txt" />
@@ -611,6 +520,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Audit\PostingExample.cshtml" />
+    <Content Include="Views\Shared\Issues\_MarkAsDone.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Questions\_Questions.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueItemExpired.cshtml" />
@@ -630,10 +540,9 @@
     <Content Include="Views\Shared\Contacts\_Contacts.cshtml" />
     <Content Include="Views\Shared\Contacts\_ContactItem.cshtml" />
     <Content Include="Views\Shared\_Link.cshtml" />
-    <Content Include="Views\Shared\Questions\_QuestionItemWithCreateAnswer.cshtml" />
     <Content Include="Views\Shared\Answers\_AddAnswerAjax.cshtml" />
     <Content Include="Views\Shared\Answers\_AnswerItem.cshtml" />
-    <Content Include="Views\Shared\Issues\_AddQuestionAjax.cshtml" />
+    <Content Include="Views\Shared\Questions\_AddQuestionAjax.cshtml" />
     <Content Include="Views\Shared\_DeleteMsg.cshtml" />
     <Content Include="Views\Shared\Contacts\_ContactMenu.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
@@ -642,18 +551,15 @@
     <Content Include="Views\Shared\Issues\_AddPriceAjax.cshtml" />
     <Content Include="Views\Shared\Issues\_SetTime.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueMenu.cshtml" />
-    <Content Include="Views\Jobs\Create2.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\Jobs\Create.cshtml" />
-    <Content Include="Views\Comments\CreateForJob.cshtml" />
     <Content Include="Views\Shared\Comments\_Comments.cshtml" />
     <Content Include="Views\Shared\Comments\_Comment.cshtml" />
     <Content Include="Views\Shared\Partials\_Header.cshtml" />
     <Content Include="Views\WorkIssues\Create.cshtml" />
     <Content Include="Views\Shared\Partials\_About.cshtml" />
-    <Content Include="Views\Shared\Issues\_MarkAsDone.cshtml" />
     <Content Include="Views\WorkIssues\Details.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -728,9 +634,9 @@
     <Content Include="Views\Home\_Manage.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\Home\_RegisterExternal.cshtml" />
-    <Content Include="Views\Shared\_WorkTime.cshtml" />
+    <Content Include="Views\Shared\Issues\_WorkTime.cshtml" />
     <Content Include="Views\Shared\Issues\_IssueItem.cshtml" />
-    <Content Include="Views\Shared\_WorkStatus.cshtml" />
+    <Content Include="Views\Shared\Issues\_WorkStatus.cshtml" />
     <Content Include="Views\Shared\Issues\_Issues.cshtml" />
     <Content Include="Views\Shared\Issues\_QuickCreateIssue.cshtml" />
     <Content Include="Views\WorkIssues\Index.cshtml" />
@@ -785,7 +691,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\Questions\_EmbedQuestion.cshtml" />
-    <Content Include="Views\WorkIssues\GetTaskAsync.cshtml" />
     <Content Include="Views\GoogleDrives\UpcomingEvents.cshtml" />
     <Content Include="Views\GoogleDrives\IndexAsync.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
@@ -808,7 +713,7 @@
     <Content Include="Views\Shared\Urls\_EmbedUrl.cshtml" />
     <Content Include="Views\Shared\_SearchBox.cshtml" />
     <Content Include="Views\Shared\Projects\_List.cshtml" />
-    <Content Include="Views\UsersAdmin\_Users.cshtml" />
+    <Content Include="Views\Shared\Users\_Users.cshtml" />
     <Content Include="Views\Shared\Issues\_AddTime.cshtml" />
     <Content Include="Views\GoogleDrives\Files.cshtml" />
     <Content Include="Views\Articles\_Articles.cshtml" />
@@ -825,6 +730,18 @@
     <Content Include="Views\Articles\_Files.cshtml" />
     <Content Include="Views\Shared\Questions\_QuestionInfo.cshtml" />
     <Content Include="Views\Shared\Answers\_AnswerTitle.cshtml" />
+    <Content Include="Views\Shared\Jobs\_AddPriceAjax.cshtml" />
+    <Content Include="Views\Shared\Jobs\_HotJob.cshtml" />
+    <Content Include="Views\Shared\Jobs\_HotJobs.cshtml" />
+    <Content Include="Views\Shared\Jobs\_Job.cshtml" />
+    <Content Include="Views\Shared\Jobs\_Jobs.cshtml" />
+    <Content Include="Views\Shared\Jobs\_JobMenu.cshtml" />
+    <Content Include="Views\Shared\Comments\_AddComment.cshtml" />
+    <Content Include="Views\Shared\Comments\_CommentMenu.cshtml" />
+    <Content Include="Views\Shared\Jobs\_Appliers.cshtml" />
+    <Content Include="Views\Shared\Jobs\_Applier.cshtml" />
+    <Content Include="Views\WorkIssues\_SearchResults.cshtml" />
+    <Content Include="Views\Shared\Messages\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -840,11 +757,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805020404260_UpdateDocument.resx">
-      <DependentUpon>201805020404260_UpdateDocument.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805070709220_UpdateQuestion.resx">
+      <DependentUpon>201805070709220_UpdateQuestion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805020731310_UpdateDocument1.resx">
-      <DependentUpon>201805020731310_UpdateDocument1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805070850315_UpdateQuestion1.resx">
+      <DependentUpon>201805070850315_UpdateQuestion1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

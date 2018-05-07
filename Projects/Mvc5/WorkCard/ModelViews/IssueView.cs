@@ -286,7 +286,6 @@ namespace Web.ModelViews
 
         public string[] GetInnerMembers()
         {
-            //Members
             List<string> _innerMembers = new List<string>();
             string[] _emails = Content.GetEmails();
             if (_emails != null && _emails.Count() > 0)
@@ -348,6 +347,7 @@ namespace Web.ModelViews
             if (Content.HasEmail()) _emails.AddRange(Content.GetEmails().ToList());
             return _emails.ToArray();
         }
+
         public string[] GetCommands()
         {
             List<string> commands = new List<string>();

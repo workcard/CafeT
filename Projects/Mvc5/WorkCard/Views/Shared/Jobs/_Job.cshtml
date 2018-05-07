@@ -4,42 +4,18 @@
 
 @model Web.Models.Job
 
-<div class="card-box kanban-box">
-    
-    @if (Model.Title != null && Model.Title.Length > 0)
+@if (Model.Title != null && Model.Title.Length > 0)
+{
+    @Html.ActionLink(Model.Title, "Details", "Jobs", new { id = Model.Id }, null)<br />
+    <span class="badge badge-danger">@Model.Status</span>
+    <span class="badge badge-success">@Model.Salary.Amout.ToReadable() (@Model.Salary.Currency)/tháng</span>
+    if (Model.End.HasValue)
     {
-        <div class="row">
-            <h5>
-                <a href="#">@Html.ActionLink(Model.Title, "Details", "Jobs", new { id = Model.Id }, null)</a>
-                <span class="label label-danger">@Model.Status</span>
-                <span class="label label-success pull-right">@Model.Salary.Amout.ToReadable() (@Model.Salary.Currency)/tháng</span>
-            </h5>
-        </div>
-        <div class="row">
-            @if (Model.End.HasValue)
-            {
-                <span class="label label-success pull-left">@Model.End.Value.TimeAgo()</span>
-                @Html.Raw(" ")
-            }
-            
-        </div>
+        <span class="badge badge-info">@Model.End.Value.TimeAgo()</span>
+        @Html.Raw(" ")
     }
-    <div class="row">
-        <p>
-            @Html.Raw(Model.Description)
-        </p>
-    </div>
-    <div class="row">
-        <span class="pull-right">
-            @Ajax.ActionLink("Apply", "Apply", "Jobs", new { id = Model.Id },
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "Update-" + Model.Id.ToString(),
-                                HttpMethod = "Get",
-                            }, null)
-        </span>
-        <p>
-            <div id="Update-@Model.Id.ToString()"></div>
-        </p>
-    </div>
-</div>
+}
+<p>
+    @Html.Raw(Model.Description)
+</p>
+@Html.Partial("Jobs/_JobMenu", Model)

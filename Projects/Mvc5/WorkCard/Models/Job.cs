@@ -2,6 +2,7 @@
 using CafeT.Time;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Web.Models
 {
@@ -23,46 +24,45 @@ namespace Web.Models
         Open
     }
 
-    public class Job:BaseObject, ICloneable
+    public class JobApplier:BaseObject
+    {
+        public string UserName { set; get; }
+        public Guid? JobId { set; get; }
+        public JobApplier():base()
+        { }
+    }
+
+    public class Job:BaseObject//, ICloneable
     {
         public string Title { set; get; }
         public string Description { get; set; }
         public string Content { set; get; }
-        public string Message { set; get; } = string.Empty;
-        public string Owner { set; get; }
         public Money Salary { set; get; } = new Money() {  Amout = 0, Currency = CurrencyType.VND };
-        public double Price { set; get; } = 0;
         public Address Location { set; get; }
 
-        public DateTime? Start { set; get; } = DateTime.Now;
+        public DateTime? Start { set; get; }
         public DateTime? End { set; get; }
         
-        public JobStatus Status { set; get; } = JobStatus.New;
+        public JobStatus Status { set; get; }
 
         public virtual IEnumerable<Comment> Comments { set; get; }
         public virtual IEnumerable<Question> Questions { set; get; }
-        public List<string> Appliers { set; get; }
+        public virtual List<JobApplier> Appliers { set; get; }
 
         public string[] Tags { set; get; }
        
 
         public Job():base()
         {
-            Appliers = new List<string>();
-        }
-
-        public bool IsOf(string userName)
-        {
-            if ((!this.CreatedBy.IsNullOrEmptyOrWhiteSpace() && (this.CreatedBy.ToLower() == userName))
-                || (!this.Owner.IsNullOrEmptyOrWhiteSpace() && (this.Owner.ToLower() == userName))) return true;
-            return false;
+            Status = JobStatus.New;
+            Appliers = new List<JobApplier>();
         }
 
         public void AddApplier(string userName)
         {
-            if(!Appliers.Contains(userName))
+            if(!Appliers.Select(t=>t.UserName).Contains(userName))
             {
-                Appliers.Add(userName);
+                Appliers.Add(new JobApplier() { UserName = userName, CreatedBy=this.CreatedBy });
             }
         }
         
@@ -78,17 +78,16 @@ namespace Web.Models
             return false;
         }
 
-        public Job ToView()
-        {
-            Job _model = (Job)this.Clone();
-            //_model.Salary.ToReadable();
-            return _model;
-        }
+        //public Job ToView()
+        //{
+        //    Job _model = (Job)this.Clone();
+        //    return _model;
+        //}
 
-        public object Clone()
-        {
-            Job _story = (Job)this.MemberwiseClone();
-            return _story;
-        }
+        //public object Clone()
+        //{
+        //    Job _story = (Job)this.MemberwiseClone();
+        //    return _story;
+        //}
     }
 }
