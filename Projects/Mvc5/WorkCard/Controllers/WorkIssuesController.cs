@@ -77,7 +77,19 @@ namespace Web.Controllers
             
             return View("Index", _views);
         }
+        //[HttpGet]
+        //public async Task<ActionResult> GetMembers(Guid id)
+        //{
+        //    var _object = IssueManager.GetById(id);
+        //    var _members = _object.Members;
 
+        //    if (Request.IsAjaxRequest())
+        //    {
+        //        return PartialView("Issues/_IssuesCompleted",
+        //            _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
+        //    }
+        //    return View("Index", _views);
+        //}
         [HttpGet]
         public async Task<ActionResult> GetCompletedIssues(int? page)
         {

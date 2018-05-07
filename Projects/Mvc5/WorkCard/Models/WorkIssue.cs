@@ -348,6 +348,7 @@ namespace Web.Models
             }
             return _innerMembers.ToArray();
         }
+
         public string[] GetLinks()
         {
             List<string> _links = new List<string>();

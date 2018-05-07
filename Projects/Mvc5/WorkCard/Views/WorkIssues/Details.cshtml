@@ -12,7 +12,12 @@
             $('#questions-box').html(data);
         });
 </script>
-
+<script type="text/javascript">
+    $.get('@Url.Action("GetMembers", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#members-box').html(data);
+        });
+</script>
 <script type="text/javascript">
     $.get('@Url.Action("SearchBy", "WorkIssues",
           new { keyWord = Model.GetCommands().Where(t => t.StartsWith("[")).FirstOrDefault(), page = 1 })',
@@ -65,38 +70,37 @@
     </div>
     <div class="col-md-4">
         @if (Model.GetEmails() != null && Model.GetEmails().Count() > 0)
-        {
-            <div class="card">
-                <div class="card-header">Contacts</div>
-                <ul class="list-group">
-                    @foreach (string email in Model.GetEmails().Distinct())
-                    {
-                        <li class="list-group-item">
-                            @Html.ActionLink(email, "GetContact", "Contacts", new { email = email }, null)
-                            @Html.Raw(" | ")
-                            @Html.ActionLink("Send email", "SendEmail", "WorkIssues", new { toEmail = email, issueId = Model.Id }, null)
-                        </li>
-                    }
-                </ul>
-
-            </div>
-            <div class="card">
-                <div class="card-header">Tags</div>
-                <ul class="list-group">
-                    @foreach (var command in Model.GetCommands().Distinct())
-                    {
-                        if (command.StartsWith("["))
-                        {
-                            <li class="list-group-item">
-                                @Html.ActionLink(command, "SearchBy", "WorkIssues", new { keyWord = command }, null)
-                            </li>
-                        }
-                    }
-                </ul>
-            </div>
+    {
+        <div class="card">
+            <div class="card-header">Contacts</div>
+            <ul class="list-group">
+                @foreach (string email in Model.GetEmails().Distinct())
+            {
+                <li class="list-group-item">
+                    @Html.ActionLink(email, "GetContact", "Contacts", new { email = email }, null)
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Send email", "SendEmail", "WorkIssues", new { toEmail = email, issueId = Model.Id }, null)
+                </li>
         }
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">Tags</div>
+            <ul class="list-group">
+                @foreach (var command in Model.GetCommands().Distinct())
+            {
+                if (command.StartsWith("["))
+                {
+                    <li class="list-group-item">
+                        @Html.ActionLink(command, "SearchBy", "WorkIssues", new { keyWord = command }, null)
+                    </li>
+            }
+        }
+            </ul>
+        </div>
+}
         <div id="sameTag-box"></div>
-        @{
+        @*@{
             var commands = Model.GetCommands().Distinct();
             if (commands != null && commands.Count() > 0)
             {
@@ -121,16 +125,27 @@
                     }
                 </ul>
             }
-        }
+        }*@
         <div class="card">
             <div class="card-header">Đã xem bởi: </div>
             <ul class="list-group">
                 @foreach (string userName in Model.Viewers.Distinct())
-                {
-                    <li class="list-group-item">
-                        @Html.Raw(userName)
-                    </li>
-                }
+            {
+                <li class="list-group-item">
+                    @Html.Raw(userName)
+                </li>
+        }
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">Members </div>
+            <ul class="list-group">
+                @foreach (string userName in Model.Members.Distinct())
+            {
+                <li class="list-group-item">
+                    @Html.Raw(userName)
+                </li>
+        }
             </ul>
         </div>
     </div>

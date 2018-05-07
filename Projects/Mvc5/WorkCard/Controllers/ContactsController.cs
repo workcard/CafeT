@@ -1,5 +1,7 @@
-﻿using Repository.Pattern.UnitOfWork;
+﻿using CafeT.Text;
+using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -18,6 +20,25 @@ namespace Web.Controllers
 
         public ContactsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult Find(string keyword)
+        {
+            if(keyword.Contains("{"))
+            {
+                keyword = keyword.GetInBetween("{", "}", false, false);
+            }
+            var contacts = db.Contacts.AsEnumerable();
+            List<Contact> list = new List<Contact>();
+            foreach(var contact in contacts)
+            {
+                if(contact.Contains(keyword))
+                {
+                    list.Add(contact);
+                }
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Index()

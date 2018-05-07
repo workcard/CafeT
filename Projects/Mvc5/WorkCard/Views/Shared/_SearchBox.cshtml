@@ -1,4 +1,42 @@
-﻿@using (Html.BeginForm("SearchBy", "WorkIssues", FormMethod.Post))
+﻿
+<script type="text/javascript">
+$(function () {
+    $("#Keyword").autocomplete({
+            source: function (request, response) {
+                var itemnamecodes = new Array();
+                $.ajax({
+                    async: false, cache: false,
+                    type: "Get",
+                    url: "@(Url.Action("Find", "Contacts"))",
+                    data: { keyword: request.term },
+                    success: function (data) {
+                        for (var i = 0; i < data.length ; i++) {
+                            itemnamecodes[i] = { label: data[i].Email, Id: data[i].Id };
+                        }
+                     }
+                });
+                response(itemnamecodes);
+            },
+             @*select: function (event, ui) {
+                 $.ajax({
+                     cache: false, async: false, type: "POST",
+                     url: "@(Url.Action("Find", "Contacts"))",
+                     data: { "id": ui.item.Id },
+                    success: function (data) {
+                        var item = data[0];
+                        $("#ItemName").val(item.ItemName);
+                        $("#ItemModel").val(item.ItemModel);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve Item.');
+                    }
+                });
+            }*@
+    });
+});
+</script>
+
+@using (Html.BeginForm("SearchBy", "WorkIssues", FormMethod.Post))
 {
     <div class="row">
         <div class="col-8 col-sm pr-sm-0">

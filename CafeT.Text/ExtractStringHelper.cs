@@ -6,7 +6,7 @@ namespace CafeT.Text
     public static class ExtractStringHelper
     {
         #region Extracts
-        public static string GetInBetween(string strBegin, string strEnd, string strSource, bool includeBegin, bool includeEnd)
+        public static string GetInBetween(this  string strSource, string strBegin, string strEnd, bool includeBegin, bool includeEnd)
         {
             string[] result = { string.Empty, string.Empty };
             int iIndexOfBegin = strSource.IndexOf(strBegin);
@@ -99,16 +99,7 @@ namespace CafeT.Text
             return string.Empty;
         }
 
-        //public static string[] ExtractBetween(this string text, string a, string b)
-        //{
-        //    List<string> _lst = new List<string>();
-        //    while (text.ExtractMaxBetween(a, b) != string.Empty)
-        //    {
-        //        _lst.Add(text.ExtractMinBetween(a, b));
-        //        text = text.Replace(text.ExtractMinBetween(a, b), string.Empty);
-        //    }
-        //    return _lst.ToArray();
-        //}
+        
 
         /// <summary>
         /// Tested by: Phan Minh Tai

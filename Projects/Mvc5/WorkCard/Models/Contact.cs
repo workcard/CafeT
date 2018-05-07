@@ -56,16 +56,10 @@ namespace Web.Models
             Email = email;
         }
 
-        //public void Load()
-        //{
-            
-        //}
-
+        
         public bool Contains(string userName)
         {
-            string FullName = FirstName + " " + LastName;
-            FullName = FullName.RemoveUnicode();
-            if (FullName.ToLower().Contains(userName.ToLower())) return true;
+            if (Email.ToLower().Contains(userName.ToLower())) return true;
             return false;
         }
     }

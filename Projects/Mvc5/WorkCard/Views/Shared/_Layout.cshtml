@@ -52,15 +52,17 @@
         SyntaxHighlighter.config.clipboardSwf = 'http://alexgorbatchev.com/pub/sh/current/scripts/clipboard.swf';
         SyntaxHighlighter.all();
     </script>
-
+    <link rel="stylesheet" href="@Url.Content("//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css")">
+    <script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("//code.jquery.com/ui/1.11.4/jquery-ui.js")"></script>
     @StackExchange.Profiling.MiniProfiler.RenderIncludes()
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            @Html.Partial("Partials/_Header")
+        </div>
         <div class="row">
-            <div id="header" class="row">
-                @Html.Partial("Partials/_Header")
-            </div>
             <div class="col-md-2">
                 @Html.Partial("Projects/_List")
                 <div id="projects-panel"></div>
