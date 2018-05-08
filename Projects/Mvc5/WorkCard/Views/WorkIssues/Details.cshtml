@@ -19,6 +19,12 @@
         });
 </script>
 <script type="text/javascript">
+    $.get('@Url.Action("GetSubIssues", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#subIssues-box').html(data);
+        });
+</script>
+<script type="text/javascript">
     $.get('@Url.Action("SearchBy", "WorkIssues",
           new { keyWord = Model.GetCommands().Where(t => t.StartsWith("[")).FirstOrDefault(), page = 1 })',
         function (data) {
@@ -64,6 +70,9 @@
                 <p>
                     @Html.Partial("_DetailsMenu", Model)
                 </p>
+            </div>
+            <div id="subIssues-box">
+
             </div>
         </div>
         <div id="questions-box"></div>

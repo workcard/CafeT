@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace Web.Models
 {
-    //public class UserProfile
-    //{
-    //    [Key]
-    //    public Guid Id { set; get; }
-    //    public string UserId { set; get; }
-    //    public DateTime CreatedDate { set; get; }
-    //    public string ActivityName { set; get; }
-    //    public DateTimeOffset LastActivityDate { get; set; }
-    //}
-
     public class ApplicationUser : IdentityUser<string, ApplicationUserLogin,
         ApplicationUserRole, ApplicationUserClaim>
     {
@@ -42,7 +32,7 @@ namespace Web.Models
         public string About { set; get; }
         
         public DateTime CreatedDate { set; get; }
-        public DateTime LastUpatedDate { set; get; }
+        public DateTime? LastUpatedDate { set; get; }
 
         public ApplicationUser()
         {

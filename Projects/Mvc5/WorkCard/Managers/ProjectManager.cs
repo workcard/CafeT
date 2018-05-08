@@ -19,12 +19,25 @@ namespace Web.Managers
         {
             return db.Projects.FindAsync(id).Result;
         }
+        public Project GetByName(string projectName)
+        {
+            var _projects = db.Projects.Where(t => t.Title.ToLower().Contains(projectName.ToLower()));
+            if (_projects != null && _projects.Count() == 1)
+            {
+                return _projects.FirstOrDefault();
+            }
+            else
+            {
+                return null;
+            }
+        }
         public List<Project> GetAllOf(string userName)
         {
-            return _unitOfWorkAsync.RepositoryAsync<Project>()
+            var _projects = _unitOfWorkAsync.RepositoryAsync<Project>()
                 .Queryable()
-                .Where(t => (t.CreatedBy.ToLower() == userName))
                 .ToList();
+
+            return _projects.Where(t=>t.IsOf(userName)).ToList();
         }
        
         public IEnumerable<WorkIssue> GetIssues(Guid projectId)

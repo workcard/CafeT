@@ -4,41 +4,49 @@
     if (Model.IsOf(User.Identity.Name))
     {
         @Ajax.ActionLink("Done", "MarkStatus", "WorkIssues",
-                       new { id = Model.Id, status = "Done" },
-                       new AjaxOptions
-                       {
-                           UpdateTargetId = "Status-" + Model.Id.ToString(),
-                           HttpMethod = "Post",
-                       }, new { @class = "card-link" })
+                            new { id = Model.Id, status = "Done" },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                HttpMethod = "Post",
+                            }, new { @class = "card-link" })
 
         @Ajax.ActionLink("Notify", "Notify", "WorkIssues",
-                          new { id = Model.Id },
-                          new AjaxOptions
-                          {
-                              UpdateTargetId = "Status-" + Model.Id.ToString(),
-                              HttpMethod = "Post",
-                          }, new { @class = "card-link" })
+                               new { id = Model.Id },
+                               new AjaxOptions
+                               {
+                                   UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                   HttpMethod = "Post",
+                               }, new { @class = "card-link" })
 
         @Html.ActionLink("To article", "ToArticle", new { id = Model.Id }, new { @class = "card-link" })
         @Html.ActionLink("Edit", "Edit", "WorkIssues", new { id = Model.Id }, new { @class = "card-link" })
         @Html.ActionLink("ToCalendar", "ToCalendar", "WorkIssues", new { id = Model.Id }, new { @class = "card-link" })
         @Html.ActionLink("Delete", "Delete", "WorkIssues", new { id = Model.Id }, new { @class = "card-link" })
         @Ajax.ActionLink("Delete All Questions", "DeleteAllQuestions", "WorkIssues",
-                             new { Id = Model.Id },
-                             new AjaxOptions
-                             {
-                                 UpdateTargetId = "Status-" + Model.Id.ToString(),
-                                 HttpMethod = "Post",
-                             }, new { @class = "card-link" })
+                                  new { Id = Model.Id },
+                                  new AjaxOptions
+                                  {
+                                      UpdateTargetId = "Status-" + Model.Id.ToString(),
+                                      HttpMethod = "Post",
+                                  }, new { @class = "card-link" })
 
     }
     @Ajax.ActionLink("Hỏi", "AddQuestion", "Questions",
-                            new { issueId = Model.Id },
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "AddQuestion",
-                                HttpMethod = "Get",
-                            },
-                            new { @class = "card-link" })
+                                new { issueId = Model.Id },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "AddQuestion",
+                                    HttpMethod = "Get",
+                                },
+                                new { @class = "card-link" })
+    @Ajax.ActionLink("+ Sub Issue", "AddSubIssue", "WorkIssues",
+                                new { id = Model.Id },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "AddQuestion",
+                                    HttpMethod = "Get",
+                                },
+                                new { @class = "card-link" })
 }
 <div id="AddQuestion"></div>

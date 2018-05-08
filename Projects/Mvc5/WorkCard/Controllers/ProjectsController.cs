@@ -142,8 +142,7 @@ namespace Web.Controllers
             }
             Project project = await db.Projects.FindAsync(id);
             project.Issues = ProjectManager.GetIssues(project.Id);
-            //ViewBag.Issues = Mappers.IssueMappers.IssuesToViews(project.Issues.ToList());
-            project.Contacts = ProjectManager.GetContacts(project.Id);
+            project.Contacts = ProjectManager.GetContacts(project.Id).ToList();
 
             if (project == null)
             {
@@ -152,7 +151,6 @@ namespace Web.Controllers
             return View(project);
         }
 
-        // GET: Projects/Create
         [Authorize]
         public ActionResult Create()
         {

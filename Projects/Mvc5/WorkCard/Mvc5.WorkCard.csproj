@@ -417,6 +417,18 @@
     <Compile Include="Migrations\201805070850315_UpdateQuestion1.Designer.cs">
       <DependentUpon>201805070850315_UpdateQuestion1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805080212209_UpdateAppUser.cs" />
+    <Compile Include="Migrations\201805080212209_UpdateAppUser.Designer.cs">
+      <DependentUpon>201805080212209_UpdateAppUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805080350563_UpdateIssueAndProject.cs" />
+    <Compile Include="Migrations\201805080350563_UpdateIssueAndProject.Designer.cs">
+      <DependentUpon>201805080350563_UpdateIssueAndProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805080656532_UpdateSubIssue.cs" />
+    <Compile Include="Migrations\201805080656532_UpdateSubIssue.Designer.cs">
+      <DependentUpon>201805080656532_UpdateSubIssue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AuditingExampleModels.cs" />
@@ -742,6 +754,7 @@
     <Content Include="Views\Shared\Jobs\_Applier.cshtml" />
     <Content Include="Views\WorkIssues\_SearchResults.cshtml" />
     <Content Include="Views\Shared\Messages\_Error.cshtml" />
+    <Content Include="Views\Shared\Issues\_AjaxQuickCreateIssue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -762,6 +775,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805070850315_UpdateQuestion1.resx">
       <DependentUpon>201805070850315_UpdateQuestion1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080212209_UpdateAppUser.resx">
+      <DependentUpon>201805080212209_UpdateAppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080350563_UpdateIssueAndProject.resx">
+      <DependentUpon>201805080350563_UpdateIssueAndProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080656532_UpdateSubIssue.resx">
+      <DependentUpon>201805080656532_UpdateSubIssue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

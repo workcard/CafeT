@@ -125,6 +125,7 @@ namespace Web.Managers
                 }
             }
             _unitOfWorkAsync.RepositoryAsync<WorkIssue>().Insert(issue);
+            
             int _result = _unitOfWorkAsync.SaveChangesAsync().Result;
             if (_result >= 0)
             {
@@ -261,7 +262,16 @@ namespace Web.Managers
             
             return _objects;
         }
+        public IEnumerable<WorkIssue> GetSubIssues(Guid id)
+        {
+            var _objects = _unitOfWorkAsync.Repository<WorkIssue>()
+                .Query().Select()
+                .Where(t => t.ParentId.HasValue && t.ParentId.Value == id)
+                .OrderByDescending(t => t.UpdatedDate)
+                .ThenByDescending(t=>t.CreatedDate);
 
+            return _objects;
+        }
         public void Notify(Guid id)
         {
             var _issue = GetById(id);

@@ -77,27 +77,18 @@ namespace Web.Controllers
             
             return View("Index", _views);
         }
-        //[HttpGet]
-        //public async Task<ActionResult> GetMembers(Guid id)
-        //{
-        //    var _object = IssueManager.GetById(id);
-        //    var _members = _object.Members;
-
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("Issues/_IssuesCompleted",
-        //            _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
-        //    }
-        //    return View("Index", _views);
-        //}
+       
         [HttpGet]
         public async Task<ActionResult> GetCompletedIssues(int? page)
         {
             if (page == null) page = 1;
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
-            _objects = _objects.Where(t => t.IsVerified && t.IsCompleted()).ToList();
-            var _views = IssueMappers.IssuesToViews(_objects);
+            _objects = _objects.Where(t => t.IsVerified && t.IsCompleted())
+                .OrderByDescending(t=>t.UpdatedDate)
+                .ThenByDescending(t=>t.CreatedDate)
+                .ToList();
 
+            var _views = IssueMappers.IssuesToViews(_objects);
 
             if (Request.IsAjaxRequest())
             {
@@ -375,7 +366,17 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
+        public ActionResult GetSubIssues(Guid id)
+        {
+            var _objects = IssueManager.GetSubIssues(id).ToList();
+            var _views = IssueMappers.IssuesToViews(_objects);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_Issues", _views);
+            }
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         [Authorize]
         public ActionResult AddQuestion(Guid issueId)
@@ -388,7 +389,18 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddSubIssue(Guid id)
+        {
+            WorkIssue issue = new WorkIssue() { ParentId = id };
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_AjaxQuickCreateIssue", issue);
+            }
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         [Authorize]
         public ActionResult LoadInfo(Guid id)
@@ -413,6 +425,7 @@ namespace Web.Controllers
             return View();
         }
 
+
         
         [HttpPost]
         [Authorize]
@@ -433,7 +446,7 @@ namespace Web.Controllers
                         return View("_NotifyMessage", "Issue is not valid");
                     }
                 }
-
+                workIssue.Id = Guid.NewGuid();
                 workIssue.CreatedBy = User.Identity.Name;
                 workIssue.PrepareToCreate();
                 workIssue.Update();
@@ -450,10 +463,31 @@ namespace Web.Controllers
                     {
                         workIssue.ProjectId = _selectProjects.FirstOrDefault().Id;
                     }
+                    else
+                    {
+                        var _project = ProjectManager.GetByName(_tag);
+                        if(_project != null)
+                        {
+                            workIssue.ProjectId = _project.Id;
+                        }
+                    }
                 }
 
                 IssueManager.Insert(workIssue);
-              
+
+                if(workIssue.ProjectId.HasValue)
+                {
+                    var _project = ProjectManager.GetById(workIssue.ProjectId.Value);
+                    if(!_project.IsOf(User.Identity.Name))
+                    {
+                        Contact contact = new Contact();
+                        contact.CreatedBy = User.Identity.Name;
+                        contact.Email = User.Identity.Name;
+                        contact.UserName = User.Identity.Name;
+                        await ProjectManager.AddContactAsync(_project.Id, contact);
+                    }
+                }
+
                 if(workIssue.HasInnerMembers())
                 {
                     var _innerMembers = workIssue.GetInnerMembers();
@@ -461,14 +495,15 @@ namespace Web.Controllers
                     {
                         Contact _contact = new Contact();
                         _contact.Email = _member;
-                        _contact.UserName = User.Identity.Name;
+                        _contact.UserName = _member;
                         _contact.CreatedBy = User.Identity.Name;
                         await ContactManager.AddContactAsync(_contact);
                     }
                 }
                 if(Request.IsAjaxRequest())
                 {
-                    return PartialView("Issues/_IssueItem", workIssue);
+                    var _viewObject = Mapper.Map<WorkIssue, IssueView>(workIssue);
+                    return PartialView("Issues/_IssueItem", _viewObject);
                 }
                 return RedirectToAction("Details", "WorkIssues", new { id = workIssue.Id});
             }

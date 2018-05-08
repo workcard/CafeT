@@ -29,6 +29,8 @@ namespace Web.Models
 
         public Guid? ProjectId { set; get; }
         public Guid? JobId { set; get; }
+        public Guid? ParentId { set; get; }
+        public List<Guid> SubIds { set; get; }
 
         public List<string> Tags { set; get; }
         public List<string> Numbers { set; get; }
@@ -48,6 +50,7 @@ namespace Web.Models
             Tags = new List<string>();
             Emails = new List<string>();
             Times = new List<DateTime>();
+            SubIds = new List<Guid>();
         }
         
 

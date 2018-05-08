@@ -1,10 +1,14 @@
 ﻿@model Web.Models.WorkIssue
 
-<div class="row">
-    @using (Html.BeginForm("Create", "WorkIssues", FormMethod.Post))
+<div id="Create" class="row">
+    @using (Ajax.BeginForm("Create", "WorkIssues", FormMethod.Post,
+        new AjaxOptions
+        {
+            HttpMethod = "POST", UpdateTargetId = "Create", InsertionMode = InsertionMode.Replace
+        }, 
+        null))
     {
         @Html.AntiForgeryToken()
-        @*@Html.HiddenFor(model => Model.Id)*@
         @Html.HiddenFor(model => Model.ProjectId)
         @Html.HiddenFor(model => Model.JobId)
         @Html.HiddenFor(model => Model.ParentId)
