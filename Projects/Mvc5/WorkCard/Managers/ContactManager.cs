@@ -10,8 +10,6 @@ namespace Web.Managers
 {
     public class ContactManager:BaseManager
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         public ContactManager(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
@@ -29,11 +27,12 @@ namespace Web.Managers
 
         public async Task<bool> AddContactAsync(Contact contact)
         {
-            var _myContacts = db.Contacts.Where(t => t.UserName == contact.UserName).Select(t => t.Email);
+            var _myContacts = dbContext.Contacts
+                .Where(t => t.UserName == contact.UserName).Select(t => t.Email);
             if (!_myContacts.Contains(contact.Email))
             {
-                db.Contacts.Add(contact);
-                await db.SaveChangesAsync();
+                dbContext.Contacts.Add(contact);
+                await dbContext.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -41,13 +40,13 @@ namespace Web.Managers
 
         public Contact GetById(Guid contactId)
         {
-            return db.Contacts.FindAsync(contactId).Result;
+            return dbContext.Contacts.FindAsync(contactId).Result;
         }
 
         public Contact GetByEmail(string email)
         {
             if (!email.IsEmail()) return null;
-            return db.Contacts.Where(t=>t.Email == email).FirstOrDefault();
+            return dbContext.Contacts.Where(t=>t.Email == email).FirstOrDefault();
         }
         public IEnumerable<WorkIssue> GetIssuesOf(string email)
         {
@@ -60,15 +59,42 @@ namespace Web.Managers
 
         public IEnumerable<Contact> GetContactsOfIssue(Guid issueId)
         {
-            return db.Contacts.Where(t => t.IssueId == issueId);
+            var contacts = _unitOfWorkAsync.RepositoryAsync<Contact>().Query().Select()
+                .ToList();
+            List<Contact> results = new List<Contact>();
+            if(contacts != null && contacts.Any())
+            {
+                foreach (var contact in contacts)
+                {
+                    if (contact.Issues.Any())
+                    {
+                        foreach (var issue in contact.Issues)
+                        {
+                            if (issue.Id == issueId) { results.Add(contact); }
+                        }
+                    }
+                }
+            }
+            
+            
+            return results;
         }
 
-        public IEnumerable<Contact> GetContacts(string userName)
+        public List<Contact> GetContacts(string userName)
         {
-            return db.Contacts.Where(t => t.CreatedBy == userName);
+            var contacts = _unitOfWorkAsync.RepositoryAsync<Contact>()
+                .Query().Select().Where(t => t.CreatedBy == userName)
+                .ToList();
+
+            return contacts;
         }
 
-        
+        public IEnumerable<Contact> GetContacts()
+        {
+            return _unitOfWorkAsync.RepositoryAsync<Contact>().Query().Select()
+                .AsEnumerable();
+        }
+
         public IEnumerable<Contact> SearchByName(string name)
         {
             return _unitOfWorkAsync.RepositoryAsync<Contact>()

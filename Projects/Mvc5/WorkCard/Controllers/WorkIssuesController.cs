@@ -258,7 +258,7 @@ namespace Web.Controllers
             if(User.Identity.IsAuthenticated)
             {
                 workIssue.AddViewer(User.Identity.Name);
-                await IssueManager.UpdateAsync(id.Value, workIssue);
+                await IssueManager.UpdateAsync(workIssue);
             }
 
             if (workIssue == null)
@@ -366,6 +366,17 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult GetMembers(Guid id)
+        {
+            var _objects = ContactManager.GetContactsOfIssue(id).ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Contacts/_Contacts", _objects);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult GetSubIssues(Guid id)
         {
@@ -475,7 +486,7 @@ namespace Web.Controllers
 
                 IssueManager.Insert(workIssue);
 
-                if(workIssue.ProjectId.HasValue)
+                if (workIssue.ProjectId.HasValue)
                 {
                     var _project = ProjectManager.GetById(workIssue.ProjectId.Value);
                     if(!_project.IsOf(User.Identity.Name))
@@ -484,6 +495,8 @@ namespace Web.Controllers
                         contact.CreatedBy = User.Identity.Name;
                         contact.Email = User.Identity.Name;
                         contact.UserName = User.Identity.Name;
+                        contact.Projects.Add(_project);
+                        workIssue.Contacts.Add(contact);
                         await ProjectManager.AddContactAsync(_project.Id, contact);
                     }
                 }
@@ -530,7 +543,7 @@ namespace Web.Controllers
             DateTime newStart = DateTime.Parse(date);
             WorkIssue workIssue = IssueManager.GetById(id);
             workIssue.UpdateTime(newStart);
-            await IssueManager.UpdateAsync(id, workIssue);
+            await IssueManager.UpdateAsync(workIssue);
 
             if (Request.IsAjaxRequest())
             {
@@ -646,7 +659,7 @@ namespace Web.Controllers
         {
             WorkIssue workIssue = IssueManager.GetById(id);
             workIssue.AddTimeToDo(minutes);
-            await IssueManager.UpdateAsync(id, workIssue);
+            await IssueManager.UpdateAsync(workIssue);
 
             if (Request.IsAjaxRequest())
             {
@@ -682,14 +695,45 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> StopEmail(Guid id)
+        {
+            var issue = IssueManager.GetById(id);
+            if (issue != null)
+            {
+                issue.IsStopEmail = true;
+                await IssueManager.UpdateAsync(issue);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_NotifyMessage", "Stop email!");
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> StartEmail(Guid id)
+        {
+            var issue = IssueManager.GetById(id);
+            if (issue != null)
+            {
+                issue.IsStopEmail = false;
+                await IssueManager.UpdateAsync(issue);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_NotifyMessage", "Stop email!");
+            }
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> MarkStatus(Guid id, IssueStatus status)
         {
             WorkIssue workIssue = IssueManager.GetById(id);
             workIssue.Status = status;
-            await IssueManager.UpdateAsync(id, workIssue);
+            await IssueManager.UpdateAsync(workIssue);
 
             if(status == IssueStatus.Done)
             {
@@ -736,7 +780,7 @@ namespace Web.Controllers
                 try
                 {
                     IssueManager.IsNotify = true;
-                    await IssueManager.UpdateAsync(workIssue.Id, workIssue);
+                    await IssueManager.UpdateAsync(workIssue);
                     return RedirectToAction("Index", "Home");
                 }
                 catch(Exception ex)

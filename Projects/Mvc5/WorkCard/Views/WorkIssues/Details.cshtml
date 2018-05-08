@@ -1,5 +1,4 @@
 ﻿@using CafeT.Objects.Enums
-
 @model Web.ModelViews.IssueView
 
 @{
@@ -148,14 +147,7 @@
         </div>
         <div class="card">
             <div class="card-header">Members </div>
-            <ul class="list-group">
-                @foreach (string userName in Model.Members.Distinct())
-            {
-                <li class="list-group-item">
-                    @Html.Raw(userName)
-                </li>
-        }
-            </ul>
+            <div id="members-box"></div>
         </div>
     </div>
 </div>

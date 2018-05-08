@@ -24,7 +24,7 @@ namespace Web.Controllers
         public ActionResult LoadSummary(Guid id)
         {
             var project = ProjectManager.GetById(id);
-            var issues = ProjectManager.GetIssues(id);
+            var issues = ProjectManager.GetIssues(id).ToList();
             ProjectSummary summary = new ProjectSummary(project,issues);
 
             if (Request.IsAjaxRequest())
@@ -105,7 +105,7 @@ namespace Web.Controllers
                 foreach(string _email in _emails)
                 {
                     Contact _Model = new Contact(_email);
-                    _Model.ProjectId = projectId;
+                    _Model.Projects.Add(_project);
                     _Model.CreatedBy = User.Identity.Name;
                     _contacts.Add(_Model);
                 }

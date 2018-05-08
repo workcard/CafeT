@@ -62,6 +62,8 @@ namespace Web
                .RegisterType<BaseManager>()
                .RegisterType<IssuesManager>()
                .RegisterType<JobManager>()
+               .RegisterType<QuestionManager>()
+               .RegisterType<ContactManager>()
                ;
 
             container

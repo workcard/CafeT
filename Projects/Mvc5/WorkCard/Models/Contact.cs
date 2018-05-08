@@ -1,5 +1,6 @@
 ﻿using CafeT.Text;
 using System;
+using System.Collections.Generic;
 
 namespace Web.Models
 {
@@ -29,13 +30,12 @@ namespace Web.Models
         public string About { set; get; }
         public Address Address { set; get; }
 
-        public Guid? ProjectId { set; get; }
-        public Guid? IssueId { set; get; }
+        public virtual List<Project> Projects { set; get; } = new List<Project>();
+        public virtual List<WorkIssue> Issues { set; get; } = new List<WorkIssue>();
 
         public string UserName { set; get; }
         public bool? IsRegistered { set; get; }
 
-        //public virtual string FullName { set; get; }
         public bool IsValid()
         {
             if (FirstName.IsNullOrEmptyOrWhiteSpace()) return false;
@@ -47,6 +47,7 @@ namespace Web.Models
         public Contact(string email):base()
         {
             Email = email;
+            UserName = email;
         }
 
         public Contact(string firstName, string lastName, string email) : base()
@@ -56,10 +57,9 @@ namespace Web.Models
             Email = email;
         }
 
-        
         public bool Contains(string userName)
         {
-            if (Email.ToLower().Contains(userName.ToLower())) return true;
+            if (Email.IndexOf(userName, StringComparison.CurrentCultureIgnoreCase) >= 0) return true;
             return false;
         }
     }

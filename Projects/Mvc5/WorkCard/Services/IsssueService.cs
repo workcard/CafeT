@@ -12,8 +12,8 @@ namespace Web.Services
     {
         public IsssueService(IRepositoryAsync<WorkIssue> repository) : base(repository) {}
     }
-    public class JobService : Service<Job>//, IIsssueService
-    {
-        public JobService(IRepositoryAsync<Job> repository) : base(repository) { }
-    }
+    //public class JobService : Service<Job>//, IIsssueService
+    //{
+    //    public JobService(IRepositoryAsync<Job> repository) : base(repository) { }
+    //}
 }

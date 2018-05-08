@@ -137,7 +137,7 @@ namespace Web.Managers
                 return false;
             }
         }
-        public async Task<bool> UpdateAsync(Guid id, WorkIssue issue)
+        public async Task<bool> UpdateAsync(WorkIssue issue)
         {
             issue.Update();
             string[] _commands = issue.GetCommands();

@@ -11,8 +11,8 @@ namespace Web.Managers
         public readonly ApplicationDbContext dbContext;
         public readonly IsssueService issueService;
         public readonly EmailService emailService;
-        public readonly JobService jobService;
-        public IService<Question> QuestionService;
+        //public readonly JobService jobService;
+        ////public IService<Question> QuestionService;
         public IUnitOfWorkAsync _unitOfWorkAsync;
         public IRepositoryAsync<WorkIssue> repository;
 
@@ -21,7 +21,7 @@ namespace Web.Managers
             dbContext = new ApplicationDbContext();
             _unitOfWorkAsync = unitOfWorkAsync;
             issueService = new IsssueService(unitOfWorkAsync.RepositoryAsync<WorkIssue>());
-            jobService = new JobService(unitOfWorkAsync.RepositoryAsync<Job>());
+            //jobService = new JobService(unitOfWorkAsync.RepositoryAsync<Job>());
             emailService = new EmailService();
         }
     }

@@ -60,13 +60,12 @@ namespace Web.Managers
         }
         public IEnumerable<Contact> GetContacts(Guid projectId)
         {
-            var _contacts = db.Contacts.Where(t => t.ProjectId == projectId);
+            var _contacts = db.Contacts.Where(t => t.Projects.Select(x=>x.Id).Contains(projectId));
             return _contacts.AsEnumerable();
         }
 
         public async Task<bool> AddContactAsync(Guid projectId, Contact contact)
         {
-            if (!contact.ProjectId.HasValue) return false;
             var _nowContacts = GetContacts(projectId).Select(t => t.Email);
             if (!_nowContacts.Contains(contact.Email))
             {

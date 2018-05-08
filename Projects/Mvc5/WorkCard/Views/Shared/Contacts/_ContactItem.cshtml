@@ -7,7 +7,7 @@
         });
 </script>
 <div class="row">
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <div class="card-body">
             <div class="card-title">
                 @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
@@ -27,8 +27,19 @@
                 @Html.Partial("Contacts/_ContactMenu", Model)
             </div>
         </div>
-    </div>
+    </div*@
     <div class="col-md-8">
+        <div class="card-title">
+            @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
+        {
+            @Model.LastName @Html.Raw(" ") @Model.FirstName
+    }
+            <span class="badge badge-success">@Model.CreatedDate.Value.TimeAgo()</span>
+            <p>
+                Office: @Model.OfficeName |<span class="desc">@Model.Email</span>
+                <span>@Model.MobilePhone</span>
+            </p>
+        </div>
         <div id="issues-box-@Model.Email"></div>
     </div>
 </div>

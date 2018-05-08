@@ -38,15 +38,16 @@ namespace Web.Models
         public List<string> Emails { set; get; }
         
         public List<string> HasTags { set; get; }
-        public List<string> Members { set; get; }
+        public virtual List<Contact> Contacts { set; get; }
         public List<string> Viewers { set; get; } = new List<string>();
         public bool IsClosed { set; get; }
         public bool IsVerified { set; get; } = false;
-        
+        public bool IsStopEmail { set; get; } = false;
+
         public WorkIssue():base()
         {
             HasTags = new List<string>();
-            Members = new List<string>();
+            Contacts = new List<Contact>();
             Tags = new List<string>();
             Emails = new List<string>();
             Times = new List<DateTime>();
@@ -440,6 +441,7 @@ namespace Web.Models
         #region Notification
         public void Notify(EmailService emailService)
         {
+            if (IsStopEmail) return;
             var _emails = GetEmails().Distinct();
             if (_emails != null && _emails.Count() > 0)
             {

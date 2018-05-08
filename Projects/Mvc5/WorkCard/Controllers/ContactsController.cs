@@ -41,14 +41,19 @@ namespace Web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public async Task<ActionResult> Index()
         {
-            var _myContacts = db.Contacts.Where(t => t.UserName == User.Identity.Name).AsEnumerable();
+            var _myContacts = db.Contacts.Where(t => t.CreatedBy == User.Identity.Name)
+                .OrderByDescending(t=>t.UpdatedDate)
+                .ThenByDescending(t=>t.CreatedDate)
+                .AsEnumerable();
+
             if(User.Identity.IsAuthenticated)
             {
                 return View("Index", _myContacts);
             }
-            return View(db.Contacts.AsEnumerable());
+            return View();
         }
 
         [HttpGet]
@@ -64,6 +69,7 @@ namespace Web.Controllers
             return View(_objects);
         }
 
+        [Authorize]
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -79,6 +85,7 @@ namespace Web.Controllers
             }
             return View(contact);
         }
+
         public async Task<ActionResult> GetContact(string email)
         {
             Contact contact = ContactManager.GetByEmail(email);
@@ -90,13 +97,14 @@ namespace Web.Controllers
             }
             return View("Details",contact);
         }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddContact(string email)
         {
             Contact _contact = new Contact(email);
             _contact.CreatedBy = User.Identity.Name;
-            _contact.UserName = User.Identity.Name;
+            
 
             bool _isAdded = await ContactManager.AddContactAsync(_contact);
             if(_isAdded)

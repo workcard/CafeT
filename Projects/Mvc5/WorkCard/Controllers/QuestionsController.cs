@@ -1,7 +1,9 @@
 ﻿using CafeT.Enumerable;
 using CafeT.GoogleManager;
+using CafeT.Text;
 using Repository.Pattern.UnitOfWork;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -12,7 +14,6 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-
     public class QuestionsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -20,8 +21,7 @@ namespace Web.Controllers
         public QuestionsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
         }
-        public QuestionsController() : base() { }
-
+        
         [HttpGet]
         public ActionResult GetLastAnswers(string id)
         {
@@ -122,6 +122,32 @@ namespace Web.Controllers
                 if(insterted)
                 {
                     question.Notify(EmailService);
+                    if(question.IssueId.HasValue)
+                    {
+                        var emails = question.Content.GetEmails();
+                        if (emails != null && emails.Any())
+                        {
+                            var myContacts = ContactManager.GetContactsOfIssue(question.IssueId.Value);
+                            var newEmails = new List<string>();
+                            if (myContacts != null && myContacts.Any())
+                            {
+                                var myEmails = myContacts.Select(t => t.Email);
+                                foreach (var email in emails)
+                                {
+                                    if (!myEmails.Contains(email))
+                                    {
+                                        Contact contact = new Contact(email) { CreatedBy = User.Identity.Name };
+                                        var issue = IssueManager.GetById(question.IssueId.Value);
+                                        contact.Issues.Add(issue);
+                                        issue.Contacts.Add(contact);
+                                        await IssueManager.UpdateAsync(issue);
+                                        await ContactManager.AddContactAsync(contact);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                 }
 
                 if (Request.IsAjaxRequest())
