@@ -1,32 +1,32 @@
 ﻿@model PagedList.IPagedList<Web.ModelViews.IssueView>
 @using PagedList.Mvc
+@using Web.ModelViews
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-@{
-    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
-    if (items != null && items.Count() > 0)
-    {
 <div id="issues-expired">
     <div class="card border-success">
-        <div class="card-footer">
-            Quá hạn
-            <span class="badge badge-danger">
-                @Model.Count() (issues)
-            </span>
-            <span class="badge badge-danger">
-                @{
-                    var time = Model.Sum(t => t.IssueEstimation) / 60;
-                    @Html.Raw(time.ToReadable() + " (h)");
-                }
+        @{
+            var issues = (IEnumerable<IssueView>)ViewBag.ExpiredIssues;
+            <div class="card-header">
+                Expired
+                <span class="badge badge-danger">
+                    @issues.Count()
+                </span>
+                <span class="badge badge-danger">
+                    @{
+                        var time = issues.Sum(t => t.IssueEstimation) / 60;
+                        @Html.Raw(time.ToReadable() + " (h)");
+                    }
 
-            </span>
-            <span class="badge badge-primary">
-                @Model.Sum(t => t.Price).ToReadable() (VND)
-            </span>
-        </div>
+                </span>
+                <span class="small badge badge-primary">
+                    @issues.Sum(t => t.Price).ToReadable() (VND)
+                </span>
+            </div>
+        }
     </div>
     <ul class="list-group">
-        @foreach (var item in items)
+        @foreach (var item in Model)
         {
             <li class="list-group-item">
 
@@ -36,25 +36,20 @@
     </ul>
     <div class="panel-footer">
         @Html.PagedListPager(Model, page => Url.Action("GetExpiredIssues", new { page }),
-                           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
-                           {
-                               Display = PagedListDisplayMode.IfNeeded,
-                               MaximumPageNumbersToDisplay = 5
-                           },
-                           new AjaxOptions
-                           {
-                               InsertionMode = InsertionMode.Replace,
-                               HttpMethod = "Get",
-                               UpdateTargetId = "issues-expired",
-                               LoadingElementId = "divProcessing"
-                           }))
+                                     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         MaximumPageNumbersToDisplay = 5
+                                     },
+                                     new AjaxOptions
+                                     {
+                                         InsertionMode = InsertionMode.Replace,
+                                         HttpMethod = "Get",
+                                         UpdateTargetId = "issues-expired",
+                                         LoadingElementId = "divProcessing"
+                                     }))
     </div>
 </div>
-        
-    }
-
-}
-
 
 
 

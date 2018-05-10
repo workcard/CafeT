@@ -1,12 +1,5 @@
 ﻿@model Web.ModelViews.IssueView
 
-@if (Model.IsRunning())
-{
-    <span class="badge badge-danger">@Html.Raw("Running")</span>
-}
-@Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
-<span class="badge badge-danger pull-right">@Model.Status</span>
-<br />
 <div class="small">
     @Model.Start.Value.ToShortTimeString() - @Model.End.Value.ToShortTimeString() |
     <span>@Model.IssueEstimation (phút)</span>
@@ -16,6 +9,14 @@
         <span class="small material-icons">verified_user</span>
     }
 </div>
+@if (Model.IsRunning())
+{
+    <span class="badge badge-danger">@Html.Raw("Running")</span>
+}
+@Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
+<span class="badge badge-danger pull-right">@Model.Status</span>
+<br />
+
 <hr />
 <div id="Status-@Model.Id.ToString()" class="container"></div>
 @Html.Partial("Issues/_IssueMenu", Model)

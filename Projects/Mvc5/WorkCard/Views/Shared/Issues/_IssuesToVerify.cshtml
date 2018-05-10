@@ -1,28 +1,37 @@
 ﻿@using PagedList.Mvc;
+@using Web.ModelViews;
 @model PagedList.IPagedList<Web.ModelViews.IssueView>
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-@{
-    var items = Model.OrderByDescending(t => t.End.Value).AsEnumerable();
-    if (items != null && items.Count() > 0)
-    {
 <div id="UpdateVerify">
     <div class="card border-success">
-        <div class="card-header">
-            To verify
-            <span class="badge badge-danger">
-                @Model.Count() (issues)
-            </span>
-            <span class="badge badge-danger">
-                @{
-                    var time = Model.Sum(t => t.IssueEstimation) / 60;
+        @{
+        var issues = (IEnumerable<IssueView>)ViewBag.VerifyIssues;
+        if (issues != null && issues.Count() > 0)
+        {
+            <div class="card-header">
+                To-Verify
+                <span class="badge badge-danger">
+                    @issues.Count()
+                </span>
+                <span class="badge badge-danger">
+                    @{
+                    var time = issues.Sum(t => t.IssueEstimation) / 60;
                     @Html.Raw(time.ToReadable() + " (h)");
-                }
-            </span>
-        </div>
+                    }
+
+                </span>
+                <span class="small badge badge-primary">
+                    @issues.Sum(t => t.Price).ToReadable() (VND)
+                </span>
+            </div>
+    }
+
+        }
     </div>
     <ul class="list-group">
-        @foreach (var item in items)
+        @foreach (var item in Model)
         {
             <li id="@item.Id.ToString()" class="list-group-item">
                 @if (item.IsToday())
@@ -47,27 +56,21 @@
             </li>
         }
     </ul>
+    <div class="panel-footer">
+        @Html.PagedListPager(Model, page => Url.Action("GetToVerifyIssues", new { page }),
+                                               PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                                               {
+                                                   Display = PagedListDisplayMode.IfNeeded,
+                                                   MaximumPageNumbersToDisplay = 5
+                                               },
+                                               new AjaxOptions
+                                               {
+                                                   InsertionMode = InsertionMode.Replace,
+                                                   HttpMethod = "Get",
+                                                   UpdateTargetId = "UpdateVerify",
+                                                   LoadingElementId = "divProcessing"
+                                               }))
+    </div>
 </div>
-        
-        <div class="panel-footer">
-            @Html.PagedListPager(Model, page => Url.Action("GetToVerifyIssues", new { page }),
-                                         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
-                                         {
-                                             Display = PagedListDisplayMode.IfNeeded,
-                                             MaximumPageNumbersToDisplay = 5
-                                         },
-                                         new AjaxOptions
-                                         {
-                                             InsertionMode = InsertionMode.Replace,
-                                             HttpMethod = "Get",
-                                             UpdateTargetId = "UpdateVerify",
-                                             LoadingElementId = "divProcessing"
-                                         }))
-        </div>
-    }
-
-}
-
-
 
 

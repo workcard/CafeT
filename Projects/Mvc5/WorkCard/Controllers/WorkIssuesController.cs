@@ -85,11 +85,11 @@ namespace Web.Controllers
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
             _objects = _objects.Where(t => t.IsVerified && t.IsCompleted())
                 .OrderByDescending(t=>t.UpdatedDate)
-                .ThenByDescending(t=>t.CreatedDate)
+                .ThenByDescending(t => t.CreatedDate)
                 .ToList();
 
             var _views = IssueMappers.IssuesToViews(_objects);
-
+            ViewBag.CompletedIssues = _views;
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssuesCompleted", 
@@ -105,9 +105,11 @@ namespace Web.Controllers
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
             _objects = _objects.Where(t => t.IsVerified && !t.IsCompleted())
                 .Where(t=>t.IsToday())
+                .OrderByDescending(t => t.UpdatedDate)
+                .ThenByDescending(t => t.CreatedDate)
                 .ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
-
+            ViewBag.TodayIssues = _views;
 
             if (Request.IsAjaxRequest())
             {
@@ -122,9 +124,12 @@ namespace Web.Controllers
         {
             if (page == null) page = 1;
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
-            _objects = _objects.Where(t => t.IsVerified && t.IsExpired()).ToList();
+            _objects = _objects.Where(t => t.IsVerified && t.IsExpired())
+                .OrderByDescending(t=>t.UpdatedDate)
+                .ThenByDescending(t=>t.CreatedDate)
+                .ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
-
+            ViewBag.ExpiredIssues = _views;
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssuesExpired", 
@@ -137,9 +142,12 @@ namespace Web.Controllers
         {
             if (page == null) page = 1;
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
-            _objects = _objects.Where(t => t.IsUpcoming(1)).ToList();
+            _objects = _objects.Where(t => t.IsUpcoming(1))
+                .OrderByDescending(t => t.UpdatedDate)
+                .ThenByDescending(t => t.CreatedDate)
+                .ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
-
+            ViewBag.UpcomingIssues = _views;
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssuesUpcoming",
@@ -152,9 +160,12 @@ namespace Web.Controllers
         {
             if (page == null) page = 1;
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
-            _objects = _objects.Where(t => !t.IsVerified).ToList();
+            _objects = _objects.Where(t => !t.IsVerified)
+                .OrderByDescending(t => t.UpdatedDate)
+                .ThenByDescending(t => t.CreatedDate)
+                .ToList();
             var _views = IssueMappers.IssuesToViews(_objects);
-
+            ViewBag.VerifyIssues = _views;
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssuesToVerify",
@@ -245,7 +256,6 @@ namespace Web.Controllers
             return View(_view);
         }
 
-        
         [HttpGet]
         public async Task<ActionResult> Details(Guid? id)
         {

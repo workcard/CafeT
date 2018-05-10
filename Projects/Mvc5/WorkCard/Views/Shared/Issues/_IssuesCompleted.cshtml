@@ -1,25 +1,30 @@
-﻿@using PagedList.Mvc;
+﻿@using PagedList.Mvc
+@using Web.ModelViews
+
 @model PagedList.IPagedList<Web.ModelViews.IssueView>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
 <div id="Issues">
     <div class="card border-success">
-        <div class="card-footer">
+        @{
+        var issues = (IEnumerable<IssueView>)ViewBag.CompletedIssues;
+        <div class="card-header">
             Completed
             <span class="badge badge-danger">
-                @Model.Count() (issues)
+                @issues.Count()
             </span>
             <span class="badge badge-danger">
                 @{
-                    var time = Model.Sum(t => t.IssueEstimation) / 60;
-                    @Html.Raw(time.ToReadable() + " (h)");
+                var time = issues.Sum(t => t.IssueEstimation) / 60;
+                @Html.Raw(time.ToReadable() + " (h)");
                 }
 
             </span>
-            <span class="badge badge-primary">
-                @Model.Sum(t => t.Price).ToReadable() (VND)
+            <span class="small badge badge-primary">
+                @issues.Sum(t => t.Price).ToReadable() (VND)
             </span>
         </div>
+        }
     </div>
     <ul class="list-group">
         @foreach (var item in Model)
