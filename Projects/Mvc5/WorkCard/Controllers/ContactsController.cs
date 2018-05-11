@@ -1,4 +1,5 @@
 ﻿using CafeT.Text;
+using MoreLinq;
 using Repository.Pattern.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,7 @@ namespace Web.Controllers
         public ActionResult GetContacts()
         {
             var _objects = ContactManager.GetContacts(User.Identity.Name);
-
+            _objects = _objects.DistinctBy(t=>t.Email).ToList();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_Contacts", _objects);
@@ -130,9 +131,7 @@ namespace Web.Controllers
             return View();
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Contact contact)
@@ -148,7 +147,6 @@ namespace Web.Controllers
             return View(contact);
         }
 
-        // GET: Contacts/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)

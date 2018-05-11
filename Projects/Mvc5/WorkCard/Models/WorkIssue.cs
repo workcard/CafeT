@@ -153,7 +153,10 @@ namespace Web.Models
         }
         public bool IsInDay(DateTime date)
         {
-            if (End != null && End.HasValue && (End.Value.Day == date.Day)) return true;
+            if (End != null && End.HasValue && (End.Value.Day == date.Day)
+                && (End.Value.Month == date.Month)
+                && (End.Value.Year == date.Year)
+                ) return true;
             return false;
         }
         public bool IsCompleted()

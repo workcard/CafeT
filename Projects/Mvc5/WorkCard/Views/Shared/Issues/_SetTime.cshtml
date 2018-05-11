@@ -54,11 +54,12 @@
                                                                        }, null)
 }
 
-@Ajax.ActionLink(" | Next week", "SetWorkOnTime", "WorkIssues",
+@Ajax.ActionLink(" | Next week", "SetNextWeek", "WorkIssues",
                                         new { Id = Model.Id, date = DateTime.Now.AddDays(5).ToString() },
                                         new AjaxOptions
                                         {
                                             UpdateTargetId = "time-" + Model.Id.ToString(),
-                                            HttpMethod = "Post",
+                                            HttpMethod = "Get",
                                         }, null)
+
 <div id="time-@Model.Id.ToString()"></div>

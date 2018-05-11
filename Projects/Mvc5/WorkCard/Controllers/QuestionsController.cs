@@ -129,20 +129,21 @@ namespace Web.Controllers
                         {
                             var myContacts = ContactManager.GetContactsOfIssue(question.IssueId.Value);
                             var newEmails = new List<string>();
+                            var myEmails = new List<string>();
                             if (myContacts != null && myContacts.Any())
                             {
-                                var myEmails = myContacts.Select(t => t.Email);
-                                foreach (var email in emails)
+                                myEmails = myContacts.Select(t => t.Email).ToList();
+                            }
+                            foreach (var email in emails)
+                            {
+                                if (!myEmails.Contains(email))
                                 {
-                                    if (!myEmails.Contains(email))
-                                    {
-                                        Contact contact = new Contact(email) { CreatedBy = User.Identity.Name };
-                                        var issue = IssueManager.GetById(question.IssueId.Value);
-                                        contact.Issues.Add(issue);
-                                        issue.Contacts.Add(contact);
-                                        await IssueManager.UpdateAsync(issue);
-                                        await ContactManager.AddContactAsync(contact);
-                                    }
+                                    Contact contact = new Contact(email) { CreatedBy = User.Identity.Name };
+                                    var issue = IssueManager.GetById(question.IssueId.Value);
+                                    contact.Issues.Add(issue);
+                                    issue.Contacts.Add(contact);
+                                    await IssueManager.UpdateAsync(issue);
+                                    await ContactManager.AddContactAsync(contact);
                                 }
                             }
                         }

@@ -76,7 +76,6 @@ namespace Web.Managers
                 }
             }
             
-            
             return results;
         }
 

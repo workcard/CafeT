@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Web.Models.Contact>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        @Html.Partial("Contacts/_Item", item)
+        if(Model.ToList().IndexOf(item) != Model.Count())
+        {
+            @Html.Raw("; ");
+        }
+    }
+}

@@ -1,19 +1,25 @@
 ﻿@model IEnumerable<Web.Models.Contact>
 
 <div class="card">
-    @if (Model != null)
-    {
-        <div class="card-header">
-            Contacts <span class="badge badge-danger">@Model.Count()</span>
-        </div>
+    <div class="card-body">
+        Contacts
+        <span class="badge badge-danger">@Model.Count()</span>
+    </div>
+</div>
+<div class="navbar navbar-expand-lg navbar-light align-content-end">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="list-group">
             @foreach (var item in Model)
             {
                 <li class="list-group-item">
-                    @Html.Partial("Contacts/_ContactItem", item)
+                    @Html.ActionLink(item.Email.GetFromBeginTo("@"), "Details", "Contacts", new { id = item.Id }, null)
                 </li>
             }
         </ul>
-        
-    }
+    </div>
 </div>

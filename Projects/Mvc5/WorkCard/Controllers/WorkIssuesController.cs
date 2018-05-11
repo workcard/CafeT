@@ -83,7 +83,9 @@ namespace Web.Controllers
         {
             if (page == null) page = 1;
             var _objects = IssueManager.GetAllOf(User.Identity.Name);
+
             _objects = _objects.Where(t => t.IsVerified && t.IsCompleted())
+                .Where(t=>t.IsInDay(DateTime.Today))
                 .OrderByDescending(t=>t.UpdatedDate)
                 .ThenByDescending(t => t.CreatedDate)
                 .ToList();
@@ -93,7 +95,7 @@ namespace Web.Controllers
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Issues/_IssuesCompleted", 
-                    _views.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize));
+                    _views.ToPagedList(pageNumber: page??1, pageSize: PageSize));
             }
             return View("Index", _views);
         }
@@ -386,7 +388,16 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
+        public ActionResult GetContacts(Guid id)
+        {
+            var _objects = ContactManager.GetContactsOfIssue(id).ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Contacts/_List", _objects);
+            }
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public ActionResult GetSubIssues(Guid id)
         {
@@ -532,6 +543,18 @@ namespace Web.Controllers
             }
 
             return View(workIssue);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> SetNextWeek(Guid id)
+        {
+            WorkIssue workIssue = IssueManager.GetById(id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_SetNextWeek", workIssue);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

@@ -89,14 +89,36 @@ namespace CafeT.Time
             var d = new GregorianCalendar().AddDays(dt, -((int)dt.DayOfWeek) + (int)day);
             return (d.Day < dt.Day) ? d.AddDays(7) : d;
         }
+        public static DateTime FirstDayOfWeek(this DateTime dt)
+        {
+            var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var diff = dt.DayOfWeek - culture.DateTimeFormat.FirstDayOfWeek;
+            if (diff < 0)
+                diff += 7;
+            return dt.AddDays(-diff).Date;
+        }
+
+        public static DateTime LastDayOfWeek(this DateTime dt)
+        {
+            return dt.FirstDayOfWeek().AddDays(6);
+        }
+
+        ////public static DateTime FirstDayOfMonth(this DateTime dt)
+        ////{
+        ////    return new DateTime(dt.Year, dt.Month, 1);
+        ////}
+
+        ////public static DateTime LastDayOfMonth(this DateTime dt)
+        ////{
+        ////    return dt.FirstDayOfMonth().AddMonths(1).AddDays(-1);
+        ////}
+
+        ////public static DateTime FirstDayOfNextMonth(this DateTime dt)
+        ////{
+        ////    return dt.FirstDayOfMonth().AddMonths(1);
+        ////}
         #endregion
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns>
-        ///     result like 00:00:03
-        /// </returns>
+
         public static TimeSpan TimeElapsed(this DateTime date)
         {
             return DateTime.Now - date;

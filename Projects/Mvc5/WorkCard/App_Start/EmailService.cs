@@ -71,6 +71,7 @@ namespace Web
             {
                 foreach(string email in message.ToEmails)
                 {
+                    if(!message.ToEmails.Contains(email))
                     _msg.To.Add(new MailAddress(email));
                 }
             }

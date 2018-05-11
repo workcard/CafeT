@@ -108,32 +108,7 @@
         </div>
 }
         <div id="sameTag-box"></div>
-        @*@{
-            var commands = Model.GetCommands().Distinct();
-            if (commands != null && commands.Count() > 0)
-            {
-                <div class="card-header">
-                    Commands
-                </div>
-                <ul class="list-group">
-                    @foreach (string command in commands)
-                    {
-                        if (command.Contains("@"))
-                        {
-                            <li class="list-group-item">
-                                @Html.Partial("_Command", command)
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="list-group-item">
-                                @Html.Partial("_Command", command)
-                            </li>
-                        }
-                    }
-                </ul>
-            }
-        }*@
+       
         <div class="card">
             <div class="card-header">Đã xem bởi: </div>
             <ul class="list-group">

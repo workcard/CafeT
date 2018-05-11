@@ -3,6 +3,13 @@
 }
 
 <script type="text/javascript">
+    $.get('@Url.Action("GetContacts", "Contacts")',
+        function (data) {
+            $('#contacts-box').html(data);
+        });
+</script>
+
+<script type="text/javascript">
     $.get('@Url.Action("GetLastQuestions", "Questions", new { n = 5 })',
         function (data) {
             $('#questions-box').html(data);
@@ -15,11 +22,18 @@
         });
 </script>
 <script type="text/javascript">
-    $.get('@Url.Action("GetCompletedIssues", "WorkIssues", new { page = 1 })',
+    $.get('@Url.Action("GetCompletedIssues", "WorkIssues", new { page = 1})',
         function (data) {
             $('#completed-box').html(data);
         });
 </script>
+@*<script type="text/javascript">
+    $.get('@Url.Action("GetCompletedIssues", "WorkIssues", new { page = 1})',
+        function (data) {
+            $('#today-completed-box').html(data);
+        });
+</script>*@
+
 <script type="text/javascript">
     $.get('@Url.Action("GetTodayIssues", "WorkIssues", new { page = 1 })',
         function (data) {
@@ -66,6 +80,7 @@ else
         </div>
         <div class="col-md-4">
             <div id="verify-box"></div>
+            <div id="today-completed-box"></div>
             <div id="upcomming-box"></div>
         </div>
         <div class="col-md-4">

@@ -5,22 +5,24 @@
             Projects
             <span class="badge badge-danger">@Model.Count()</span>
         </div>
-        <div class="navbar navbar-expand-lg navbar-light align-content-end">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul>
-                    @foreach (var item in Model)
-                {
-                    <li class="menu-title">
-                        @Html.ActionLink(item.Title, "Details", "Projects", new { id = item.Id }, null)
-                    </li>
-            }
-                </ul>
-            </div>
+    </div>
+</div>
+<div class="navbar navbar-expand-lg navbar-light align-content-end">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div class="row">
+            <ul class="list-group">
+                @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @Html.ActionLink(item.Title, "Details", "Projects", new { id = item.Id }, null)
+            </li>
+}
+            </ul>
         </div>
     </div>
 </div>

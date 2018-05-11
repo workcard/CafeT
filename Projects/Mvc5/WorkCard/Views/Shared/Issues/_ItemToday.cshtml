@@ -1,5 +1,12 @@
 ﻿@model Web.ModelViews.IssueView
 
+<script type="text/javascript">
+    $.get('@Url.Action("GetContacts", "WorkIssues", new { id = Model.Id.ToString()})',
+        function (data) {
+            $('#contacts-box-@Model.Id.ToString()').html(data);
+        });
+</script>
+
 <div class="small">
     @Model.Start.Value.ToShortTimeString() - @Model.End.Value.ToShortTimeString() |
     <span>@Model.IssueEstimation (phút)</span>
@@ -16,7 +23,14 @@
 @Html.ActionLink(Model.Title, "Details", "WorkIssues", new { id = Model.Id }, null)
 <span class="badge badge-danger pull-right">@Model.Status</span>
 <br />
-
+@{
+    var images = Model.Content.GetImages();
+    if(images != null && images.Length >0)
+    {
+        @Html.Raw(@images[0].ResizeImages())
+    }
+}
 <hr />
 <div id="Status-@Model.Id.ToString()" class="container"></div>
+<div id="contacts-box-@Model.Id.ToString()" class="small"></div>
 @Html.Partial("Issues/_IssueMenu", Model)

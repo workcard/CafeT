@@ -1,45 +1,19 @@
 ﻿@using Web.ModelViews
 @model Web.Models.Contact
-<script type="text/javascript">
-    $.get('@Url.Action("GetLastest", "WorkIssues", new { userName = Model.Email })',
-        function (data) {
-            $('#issues-box-@Model.Email').html(data);
-        });
-</script>
-<div class="row">
-    @*<div class="col-md-4">
-        <div class="card-body">
-            <div class="card-title">
-                @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
-                {
-                    @Model.LastName @Html.Raw(" ") @Model.FirstName
-                }
-                <span class="badge badge-success">@Model.CreatedDate.Value.TimeAgo()</span>
-                <p>
-                    Office: @Model.OfficeName |<span class="desc">@Model.Email</span>
-                    <span>@Model.MobilePhone</span>
-                </p>
-            </div>
-            <div class="card-text">
-                @Html.Raw(Model.About)
-            </div>
-            <div class="card-footer">
-                @Html.Partial("Contacts/_ContactMenu", Model)
-            </div>
-        </div>
-    </div*@
-    <div class="col-md-8">
-        <div class="card-title">
-            @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
-        {
-            @Model.LastName @Html.Raw(" ") @Model.FirstName
+
+<div class="card-title">
+    @if (!Model.FirstName.IsNullOrEmptyOrWhiteSpace())
+    {
+        @Model.LastName @Html.Raw(" ") @Model.FirstName
     }
-            <span class="badge badge-success">@Model.CreatedDate.Value.TimeAgo()</span>
-            <p>
-                Office: @Model.OfficeName |<span class="desc">@Model.Email</span>
-                <span>@Model.MobilePhone</span>
-            </p>
-        </div>
-        <div id="issues-box-@Model.Email"></div>
-    </div>
+    else
+    {
+        @Model.Email
+    }
+    <span class="badge badge-success">@Model.CreatedDate.Value.TimeAgo()</span>
+    <br />
+    @if (!Model.OfficeName.IsNullOrEmptyOrWhiteSpace())
+    {
+        @Html.Raw("Office: " + Model.OfficeName)
+    }
 </div>

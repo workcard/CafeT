@@ -1,0 +1,59 @@
+﻿@model Web.Models.WorkIssue
+
+<div id="small">
+
+
+    @{
+        DateTime lastDay = DateTime.Now.LastDayOfWeek();
+        @Ajax.ActionLink("Thứ 2", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Monday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Thứ 3", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Monday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Thứ 4", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Thursday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Thứ 5", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Wednesday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Thứ 6", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Friday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Thứ 7", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Saturday).ToString() },
+                                                                                           new AjaxOptions
+                                                                                           {
+                                                                                               UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                               HttpMethod = "Post",
+                                                                                           },
+                                                                                           new { @class = "btn btn-outline-success" })
+        @Ajax.ActionLink("Chủ nhật", "SetWorkOnTime", "WorkIssues", new { id = Model.Id, date = lastDay.NextDayOfWeek(DayOfWeek.Sunday).ToString() },
+                                                                                       new AjaxOptions
+                                                                                       {
+                                                                                           UpdateTargetId = "time-" + Model.Id.ToString(),
+                                                                                           HttpMethod = "Post",
+                                                                                       },
+                                                                                       new { @class = "btn btn-outline-success" })
+        <div id="time-@Model.Id.ToString()"></div>
+    }
+</div>
