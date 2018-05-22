@@ -120,7 +120,27 @@ namespace Web.Controllers
             }
             return View("Index", _views);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> GetIssuesOf(string email)
+        {
+            //if (page == null) page = 1;
+            var _objects = IssueManager.GetAllExtendOf(email);
+            _objects = _objects
+                //.Where(t => t.IsVerified && t.IsExpired())
+                .OrderByDescending(t => t.UpdatedDate)
+                .ThenByDescending(t => t.CreatedDate)
+                .ToList();
+            var _views = IssueMappers.IssuesToViews(_objects);
+            ViewBag.ExpiredIssues = _views;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Issues/_Issues",
+                    _views
+                    //.ToPagedList(pageNumber: page ?? 1, pageSize: PageSize)
+                    );
+            }
+            return View("Index", _views);
+        }
         [HttpGet]
         public async Task<ActionResult> GetExpiredIssues(int? page)
         {
@@ -286,6 +306,13 @@ namespace Web.Controllers
             return View(_view);
         }
 
+        //public bool AddContact(Guid id, Contact contact)
+        //{
+        //    bool _result = false;
+        //    var issue = IssueManager.GetById(id);
+        //    if (issue == null) { return _result; }
+        //    var _contacts = IssueManager.GetContacts(id);
+        //}
         public WorkIssue ProcessEmbedUrls(WorkIssue issue)
         {
             var _commands = issue.GetCommands();
@@ -522,18 +549,19 @@ namespace Web.Controllers
                     }
                 }
 
-                if(workIssue.HasInnerMembers())
-                {
-                    var _innerMembers = workIssue.GetInnerMembers();
-                    foreach(string _member in _innerMembers)
-                    {
-                        Contact _contact = new Contact();
-                        _contact.Email = _member;
-                        _contact.UserName = _member;
-                        _contact.CreatedBy = User.Identity.Name;
-                        await ContactManager.AddContactAsync(_contact);
-                    }
-                }
+                //if(workIssue.HasInnerMembers())
+                //{
+                //    var _innerMembers = workIssue.GetInnerMembers();
+                //    foreach(string _member in _innerMembers)
+                //    {
+                //        Contact _contact = new Contact();
+                //        _contact.Email = _member;
+                //        _contact.UserName = _member;
+                //        _contact.CreatedBy = User.Identity.Name;
+                //        await ContactManager.AddContactAsync(_contact, User.Identity.Name);
+                //    }
+                //}
+
                 if(Request.IsAjaxRequest())
                 {
                     var _viewObject = Mapper.Map<WorkIssue, IssueView>(workIssue);

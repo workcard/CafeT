@@ -42,7 +42,7 @@ namespace Web.Managers
             if (_result < 0) return false;
             return true;
         }
-        public bool Update(Guid id, Question issue)
+        public bool Update(Question issue)
         {
             _unitOfWorkAsync.Repository<Question>().Update(issue);
             int _result = _unitOfWorkAsync.SaveChangesAsync().Result;

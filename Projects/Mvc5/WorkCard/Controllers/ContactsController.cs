@@ -78,8 +78,6 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Contact contact = await db.Contacts.FindAsync(id);
-            var _issues = ContactManager.GetIssuesOf(contact.Email).ToList();
-            ViewBag.Issues = Mappers.IssueMappers.IssuesToViews(_issues);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -99,31 +97,31 @@ namespace Web.Controllers
             return View("Details",contact);
         }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult> AddContact(string email)
-        {
-            Contact _contact = new Contact(email);
-            _contact.CreatedBy = User.Identity.Name;
+        //[HttpPost]
+        //[Authorize]
+        //public async Task<ActionResult> AddContact(string email)
+        //{
+        //    Contact _contact = new Contact(email);
+        //    _contact.CreatedBy = User.Identity.Name;
             
 
-            bool _isAdded = await ContactManager.AddContactAsync(_contact);
-            if(_isAdded)
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("Issues/_WorkTime", "Đã thêm");
-                }
-                return RedirectToAction("Index");
-            }
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("Issues/_WorkTime", "Không thêm được. Thành viên này đã có");
-                }
-                return RedirectToAction("Index");
-            }
-        }
+        //    bool _isAdded = await ContactManager.AddContactAsync(_contact,User.Identity.Name);
+        //    if(_isAdded)
+        //    {
+        //        if (Request.IsAjaxRequest())
+        //        {
+        //            return PartialView("Issues/_WorkTime", "Đã thêm");
+        //        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    {
+        //        if (Request.IsAjaxRequest())
+        //        {
+        //            return PartialView("Issues/_WorkTime", "Không thêm được. Thành viên này đã có");
+        //        }
+        //        return RedirectToAction("Index");
+        //    }
+        //}
 
         // GET: Contacts/Create
         public ActionResult Create()

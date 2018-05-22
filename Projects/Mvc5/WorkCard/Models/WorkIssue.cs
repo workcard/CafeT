@@ -38,7 +38,7 @@ namespace Web.Models
         public List<string> Emails { set; get; }
         
         public List<string> HasTags { set; get; }
-        public virtual List<Contact> Contacts { set; get; }
+        public virtual List<Contact> Contacts { set; get; } = new List<Contact>();
         public List<string> Viewers { set; get; } = new List<string>();
         public bool IsClosed { set; get; }
         public bool IsVerified { set; get; } = false;

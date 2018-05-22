@@ -16,7 +16,7 @@ namespace Web.Controllers
 {
     public class QuestionsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        //private ApplicationDbContext db = new ApplicationDbContext();
        
         public QuestionsController(IUnitOfWorkAsync unitOfWorkAsync) : base(unitOfWorkAsync)
         {
@@ -37,9 +37,11 @@ namespace Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            return View(await db.Questions
-                .OrderByDescending(t=>t.CreatedDate.Value)
-                .ToListAsync());
+            var _questions = _unitOfWorkAsync.RepositoryAsync<Question>()
+                .Query().Select().OrderByDescending(t => t.CreatedDate.Value)
+                .AsEnumerable();
+
+            return View(_questions.ToList());
         }
 
         [HttpGet]
@@ -66,15 +68,12 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = await db.Questions.FindAsync(id);
+            var question = QuestionManager.GetById(id.Value);
             
             if (question == null)
             {
                 return HttpNotFound();
             }
-            question.Answers = await db.Answers
-                    .Where(t => t.QuestionId == id.Value)
-                    .ToListAsync();
             return View(question);
         }
 
@@ -122,33 +121,8 @@ namespace Web.Controllers
                 if(insterted)
                 {
                     question.Notify(EmailService);
-                    if(question.IssueId.HasValue)
-                    {
-                        var emails = question.Content.GetEmails();
-                        if (emails != null && emails.Any())
-                        {
-                            var myContacts = ContactManager.GetContactsOfIssue(question.IssueId.Value);
-                            var newEmails = new List<string>();
-                            var myEmails = new List<string>();
-                            if (myContacts != null && myContacts.Any())
-                            {
-                                myEmails = myContacts.Select(t => t.Email).ToList();
-                            }
-                            foreach (var email in emails)
-                            {
-                                if (!myEmails.Contains(email))
-                                {
-                                    Contact contact = new Contact(email) { CreatedBy = User.Identity.Name };
-                                    var issue = IssueManager.GetById(question.IssueId.Value);
-                                    contact.Issues.Add(issue);
-                                    issue.Contacts.Add(contact);
-                                    await IssueManager.UpdateAsync(issue);
-                                    await ContactManager.AddContactAsync(contact);
-                                }
-                            }
-                        }
-                    }
-                    
+                    await ProcessQuestion(question);
+
                 }
 
                 if (Request.IsAjaxRequest())
@@ -161,6 +135,42 @@ namespace Web.Controllers
             return View(question);
         }
 
+        private async Task ProcessQuestion(Question question)
+        {
+            if (question.IssueId == null) return;
+            var emails = question.Content.GetEmails();
+            if (emails == null) return;
+
+            var issueContacts = ContactManager.GetContactsOfIssue(question.IssueId.Value);
+            var issue = IssueManager.GetById(question.IssueId.Value);
+            var nowEmails = new List<string>();
+            if (issueContacts != null && issueContacts.Any())
+            {
+                nowEmails = issueContacts.Select(t => t.Email).ToList();
+            }
+            foreach (var email in emails)
+            {
+                if (!nowEmails.Contains(email))
+                {
+                    Contact contact = ContactManager.GetByEmail(email);
+                    if(contact == null)
+                    {
+                        contact = new Contact(email) { CreatedBy = User.Identity.Name };
+                        ContactManager.AddContact(contact);
+                    }
+                    ContactManager.MappContactIssue(contact, issue);
+                }
+                else
+                {
+                    var contact = ContactManager.GetByEmail(email);
+                    contact.Issues.Add(issue);
+                    issue.Contacts.Add(contact);
+                    await IssueManager.UpdateAsync(issue);
+                    ContactManager.MappContactIssue(contact, issue);
+                }
+            }
+        }
+
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
@@ -170,9 +180,8 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 question.CreatedBy = User.Identity.Name;
-                db.Questions.Add(question);
-
-                await db.SaveChangesAsync();
+                _unitOfWorkAsync.RepositoryAsync<Question>().Insert(question);
+                await _unitOfWorkAsync.SaveChangesAsync();
 
                 if(question.IssueId.HasValue)
                 {
@@ -192,7 +201,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = await db.Questions.FindAsync(id);
+            var question = QuestionManager.GetById(id.Value);
             if (question == null)
             {
                 return HttpNotFound();
@@ -209,8 +218,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(question).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                QuestionManager.Update(question);
                 return RedirectToAction("Index");
             }
             return View(question);
@@ -224,7 +232,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = await db.Questions.FindAsync(id);
+            Question question = QuestionManager.GetById(id.Value);
             if (question == null)
             {
                 return HttpNotFound();
@@ -237,23 +245,12 @@ namespace Web.Controllers
         [Authorize]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Question question = await db.Questions.FindAsync(id);
-            db.Questions.Remove(question);
-            await db.SaveChangesAsync();
+            QuestionManager.Delete(id);
             if(Request.IsAjaxRequest())
             {
                 return PartialView("_DeleteMsg");
             }
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -23,13 +23,13 @@
             $('#subIssues-box').html(data);
         });
 </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
     $.get('@Url.Action("SearchBy", "WorkIssues",
           new { keyWord = Model.GetCommands().Where(t => t.StartsWith("[")).FirstOrDefault(), page = 1 })',
         function (data) {
             $('#sameTag-box').html(data);
         });
-</script>
+</script>*@
 
 <div class="row">
     <div class="col-md-8">

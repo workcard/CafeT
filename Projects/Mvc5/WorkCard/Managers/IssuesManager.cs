@@ -43,6 +43,13 @@ namespace Web.Managers
                 .Where(t => (t.CreatedBy.ToLower() == userName) || (t.Owner.ToLower() == userName))
                 .ToList();
         }
+        public List<WorkIssue> GetAllExtendOf(string userName)
+        {
+            var contact = _unitOfWorkAsync.RepositoryAsync<Contact>()
+                .Query().Select().Where(t => t.Email == userName).FirstOrDefault();
+
+            return contact.Issues;
+        }
         public List<WorkIssue> GetAllOf(string userName, IssueStatus status)
         {
             return GetAllOf(userName)
@@ -140,6 +147,51 @@ namespace Web.Managers
         public async Task<bool> UpdateAsync(WorkIssue issue)
         {
             issue.Update();
+            ProcessIssueCommands(issue);
+
+            _unitOfWorkAsync.Repository<WorkIssue>().Update(issue);
+            int _result = _unitOfWorkAsync.SaveChangesAsync().Result;
+            if (_result >= 0)
+            {
+                Notify(issue);
+                if (issue.Status == IssueStatus.Done)
+                {
+                    WorkIssue _newIssue = new WorkIssue();
+                    if (issue.Repeat == ScheduleType.Daily)
+                    {
+                        _newIssue = issue.MoveTo(issue.Start.Value.AddDays(1));
+                    }
+                    else if (issue.Repeat == ScheduleType.Weekly)
+                    {
+                        _newIssue = issue.MoveTo(issue.Start.Value.AddDays(5));
+                    }
+                    else if (issue.Repeat == ScheduleType.Monthly)
+                    {
+                        _newIssue = issue.MoveTo(issue.Start.Value.AddMonths(1));
+                    }
+                    else if (issue.Repeat == ScheduleType.Yearly)
+                    {
+                        _newIssue = issue.MoveTo(issue.Start.Value.AddYears(1));
+                    }
+                    _newIssue.Status = IssueStatus.New;
+                    _newIssue.Update();
+                    _unitOfWorkAsync.Repository<WorkIssue>().Insert(_newIssue);
+                    Notify(_newIssue);
+                    await _unitOfWorkAsync.SaveChangesAsync();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
+
+        private void ProcessIssueCommands(WorkIssue issue)
+        {
             string[] _commands = issue.GetCommands();
 
             if (_commands != null && _commands.Count() > 0)
@@ -180,47 +232,8 @@ namespace Web.Managers
                     }
                 }
             }
-
-            _unitOfWorkAsync.Repository<WorkIssue>().Update(issue);
-            int _result = _unitOfWorkAsync.SaveChangesAsync().Result;
-            if (_result >= 0)
-            {
-                Notify(issue);
-                if (issue.Status == IssueStatus.Done)
-                {
-                    WorkIssue _newIssue = new WorkIssue();
-                    if (issue.Repeat == ScheduleType.Daily)
-                    {
-                        _newIssue = issue.MoveTo(issue.Start.Value.AddDays(1));
-                    }
-                    else if (issue.Repeat == ScheduleType.Weekly)
-                    {
-                        _newIssue = issue.MoveTo(issue.Start.Value.AddDays(5));
-                    }
-                    else if (issue.Repeat == ScheduleType.Monthly)
-                    {
-                        _newIssue = issue.MoveTo(issue.Start.Value.AddMonths(1));
-                    }
-                    else if (issue.Repeat == ScheduleType.Yearly)
-                    {
-                        _newIssue = issue.MoveTo(issue.Start.Value.AddYears(1));
-                    }
-                    _newIssue.Status = IssueStatus.New;
-                    _newIssue.Update();
-                    _unitOfWorkAsync.Repository<WorkIssue>().Insert(_newIssue);
-                    Notify(_newIssue);
-                    await _unitOfWorkAsync.SaveChangesAsync();
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            
-            
         }
+
         public bool Verify(Guid id)
         {
             var issue = GetById(id);

@@ -4,7 +4,12 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<script type="text/javascript">
+    $.get('@Url.Action("GetIssuesOf", "WorkIssues", new { email = Model.Email })',
+        function (data) {
+            $('#issues-box').html(data);
+        });
+</script>
 <div class="row">
     <div class="col-md-12">
         <div class="card-title">
@@ -26,9 +31,7 @@
             @Html.Partial("Contacts/_ContactMenu")
         </div>
     </div>
-    <div class="col-md-12">
-        @Html.Partial("Issues/_Issues", (IEnumerable<IssueView>)ViewBag.Issues)
-    </div>
+    
 </div>
-
+<div id="issues-box"></div>
 
